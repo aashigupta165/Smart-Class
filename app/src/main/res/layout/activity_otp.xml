@@ -10,10 +10,9 @@
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/otp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="LOGIN"
+        android:layout_marginTop="100dp"
+        android:text="OTP Verification"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -22,52 +21,30 @@
         android:id="@+id/otp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
+        android:layout_below="@+id/heading"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/edittext_background"
-        android:hint="Email"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/background"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/edittext_background"
-        android:hint="Password"
+        android:hint="Enter OTP"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:singleLine="true" />
 
     <TextView
-        android:id="@+id/loginbtn"
+        android:id="@+id/verifybtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/background"
-        android:layout_alignRight="@+id/password"
+        android:layout_below="@+id/otp"
+        android:layout_alignRight="@+id/otp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_background"
         android:paddingHorizontal="40dp"
         android:paddingVertical="5dp"
-        android:text="Login"
+        android:text="Verify"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginbtn"
-        android:layout_alignRight="@+id/password"
-        android:text="Forgot Password?"
-        android:textColor="@color/colorPrimaryDark" />
 
     <RelativeLayout
         android:id="@+id/background"
