@@ -31,6 +31,18 @@
         android:singleLine="true" />
 
     <TextView
+        android:id="@+id/resendbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/otp"
+        android:layout_alignRight="@+id/otp"
+        android:layout_marginRight="20dp"
+        android:text="resend"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="italic"
+        android:textSize="15sp" />
+
+    <TextView
         android:id="@+id/verifybtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
