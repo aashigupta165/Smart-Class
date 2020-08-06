@@ -29,9 +29,9 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.add:
-                Intent intent = new Intent(AdminHomeActivity.this, CreateNewOrgAdminActivity.class);
+                Intent intent = new Intent(AdminHomeActivity.this, CreateNewOrgAdminActivity1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
