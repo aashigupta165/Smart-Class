@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/profile">
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.education.smartclass.ui.home.HomeFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_teacher" />
+
+    <fragment
+        android:id="@+id/teacher"
+        android:name="com.education.smartclass.ui.gallery.GalleryFragment"
+        android:label="@string/teacher"
+        tools:layout="@layout/fragment_teacher" />
+
+    <fragment
+        android:id="@+id/classes"
+        android:name="com.education.smartclass.ui.slideshow.SlideshowFragment"
+        android:label="@string/classes"
+        tools:layout="@layout/fragment_teacher" />
+
+    <fragment
+        android:id="@+id/student"
+        android:name="com.education.smartclass.ui.slideshow.SlideshowFragment"
+        android:label="@string/student"
+        tools:layout="@layout/fragment_teacher" />
+
+</navigation>

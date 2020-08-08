@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Smart Class</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="profile">Profile</string>
+    <string name="teacher">Teacher</string>
+    <string name="classes">Class</string>
+    <string name="student">Student</string>
 </resources>
