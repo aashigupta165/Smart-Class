@@ -1,18 +1,15 @@
-package com.education.smartclass;
+package com.education.smartclass.activities.login.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Locale;
+import com.education.smartclass.R;
 
 public class OtpActivity extends AppCompatActivity {
 

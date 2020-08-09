@@ -1,8 +1,10 @@
-package com.education.smartclass;
+package com.education.smartclass.activities.login.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.education.smartclass.R;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 

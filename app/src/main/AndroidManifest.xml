@@ -11,15 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminHomeActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".OtpActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".CreateNewOrgAdminActivity1" />
-        <activity android:name=".CreateNewOrgAdminActivity2" />
-        <activity android:name=".CreateNewOrgAdminActivity3" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".activities.admin.ui.HomeActivity"></activity>
+        <activity android:name=".activities.master.AdminHomeActivity" />
+        <activity android:name=".activities.login.ui.ResetPasswordActivity" />
+        <activity android:name=".activities.login.ui.OtpActivity" />
+        <activity android:name=".activities.login.ui.ForgotPasswordActivity" />
+        <activity android:name=".activities.admin.ui.CreateNewOrgAdminActivity1" />
+        <activity android:name=".activities.admin.ui.CreateNewOrgAdminActivity2" />
+        <activity android:name=".activities.admin.ui.CreateNewOrgAdminActivity3" />
+        <activity android:name=".activities.login.ui.LoginActivity" />
+        <activity android:name=".activities.login.ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

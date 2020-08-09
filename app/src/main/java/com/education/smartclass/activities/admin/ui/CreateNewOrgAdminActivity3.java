@@ -1,8 +1,10 @@
-package com.education.smartclass;
+package com.education.smartclass.activities.admin.ui;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.education.smartclass.R;
 
 public class CreateNewOrgAdminActivity3 extends AppCompatActivity {
 
