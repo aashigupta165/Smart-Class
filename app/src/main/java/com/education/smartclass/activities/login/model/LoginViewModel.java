@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText = new MutableLiveData<>();
+    private MutableLiveData<String> message = new MutableLiveData<>();
 
     public void dataRetrieval(Context context, String mobile, String password) {
 
@@ -25,18 +25,18 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
                 SharedPrefManager.getInstance(context).saveUser(loginResponse.getUser());
-                mText.setValue(loginResponse.getMessage());
+                message.setValue(loginResponse.getMessage());
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                mText.setValue("Internet_Issue");
+                message.setValue("Internet_Issue");
             }
         });
     }
 
-    public MutableLiveData<String> getText() {
-        return mText;
+    public MutableLiveData<String> getMessage() {
+        return message;
     }
 
     @Override

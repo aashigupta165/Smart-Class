@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.admin.ui.CreateNewOrgAdminActivity1">
+    tools:context=".activities.admin.ui.RegisterNewOrgActivity1">
 
     <TextView
         android:id="@+id/heading"
@@ -39,7 +39,7 @@
         android:paddingVertical="30dp">
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/org_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
@@ -50,10 +50,10 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/orgCode"
+            android:id="@+id/org_Code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
+            android:layout_below="@+id/org_Name"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Org's Code"
@@ -63,10 +63,10 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/orgType"
+            android:id="@+id/org_Type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orgCode"
+            android:layout_below="@+id/org_Code"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Org's Type"
@@ -75,10 +75,10 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/org_Address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orgType"
+            android:layout_below="@+id/org_Type"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Org's Address"

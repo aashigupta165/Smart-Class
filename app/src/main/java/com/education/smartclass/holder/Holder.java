@@ -16,7 +16,7 @@ public class Holder extends RecyclerView.ViewHolder {
     public Holder(@NonNull View itemView) {
         super(itemView);
 
-        this.orgName = itemView.findViewById(R.id.image);
-        this.orgCode = itemView.findViewById(R.id.title);
+        this.orgName = itemView.findViewById(R.id.org_Name);
+        this.orgCode = itemView.findViewById(R.id.org_Code);
     }
 }

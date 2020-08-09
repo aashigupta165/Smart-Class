@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     private void dataObserver() {
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        LiveData<String> message = loginViewModel.getText();
+        LiveData<String> message = loginViewModel.getMessage();
 
         message.observe(LoginActivity.this, new Observer<String>() {
             @Override

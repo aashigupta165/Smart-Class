@@ -16,7 +16,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.education.smartclass.activities.admin.ui.CreateNewOrgAdminActivity1;
+import com.education.smartclass.activities.admin.ui.RegisterNewOrgActivity1;
 import com.education.smartclass.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -99,7 +99,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                Intent intent = new Intent(AdminHomeActivity.this, CreateNewOrgAdminActivity1.class);
+                Intent intent = new Intent(AdminHomeActivity.this, RegisterNewOrgActivity1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;

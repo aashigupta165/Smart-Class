@@ -13,14 +13,14 @@ import com.education.smartclass.R;
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private TextView nextbtn;
-    private EditText number;
+    private EditText mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        number = findViewById(R.id.number);
+        mobile = findViewById(R.id.mobile);
 
         nextbtn = findViewById(R.id.nextbtn);
         nextbtn.setOnClickListener(new View.OnClickListener() {

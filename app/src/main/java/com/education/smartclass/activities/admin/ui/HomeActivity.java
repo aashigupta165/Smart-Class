@@ -18,9 +18,11 @@ import android.widget.RelativeLayout;
 import com.education.smartclass.Adapter.HolderAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.activities.admin.model.HomeViewModel;
-import com.education.smartclass.response.OrganisationList;
+import com.education.smartclass.models.Organisation;
 import com.education.smartclass.utils.Logout;
 import com.education.smartclass.utils.SnackBar;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         organisation_list = findViewById(R.id.organisation_list);
 
         dataObserver();
+        homeViewModel.fetchOrganisationList();
     }
 
     @Override
@@ -53,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                Intent intent = new Intent(HomeActivity.this, CreateNewOrgAdminActivity1.class);
+                Intent intent = new Intent(HomeActivity.this, RegisterNewOrgActivity1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
@@ -67,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
     private void dataObserver() {
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        LiveData<String> message = homeViewModel.getText();
+        LiveData<String> message = homeViewModel.getMessage();
 
         message.observe(this, new Observer<String>() {
             @Override
@@ -75,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
                 switch (s) {
                     case "list_found":
                         fetchList();
+                        break;
                     case "Invalid_orgCode":
                         new SnackBar(relativeLayout, "Invalid Details");
                         break;
@@ -92,15 +96,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void fetchList() {
-        OrganisationList organisationList = homeViewModel.fetchOrganisationList();
+        LiveData<ArrayList<Organisation>> list = homeViewModel.getList();
 
-        if (organisationList == null) {
-            return;
-        } else {
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-            organisation_list.setLayoutManager(layoutManager);
-            HolderAdapter holderAdapter = new HolderAdapter(this, organisationList.getList());
-            organisation_list.setAdapter(holderAdapter);
-        }
+        list.observe(this, new Observer<ArrayList<Organisation>>() {
+            @Override
+            public void onChanged(ArrayList<Organisation> organisations) {
+                organisation_list.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+                HolderAdapter holderAdapter = new HolderAdapter(HomeActivity.this, organisations);
+                organisation_list.setAdapter(holderAdapter);
+            }
+        });
     }
 }

@@ -16,9 +16,9 @@
         <activity android:name=".activities.login.ui.ResetPasswordActivity" />
         <activity android:name=".activities.login.ui.OtpActivity" />
         <activity android:name=".activities.login.ui.ForgotPasswordActivity" />
-        <activity android:name=".activities.admin.ui.CreateNewOrgAdminActivity1" />
-        <activity android:name=".activities.admin.ui.CreateNewOrgAdminActivity2" />
-        <activity android:name=".activities.admin.ui.CreateNewOrgAdminActivity3" />
+        <activity android:name=".activities.admin.ui.RegisterNewOrgActivity1" />
+        <activity android:name=".activities.admin.ui.RegisterNewOrgActivity2" />
+        <activity android:name=".activities.admin.ui.RegisterNewOrgActivity3" />
         <activity android:name=".activities.login.ui.LoginActivity" />
         <activity android:name=".activities.login.ui.SplashScreenActivity">
             <intent-filter>
