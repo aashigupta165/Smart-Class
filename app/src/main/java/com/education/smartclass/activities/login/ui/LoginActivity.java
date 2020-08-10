@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = new ProgressDialog(this);
 
         dataObserver();
-        buttonClickListener();
+        buttonClickEvents();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void buttonClickListener() {
+    private void buttonClickEvents() {
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

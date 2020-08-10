@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         relativeLayout = findViewById(R.id.relativeLayout);
         organisation_list = findViewById(R.id.organisation_list);

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.admin.ui.RegisterNewOrgActivity1">
@@ -43,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/colorPrimaryDark"
             android:text="Upload Org's Logo"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 
         <ImageButton
@@ -57,10 +58,20 @@
             android:background="@null"
             android:src="@drawable/ic_upload" />
 
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo_upload"
+            android:layout_marginTop="10dp"
+            android:text="Logo Uploaded Successfully"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="gone" />
+
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/createbtn"
+        android:id="@+id/submitbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_form"
@@ -69,7 +80,7 @@
         android:background="@drawable/btn_background"
         android:paddingHorizontal="40dp"
         android:paddingVertical="5dp"
-        android:text="Create"
+        android:text="Submit"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
