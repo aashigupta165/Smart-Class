@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.admin.model;
+package com.education.smartclass.roles.admin.model;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -28,9 +28,8 @@ public class RegisterViewModel extends ViewModel {
         RequestBody Mobile = RequestBody.create(mobile, MediaType.parse("text/plain"));
         RequestBody MethodToUpload = RequestBody.create("File", MediaType.parse("text/plain"));
 
-        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().register(OrgName, OrgCode, OrgType, OrgAddress, Email, Role, Mobile,
-                MethodToUpload, null, null, null, null, null, null,
-                null, logo);
+        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().registerOrg(OrgName, OrgCode, OrgType, OrgAddress, Email, Role, Mobile,
+                MethodToUpload, logo);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

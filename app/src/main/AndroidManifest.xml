@@ -12,16 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.admin.ui.HomeActivity"></activity>
-        <activity android:name=".activities.master.AdminHomeActivity" />
-        <activity android:name=".activities.login.ui.ResetPasswordActivity" />
-        <activity android:name=".activities.login.ui.OtpActivity" />
-        <activity android:name=".activities.login.ui.ForgotPasswordActivity" />
-        <activity android:name=".activities.admin.ui.RegisterNewOrgActivity1" />
-        <activity android:name=".activities.admin.ui.RegisterNewOrgActivity2" />
-        <activity android:name=".activities.admin.ui.RegisterNewOrgActivity3" />
-        <activity android:name=".activities.login.ui.LoginActivity" />
-        <activity android:name=".activities.login.ui.SplashScreenActivity">
+        <activity android:name=".roles.admin.ui.HomeActivity"></activity>
+        <activity android:name=".roles.master.AdminHomeActivity" />
+        <activity android:name=".roles.login.ui.ResetPasswordActivity" />
+        <activity android:name=".roles.login.ui.OtpActivity" />
+        <activity android:name=".roles.login.ui.ForgotPasswordActivity" />
+        <activity android:name=".roles.admin.ui.RegisterNewOrgActivity1" />
+        <activity android:name=".roles.admin.ui.RegisterNewOrgActivity2" />
+        <activity android:name=".roles.admin.ui.RegisterNewOrgActivity3" />
+        <activity android:name=".roles.login.ui.LoginActivity" />
+        <activity android:name=".roles.login.ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

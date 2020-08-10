@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.login.model;
+package com.education.smartclass.roles.login.model;
 
 import android.content.Context;
 
@@ -24,7 +24,11 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
-                SharedPrefManager.getInstance(context).saveUser(loginResponse.getUser());
+
+                if (loginResponse.getMessage().equals("loggedIn")) {
+                    SharedPrefManager.getInstance(context).saveUser(loginResponse.getUser());
+                }
+
                 message.setValue(loginResponse.getMessage());
             }
 

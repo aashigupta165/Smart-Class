@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activities.master.AdminHomeActivity">
+    tools:context=".roles.master.AdminHomeActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/toolbar_card"

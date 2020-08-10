@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.admin.model;
+package com.education.smartclass.roles.admin.model;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

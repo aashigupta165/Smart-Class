@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.master;
+package com.education.smartclass.roles.master;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,7 +16,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.education.smartclass.activities.admin.ui.RegisterNewOrgActivity1;
+import com.education.smartclass.roles.admin.fragments.New_frag;
+import com.education.smartclass.roles.admin.ui.HomeActivity;
+import com.education.smartclass.roles.admin.ui.RegisterNewOrgActivity1;
 import com.education.smartclass.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,30 +56,30 @@ public class AdminHomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.profile:
-//                        Intent intent = new Intent(AdminHomeActivity.this, OtpActivity.class);
-//                        startActivity(intent);
-//                        return true;
-//                    case R.id.teacher:
-//                        intent = new Intent(AdminHomeActivity.this, ForgotPasswordActivity.class);
-//                        startActivity(intent);
-//                        return true;
-//                    case R.id.classes:
-//                        intent = new Intent(AdminHomeActivity.this, LoginActivity.class);
-//                        startActivity(intent);
-//                        return true;
-//                    case R.id.student:
-//                        intent = new Intent(AdminHomeActivity.this, OtpActivity.class);
-//                        startActivity(intent);
-//                        return true;
-//                }
-//                return true;
-//            }
-//        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profile:
+                        Intent intent = new Intent(AdminHomeActivity.this, New_frag.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.teacher:
+                        Intent mintent = new Intent(AdminHomeActivity.this, New_frag.class);
+                        startActivity(mintent);
+                        return true;
+                    case R.id.classes:
+                        Intent ntent = new Intent(AdminHomeActivity.this, New_frag.class);
+                        startActivity(ntent);
+                        return true;
+                    case R.id.student:
+                        Intent tent = new Intent(AdminHomeActivity.this, New_frag.class);
+                        startActivity(tent);
+                        return true;
+                }
+                return true;
+            }
+        });
     }
 
     @Override

@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.education.smartclass.ui.home.HomeFragment"
+        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
         android:label="@string/profile"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment
         android:id="@+id/teacher"
-        android:name="com.education.smartclass.ui.gallery.GalleryFragment"
+        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
         android:label="@string/teacher"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment
         android:id="@+id/classes"
-        android:name="com.education.smartclass.ui.slideshow.SlideshowFragment"
+        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
         android:label="@string/classes"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment
         android:id="@+id/student"
-        android:name="com.education.smartclass.ui.slideshow.SlideshowFragment"
+        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
         android:label="@string/student"
         tools:layout="@layout/fragment_teacher" />
 

@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.login.ui;
+package com.education.smartclass.roles.login.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -13,9 +13,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.education.smartclass.activities.admin.ui.HomeActivity;
+import com.education.smartclass.roles.admin.ui.HomeActivity;
 import com.education.smartclass.R;
-import com.education.smartclass.activities.login.model.LoginViewModel;
+import com.education.smartclass.roles.login.model.LoginViewModel;
+import com.education.smartclass.roles.master.AdminHomeActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -125,12 +126,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void roleSelection() {
+        Intent intent;
         switch (SharedPrefManager.getInstance(this).getUser().getRole()) {
             case "Admin":
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent = new Intent(LoginActivity.this, HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-            case "Master":
+                break;
+            case "Organisation":
+                intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case "Teacher":
                 break;

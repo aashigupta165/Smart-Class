@@ -29,10 +29,22 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("name", user.getName());
-        editor.putString("mobile", user.getMobile());
-        editor.putString("email", user.getEmail());
-        editor.putString("role", user.getRole());
+        if (user.getRole().equals("Admin")){
+            editor.putString("name", user.getName());
+            editor.putString("mobile", user.getMobile());
+            editor.putString("email", user.getEmail());
+            editor.putString("role", user.getRole());
+        }
+        else if(user.getRole().equals("Organisation")){
+            editor.putString("orgName", user.getOrgName());
+            editor.putString("orgCode", user.getOrgCode());
+            editor.putString("orgType", user.getOrgType());
+            editor.putString("orgAddress", user.getOrgAddress());
+            editor.putString("orgLogo", user.getOrgLogo());
+            editor.putString("orgEmail", user.getOrgEmail());
+            editor.putString("role", user.getRole());
+            editor.putString("orgMobile", user.getOrgMobile());
+        }
 
         editor.apply();
 
@@ -45,11 +57,19 @@ public class SharedPrefManager {
 
     public User getUser() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
         return new User(
                 sharedPreferences.getString("name", null),
                 sharedPreferences.getString("mobile", null),
                 sharedPreferences.getString("email", null),
-                sharedPreferences.getString("role",null)
+                sharedPreferences.getString("role", null),
+                sharedPreferences.getString("orgName", null),
+                sharedPreferences.getString("orgCode", null),
+                sharedPreferences.getString("orgType", null),
+                sharedPreferences.getString("orgAddress", null),
+                sharedPreferences.getString("orgLogo", null),
+                sharedPreferences.getString("orgEmail", null),
+                sharedPreferences.getString("orgMobile", null)
         );
     }
 

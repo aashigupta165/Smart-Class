@@ -1,5 +1,6 @@
 package com.education.smartclass.response;
 
+import com.education.smartclass.models.Organisation;
 import com.education.smartclass.models.User;
 
 public class LoginResponse {

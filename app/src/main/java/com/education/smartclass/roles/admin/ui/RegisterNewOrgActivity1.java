@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.admin.ui;
+package com.education.smartclass.roles.admin.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.utils.SnackBar;
-
-import java.util.regex.Pattern;
 
 public class RegisterNewOrgActivity1 extends AppCompatActivity {
 

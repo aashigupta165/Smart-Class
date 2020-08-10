@@ -31,7 +31,7 @@ public interface Api {
 
     @Multipart
     @POST("register")
-    Call<MessageResponse> register(
+    Call<MessageResponse> registerOrg(
             @Part("orgName") RequestBody orgName,
             @Part("orgCode") RequestBody orgCode,
             @Part("orgType") RequestBody orgType,
@@ -40,13 +40,22 @@ public interface Api {
             @Part("role") RequestBody role,
             @Part("mobile") RequestBody mobile,
             @Part("methodToCreate") RequestBody methodToCreate,
-            @Part("teacherName") RequestBody teacherName,
-            @Part("teacherAge") RequestBody teacherAge,
-            @Part("teacherDesignation") RequestBody teacherDesignation,
-            @Part("teacherCode") RequestBody teacherCode,
-            @Part("teacherGender") RequestBody teacherGender,
-            @Part("teacherEmail") RequestBody teacherEmail,
-            @Part("class_section_subject") RequestBody class_section_subject,
             @Part MultipartBody.Part file
+    );
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<MessageResponse> registerTeacher(
+            @Field("teacherName") String teacherName,
+            @Field("teacherAge") String teacherAge,
+            @Field("teacherDesignation") String teacherDesignation,
+            @Field("teacherCode") String teacherCode,
+            @Field("teacherGender") String teacherGender,
+            @Field("role") String role,
+            @Field("teacherEmail") String teacherEmail,
+            @Field("mobile") String mobile,
+            @Field("class_section_subject") String class_section_subject,
+            @Field("orgCode") String orgCode,
+            @Field("methodToCreate") String methodToCreate
     );
 }

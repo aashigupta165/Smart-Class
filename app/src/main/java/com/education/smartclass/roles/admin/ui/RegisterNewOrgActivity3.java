@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.admin.ui;
+package com.education.smartclass.roles.admin.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.education.smartclass.R;
-import com.education.smartclass.activities.admin.model.RegisterViewModel;
+import com.education.smartclass.roles.admin.model.RegisterViewModel;
 import com.education.smartclass.utils.SnackBar;
 
 import java.io.ByteArrayOutputStream;

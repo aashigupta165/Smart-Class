@@ -1,4 +1,4 @@
-package com.education.smartclass.activities.admin.ui;
+package com.education.smartclass.roles.admin.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.education.smartclass.Adapter.HolderAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.activities.admin.model.HomeViewModel;
+import com.education.smartclass.roles.admin.model.HomeViewModel;
 import com.education.smartclass.models.Organisation;
 import com.education.smartclass.utils.Logout;
 import com.education.smartclass.utils.SnackBar;
