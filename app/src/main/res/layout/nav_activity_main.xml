@@ -7,25 +7,35 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
-<!--    <include-->
-<!--        layout="@layout/activity_master_home"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
+    <!--    <include-->
+    <!--        layout="@layout/activity_master_home"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" />-->
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <include layout="@layout/content_main" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <include
+            layout="@layout/content_main"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/toolbar" />
+
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        app:headerLayout="@layout/nav_header"
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextColor="@color/colorPrimaryDark"
-        app:itemIconTint="@color/colorPrimaryDark"
+        app:headerLayout="@layout/nav_header"
         app:itemIconSize="30dp"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorPrimaryDark"
         app:menu="@menu/navigation_drawer_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

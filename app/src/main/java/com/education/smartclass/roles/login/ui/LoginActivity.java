@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.education.smartclass.roles.admin.ui.HomeActivity;
 import com.education.smartclass.R;
 import com.education.smartclass.roles.login.model.LoginViewModel;
-import com.education.smartclass.roles.master.AdminHomeActivity;
+import com.education.smartclass.roles.Organisation.activities.OrganisationHomeActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case "Organisation":
-                intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                intent = new Intent(LoginActivity.this, OrganisationHomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;

@@ -3,7 +3,7 @@
     package="com.education.smartclass">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".roles.admin.ui.HomeActivity"></activity>
-        <activity android:name=".roles.master.AdminHomeActivity" />
+        <activity android:name=".roles.Organisation.activities.ManualTeacherRegisterActivity3"></activity>
+        <activity android:name=".roles.Organisation.activities.ManualTeacherRegisterActivity1" />
+        <activity android:name=".roles.Organisation.activities.ManualTeacherRegisterActivity2" />
+        <activity android:name=".roles.Organisation.activities.TeacherRegisterActivity" />
+        <activity android:name=".roles.admin.ui.HomeActivity" />
+        <activity android:name=".roles.Organisation.activities.OrganisationHomeActivity" />
         <activity android:name=".roles.login.ui.ResetPasswordActivity" />
         <activity android:name=".roles.login.ui.OtpActivity" />
         <activity android:name=".roles.login.ui.ForgotPasswordActivity" />

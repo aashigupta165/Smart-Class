@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00f"
+    tools:context=".roles.Organisation.activities.ManualTeacherRegisterActivity3">
+
+    <Button
+        android:id="@+id/addbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add" />
+
+    <GridLayout
+        android:id="@+id/myLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addbtn"
+        android:columnCount="3"
+        android:padding="10dp">
+
+        <TextView
+            android:padding="20dp"
+            android:text="Item Name"
+            android:textColor="#000" />
+
+        <TextView
+            android:padding="20dp"
+            android:text="Quantity"
+            android:textColor="#000" />
+
+        <TextView
+            android:padding="20dp"
+            android:text="Price"
+            android:textColor="#000" />
+
+    </GridLayout>
+
+</RelativeLayout>

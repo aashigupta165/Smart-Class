@@ -7,26 +7,22 @@
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
-        android:label="@string/profile"
+        android:name="com.education.smartclass.roles.Organisation.fragments.ProfileFragment"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment
         android:id="@+id/teacher"
-        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
-        android:label="@string/teacher"
+        android:name="com.education.smartclass.roles.Organisation.fragments.TeacherFragment"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment
         android:id="@+id/classes"
-        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
-        android:label="@string/classes"
+        android:name="com.education.smartclass.roles.Organisation.fragments.ClassFragment"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment
         android:id="@+id/student"
-        android:name="com.education.smartclass.roles.admin.fragments.New_frag"
-        android:label="@string/student"
+        android:name="com.education.smartclass.roles.Organisation.fragments.StudentFragment"
         tools:layout="@layout/fragment_teacher" />
 
 </navigation>
