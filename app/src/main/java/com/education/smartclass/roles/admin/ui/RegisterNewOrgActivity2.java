@@ -56,10 +56,10 @@ public class RegisterNewOrgActivity2 extends AppCompatActivity {
         Intent intent = new Intent(RegisterNewOrgActivity2.this, RegisterNewOrgActivity3.class);
         intent.putExtra("email", bundle.getString("email"));
         intent.putExtra("mobile", bundle.getString("mobile"));
-        intent.putExtra("orgName", orgName.getText().toString());
-        intent.putExtra("orgCode", orgCode.getText().toString());
-        intent.putExtra("orgType", orgType.getText().toString());
-        intent.putExtra("orgAddress", orgAddress.getText().toString());
+        intent.putExtra("orgName", OrgName);
+        intent.putExtra("orgCode", OrgCode);
+        intent.putExtra("orgType", OrgType);
+        intent.putExtra("orgAddress", OrgAddress);
         startActivity(intent);
     }
 }

@@ -4,6 +4,8 @@ import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
 
+import java.util.ArrayList;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -54,7 +56,7 @@ public interface Api {
             @Field("role") String role,
             @Field("teacherEmail") String teacherEmail,
             @Field("mobile") String mobile,
-            @Field("class_section_subject") String class_section_subject,
+            @Field("class_section_subject") ArrayList<String> class_section_subject,
             @Field("orgCode") String orgCode,
             @Field("methodToCreate") String methodToCreate
     );

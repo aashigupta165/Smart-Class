@@ -1,40 +1,188 @@
 package com.education.smartclass.roles.Organisation.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.education.smartclass.R;
-import com.education.smartclass.roles.Organisation.views.ClassDetails;
+import com.education.smartclass.models.ClassDetail;
+import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
+import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.SnackBar;
+
+import java.util.ArrayList;
 
 public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
 
-    private GridLayout layout;
-    Button addbtn;
-    ClassDetails classDetails;
-    Context context;
+    private LinearLayout classDetailsList;
+    private TextView addbtn, submitbtn;
+
+    private RelativeLayout relativeLayout;
+    private ProgressDialog progressDialog;
+
+    ArrayList<String> list = new ArrayList<>();
+
+    private TeacherRegisterManualViewModel teacherRegisterManualViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_teacher_register3);
 
-        layout = findViewById(R.id.myLayout);
+        relativeLayout = findViewById(R.id.relativeLayout);
+        classDetailsList = findViewById(R.id.class_details_list);
         addbtn = findViewById(R.id.addbtn);
+        submitbtn = findViewById(R.id.submitbtn);
+
+        progressDialog = new ProgressDialog(this);
+
+        buttonClickEvents();
+        dataObserver();
+    }
+
+    private void buttonClickEvents() {
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                classDetails = new ClassDetails(context);
-                layout.addView(classDetails.descriptionTextView(getApplicationContext(), "Item No. 1"),3);
-                layout.addView(classDetails.receiveQuantityEditText(getApplicationContext()), 4);
-                layout.addView(classDetails.inStockTextView(getApplicationContext(), "34.00"),5);
+                addView();
             }
         });
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkIfValidAndRead()) {
+                    registerTeacher();
+                }
+            }
+        });
+    }
+
+    private boolean checkIfValidAndRead() {
+
+        list.clear();
+        boolean result = true;
+
+        for (int i = 0; i < classDetailsList.getChildCount(); i++) {
+            View view = classDetailsList.getChildAt(i);
+
+            EditText className = view.findViewById(R.id.className);
+            EditText section = view.findViewById(R.id.section);
+            EditText subject = view.findViewById(R.id.subject);
+
+            String temp = "";
+
+            if (!className.getText().toString().equals("")) {
+                temp += className.getText().toString() + "_";
+            } else {
+                result = false;
+                break;
+            }
+
+            if (!section.getText().toString().equals("")) {
+                temp += section.getText().toString() + "_";
+            } else {
+                result = false;
+                break;
+            }
+
+            if (!subject.getText().toString().equals("")) {
+                temp += subject.getText().toString();
+            } else {
+                result = false;
+                break;
+            }
+
+            list.add(temp);
+        }
+
+        if (list.size() == 0 || !result) {
+            result = false;
+            new SnackBar(relativeLayout, "Please Enter the Required Fields.");
+        }
+
+        return result;
+    }
+
+    private void addView() {
+
+        View view = getLayoutInflater().inflate(R.layout.row_add_teach_details, null, false);
+
+        ImageView imageClose = view.findViewById(R.id.remove_row);
+
+        imageClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(view);
+            }
+        });
+
+        classDetailsList.addView(view);
+    }
+
+    private void removeView(View view) {
+        classDetailsList.removeView(view);
+    }
+
+    private void dataObserver() {
+        teacherRegisterManualViewModel = ViewModelProviders.of(this).get(TeacherRegisterManualViewModel.class);
+        LiveData<String> message = teacherRegisterManualViewModel.getMessage();
+
+        message.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                progressDialog.dismiss();
+
+                switch (s) {
+                    case "teacher_created":
+                        new SnackBar(relativeLayout, "Teacher Registered");
+                        Intent intent = new Intent(ManualTeacherRegisterActivity3.this, OrganisationHomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        break;
+                    case "invalid_entry":
+                        new SnackBar(relativeLayout, "Invalid Details");
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
+    }
+
+    private void registerTeacher() {
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        Bundle bundle = getIntent().getExtras();
+
+        String teacherName = bundle.getString("teacherName");
+        String teacherAge = bundle.getString("teacherAge");
+        String teacherDesignation = bundle.getString("teacherDesignation");
+        String teacherCode = bundle.getString("teacherCode");
+        String teacherGender = bundle.getString("teacherGender");
+        String email = bundle.getString("email");
+        String mobile = bundle.getString("mobile");
+        String orgCode = SharedPrefManager.getInstance(this).getUser().getOrgCode();
+
+        teacherRegisterManualViewModel.register(teacherName, teacherAge, teacherDesignation, teacherCode, teacherGender, email, mobile,
+                list, orgCode);
     }
 }

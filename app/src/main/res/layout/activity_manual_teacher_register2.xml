@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/dots" />
 
     <RelativeLayout
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/inside_edittext_background"
         android:paddingHorizontal="20dp"
@@ -51,13 +51,26 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/teacher_Designation"
+            android:id="@+id/teacher_Age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/teacher_Name"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
-            android:hint="Designation"
+            android:hint="Teacher Age"
+            android:inputType="number"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/teacher_Designation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/teacher_Age"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Teacher Designation"
             android:inputType="text"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
@@ -76,7 +89,7 @@
             android:singleLine="true" />
 
         <RadioGroup
-            android:id="@+id/gender"
+            android:id="@+id/teacher_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/teacher_Code"

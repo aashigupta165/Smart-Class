@@ -54,14 +54,14 @@ public class ManualTeacherRegisterActivity1 extends AppCompatActivity {
             return;
         }
 
-        if (!Email.matches(emailPattern) || Mobile.length() != 10) {
+        if (!Email.matches(emailPattern) || Mobile.length() != 10 || Long.parseLong(Mobile)<Long.parseLong("6000000000")) {
             new SnackBar(relativeLayout, "Invalid Credentials");
             return;
         }
 
         Intent intent = new Intent(ManualTeacherRegisterActivity1.this, ManualTeacherRegisterActivity2.class);
-        intent.putExtra("email", email.getText().toString());
-        intent.putExtra("mobile", mobile.getText().toString());
+        intent.putExtra("email", Email);
+        intent.putExtra("mobile", Mobile);
         startActivity(intent);
     }
 }
