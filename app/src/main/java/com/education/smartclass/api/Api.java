@@ -60,4 +60,21 @@ public interface Api {
             @Field("orgCode") String orgCode,
             @Field("methodToCreate") String methodToCreate
     );
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<MessageResponse> registerStudent(
+            @Field("studentName") String studentName,
+            @Field("studentRollNo") String studentRollNo,
+            @Field("studentClass") String studentClass,
+            @Field("studentSection") String studentSection,
+            @Field("studentFatherName") String studentFatherName,
+            @Field("role") String role,
+            @Field("studentEmail") String studentEmail,
+            @Field("mobile") String mobile,
+            @Field("studentDOB") String studentDOB,
+            @Field("studentGender") String studentGender,
+            @Field("orgCode") String orgCode,
+            @Field("methodToCreate") String methodToCreate
+    );
 }

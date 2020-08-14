@@ -12,10 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".roles.Organisation.activities.ManualTeacherRegisterActivity3"></activity>
-        <activity android:name=".roles.Organisation.activities.ManualTeacherRegisterActivity1" />
-        <activity android:name=".roles.Organisation.activities.ManualTeacherRegisterActivity2" />
-        <activity android:name=".roles.Organisation.activities.TeacherRegisterActivity" />
+        <activity android:name=".roles.Organisation.fragments.ManualTeacherRegisterFragment3" />
+        <activity android:name=".roles.Organisation.fragments.ManualTeacherRegisterFragment1" />
+        <activity android:name=".roles.Organisation.fragments.ManualTeacherRegisterFragment2" />
         <activity android:name=".roles.admin.ui.HomeActivity" />
         <activity android:name=".roles.Organisation.activities.OrganisationHomeActivity" />
         <activity android:name=".roles.login.ui.ResetPasswordActivity" />

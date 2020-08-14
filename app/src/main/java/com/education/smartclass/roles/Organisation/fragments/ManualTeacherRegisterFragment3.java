@@ -1,14 +1,17 @@
-package com.education.smartclass.roles.Organisation.activities;
+package com.education.smartclass.roles.Organisation.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,14 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.education.smartclass.R;
-import com.education.smartclass.models.ClassDetail;
 import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 
-public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
+public class ManualTeacherRegisterFragment3 extends Fragment {
 
     private LinearLayout classDetailsList;
     private TextView addbtn, submitbtn;
@@ -35,20 +37,22 @@ public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
 
     private TeacherRegisterManualViewModel teacherRegisterManualViewModel;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manual_teacher_register3);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_manual_teacher_register3, container, false);
 
-        relativeLayout = findViewById(R.id.relativeLayout);
-        classDetailsList = findViewById(R.id.class_details_list);
-        addbtn = findViewById(R.id.addbtn);
-        submitbtn = findViewById(R.id.submitbtn);
+        relativeLayout = view.findViewById(R.id.relativeLayout);
+        classDetailsList = view.findViewById(R.id.class_details_list);
+        addbtn = view.findViewById(R.id.addbtn);
+        submitbtn = view.findViewById(R.id.submitbtn);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(getContext());
 
         buttonClickEvents();
         dataObserver();
+
+        return view;
     }
 
     private void buttonClickEvents() {
@@ -140,7 +144,7 @@ public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
         teacherRegisterManualViewModel = ViewModelProviders.of(this).get(TeacherRegisterManualViewModel.class);
         LiveData<String> message = teacherRegisterManualViewModel.getMessage();
 
-        message.observe(this, new Observer<String>() {
+        message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
 
@@ -149,9 +153,8 @@ public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
                 switch (s) {
                     case "teacher_created":
                         new SnackBar(relativeLayout, "Teacher Registered");
-                        Intent intent = new Intent(ManualTeacherRegisterActivity3.this, OrganisationHomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        TeacherFragment fragment = new TeacherFragment();
+                        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         break;
                     case "invalid_entry":
                         new SnackBar(relativeLayout, "Invalid Details");
@@ -171,7 +174,7 @@ public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = this.getArguments();
 
         String teacherName = bundle.getString("teacherName");
         String teacherAge = bundle.getString("teacherAge");
@@ -180,7 +183,7 @@ public class ManualTeacherRegisterActivity3 extends AppCompatActivity {
         String teacherGender = bundle.getString("teacherGender");
         String email = bundle.getString("email");
         String mobile = bundle.getString("mobile");
-        String orgCode = SharedPrefManager.getInstance(this).getUser().getOrgCode();
+        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
 
         teacherRegisterManualViewModel.register(teacherName, teacherAge, teacherDesignation, teacherCode, teacherGender, email, mobile,
                 list, orgCode);

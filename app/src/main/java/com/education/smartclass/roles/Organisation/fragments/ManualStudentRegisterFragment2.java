@@ -1,0 +1,154 @@
+package com.education.smartclass.roles.Organisation.fragments;
+
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.education.smartclass.R;
+import com.education.smartclass.roles.Organisation.model.StudentRegisterManualViewModel;
+import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.SnackBar;
+
+public class ManualStudentRegisterFragment2 extends Fragment {
+
+    private EditText studentName, studentRollNo, teacherDesignation, studentClass, studentSection, studentFather;
+    private RadioGroup studentGender;
+    private RadioButton radioButton;
+    private String gender = "male";
+    private TextView submitbtn, heading;
+
+    private RelativeLayout relativeLayout;
+    private LinearLayout class_section;
+
+    private ProgressDialog progressDialog;
+
+    private StudentRegisterManualViewModel studentRegisterManualViewModel;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_manual_teacher_register2, container, false);
+
+        class_section = view.findViewById(R.id.student_Class_Section);
+        class_section.setVisibility(View.VISIBLE);
+        studentName = view.findViewById(R.id.teacher_Name);
+        studentRollNo = view.findViewById(R.id.teacher_Age);
+        teacherDesignation = view.findViewById(R.id.teacher_Designation);
+        teacherDesignation.setVisibility(View.INVISIBLE);
+        studentClass = view.findViewById(R.id.student_Class);
+        studentSection = view.findViewById(R.id.student_Section);
+        studentFather = view.findViewById(R.id.teacher_Code);
+        studentGender = view.findViewById(R.id.teacher_gender);
+        submitbtn = view.findViewById(R.id.nextbtn);
+        heading = view.findViewById(R.id.heading);
+
+        relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        heading.setText("Create Student");
+        studentName.setHint("Student Name");
+        studentRollNo.setHint("Student Roll No.");
+        studentFather.setHint("Father's Name");
+        teacherDesignation.setHint("Class-section");
+        submitbtn.setText("Submit");
+
+        progressDialog = new ProgressDialog(getContext());
+
+        buttonClickEvents();
+        dataObserver();
+
+        return view;
+    }
+
+    private void buttonClickEvents() {
+
+        studentGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButton = radioButton.findViewById(checkedId);
+                if (radioButton.getText().toString().equals("Male")) {
+                    gender = "male";
+                } else {
+                    gender = "female";
+                }
+            }
+        });
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerStudent();
+            }
+        });
+    }
+
+    private void dataObserver() {
+        studentRegisterManualViewModel = ViewModelProviders.of(this).get(StudentRegisterManualViewModel.class);
+        LiveData<String> message = studentRegisterManualViewModel.getMessage();
+
+        message.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                progressDialog.dismiss();
+
+                switch (s) {
+                    case "student_created":
+                        new SnackBar(relativeLayout, "Student Registered");
+                        StudentFragment fragment = new StudentFragment();
+                        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+                        break;
+                    case "invalid_entry":
+                        new SnackBar(relativeLayout, "Invalid Details");
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
+    }
+
+    private void registerStudent() {
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        String StudentName = studentName.getText().toString().trim();
+        String StudentRollNo = studentRollNo.getText().toString().trim();
+        String StudentClass = studentClass.getText().toString().trim();
+        String StudentSection = studentSection.getText().toString().trim();
+        String StudentFather = studentFather.getText().toString().trim();
+
+        if (StudentName.isEmpty() || StudentRollNo.isEmpty() || StudentClass.isEmpty() || StudentSection.isEmpty() || StudentFather.isEmpty()) {
+            new SnackBar(relativeLayout, "Please Enter All The Details.");
+            return;
+        }
+
+        Bundle bundle = this.getArguments();
+
+        String email = bundle.getString("email");
+        String mobile = bundle.getString("mobile");
+        String dob = bundle.getString("dob");
+        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+
+        studentRegisterManualViewModel.register(StudentName, StudentRollNo, StudentClass, StudentSection, StudentFather, email, mobile, dob,
+                gender, orgCode);
+    }
+}

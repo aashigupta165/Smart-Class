@@ -76,6 +76,42 @@
             android:paddingVertical="8dp"
             android:singleLine="true" />
 
+        <LinearLayout
+            android:id="@+id/student_Class_Section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teacher_Age"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/student_Class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Class"
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/student_Section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Section"
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
         <EditText
             android:id="@+id/teacher_Code"
             android:layout_width="match_parent"
