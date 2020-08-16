@@ -31,6 +31,7 @@ import com.education.smartclass.models.Organisation;
 import com.education.smartclass.roles.Organisation.fragments.CSVReader;
 import com.education.smartclass.roles.admin.ui.RegisterNewOrgActivity1;
 import com.education.smartclass.R;
+import com.education.smartclass.utils.Logout;
 import com.education.smartclass.utils.SnackBar;
 import com.google.android.material.navigation.NavigationView;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -90,7 +91,25 @@ public class OrganisationHomeActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
+        @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
+        MenuItem item = menu.findItem(R.id.add);
+        item.setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                new Logout(OrganisationHomeActivity.this);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        Toast.makeText(OrganisationHomeActivity.this, "mai hu super", Toast.LENGTH_LONG).show();

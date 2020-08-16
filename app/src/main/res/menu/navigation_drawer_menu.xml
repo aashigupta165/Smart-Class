@@ -24,9 +24,5 @@
             android:id="@+id/student"
             android:icon="@drawable/ic_student"
             android:title="@string/student" />
-        <item
-            android:id="@+id/logout"
-            android:icon="@drawable/ic_logout"
-            android:title="Logout"/>
     </group>
 </menu>
