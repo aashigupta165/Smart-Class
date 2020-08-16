@@ -3,6 +3,7 @@ package com.education.smartclass.api;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
+import com.education.smartclass.response.TeacherList;
 
 import java.util.ArrayList;
 
@@ -94,5 +95,12 @@ public interface Api {
             @Field("orgCode") String orgCode,
             @Field("class_section_subject") ArrayList<String> class_section_subject,
             @Field("methodToCreate") String methodToCreate
+    );
+
+    @FormUrlEncoded
+    @POST("showList")
+    Call<TeacherList> showTeacherList(
+            @Field("currentRole") String currentRole,
+            @Field("orgCode") String orgCode
     );
 }

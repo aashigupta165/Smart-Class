@@ -72,7 +72,7 @@ public class OrganisationHomeActivity extends AppCompatActivity {
         toggle.syncState();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.profile, R.id.teacher, R.id.classes, R.id.student)
+                R.id.home, R.id.profile, R.id.teacher, R.id.classes, R.id.student, R.id.logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
