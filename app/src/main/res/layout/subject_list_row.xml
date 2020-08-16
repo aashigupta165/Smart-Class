@@ -7,37 +7,14 @@
     android:padding="5dp">
 
     <EditText
-        android:id="@+id/className"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:background="@drawable/details_background"
-        android:hint="Class"
-        android:paddingHorizontal="5dp"
-        android:singleLine="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"></EditText>
-
-    <EditText
-        android:id="@+id/section"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:background="@drawable/details_background"
-        android:hint="Section"
-        android:layout_marginLeft="10dp"
-        android:paddingHorizontal="5dp"
-        android:singleLine="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"></EditText>
-
-    <EditText
         android:id="@+id/subject"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/details_background"
         android:hint="Subject"
         android:paddingHorizontal="5dp"
         android:singleLine="true"
+        android:layout_weight="2"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"></EditText>
 

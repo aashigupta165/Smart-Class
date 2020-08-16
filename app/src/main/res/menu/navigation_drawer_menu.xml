@@ -5,6 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            
+        <item
             android:id="@+id/profile"
             android:icon="@drawable/ic_profile"
             android:title="@string/profile" />

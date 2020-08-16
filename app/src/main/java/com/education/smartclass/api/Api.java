@@ -77,4 +77,22 @@ public interface Api {
             @Field("orgCode") String orgCode,
             @Field("methodToCreate") String methodToCreate
     );
+
+    @Multipart
+    @POST("register")
+    Call<MessageResponse> registerTeachers(
+            @Part("role") RequestBody role,
+            @Part("orgCode") RequestBody orgCode,
+            @Part("methodToCreate") RequestBody methodToCreate,
+            @Part MultipartBody.Part file
+    );
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<MessageResponse> registerClass(
+            @Field("role") String role,
+            @Field("orgCode") String orgCode,
+            @Field("class_section_subject") ArrayList<String> class_section_subject,
+            @Field("methodToCreate") String methodToCreate
+    );
 }

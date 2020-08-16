@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Create Teacher"
+        android:text="Create Subject For Class"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -30,7 +30,7 @@
     <RelativeLayout
         android:id="@+id/input_form"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_below="@+id/heading"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="80dp"
@@ -40,47 +40,66 @@
         android:paddingVertical="30dp">
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/className"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
-            android:hint="Teacher Email"
+            android:hint="Enter Class"
+            android:inputType="textEmailAddress"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true" />
 
-        <EditText
-            android:id="@+id/mobile"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/inner_heading"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/email"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint="Teacher Mobile"
-            android:maxLength="10"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="8dp"
-            android:singleLine="true" />
+            android:layout_centerHorizontal="true"
+            android:text="Add Subjects"
+            android:layout_below="@+id/className"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/dob"
+        <ScrollView
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/mobile"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint="Teacher Mobile"
-            android:inputType="number"
-            android:maxLength="10"
+            android:layout_above="@+id/addbtn"
+            android:layout_below="@+id/inner_heading"
+            android:layout_marginTop="10dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/subject_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/addbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_background"
+            android:drawableRight="@drawable/ic_add"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="8dp"
-            android:singleLine="true"
-            android:visibility="gone" />
+            android:textSize="17sp"
+            android:paddingVertical="5dp"
+            android:text="Add"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/nextbtn"
+        android:id="@+id/submitbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_form"
@@ -89,7 +108,7 @@
         android:background="@drawable/btn_background"
         android:paddingHorizontal="40dp"
         android:paddingVertical="5dp"
-        android:text="Next"
+        android:text="Submit"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />

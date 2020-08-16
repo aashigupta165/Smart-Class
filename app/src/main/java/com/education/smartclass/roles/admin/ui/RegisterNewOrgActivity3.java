@@ -74,7 +74,7 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
+            if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
                 Bitmap bitmap = BitmapFactory.decodeFileDescriptor(this.getContentResolver()
                         .openFileDescriptor(data.getData(), "r").getFileDescriptor());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
