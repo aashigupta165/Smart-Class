@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".roles.Organisation.fragments.ManualClassRegisterFragment2"></activity>
+        <activity android:name=".roles.student.activities.StudentHomeActivity"></activity>
+        <activity android:name=".roles.teacher.activities.TeacherHomeActivity" />
+        <activity android:name=".roles.Organisation.fragments.ManualClassRegisterFragment2" />
         <activity android:name=".roles.admin.ui.HomeActivity" />
         <activity android:name=".roles.Organisation.activities.OrganisationHomeActivity" />
         <activity android:name=".roles.login.ui.ResetPasswordActivity" />

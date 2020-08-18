@@ -20,9 +20,9 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Teachers>> list = new MutableLiveData<>();
 
-    public void fetchOrganisationList() {
+    public void fetchOrganisationList(String orgCode) {
 
-        Call<TeacherList> call = RetrofitClient.getInstance().getApi().showTeacherList("Admin", "Admin");
+        Call<TeacherList> call = RetrofitClient.getInstance().getApi().showTeacherList("Organisation", orgCode);
         call.enqueue(new Callback<TeacherList>() {
             @Override
             public void onResponse(Call<TeacherList> call, Response<TeacherList> response) {

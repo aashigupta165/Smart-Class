@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -22,6 +23,7 @@ import com.education.smartclass.holder.TeacherHolder;
 import com.education.smartclass.models.Organisation;
 import com.education.smartclass.roles.Organisation.model.HomeViewModel;
 import com.education.smartclass.models.Teachers;
+import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class HomeFragment extends Fragment {
 
         dataObserver();
 
-        homeViewModel.fetchOrganisationList();
+        homeViewModel.fetchOrganisationList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
 
         return view;
     }

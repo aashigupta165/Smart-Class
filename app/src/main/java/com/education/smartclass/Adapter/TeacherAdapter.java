@@ -37,6 +37,11 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherHolder> {
     public void onBindViewHolder(@NonNull TeacherHolder holder, int position) {
         holder.teacherName.setText(teacherList.get(position).getTeacherName());
         holder.teacherCode.setText(teacherList.get(position).getTeacherCode());
+        if (holder.switchCompat.isChecked()){
+            holder.switchCompat.setChecked(false);
+        }else {
+            holder.switchCompat.setChecked(true);
+        }
     }
 
     @Override

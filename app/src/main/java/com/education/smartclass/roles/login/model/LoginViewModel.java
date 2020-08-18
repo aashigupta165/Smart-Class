@@ -1,6 +1,7 @@
 package com.education.smartclass.roles.login.model;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -34,7 +35,7 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                message.setValue("Internet_Issue");
+                message.setValue(t.getMessage());
             }
         });
     }

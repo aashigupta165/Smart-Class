@@ -45,6 +45,12 @@ public class SharedPrefManager {
             editor.putString("role", user.getRole());
             editor.putString("orgMobile", user.getOrgMobile());
         }
+        else if(user.getRole().equals("Teacher")){
+            editor.putString("teacherCode", user.getTeacherCode());
+            editor.putString("role", user.getOrgEmail());
+            editor.putString("teacherEmail", user.getRole());
+            editor.putString("teacherMobile", user.getOrgMobile());
+        }
 
         editor.apply();
 
@@ -69,7 +75,10 @@ public class SharedPrefManager {
                 sharedPreferences.getString("orgAddress", null),
                 sharedPreferences.getString("orgLogo", null),
                 sharedPreferences.getString("orgEmail", null),
-                sharedPreferences.getString("orgMobile", null)
+                sharedPreferences.getString("orgMobile", null),
+                sharedPreferences.getString("teacherCode", null),
+                sharedPreferences.getString("teacherEmail", null),
+                sharedPreferences.getString("teacherMobile", null)
         );
     }
 
