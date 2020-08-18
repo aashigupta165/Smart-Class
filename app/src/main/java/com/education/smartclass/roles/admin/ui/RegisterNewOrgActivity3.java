@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -20,6 +21,8 @@ import com.education.smartclass.roles.admin.model.RegisterViewModel;
 import com.education.smartclass.utils.SnackBar;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -81,7 +84,8 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 RequestBody requestLogo = RequestBody.create(MediaType.parse("image/*"), byteArray);
-                logo = MultipartBody.Part.createFormData("file", "organisationLogo.png", requestLogo);
+                Date date = Calendar.getInstance().getTime();
+                logo = MultipartBody.Part.createFormData("file", date + "organisationLogo.png", requestLogo);
                 status.setVisibility(View.VISIBLE);
             } else {
                 new SnackBar(relativeLayout, "You haven't picked Image.");

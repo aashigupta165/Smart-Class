@@ -103,4 +103,11 @@ public interface Api {
             @Field("currentRole") String currentRole,
             @Field("orgCode") String orgCode
     );
+
+    @FormUrlEncoded
+    @POST("changeState")
+    Call<MessageResponse> stateChange(
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode
+    );
 }

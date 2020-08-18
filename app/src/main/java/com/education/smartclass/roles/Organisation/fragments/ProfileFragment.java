@@ -7,11 +7,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -20,12 +24,13 @@ import com.squareup.picasso.Picasso;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ProfileFragment extends Fragment {
 
     private TextView orgCode, orgName, orgAddress;
-    private ImageView orgLogo;
+    private ImageView orgLogo, editPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,31 +40,37 @@ public class ProfileFragment extends Fragment {
         orgName = view.findViewById(R.id.org_Name);
         orgCode = view.findViewById(R.id.org_Code);
         orgAddress = view.findViewById(R.id.org_Address);
+        editPassword = view.findViewById(R.id.edit_password);
 
-//        orgLogo.setImageDrawable(LoadImageFromWebOperations(SharedPrefManager.getInstance(getContext()).getUser().getOrgLogo()));
+        editPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "ho gya", Toast.LENGTH_LONG).show();
+            }
+        });
+
         orgName.setText(SharedPrefManager.getInstance(getContext()).getUser().getOrgName());
         orgCode.setText("Org's id - " + SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
         orgAddress.setText(SharedPrefManager.getInstance(getContext()).getUser().getOrgAddress());
 
-        Bitmap b = null;
-        try
-        {
-            URL url = new URL(SharedPrefManager.getInstance(getContext()).getUser().getOrgLogo());
-            InputStream is = new BufferedInputStream(url.openStream());
-            b = BitmapFactory.decodeStream(is);
-        } catch(Exception e){}
-        orgLogo.setImageBitmap(b);
-
         return view;
     }
 
-//    public static Drawable LoadImageFromWebOperations(String url) {
-//        try {
-//            InputStream is = (InputStream) new URL(url).getContent();
-//            Drawable d = Drawable.createFromStream(is, "src name");
-//            return d;
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            try {
+                URL url = new URL(SharedPrefManager.getInstance(getContext()).getUser().getOrgLogo());
+                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                orgLogo.setImageBitmap(bitmap);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

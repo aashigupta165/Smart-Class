@@ -17,6 +17,7 @@ import com.education.smartclass.roles.admin.ui.HomeActivity;
 import com.education.smartclass.R;
 import com.education.smartclass.roles.login.model.LoginViewModel;
 import com.education.smartclass.roles.Organisation.activities.OrganisationHomeActivity;
+import com.education.smartclass.roles.student.activities.StudentHomeActivity;
 import com.education.smartclass.roles.teacher.activities.TeacherHomeActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
@@ -145,6 +146,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case "Student":
+                intent = new Intent(LoginActivity.this, StudentHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
         }
     }

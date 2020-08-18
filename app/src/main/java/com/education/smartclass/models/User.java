@@ -1,7 +1,5 @@
 package com.education.smartclass.models;
 
-import java.util.ArrayList;
-
 public class User {
 
     private String name;
@@ -17,19 +15,28 @@ public class User {
     private String orgEmail;
     private String orgMobile;
 
-//    private String teacherName;
-//    private String teacherAge;
-//    private String teacherDesignation;
+    private String teacherName;
+    private String teacherAge;
+    private String teacherDesignation;
     private String teacherCode;
-//    private String teacherGender;
+    private String teacherGender;
     private String teacherEmail;
     private String teacherMobile;
-//    private ArrayList<TeacherClasses> teacherClasses;
+
+    private String studentName;
+    private String studentRollNo;
+    private String studentClass;
+    private String studentSection;
+    private String studentFatherName;
+    private String studentEmail;
+    private String studentMobile;
+    private String studentDOB;
+    private String studentGender;
 
     public User() {
     }
 
-    public User(String name, String mobile, String email, String role, String orgName, String orgCode, String orgType, String orgAddress, String orgLogo, String orgEmail, String orgMobile, String teacherCode, String teacherEmail, String teacherMobile) {
+    public User(String name, String mobile, String email, String role, String orgName, String orgCode, String orgType, String orgAddress, String orgLogo, String orgEmail, String orgMobile, String teacherName, String teacherAge, String teacherDesignation, String teacherCode, String teacherGender, String teacherEmail, String teacherMobile, String studentName, String studentRollNo, String studentClass, String studentSection, String studentFatherName, String studentEmail, String studentMobile, String studentDOB, String studentGender) {
         this.name = name;
         this.mobile = mobile;
         this.email = email;
@@ -41,14 +48,22 @@ public class User {
         this.orgLogo = orgLogo;
         this.orgEmail = orgEmail;
         this.orgMobile = orgMobile;
-//        this.teacherName = teacherName;
-//        this.teacherAge = teacherAge;
-//        this.teacherDesignation = teacherDesignation;
+        this.teacherName = teacherName;
+        this.teacherAge = teacherAge;
+        this.teacherDesignation = teacherDesignation;
         this.teacherCode = teacherCode;
-//        this.teacherGender = teacherGender;
+        this.teacherGender = teacherGender;
         this.teacherEmail = teacherEmail;
         this.teacherMobile = teacherMobile;
-//        this.teacherClasses = teacherClasses;
+        this.studentName = studentName;
+        this.studentRollNo = studentRollNo;
+        this.studentClass = studentClass;
+        this.studentSection = studentSection;
+        this.studentFatherName = studentFatherName;
+        this.studentEmail = studentEmail;
+        this.studentMobile = studentMobile;
+        this.studentDOB = studentDOB;
+        this.studentGender = studentGender;
     }
 
     public String getName() {
@@ -139,29 +154,29 @@ public class User {
         this.orgMobile = orgMobile;
     }
 
-//    public String getTeacherName() {
-//        return teacherName;
-//    }
-//
-//    public void setTeacherName(String teacherName) {
-//        this.teacherName = teacherName;
-//    }
+    public String getTeacherName() {
+        return teacherName;
+    }
 
-//    public String getTeacherAge() {
-//        return teacherAge;
-//    }
-//
-//    public void setTeacherAge(String teacherAge) {
-//        this.teacherAge = teacherAge;
-//    }
-//
-//    public String getTeacherDesignation() {
-//        return teacherDesignation;
-//    }
-//
-//    public void setTeacherDesignation(String teacherDesignation) {
-//        this.teacherDesignation = teacherDesignation;
-//    }
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getTeacherAge() {
+        return teacherAge;
+    }
+
+    public void setTeacherAge(String teacherAge) {
+        this.teacherAge = teacherAge;
+    }
+
+    public String getTeacherDesignation() {
+        return teacherDesignation;
+    }
+
+    public void setTeacherDesignation(String teacherDesignation) {
+        this.teacherDesignation = teacherDesignation;
+    }
 
     public String getTeacherCode() {
         return teacherCode;
@@ -171,13 +186,13 @@ public class User {
         this.teacherCode = teacherCode;
     }
 
-//    public String getTeacherGender() {
-//        return teacherGender;
-//    }
-//
-//    public void setTeacherGender(String teacherGender) {
-//        this.teacherGender = teacherGender;
-//    }
+    public String getTeacherGender() {
+        return teacherGender;
+    }
+
+    public void setTeacherGender(String teacherGender) {
+        this.teacherGender = teacherGender;
+    }
 
     public String getTeacherEmail() {
         return teacherEmail;
@@ -195,11 +210,75 @@ public class User {
         this.teacherMobile = teacherMobile;
     }
 
-//    public ArrayList<TeacherClasses> getTeacherClasses() {
-//        return teacherClasses;
-//    }
-//
-//    public void setTeacherClasses(ArrayList<TeacherClasses> teacherClasses) {
-//        this.teacherClasses = teacherClasses;
-//    }
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getStudentRollNo() {
+        return studentRollNo;
+    }
+
+    public void setStudentRollNo(String studentRollNo) {
+        this.studentRollNo = studentRollNo;
+    }
+
+    public String getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(String studentClass) {
+        this.studentClass = studentClass;
+    }
+
+    public String getStudentSection() {
+        return studentSection;
+    }
+
+    public void setStudentSection(String studentSection) {
+        this.studentSection = studentSection;
+    }
+
+    public String getStudentFatherName() {
+        return studentFatherName;
+    }
+
+    public void setStudentFatherName(String studentFatherName) {
+        this.studentFatherName = studentFatherName;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public String getStudentMobile() {
+        return studentMobile;
+    }
+
+    public void setStudentMobile(String studentMobile) {
+        this.studentMobile = studentMobile;
+    }
+
+    public String getStudentDOB() {
+        return studentDOB;
+    }
+
+    public void setStudentDOB(String studentDOB) {
+        this.studentDOB = studentDOB;
+    }
+
+    public String getStudentGender() {
+        return studentGender;
+    }
+
+    public void setStudentGender(String studentGender) {
+        this.studentGender = studentGender;
+    }
 }

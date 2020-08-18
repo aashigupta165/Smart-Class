@@ -16,37 +16,28 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-<!--    <com.google.android.material.imageview.ShapeableImageView-->
-<!--        android:id="@+id/logo"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_below="@+id/heading"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="@drawable/ic_home" />-->
-
     <androidx.cardview.widget.CardView
         android:id="@+id/logo"
         android:layout_width="105dp"
         android:layout_height="105dp"
-        app:cardCornerRadius="250dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/heading"
-        app:cardBackgroundColor="@color/white">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="250dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:cardCornerRadius="150dp"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            app:cardCornerRadius="150dp">
 
             <ImageView
                 android:id="@+id/org_Logo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_home"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_home" />
 
         </androidx.cardview.widget.CardView>
 
@@ -58,8 +49,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="Org's id - 027"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/password"
@@ -67,31 +60,49 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/org_Code"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="Password" />
 
-    <EditText
-        android:id="@+id/password_string"
+    <RelativeLayout
+        android:id="@+id/password_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
-        android:layout_marginHorizontal="50dp"
-        android:background="@drawable/edittext_background"
-        android:drawableRight="@drawable/ic_home"
-        android:enabled="false"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
-        android:text="********"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_marginHorizontal="50dp">
+
+        <EditText
+            android:id="@+id/password_string"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:enabled="false"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:text="********"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <ImageView
+            android:id="@+id/edit_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:paddingVertical="10dp"
+            android:paddingLeft="10dp"
+            android:src="@drawable/ic_edit" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/org_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password_string"
+        android:layout_below="@+id/password_card"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="50dp"
+        android:maxLines="2"
         android:text="Ajay Kumar Garg Engineering College"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
@@ -104,7 +115,8 @@
         android:layout_below="@+id/org_Name"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:maxLines="2"
         android:text="27 Km, Delhi - Hapur bypass road, Ghaziabad - 201009"
         android:textAlignment="center"
         android:textSize="20sp" />

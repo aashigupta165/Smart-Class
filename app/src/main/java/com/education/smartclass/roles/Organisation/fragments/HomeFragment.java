@@ -8,7 +8,6 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -16,13 +15,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.education.smartclass.Adapter.HolderAdapter;
 import com.education.smartclass.Adapter.TeacherAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.holder.TeacherHolder;
-import com.education.smartclass.models.Organisation;
 import com.education.smartclass.roles.Organisation.model.HomeViewModel;
 import com.education.smartclass.models.Teachers;
+import com.education.smartclass.roles.Organisation.model.StatusChangeViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -33,6 +30,7 @@ public class HomeFragment extends Fragment {
     private RelativeLayout relativeLayout;
     private RecyclerView teacher_list;
     private HomeViewModel homeViewModel;
+    private StatusChangeViewModel statusChangeViewModel;
 
     @Nullable
     @Override
@@ -73,6 +71,26 @@ public class HomeFragment extends Fragment {
                         break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
+
+        statusChangeViewModel = ViewModelProviders.of(this).get(StatusChangeViewModel.class);
+        LiveData<String> messageStatus = homeViewModel.getMessage();
+
+        messageStatus.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch (s) {
+                    case "state_changed":
+                        new SnackBar(relativeLayout, "State Changed");
+                        break;
+                    case "invalid_orgCode":
+                    case "invalid_teacherCode":
+                        new SnackBar(relativeLayout, "Invalid Details");
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
                 }
             }
         });

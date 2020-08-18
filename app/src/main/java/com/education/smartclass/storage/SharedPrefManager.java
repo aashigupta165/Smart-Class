@@ -46,10 +46,26 @@ public class SharedPrefManager {
             editor.putString("orgMobile", user.getOrgMobile());
         }
         else if(user.getRole().equals("Teacher")){
+            editor.putString("teacherName", user.getTeacherName());
+            editor.putString("teacherAge", user.getTeacherAge());
+            editor.putString("teacherDesignation", user.getTeacherDesignation());
             editor.putString("teacherCode", user.getTeacherCode());
-            editor.putString("role", user.getOrgEmail());
-            editor.putString("teacherEmail", user.getRole());
-            editor.putString("teacherMobile", user.getOrgMobile());
+            editor.putString("teacherGender", user.getTeacherGender());
+            editor.putString("role", user.getRole());
+            editor.putString("teacherEmail", user.getTeacherEmail());
+            editor.putString("teacherMobile", user.getTeacherMobile());
+        }
+        else if (user.getRole().equals("Student")){
+            editor.putString("studentName", user.getStudentName());
+            editor.putString("studentRollNo", user.getStudentRollNo());
+            editor.putString("studentClass", user.getStudentClass());
+            editor.putString("studentSection", user.getStudentSection());
+            editor.putString("studentFatherName", user.getStudentFatherName());
+            editor.putString("role", user.getRole());
+            editor.putString("studentEmail", user.getStudentEmail());
+            editor.putString("studentMobile", user.getStudentMobile());
+            editor.putString("studentDOB", user.getStudentDOB());
+            editor.putString("studentGender", user.getStudentGender());
         }
 
         editor.apply();
@@ -76,9 +92,22 @@ public class SharedPrefManager {
                 sharedPreferences.getString("orgLogo", null),
                 sharedPreferences.getString("orgEmail", null),
                 sharedPreferences.getString("orgMobile", null),
+                sharedPreferences.getString("teacherName", null),
+                sharedPreferences.getString("teacherAge", null),
+                sharedPreferences.getString("teacherDesignation", null),
                 sharedPreferences.getString("teacherCode", null),
+                sharedPreferences.getString("teacherGender", null),
                 sharedPreferences.getString("teacherEmail", null),
-                sharedPreferences.getString("teacherMobile", null)
+                sharedPreferences.getString("teacherMobile", null),
+                sharedPreferences.getString("studentName", null),
+                sharedPreferences.getString("studentRollNo", null),
+                sharedPreferences.getString("studentClass", null),
+                sharedPreferences.getString("studentSection", null),
+                sharedPreferences.getString("studentFatherName", null),
+                sharedPreferences.getString("studentEmail", null),
+                sharedPreferences.getString("studentMobile", null),
+                sharedPreferences.getString("studentDOB", null),
+                sharedPreferences.getString("studentGender", null)
         );
     }
 
