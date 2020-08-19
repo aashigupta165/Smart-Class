@@ -46,13 +46,13 @@ public class ManualStudentRegisterFragment2 extends Fragment {
 
         class_section = view.findViewById(R.id.student_Class_Section);
         class_section.setVisibility(View.VISIBLE);
-        studentName = view.findViewById(R.id.teacher_Name);
-        studentRollNo = view.findViewById(R.id.teacher_Age);
-        teacherDesignation = view.findViewById(R.id.teacher_Designation);
+        studentName = view.findViewById(R.id.subject);
+        studentRollNo = view.findViewById(R.id.className);
+        teacherDesignation = view.findViewById(R.id.date);
         teacherDesignation.setVisibility(View.INVISIBLE);
         studentClass = view.findViewById(R.id.student_Class);
         studentSection = view.findViewById(R.id.student_Section);
-        studentFather = view.findViewById(R.id.teacher_Code);
+        studentFather = view.findViewById(R.id.Time);
         studentGender = view.findViewById(R.id.teacher_gender);
         submitbtn = view.findViewById(R.id.nextbtn);
         heading = view.findViewById(R.id.heading);

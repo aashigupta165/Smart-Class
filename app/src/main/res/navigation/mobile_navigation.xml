@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/new_schedule"
-        android:name="com.education.smartclass.roles.common.fragments.AddScheduleSelectionFragment" />
+        android:name="com.education.smartclass.roles.teacher.fragments.TeacherAddScheduleFragment" />
 
     <fragment
         android:id="@+id/new_question"

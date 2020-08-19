@@ -1,5 +1,6 @@
 package com.education.smartclass.api;
 
+import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
@@ -109,5 +110,12 @@ public interface Api {
     Call<MessageResponse> stateChange(
             @Field("orgCode") String orgCode,
             @Field("teacherCode") String teacherCode
+    );
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<DropdownDetails> fetchDropdown(
+            @Field("mobile") String mobile,
+            @Field("password") String password
     );
 }

@@ -5,16 +5,14 @@ import java.util.ArrayList;
 public class TeacherClasses {
 
     private ArrayList<TeacherSubjects> teacherSubjects;
-    private String id;
     private String teacherClass;
     private String teacherSection;
 
     public TeacherClasses() {
     }
 
-    public TeacherClasses(ArrayList<TeacherSubjects> teacherSubjects, String id, String teacherClass, String teacherSection) {
+    public TeacherClasses(ArrayList<TeacherSubjects> teacherSubjects, String teacherClass, String teacherSection) {
         this.teacherSubjects = teacherSubjects;
-        this.id = id;
         this.teacherClass = teacherClass;
         this.teacherSection = teacherSection;
     }
@@ -25,14 +23,6 @@ public class TeacherClasses {
 
     public void setTeacherSubjects(ArrayList<TeacherSubjects> teacherSubjects) {
         this.teacherSubjects = teacherSubjects;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTeacherClass() {

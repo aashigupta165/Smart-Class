@@ -30,7 +30,7 @@
         <item
             android:id="@+id/new_schedule"
             android:icon="@drawable/ic_add_new_schedule"
-            android:title="Add Schedule"
+            android:title="Add Class"
             android:visible="false" />
         <item
             android:id="@+id/schedule"

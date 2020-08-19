@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,14 +77,21 @@ public class OrganisationActivity extends AppCompatActivity {
         @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
-        MenuItem item = menu.findItem(R.id.add);
-        item.setVisible(false);
+        MenuItem menuItem = menu.findItem(R.id.add);
+        menuItem.setVisible(false);
+        menuItem = menu.findItem(R.id.notification);
+        menuItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.refresh:
+                finish();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                break;
             case R.id.logout:
                 new Logout(OrganisationActivity.this);
                 break;

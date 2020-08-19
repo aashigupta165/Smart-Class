@@ -18,8 +18,8 @@ public class TeacherListHolder extends RecyclerView.ViewHolder {
     public TeacherListHolder(@NonNull View itemView) {
         super(itemView);
 
-        this.teacherName = itemView.findViewById(R.id.teacher_Name);
-        this.teacherCode = itemView.findViewById(R.id.teacher_Code);
+        this.teacherName = itemView.findViewById(R.id.subject);
+        this.teacherCode = itemView.findViewById(R.id.Time);
         this.status = itemView.findViewById(R.id.status);
     }
 }

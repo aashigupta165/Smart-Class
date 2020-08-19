@@ -122,6 +122,23 @@ public class SharedPrefManager {
 
     }
 
+    public String getPassword() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String password = sharedPreferences.getString("password", null);
+        return password;
+    }
+
+    public void savePassword(String password) {
+
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("password", password);
+
+        editor.apply();
+
+    }
+
     public String getToken() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);

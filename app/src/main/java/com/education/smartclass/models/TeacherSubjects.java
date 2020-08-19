@@ -1,6 +1,7 @@
 package com.education.smartclass.models;
 
 public class TeacherSubjects {
+
     private String id;
     private String subject;
 

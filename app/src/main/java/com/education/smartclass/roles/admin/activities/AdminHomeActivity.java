@@ -66,6 +66,9 @@ public class AdminHomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.refresh:
+                finish();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
                 break;
             case R.id.logout:
                 new Logout(this);

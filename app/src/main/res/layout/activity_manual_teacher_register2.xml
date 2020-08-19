@@ -40,7 +40,7 @@
         android:paddingVertical="30dp">
 
         <EditText
-            android:id="@+id/teacher_Name"
+            android:id="@+id/subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
@@ -51,10 +51,10 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/teacher_Age"
+            android:id="@+id/className"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/teacher_Name"
+            android:layout_below="@+id/subject"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Age"
@@ -64,10 +64,10 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/teacher_Designation"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/teacher_Age"
+            android:layout_below="@+id/className"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Designation"
@@ -80,16 +80,16 @@
             android:id="@+id/student_Class_Section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/teacher_Age"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:layout_below="@id/className"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/student_Class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="30dp"
+                android:layout_weight="1"
                 android:background="@drawable/edittext_background"
                 android:hint="Class"
                 android:inputType="text"
@@ -101,9 +101,9 @@
                 android:id="@+id/student_Section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
+                android:layout_weight="1"
                 android:background="@drawable/edittext_background"
                 android:hint="Section"
                 android:inputType="text"
@@ -113,10 +113,10 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/teacher_Code"
+            android:id="@+id/Time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/teacher_Designation"
+            android:layout_below="@+id/date"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Code"
@@ -128,7 +128,7 @@
             android:id="@+id/teacher_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/teacher_Code"
+            android:layout_below="@+id/Time"
             android:layout_marginTop="30dp"
 
             android:orientation="horizontal">

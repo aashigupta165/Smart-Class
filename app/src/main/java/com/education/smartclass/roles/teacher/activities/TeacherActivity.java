@@ -57,7 +57,7 @@ public class TeacherActivity extends AppCompatActivity {
         toggle.syncState();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.home, R.id.profile, R.id.schedule, R.id.questionaire)
+                R.id.home, R.id.profile, R.id.new_schedule, R.id.schedule, R.id.new_question, R.id.questionaire)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
@@ -89,6 +89,9 @@ public class TeacherActivity extends AppCompatActivity {
             case R.id.notification:
                 break;
             case R.id.refresh:
+                finish();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
                 break;
             case R.id.logout:
                 new Logout(TeacherActivity.this);
