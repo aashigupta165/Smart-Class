@@ -1,4 +1,4 @@
-package com.education.smartclass.roles.login.ui;
+package com.education.smartclass.roles.login.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.education.smartclass.roles.admin.ui;
+package com.education.smartclass.roles.admin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
-import com.education.smartclass.Adapter.HolderAdapter;
+import com.education.smartclass.Adapter.OrganisationListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.roles.admin.model.HomeViewModel;
 import com.education.smartclass.models.Organisation;
@@ -24,7 +24,7 @@ import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class AdminHomeActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
     private RecyclerView organisation_list;
@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                Intent intent = new Intent(HomeActivity.this, RegisterNewOrgActivity1.class);
+                Intent intent = new Intent(AdminHomeActivity.this, RegisterNewOrgActivity1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
@@ -101,9 +101,9 @@ public class HomeActivity extends AppCompatActivity {
         list.observe(this, new Observer<ArrayList<Organisation>>() {
             @Override
             public void onChanged(ArrayList<Organisation> organisations) {
-                organisation_list.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
-                HolderAdapter holderAdapter = new HolderAdapter(HomeActivity.this, organisations);
-                organisation_list.setAdapter(holderAdapter);
+                organisation_list.setLayoutManager(new LinearLayoutManager(AdminHomeActivity.this));
+                OrganisationListAdapter organisationListAdapter = new OrganisationListAdapter(AdminHomeActivity.this, organisations);
+                organisation_list.setAdapter(organisationListAdapter);
             }
         });
     }

@@ -4,21 +4,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.education.smartclass.R;
-import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
-import com.education.smartclass.storage.SharedPrefManager;
-import com.education.smartclass.utils.SnackBar;
 
 public class ClassFragment extends Fragment {
 

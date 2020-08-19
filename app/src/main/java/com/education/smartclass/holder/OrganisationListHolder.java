@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
 
-public class Holder extends RecyclerView.ViewHolder {
+public class OrganisationListHolder extends RecyclerView.ViewHolder {
 
     public TextView orgName;
     public TextView orgCode;
 
-    public Holder(@NonNull View itemView) {
+    public OrganisationListHolder(@NonNull View itemView) {
         super(itemView);
 
         this.orgName = itemView.findViewById(R.id.org_Name);

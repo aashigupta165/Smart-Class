@@ -1,4 +1,4 @@
-package com.education.smartclass.roles.admin.ui;
+package com.education.smartclass.roles.admin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

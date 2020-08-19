@@ -1,4 +1,4 @@
-package com.education.smartclass.roles.login.ui;
+package com.education.smartclass.roles.login.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.education.smartclass.roles.admin.ui.HomeActivity;
+import com.education.smartclass.roles.admin.activities.AdminHomeActivity;
 import com.education.smartclass.R;
 import com.education.smartclass.roles.login.model.LoginViewModel;
 import com.education.smartclass.roles.Organisation.activities.OrganisationHomeActivity;
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent;
         switch (SharedPrefManager.getInstance(this).getUser().getRole()) {
             case "Admin":
-                intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;

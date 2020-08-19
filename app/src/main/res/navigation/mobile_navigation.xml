@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.education.smartclass.roles.Organisation.fragments.HomeFragment"
+        android:name="com.education.smartclass.roles.common.fragments.HomeSelectionFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.education.smartclass.roles.common.ProfileSelectionFragment"
+        android:name="com.education.smartclass.roles.common.fragments.ProfileSelectionFragment"
         tools:layout="@layout/fragment_teacher" />
 
     <fragment

@@ -1,4 +1,4 @@
-package com.education.smartclass.roles.login.ui;
+package com.education.smartclass.roles.common.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.login.activities.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

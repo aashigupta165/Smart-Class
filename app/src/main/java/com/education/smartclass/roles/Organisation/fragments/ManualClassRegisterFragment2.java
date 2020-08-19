@@ -2,7 +2,6 @@ package com.education.smartclass.roles.Organisation.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.roles.Organisation.model.ClassRegisterManualViewModel;
-import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 

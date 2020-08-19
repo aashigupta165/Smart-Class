@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.education.smartclass.roles.login.ui.LoginActivity;
+import com.education.smartclass.roles.login.activities.LoginActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 
 public class Logout {

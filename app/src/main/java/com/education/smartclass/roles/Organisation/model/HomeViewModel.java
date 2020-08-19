@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.education.smartclass.api.RetrofitClient;
-import com.education.smartclass.models.Organisation;
 import com.education.smartclass.models.Teachers;
-import com.education.smartclass.response.OrganisationList;
 import com.education.smartclass.response.TeacherList;
 
 import java.util.ArrayList;

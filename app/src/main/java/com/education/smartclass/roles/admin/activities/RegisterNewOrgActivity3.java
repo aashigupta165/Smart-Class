@@ -1,4 +1,4 @@
-package com.education.smartclass.roles.admin.ui;
+package com.education.smartclass.roles.admin.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -109,7 +108,7 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
                 switch (s) {
                     case "org_created":
                         new SnackBar(relativeLayout, "Organisation Registered");
-                        Intent intent = new Intent(RegisterNewOrgActivity3.this, HomeActivity.class);
+                        Intent intent = new Intent(RegisterNewOrgActivity3.this, AdminHomeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         break;

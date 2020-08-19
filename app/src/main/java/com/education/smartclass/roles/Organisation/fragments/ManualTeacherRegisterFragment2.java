@@ -22,7 +22,7 @@ public class ManualTeacherRegisterFragment2 extends Fragment {
     private EditText teacherName, teacherAge, teacherDesignation, teacherCode;
     private RadioGroup teacherGender;
     private RadioButton radioButton;
-    String gender = "male";
+    private String gender = "male";
     private TextView nextbtn;
 
     private RelativeLayout relativeLayout;

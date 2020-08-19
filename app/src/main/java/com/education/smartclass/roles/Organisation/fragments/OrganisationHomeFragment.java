@@ -15,22 +15,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.education.smartclass.Adapter.TeacherAdapter;
+import com.education.smartclass.Adapter.TeacherListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.roles.Organisation.model.HomeViewModel;
 import com.education.smartclass.models.Teachers;
-import com.education.smartclass.roles.Organisation.model.StatusChangeViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class OrganisationHomeFragment extends Fragment {
 
     private RelativeLayout relativeLayout;
     private RecyclerView teacher_list;
     private HomeViewModel homeViewModel;
-    private StatusChangeViewModel statusChangeViewModel;
 
     @Nullable
     @Override
@@ -74,26 +72,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-        statusChangeViewModel = ViewModelProviders.of(this).get(StatusChangeViewModel.class);
-        LiveData<String> messageStatus = statusChangeViewModel.getMessage();
-
-        messageStatus.observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                switch (s) {
-                    case "state_changed":
-                        new SnackBar(relativeLayout, "State Changed");
-                        break;
-                    case "invalid_orgCode":
-                    case "invalid_teacherCode":
-                        new SnackBar(relativeLayout, "Invalid Details");
-                        break;
-                    case "Internet_Issue":
-                        new SnackBar(relativeLayout, "Please connect to the Internet!");
-                }
-            }
-        });
     }
 
     private void fetchList() {
@@ -103,8 +81,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Teachers> teachers) {
                 teacher_list.setLayoutManager(new LinearLayoutManager(getContext()));
-                TeacherAdapter teacherAdapter = new TeacherAdapter(getContext(), teachers);
-                teacher_list.setAdapter(teacherAdapter);
+                TeacherListAdapter teacherListAdapter = new TeacherListAdapter(getContext(), teachers);
+                teacher_list.setAdapter(teacherListAdapter);
             }
         });
     }

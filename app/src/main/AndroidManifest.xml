@@ -17,16 +17,16 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".roles.student.activities.StudentHomeActivity"></activity>
         <activity android:name=".roles.teacher.activities.TeacherHomeActivity" />
-        <activity android:name=".roles.admin.ui.HomeActivity" />
+        <activity android:name=".roles.admin.activities.AdminHomeActivity" />
         <activity android:name=".roles.Organisation.activities.OrganisationHomeActivity" />
-        <activity android:name=".roles.login.ui.ResetPasswordActivity" />
-        <activity android:name=".roles.login.ui.OtpActivity" />
-        <activity android:name=".roles.login.ui.ForgotPasswordActivity" />
-        <activity android:name=".roles.admin.ui.RegisterNewOrgActivity1" />
-        <activity android:name=".roles.admin.ui.RegisterNewOrgActivity2" />
-        <activity android:name=".roles.admin.ui.RegisterNewOrgActivity3" />
-        <activity android:name=".roles.login.ui.LoginActivity" />
-        <activity android:name=".roles.login.ui.SplashScreenActivity">
+        <activity android:name=".roles.login.activities.ResetPasswordActivity" />
+        <activity android:name=".roles.login.activities.OtpActivity" />
+        <activity android:name=".roles.login.activities.ForgotPasswordActivity" />
+        <activity android:name=".roles.admin.activities.RegisterNewOrgActivity1" />
+        <activity android:name=".roles.admin.activities.RegisterNewOrgActivity2" />
+        <activity android:name=".roles.admin.activities.RegisterNewOrgActivity3" />
+        <activity android:name=".roles.login.activities.LoginActivity" />
+        <activity android:name=".roles.common.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

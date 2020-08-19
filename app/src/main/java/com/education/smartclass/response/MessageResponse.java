@@ -1,6 +1,7 @@
 package com.education.smartclass.response;
 
 public class MessageResponse {
+
     private String message;
 
     public MessageResponse() {

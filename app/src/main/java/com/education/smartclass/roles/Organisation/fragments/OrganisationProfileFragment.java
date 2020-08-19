@@ -2,32 +2,26 @@ package com.education.smartclass.roles.Organisation.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.os.StrictMode;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.storage.SharedPrefManager;
-import com.squareup.picasso.Picasso;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ProfileFragment extends Fragment {
+public class OrganisationProfileFragment extends Fragment {
 
     private TextView orgCode, orgName, orgAddress;
     private ImageView orgLogo, editPassword;

@@ -5,6 +5,7 @@ import com.education.smartclass.models.Organisation;
 import java.util.ArrayList;
 
 public class OrganisationList {
+
     private ArrayList<Organisation> list;
     private String message;
 
