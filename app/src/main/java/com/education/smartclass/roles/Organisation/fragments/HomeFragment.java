@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
         });
 
         statusChangeViewModel = ViewModelProviders.of(this).get(StatusChangeViewModel.class);
-        LiveData<String> messageStatus = homeViewModel.getMessage();
+        LiveData<String> messageStatus = statusChangeViewModel.getMessage();
 
         messageStatus.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

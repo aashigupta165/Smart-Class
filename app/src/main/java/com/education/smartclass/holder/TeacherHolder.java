@@ -1,6 +1,7 @@
 package com.education.smartclass.holder;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,13 +14,13 @@ public class TeacherHolder extends RecyclerView.ViewHolder {
 
     public TextView teacherName;
     public TextView teacherCode;
-    public SwitchCompat switchCompat;
+    public ImageView status;
 
     public TeacherHolder(@NonNull View itemView) {
         super(itemView);
 
         this.teacherName = itemView.findViewById(R.id.teacher_Name);
         this.teacherCode = itemView.findViewById(R.id.teacher_Code);
-        this.switchCompat = itemView.findViewById(R.id.switch_compat);
+        this.status = itemView.findViewById(R.id.status);
     }
 }
