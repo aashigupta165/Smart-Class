@@ -7,27 +7,38 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.education.smartclass.roles.common.fragments.HomeSelectionFragment"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.education.smartclass.roles.common.fragments.HomeSelectionFragment" />
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.education.smartclass.roles.common.fragments.ProfileSelectionFragment"
-        tools:layout="@layout/fragment_teacher" />
+        android:name="com.education.smartclass.roles.common.fragments.ProfileSelectionFragment" />
 
     <fragment
         android:id="@+id/teacher"
-        android:name="com.education.smartclass.roles.Organisation.fragments.TeacherFragment"
-        tools:layout="@layout/fragment_teacher" />
+        android:name="com.education.smartclass.roles.Organisation.fragments.TeacherFragment" />
 
     <fragment
         android:id="@+id/classes"
-        android:name="com.education.smartclass.roles.Organisation.fragments.ClassFragment"
-        tools:layout="@layout/fragment_teacher" />
+        android:name="com.education.smartclass.roles.Organisation.fragments.ClassFragment" />
 
     <fragment
         android:id="@+id/student"
-        android:name="com.education.smartclass.roles.Organisation.fragments.StudentFragment"
-        tools:layout="@layout/fragment_teacher" />
+        android:name="com.education.smartclass.roles.Organisation.fragments.StudentFragment" />
+
+    <fragment
+        android:id="@+id/schedule"
+        android:name="com.education.smartclass.roles.common.fragments.ScheduleSelectionFragment" />
+
+    <fragment
+        android:id="@+id/questionaire"
+        android:name="com.education.smartclass.roles.common.fragments.QuestionaireSelectionFragment" />
+
+    <fragment
+        android:id="@+id/new_schedule"
+        android:name="com.education.smartclass.roles.common.fragments.AddScheduleSelectionFragment" />
+
+    <fragment
+        android:id="@+id/new_question"
+        android:name="com.education.smartclass.roles.common.fragments.AddQuestionSelectionFragment" />
 
 </navigation>

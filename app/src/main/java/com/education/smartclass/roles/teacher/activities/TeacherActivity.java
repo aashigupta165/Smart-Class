@@ -19,7 +19,7 @@ import com.education.smartclass.R;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 
-public class TeacherHomeActivity extends AppCompatActivity {
+public class TeacherActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -40,9 +40,13 @@ public class TeacherHomeActivity extends AppCompatActivity {
 
         MenuItem schedule = menu.findItem(R.id.schedule);
         MenuItem questionare = menu.findItem(R.id.questionaire);
+        MenuItem addSchedule = menu.findItem(R.id.new_schedule);
+        MenuItem addquestion = menu.findItem(R.id.new_question);
 
         schedule.setVisible(true);
         questionare.setVisible(true);
+        addSchedule.setVisible(true);
+        addquestion.setVisible(true);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
@@ -74,17 +78,20 @@ public class TeacherHomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
-        MenuItem item = menu.findItem(R.id.add);
-        item.setVisible(false);
-
+        MenuItem menuItem = menu.findItem(R.id.add);
+        menuItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.notification:
+                break;
+            case R.id.refresh:
+                break;
             case R.id.logout:
-                new Logout(TeacherHomeActivity.this);
+                new Logout(TeacherActivity.this);
                 break;
         }
         return super.onOptionsItemSelected(item);

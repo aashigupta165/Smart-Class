@@ -4,14 +4,27 @@
 
     <item
         android:id="@+id/add"
-        android:title="Add"
         android:icon="@drawable/ic_add"
-        app:showAsAction="always"/>
+        android:title="Add"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_notification"
+        android:title="Notification"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/ic_refresh"
+        android:title="Refresh"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/logout"
-        android:title="Logout"
         android:icon="@drawable/ic_logout"
-        app:showAsAction="always"/>
+        android:title="Logout"
+        app:showAsAction="always" />
 
 </menu>

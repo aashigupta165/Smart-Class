@@ -16,9 +16,9 @@ import android.widget.TextView;
 import com.education.smartclass.roles.admin.activities.AdminHomeActivity;
 import com.education.smartclass.R;
 import com.education.smartclass.roles.login.model.LoginViewModel;
-import com.education.smartclass.roles.Organisation.activities.OrganisationHomeActivity;
-import com.education.smartclass.roles.student.activities.StudentHomeActivity;
-import com.education.smartclass.roles.teacher.activities.TeacherHomeActivity;
+import com.education.smartclass.roles.Organisation.activities.OrganisationActivity;
+import com.education.smartclass.roles.student.activities.StudentActivity;
+import com.education.smartclass.roles.teacher.activities.TeacherActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -136,17 +136,17 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case "Organisation":
-                intent = new Intent(LoginActivity.this, OrganisationHomeActivity.class);
+                intent = new Intent(LoginActivity.this, OrganisationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
             case "Teacher":
-                intent = new Intent(LoginActivity.this, TeacherHomeActivity.class);
+                intent = new Intent(LoginActivity.this, TeacherActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
             case "Student":
-                intent = new Intent(LoginActivity.this, StudentHomeActivity.class);
+                intent = new Intent(LoginActivity.this, StudentActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;

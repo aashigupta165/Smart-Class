@@ -2,6 +2,7 @@ package com.education.smartclass.roles.admin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -49,6 +50,10 @@ public class AdminHomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.add);
+        menuItem.setVisible(true);
+        menuItem = menu.findItem(R.id.notification);
+        menuItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -59,6 +64,8 @@ public class AdminHomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(AdminHomeActivity.this, RegisterNewOrgActivity1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                break;
+            case R.id.refresh:
                 break;
             case R.id.logout:
                 new Logout(this);

@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".roles.student.activities.StudentHomeActivity"></activity>
-        <activity android:name=".roles.teacher.activities.TeacherHomeActivity" />
+        <activity android:name=".roles.student.activities.StudentActivity"></activity>
+        <activity android:name=".roles.teacher.activities.TeacherActivity" />
         <activity android:name=".roles.admin.activities.AdminHomeActivity" />
-        <activity android:name=".roles.Organisation.activities.OrganisationHomeActivity" />
+        <activity android:name=".roles.Organisation.activities.OrganisationActivity" />
         <activity android:name=".roles.login.activities.ResetPasswordActivity" />
         <activity android:name=".roles.login.activities.OtpActivity" />
         <activity android:name=".roles.login.activities.ForgotPasswordActivity" />

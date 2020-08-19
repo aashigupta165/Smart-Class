@@ -19,7 +19,7 @@ import com.education.smartclass.R;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 
-public class OrganisationHomeActivity extends AppCompatActivity {
+public class OrganisationActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -85,7 +85,7 @@ public class OrganisationHomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                new Logout(OrganisationHomeActivity.this);
+                new Logout(OrganisationActivity.this);
                 break;
         }
         return super.onOptionsItemSelected(item);

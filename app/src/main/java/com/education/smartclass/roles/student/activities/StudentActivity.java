@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.education.smartclass.R;
 
-public class StudentHomeActivity extends AppCompatActivity {
+public class StudentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

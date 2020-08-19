@@ -28,14 +28,24 @@
             android:title="@string/student"
             android:visible="false" />
         <item
+            android:id="@+id/new_schedule"
+            android:icon="@drawable/ic_add_new_schedule"
+            android:title="Add Schedule"
+            android:visible="false" />
+        <item
             android:id="@+id/schedule"
             android:icon="@drawable/ic_schedule"
             android:title="Schedule"
             android:visible="false" />
         <item
+            android:id="@+id/new_question"
+            android:icon="@drawable/ic_add_new_question"
+            android:title="Ask Doubt"
+            android:visible="false" />
+        <item
             android:id="@+id/questionaire"
             android:icon="@drawable/ic_question_answer"
-            android:title="Questionaire"
+            android:title="Discussion"
             android:visible="false" />
     </group>
 </menu>
