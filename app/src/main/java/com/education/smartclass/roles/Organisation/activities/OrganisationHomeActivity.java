@@ -64,6 +64,16 @@ public class OrganisationHomeActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
+        Menu menu = navigationView.getMenu();
+
+        MenuItem teacher = menu.findItem(R.id.teacher);
+        MenuItem student = menu.findItem(R.id.student);
+        MenuItem classes = menu.findItem(R.id.classes);
+
+        teacher.setVisible(true);
+        student.setVisible(true);
+        classes.setVisible(true);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);

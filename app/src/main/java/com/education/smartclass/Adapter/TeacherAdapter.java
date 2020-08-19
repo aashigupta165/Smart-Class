@@ -3,10 +3,8 @@ package com.education.smartclass.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,14 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.api.RetrofitClient;
-import com.education.smartclass.holder.Holder;
 import com.education.smartclass.holder.TeacherHolder;
-import com.education.smartclass.models.Organisation;
 import com.education.smartclass.models.Teachers;
 import com.education.smartclass.response.MessageResponse;
-import com.education.smartclass.roles.Organisation.model.StatusChangeViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
-import com.education.smartclass.utils.StatusUpdate;
 
 import java.util.ArrayList;
 

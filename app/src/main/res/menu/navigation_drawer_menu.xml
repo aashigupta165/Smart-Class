@@ -15,14 +15,27 @@
         <item
             android:id="@+id/teacher"
             android:icon="@drawable/ic_teacher"
-            android:title="@string/teacher" />
+            android:title="@string/teacher"
+            android:visible="false" />
         <item
             android:id="@+id/classes"
             android:icon="@drawable/ic_class"
-            android:title="@string/classes" />
+            android:title="@string/classes"
+            android:visible="false" />
         <item
             android:id="@+id/student"
             android:icon="@drawable/ic_student"
-            android:title="@string/student" />
+            android:title="@string/student"
+            android:visible="false" />
+        <item
+            android:id="@+id/schedule"
+            android:icon="@drawable/ic_schedule"
+            android:title="Schedule"
+            android:visible="false" />
+        <item
+            android:id="@+id/questionaire"
+            android:icon="@drawable/ic_question_answer"
+            android:title="Questionaire"
+            android:visible="false" />
     </group>
 </menu>
