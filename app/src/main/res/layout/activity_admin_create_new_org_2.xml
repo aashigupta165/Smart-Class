@@ -63,7 +63,7 @@
             android:paddingVertical="8dp"
             android:singleLine="true" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/org_Type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +74,17 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/dropdown_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/org_Type"
+            android:layout_alignRight="@+id/org_Type"
+            android:layout_alignBottom="@+id/org_Type"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_drop_down" />
 
         <EditText
             android:id="@+id/org_Address"

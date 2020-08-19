@@ -3,7 +3,10 @@ package com.education.smartclass.roles.admin.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,10 +17,14 @@ import com.education.smartclass.utils.SnackBar;
 
 public class RegisterNewOrgActivity2 extends AppCompatActivity {
 
-    private EditText orgName, orgCode, orgType, orgAddress;
+    private EditText orgName, orgCode, orgAddress;
+    private AutoCompleteTextView orgType;
+    private ImageView orgTypeDropdown;
     private TextView nextbtn;
 
     private RelativeLayout relativeLayout;
+
+    private static final String[] orgTypes = new String[] {"School", "College"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +35,24 @@ public class RegisterNewOrgActivity2 extends AppCompatActivity {
         orgName = findViewById(R.id.org_Name);
         orgCode = findViewById(R.id.org_Code);
         orgType = findViewById(R.id.org_Type);
+        orgTypeDropdown = findViewById(R.id.dropdown_menu);
         orgAddress = findViewById(R.id.org_Address);
         nextbtn = findViewById(R.id.nextbtn);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, orgTypes);
+        orgType.setAdapter(adapter);
+
+        buttonClickEvents();
+    }
+
+    private void buttonClickEvents() {
+
+        orgTypeDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orgType.showDropDown();
+            }
+        });
 
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override

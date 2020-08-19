@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,14 +31,16 @@ import okhttp3.RequestBody;
 
 public class RegisterNewOrgActivity3 extends AppCompatActivity {
 
-    private TextView submitbtn, status;
+    private RadioGroup isLogo;
+    private RadioButton radioButton;
+    private TextView submitbtn;
     private ImageButton logoUpload;
     private ProgressDialog progressDialog;
 
     private MultipartBody.Part logo;
 
     private RegisterViewModel registerViewModel;
-    private RelativeLayout relativeLayout;
+    private RelativeLayout relativeLayout, inputForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +48,10 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_admin_create_new_org_3);
 
         relativeLayout = findViewById(R.id.relativeLayout);
+        isLogo = findViewById(R.id.radiogroup);
         logoUpload = findViewById(R.id.logo_upload);
         submitbtn = findViewById(R.id.submitbtn);
-        status = findViewById(R.id.status);
+        inputForm = findViewById(R.id.input_form);
 
         progressDialog = new ProgressDialog(this);
 
@@ -55,6 +60,18 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
     }
 
     private void buttonClickEvents() {
+
+        isLogo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButton = findViewById(checkedId);
+                if (radioButton.getText().toString().equals("Yes")){
+                    inputForm.setVisibility(View.VISIBLE);
+                }else {
+                    inputForm.setVisibility(View.GONE);
+                }
+            }
+        });
 
         logoUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +102,8 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
                 RequestBody requestLogo = RequestBody.create(MediaType.parse("image/*"), byteArray);
                 Date date = Calendar.getInstance().getTime();
                 logo = MultipartBody.Part.createFormData("file", date + "organisationLogo.png", requestLogo);
-                status.setVisibility(View.VISIBLE);
+                logoUpload.setImageBitmap(bitmap);
+                new SnackBar(relativeLayout, "Logo Uploaded Successfully");
             } else {
                 new SnackBar(relativeLayout, "You haven't picked Image.");
             }
@@ -127,9 +145,14 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
 
     private void registerOrganisation() {
 
-        if (logo == null) {
-            new SnackBar(relativeLayout, "Please Upload the Logo");
-            return;
+        if (radioButton.getText().toString().equals("Yes")){
+            if (logo == null) {
+                new SnackBar(relativeLayout, "Please Upload the Logo");
+                return;
+            }
+        }
+        else {
+            logo = null;
         }
 
         progressDialog.setMessage("Loading...");
