@@ -169,6 +169,7 @@
             android:layout_marginTop="30dp">
 
             <RadioButton
+                android:id="@+id/all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -177,6 +178,7 @@
                 android:textColor="@color/colorPrimaryDark"/>
 
             <RadioButton
+                android:id="@+id/selected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -188,7 +190,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/nextbtn"
+        android:id="@+id/submitbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_form"
@@ -197,7 +199,7 @@
         android:background="@drawable/btn_background"
         android:paddingHorizontal="40dp"
         android:paddingVertical="5dp"
-        android:text="Next"
+        android:text="Submit"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />

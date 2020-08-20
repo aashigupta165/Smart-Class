@@ -1,9 +1,11 @@
 package com.education.smartclass.api;
 
+import com.education.smartclass.models.StudentDetail;
 import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
+import com.education.smartclass.response.StudentList;
 import com.education.smartclass.response.TeacherList;
 
 import java.util.ArrayList;
@@ -117,5 +119,28 @@ public interface Api {
     Call<DropdownDetails> fetchDropdown(
             @Field("orgCode") String orgCode,
             @Field("teacherCode") String teacherCode
+    );
+
+    @FormUrlEncoded
+    @POST("showList")
+    Call<StudentList> fetchStudents(
+            @Field("currentRole") String currentRole,
+            @Field("orgCode") String orgCode,
+            @Field("studentClass") String studentClass,
+            @Field("studentSection") String studentSection
+    );
+
+    @FormUrlEncoded
+    @POST("schedule/create")
+    Call<MessageResponse> createSchedule(
+            @Field("orgCode") String ordCode,
+            @Field("teacherCode") String teacherCode,
+            @Field("classScheduled") String classScheduled,
+            @Field("sectionScheduled") String sectionScheduled,
+            @Field("topicScheduled") String topicScheduled,
+            @Field("subjectScheduled") String subjectScheduled,
+            @Field("scheduleDate") String scheduleDate,
+            @Field("scheduleTime") String scheduleTime,
+            @Field("selectedStudents") ArrayList<String> selectedStudents
     );
 }
