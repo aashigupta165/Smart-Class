@@ -32,7 +32,6 @@ import com.education.smartclass.R;
 import com.education.smartclass.models.StudentDetail;
 import com.education.smartclass.models.TeacherClasses;
 import com.education.smartclass.models.TeacherSubjects;
-import com.education.smartclass.roles.Organisation.fragments.ManualTeacherRegisterFragment3;
 import com.education.smartclass.roles.teacher.model.FetchDropdownDetailsViewModel;
 import com.education.smartclass.roles.teacher.model.FetchStudentListViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleAddViewModel;
@@ -41,7 +40,6 @@ import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.StringTokenizer;
 
 public class TeacherAddScheduleFragment extends Fragment {
 
@@ -60,7 +58,7 @@ public class TeacherAddScheduleFragment extends Fragment {
     private FetchStudentListViewModel fetchStudentListViewModel;
 
     private ArrayList<TeacherClasses> teacherClassesArrayList = new ArrayList<TeacherClasses>();
-    private ArrayList<String> studentDetailArrayList;
+    private ArrayList<String> studentDetailArrayList = new ArrayList<>();
 
     private ArrayList<Integer> studentItems = new ArrayList<>();
     private boolean[] checkedItems;
@@ -230,17 +228,17 @@ public class TeacherAddScheduleFragment extends Fragment {
             public void onClick(View v) {
 
                 if (className.getText().toString().equals("") || section.getText().toString().equals("") || subject.getText().toString().equals("") ||
-                date.getText().toString().equals("") || time.getText().toString().equals("") || studentDetailArrayList.size()==0){
+                        date.getText().toString().equals("") || time.getText().toString().equals("") || studentDetailArrayList.size() == 0) {
                     new SnackBar(relativeLayout, "Please Enter All Details!");
                     return;
                 }
 
-                if (radioButton.getText().toString().equals("All Students")){
+                if (radioButton.getText().toString().equals("All Students")) {
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                     String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
                     fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
-                }else {
+                } else {
                     String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
                     String teacherCode = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode();
                     scheduleAddViewModel.scheduleCreate(orgCode, teacherCode, className.getText().toString(), section.getText().toString(), subject.getText().toString(),
@@ -299,7 +297,7 @@ public class TeacherAddScheduleFragment extends Fragment {
         msgs.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                switch (s){
+                switch (s) {
                     case "class_scheduled":
                         progressDialog.dismiss();
                         TeacherAddScheduleFragment fragment = new TeacherAddScheduleFragment();
@@ -354,22 +352,20 @@ public class TeacherAddScheduleFragment extends Fragment {
 
         LiveData<ArrayList<StudentDetail>> list = fetchStudentListViewModel.getList();
 
-        if (radioButton.getText().toString().equals("All Students")){
+        if (radioButton.getText().toString().equals("All Students")) {
             list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
                 @Override
                 public void onChanged(ArrayList<StudentDetail> studentList) {
-                    studentDetailArrayList = new ArrayList<>(studentList.size());
+                    studentDetailArrayList.clear();
                     int i = 0;
                     for (StudentDetail s : studentList) {
-                        studentDetailArrayList.set(i, s.getStudentName() + "_" + s.getStudentRollNo() + "_" +s.getStudentEmail());
+                        studentDetailArrayList.add(i, s.getStudentName() + "_" + s.getStudentRollNo() + "_" + s.getStudentEmail());
                         i++;
                     }
                     createSchedule();
                 }
             });
-        }
-
-        else {
+        } else {
             list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
                 @Override
                 public void onChanged(ArrayList<StudentDetail> studentList) {
@@ -406,8 +402,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                     if (!studentItems.contains(position)) {
                         studentItems.add(position);
                     }
-                }
-                else if (studentItems.contains(position)){
+                } else if (studentItems.contains(position)) {
                     studentItems.remove(position);
                 }
             }
@@ -417,9 +412,9 @@ public class TeacherAddScheduleFragment extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                studentDetailArrayList = new ArrayList<String>(studentItems.size());
+                studentDetailArrayList.clear();
                 for (int i = 0; i < studentItems.size(); i++) {
-                    studentDetailArrayList.set(i, name[studentItems.get(i)] + "_" + rollno[studentItems.get(i)] + "_" + email[studentItems.get(i)]);
+                    studentDetailArrayList.add(i, name[studentItems.get(i)] + "_" + rollno[studentItems.get(i)] + "_" + email[studentItems.get(i)]);
                 }
             }
         });
