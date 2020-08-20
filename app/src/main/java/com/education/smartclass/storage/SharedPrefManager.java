@@ -29,13 +29,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if (user.getRole().equals("Admin")){
+        if (user.getRole().equals("Admin")) {
             editor.putString("name", user.getName());
             editor.putString("mobile", user.getMobile());
             editor.putString("email", user.getEmail());
             editor.putString("role", user.getRole());
-        }
-        else if(user.getRole().equals("Organisation")){
+        } else if (user.getRole().equals("Organisation")) {
             editor.putString("orgName", user.getOrgName());
             editor.putString("orgCode", user.getOrgCode());
             editor.putString("orgType", user.getOrgType());
@@ -44,8 +43,7 @@ public class SharedPrefManager {
             editor.putString("orgEmail", user.getOrgEmail());
             editor.putString("role", user.getRole());
             editor.putString("orgMobile", user.getOrgMobile());
-        }
-        else if(user.getRole().equals("Teacher")){
+        } else if (user.getRole().equals("Teacher")) {
             editor.putString("teacherName", user.getTeacherName());
             editor.putString("teacherAge", user.getTeacherAge());
             editor.putString("teacherDesignation", user.getTeacherDesignation());
@@ -54,8 +52,8 @@ public class SharedPrefManager {
             editor.putString("role", user.getRole());
             editor.putString("teacherEmail", user.getTeacherEmail());
             editor.putString("teacherMobile", user.getTeacherMobile());
-        }
-        else if (user.getRole().equals("Student")){
+            editor.putString("orgCode", user.getOrgCode());
+        } else if (user.getRole().equals("Student")) {
             editor.putString("studentName", user.getStudentName());
             editor.putString("studentRollNo", user.getStudentRollNo());
             editor.putString("studentClass", user.getStudentClass());
@@ -117,23 +115,6 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("token", token);
-
-        editor.apply();
-
-    }
-
-    public String getPassword() {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        String password = sharedPreferences.getString("password", null);
-        return password;
-    }
-
-    public void savePassword(String password) {
-
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putString("password", password);
 
         editor.apply();
 

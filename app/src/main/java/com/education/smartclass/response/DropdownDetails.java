@@ -1,28 +1,29 @@
 package com.education.smartclass.response;
 
+import com.education.smartclass.models.ScheduleDetails;
 import com.education.smartclass.models.TeacherClasses;
 
 import java.util.ArrayList;
 
 public class DropdownDetails {
 
-    private ArrayList<TeacherClasses> teacherClasses;
+    private ArrayList<TeacherClasses> teacherClass;
     private String message;
 
     public DropdownDetails() {
     }
 
-    public DropdownDetails(ArrayList<TeacherClasses> teacherClasses, String message) {
-        this.teacherClasses = teacherClasses;
+    public DropdownDetails(ArrayList<TeacherClasses> teacherClass, String message) {
+        this.teacherClass = teacherClass;
         this.message = message;
     }
 
-    public ArrayList<TeacherClasses> getTeacherClasses() {
-        return teacherClasses;
+    public ArrayList<TeacherClasses> getTeacherClass() {
+        return teacherClass;
     }
 
-    public void setTeacherClasses(ArrayList<TeacherClasses> teacherClasses) {
-        this.teacherClasses = teacherClasses;
+    public void setTeacherClass(ArrayList<TeacherClasses> teacherClass) {
+        this.teacherClass = teacherClass;
     }
 
     public String getMessage() {

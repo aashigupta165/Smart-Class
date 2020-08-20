@@ -27,7 +27,6 @@ public class LoginViewModel extends ViewModel {
 
                 if (loginResponse.getMessage().equals("loggedIn")) {
                     SharedPrefManager.getInstance(context).saveUser(loginResponse.getUser());
-                    SharedPrefManager.getInstance(context).savePassword(password);
                 }
 
                 message.setValue(loginResponse.getMessage());

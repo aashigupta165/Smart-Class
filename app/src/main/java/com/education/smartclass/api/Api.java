@@ -113,9 +113,9 @@ public interface Api {
     );
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("teacher/details")
     Call<DropdownDetails> fetchDropdown(
-            @Field("mobile") String mobile,
-            @Field("password") String password
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode
     );
 }

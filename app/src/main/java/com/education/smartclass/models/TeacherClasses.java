@@ -4,25 +4,25 @@ import java.util.ArrayList;
 
 public class TeacherClasses {
 
-    private ArrayList<TeacherSubjects> teacherSubjects;
+    private ArrayList<TeacherSubjects> teachingSubjects;
     private String teacherClass;
     private String teacherSection;
 
     public TeacherClasses() {
     }
 
-    public TeacherClasses(ArrayList<TeacherSubjects> teacherSubjects, String teacherClass, String teacherSection) {
-        this.teacherSubjects = teacherSubjects;
+    public TeacherClasses(ArrayList<TeacherSubjects> teachingSubjects, String teacherClass, String teacherSection) {
+        this.teachingSubjects = teachingSubjects;
         this.teacherClass = teacherClass;
         this.teacherSection = teacherSection;
     }
 
-    public ArrayList<TeacherSubjects> getTeacherSubjects() {
-        return teacherSubjects;
+    public ArrayList<TeacherSubjects> getTeachingSubjects() {
+        return teachingSubjects;
     }
 
-    public void setTeacherSubjects(ArrayList<TeacherSubjects> teacherSubjects) {
-        this.teacherSubjects = teacherSubjects;
+    public void setTeachingSubjects(ArrayList<TeacherSubjects> teachingSubjects) {
+        this.teachingSubjects = teachingSubjects;
     }
 
     public String getTeacherClass() {
