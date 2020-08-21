@@ -40,6 +40,7 @@ import java.util.Calendar;
 public class TeacherScheduleFragment extends Fragment {
 
     private ImageView filter;
+    private TextView no_data;
     private RelativeLayout relativeLayout;
     private RecyclerView schedule_list;
     private ReadSchedulesViewModel readSchedulesViewModel;
@@ -59,6 +60,7 @@ public class TeacherScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_teacher_schedule, container, false);
 
         filter = view.findViewById(R.id.filter);
+        no_data = view.findViewById(R.id.no_class);
         schedule_list = view.findViewById(R.id.schedule_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
@@ -144,6 +146,16 @@ public class TeacherScheduleFragment extends Fragment {
                 schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
                 scheduleListAdapter = new ScheduleListAdapter(getContext(), readScheduleDetails);
                 schedule_list.setAdapter(scheduleListAdapter);
+
+                scheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (scheduleListAdapter.getItemCount()==0){
+                            no_data.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
 
                 scheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override

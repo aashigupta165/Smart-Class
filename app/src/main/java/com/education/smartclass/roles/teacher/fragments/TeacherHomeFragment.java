@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.education.smartclass.Adapter.ScheduleListAdapter;
 import com.education.smartclass.R;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 public class TeacherHomeFragment extends Fragment {
 
     private ImageView filter;
-    private TextView filterheading;
+    private TextView filterheading, no_data;
 
     private RelativeLayout relativeLayout;
     private RecyclerView schedule_list;
@@ -59,6 +60,8 @@ public class TeacherHomeFragment extends Fragment {
         filter.setVisibility(View.GONE);
         filterheading = view.findViewById(R.id.filter_heading);
         filterheading.setVisibility(View.GONE);
+
+        no_data = view.findViewById(R.id.no_class);
 
         schedule_list = view.findViewById(R.id.schedule_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
@@ -134,6 +137,16 @@ public class TeacherHomeFragment extends Fragment {
                 scheduleListAdapter = new ScheduleListAdapter(getContext(), readScheduleDetails);
                 scheduleListAdapter.getFilter().filter("filter1");
                 schedule_list.setAdapter(scheduleListAdapter);
+
+                scheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (scheduleListAdapter.getItemCount()==0){
+                            no_data.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
 
                 scheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override
