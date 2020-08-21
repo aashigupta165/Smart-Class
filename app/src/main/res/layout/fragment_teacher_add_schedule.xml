@@ -5,6 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".roles.admin.activities.RegisterNewOrgActivity1">
 
     <TextView
@@ -164,9 +165,9 @@
             android:id="@+id/student_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_below="@+id/time"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/all"
@@ -175,7 +176,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:text="All Students"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark" />
 
             <RadioButton
                 android:id="@+id/selected"
@@ -183,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Select Students"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark" />
 
         </RadioGroup>
 

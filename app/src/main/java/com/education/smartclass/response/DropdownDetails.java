@@ -1,6 +1,5 @@
 package com.education.smartclass.response;
 
-import com.education.smartclass.models.ScheduleDetails;
 import com.education.smartclass.models.TeacherClasses;
 
 import java.util.ArrayList;

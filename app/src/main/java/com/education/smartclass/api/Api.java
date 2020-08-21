@@ -5,6 +5,7 @@ import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
+import com.education.smartclass.response.ScheduleResponse;
 import com.education.smartclass.response.StudentList;
 import com.education.smartclass.response.TeacherList;
 
@@ -142,5 +143,31 @@ public interface Api {
             @Field("scheduleDate") String scheduleDate,
             @Field("scheduleTime") String scheduleTime,
             @Field("selectedStudents") ArrayList<String> selectedStudents
+    );
+
+    @FormUrlEncoded
+    @POST("schedule/read")
+    Call<ScheduleResponse> readSchedule(
+            @Field("orgCode") String orgCode,
+            @Field("role") String role,
+            @Field("teacherCode") String teacherCode
+    );
+
+    @FormUrlEncoded
+    @POST("schedule/update")
+    Call<MessageResponse> updateSchedule(
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode,
+            @Field("scheduleId") String scheduleId,
+            @Field("newScheduleDate") String newScheduleDate,
+            @Field("newScheduleTime") String newScheduleTime
+    );
+
+    @FormUrlEncoded
+    @POST("schedule/delete")
+    Call<MessageResponse> deleteSchedule(
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode,
+            @Field("scheduleId") String scheduleId
     );
 }

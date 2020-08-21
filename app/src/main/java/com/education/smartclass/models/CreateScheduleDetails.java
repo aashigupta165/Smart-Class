@@ -2,14 +2,14 @@ package com.education.smartclass.models;
 
 import java.util.ArrayList;
 
-public class ScheduleDetails {
+public class CreateScheduleDetails {
 
     private ArrayList<TeacherClasses> teacherClasses;
 
-    public ScheduleDetails() {
+    public CreateScheduleDetails() {
     }
 
-    public ScheduleDetails(ArrayList<TeacherClasses> teacherClasses, String message) {
+    public CreateScheduleDetails(ArrayList<TeacherClasses> teacherClasses, String message) {
         this.teacherClasses = teacherClasses;
     }
 
