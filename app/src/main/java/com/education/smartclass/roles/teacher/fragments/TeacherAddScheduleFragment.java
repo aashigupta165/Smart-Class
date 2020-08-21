@@ -26,7 +26,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.StudentDetail;
@@ -45,9 +44,9 @@ public class TeacherAddScheduleFragment extends Fragment {
 
     private AutoCompleteTextView subject, className, section;
     private ImageView subjectDropdown, classDropdown, sectionDropdown;
-    private TextView date, time, submitbtn;
-    private RadioGroup student_selection;
-    private RadioButton radioButton, all, selected;
+    private TextView date, time, select_students, submitbtn;
+    private RadioGroup topic;
+    private RadioButton radioButton, subjectradiobtn;
 
     private RelativeLayout relativeLayout;
 
@@ -62,6 +61,7 @@ public class TeacherAddScheduleFragment extends Fragment {
 
     private ArrayList<Integer> studentItems = new ArrayList<>();
     private boolean[] checkedItems;
+    private String[] students, name, rollno, email;
 
     private DatePickerDialog.OnDateSetListener setListener;
     private Calendar calendar = Calendar.getInstance();
@@ -70,6 +70,8 @@ public class TeacherAddScheduleFragment extends Fragment {
     private final int day = calendar.get(Calendar.DAY_OF_MONTH);
     private final int hour = calendar.get(Calendar.HOUR_OF_DAY);
     private final int minute = calendar.get(Calendar.MINUTE);
+
+    private String topicOptionSelected = "Subject";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +83,9 @@ public class TeacherAddScheduleFragment extends Fragment {
         subjectDropdown = view.findViewById(R.id.subject_drop_down);
         classDropdown = view.findViewById(R.id.class_drop_down);
         sectionDropdown = view.findViewById(R.id.section_drop_down);
-        student_selection = view.findViewById(R.id.student_selection);
-        all = view.findViewById(R.id.all);
-        selected = view.findViewById(R.id.selected);
+        topic = view.findViewById(R.id.topic);
+        subjectradiobtn = view.findViewById(R.id.subjectbtn);
+        select_students = view.findViewById(R.id.student_selection);
         submitbtn = view.findViewById(R.id.submitbtn);
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
@@ -108,6 +110,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                 className.showDropDown();
                 section.setText("");
                 subject.setText("");
+                subjectradiobtn.setChecked(true);
             }
         });
 
@@ -130,6 +133,33 @@ public class TeacherAddScheduleFragment extends Fragment {
                     section.setAdapter(adapter);
                     section.showDropDown();
                     subject.setText("");
+                    subjectradiobtn.setChecked(true);
+                }
+            }
+        });
+
+        topic.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButton = view.findViewById(checkedId);
+
+                topicOptionSelected = radioButton.getText().toString();
+
+                if (radioButton.getText().toString().equals("Other")) {
+                    if (className.getText().toString().equals("") && section.getText().toString().equals("")) {
+                        new SnackBar(relativeLayout, "Fill Above Details First!");
+                        subjectradiobtn.setChecked(true);
+                        return;
+                    }
+                    subject.setText(null);
+                    subject.setVisibility(View.GONE);
+                    subjectDropdown.setVisibility(View.GONE);
+
+                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+                    fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
+                } else {
+                    subject.setVisibility(View.VISIBLE);
+                    subjectDropdown.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -137,23 +167,27 @@ public class TeacherAddScheduleFragment extends Fragment {
         subjectDropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
                     new SnackBar(relativeLayout, "Please Select Above Fields!");
                     return;
-                } else {
-                    ArrayList<String> subjects = new ArrayList<>();
-                    int i = 0;
-                    for (TeacherClasses s : teacherClassesArrayList) {
-                        if (s.getTeacherClass().equals(className.getText().toString()) && s.getTeacherSection().equals(section.getText().toString())) {
-                            for (TeacherSubjects t : s.getTeachingSubjects())
-                                subjects.add(i, t.getSubject());
-                            i++;
-                        }
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
-                    subject.setAdapter(adapter);
-                    subject.showDropDown();
                 }
+
+                String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+                fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
+
+                ArrayList<String> subjects = new ArrayList<>();
+                int i = 0;
+                for (TeacherClasses s : teacherClassesArrayList) {
+                    if (s.getTeacherClass().equals(className.getText().toString()) && s.getTeacherSection().equals(section.getText().toString())) {
+                        for (TeacherSubjects t : s.getTeachingSubjects())
+                            subjects.add(i, t.getSubject());
+                        i++;
+                    }
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
+                subject.setAdapter(adapter);
+                subject.showDropDown();
             }
         });
 
@@ -199,24 +233,23 @@ public class TeacherAddScheduleFragment extends Fragment {
             }
         };
 
-        student_selection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        select_students.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton = view.findViewById(checkedId);
-                if (radioButton.getText().toString().equals("All Students")) {
+            public void onClick(View v) {
 
-                } else {
-                    if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
-                        new SnackBar(relativeLayout, "Please Fill Above Details First!");
-                        all.setChecked(true);
+                if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
+                    new SnackBar(relativeLayout, "Please Fill Above Details!");
+                    return;
+                }
+
+                if (topicOptionSelected.equals("Subject")) {
+                    if (subject.getText().toString().equals("")) {
+                        new SnackBar(relativeLayout, "Please Fill Above Details!");
                         return;
-                    } else {
-                        progressDialog.setMessage("Loading...");
-                        progressDialog.show();
-                        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-                        fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
                     }
                 }
+
+                showStudentList();
             }
         });
     }
@@ -226,24 +259,7 @@ public class TeacherAddScheduleFragment extends Fragment {
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (className.getText().toString().equals("") || section.getText().toString().equals("") || subject.getText().toString().equals("") ||
-                        date.getText().toString().equals("") || time.getText().toString().equals("") || studentDetailArrayList.size() == 0) {
-                    new SnackBar(relativeLayout, "Please Enter All Details!");
-                    return;
-                }
-
-                if (radioButton.getText().toString().equals("All Students")) {
-                    progressDialog.setMessage("Loading...");
-                    progressDialog.show();
-                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-                    fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
-                } else {
-                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-                    String teacherCode = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode();
-                    scheduleAddViewModel.scheduleCreate(orgCode, teacherCode, className.getText().toString(), section.getText().toString(), subject.getText().toString(),
-                            date.getText().toString(), time.getText().toString(), studentDetailArrayList);
-                }
+                createSchedule();
             }
         });
     }
@@ -281,12 +297,10 @@ public class TeacherAddScheduleFragment extends Fragment {
                         setStudentList();
                         break;
                     case "Internet_Issue":
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        progressDialog.dismiss();
-                        new SnackBar(relativeLayout, "Invalid Credentials");
+                        new SnackBar(relativeLayout, "There is an error in fetching Details... Please Try Again Later!");
                 }
             }
         });
@@ -335,6 +349,7 @@ public class TeacherAddScheduleFragment extends Fragment {
         list.observe(getViewLifecycleOwner(), new Observer<ArrayList<TeacherClasses>>() {
             @Override
             public void onChanged(ArrayList<TeacherClasses> teacherClass) {
+
                 teacherClassesArrayList = teacherClass;
                 ArrayList<String> classes = new ArrayList<>();
                 int i = 0;
@@ -352,46 +367,30 @@ public class TeacherAddScheduleFragment extends Fragment {
 
         LiveData<ArrayList<StudentDetail>> list = fetchStudentListViewModel.getList();
 
-        if (radioButton.getText().toString().equals("All Students")) {
-            list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
-                @Override
-                public void onChanged(ArrayList<StudentDetail> studentList) {
-                    studentDetailArrayList.clear();
-                    int i = 0;
-                    for (StudentDetail s : studentList) {
-                        studentDetailArrayList.add(i, s.getStudentName() + "_" + s.getStudentRollNo() + "_" + s.getStudentEmail());
-                        i++;
-                    }
-                    createSchedule();
+        list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
+            @Override
+            public void onChanged(ArrayList<StudentDetail> studentList) {
+
+                checkedItems = new boolean[studentList.size()];
+
+                students = new String[studentList.size()];
+                name = new String[studentList.size()];
+                rollno = new String[studentList.size()];
+                email = new String[studentList.size()];
+
+                int i = 0;
+                for (StudentDetail s : studentList) {
+                    students[i] = s.getStudentName() + " (" + s.getStudentRollNo() + ")";
+                    name[i] = s.getStudentName();
+                    rollno[i] = s.getStudentRollNo();
+                    email[i] = s.getStudentEmail();
+                    i++;
                 }
-            });
-        } else {
-            list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
-                @Override
-                public void onChanged(ArrayList<StudentDetail> studentList) {
-
-                    checkedItems = new boolean[studentList.size()];
-
-                    String[] students = new String[studentList.size()];
-                    String[] name = new String[studentList.size()];
-                    String[] rollno = new String[studentList.size()];
-                    String[] email = new String[studentList.size()];
-
-                    int i = 0;
-                    for (StudentDetail s : studentList) {
-                        students[i] = s.getStudentName() + " (" + s.getStudentRollNo() + ")";
-                        name[i] = s.getStudentName();
-                        rollno[i] = s.getStudentRollNo();
-                        email[i] = s.getStudentEmail();
-                        i++;
-                    }
-                    showStudentList(students, name, rollno, email);
-                }
-            });
-        }
+            }
+        });
     }
 
-    private void showStudentList(String[] students, String[] name, String[] rollno, String[] email) {
+    private void showStudentList() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Select Students");
@@ -416,6 +415,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                 for (int i = 0; i < studentItems.size(); i++) {
                     studentDetailArrayList.add(i, name[studentItems.get(i)] + "_" + rollno[studentItems.get(i)] + "_" + email[studentItems.get(i)]);
                 }
+                select_students.setText(studentItems.size() + " Students");
             }
         });
 
@@ -436,18 +436,32 @@ public class TeacherAddScheduleFragment extends Fragment {
             }
         });
 
-        progressDialog.dismiss();
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
     private void createSchedule() {
 
+        if (className.getText().toString().equals("") || section.getText().toString().equals("") ||
+                date.getText().toString().equals("") || time.getText().toString().equals("") || studentDetailArrayList.size() == 0) {
+            new SnackBar(relativeLayout, "Please Enter All Details!");
+            return;
+        }
+
+        if (topicOptionSelected.equals("Subject")) {
+            if (subject.getText().toString().equals("")) {
+                new SnackBar(relativeLayout, "Please fill all the Details!");
+                return;
+            }
+        }
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
         String teacherCode = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode();
 
-        scheduleAddViewModel.scheduleCreate(orgCode, teacherCode, className.getText().toString(), section.getText().toString(), subject.getText().toString(),
-                date.getText().toString(), time.getText().toString(), studentDetailArrayList);
+        scheduleAddViewModel.scheduleCreate(orgCode, teacherCode, className.getText().toString(), section.getText().toString(), topicOptionSelected,
+                subject.getText().toString(), date.getText().toString(), time.getText().toString(), studentDetailArrayList);
     }
 }

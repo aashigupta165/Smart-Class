@@ -1,37 +1,32 @@
 package com.education.smartclass.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
-import android.widget.Toast;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.menu.MenuView;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadScheduleDetails;
-import com.education.smartclass.roles.Organisation.fragments.ManualTeacherRegisterFragment3;
-import com.education.smartclass.roles.teacher.fragments.TeacherAddScheduleFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder> {
+public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder> implements Filterable {
 
     private Context c;
     private ArrayList<ReadScheduleDetails> readScheduleDetails;
+
+    private ArrayList<ReadScheduleDetails> filterList;
 
     private ScheduleListHolder.OnItemClickListener mListener;
 
@@ -42,6 +37,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
     public ScheduleListAdapter(Context c, ArrayList<ReadScheduleDetails> readScheduleDetails) {
         this.c = c;
         this.readScheduleDetails = readScheduleDetails;
+        filterList = new ArrayList<>(readScheduleDetails);
     }
 
     @NonNull
@@ -61,53 +57,83 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
         scheduleListHolder.time.setText("Lecture: " + readScheduleDetails.get(position).getScheduleTime() + "(" + readScheduleDetails.get(position).getScheduleDate() + ")");
         scheduleListHolder.count.setText(readScheduleDetails.get(position).getStudentCount() + " Students");
         scheduleListHolder.standard.setText("STD: " + readScheduleDetails.get(position).getScheduledClass() + " " + readScheduleDetails.get(position).getScheduledSection());
-
-//
-//                            case R.id.edit:
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("class", readScheduleDetails.get(position).getScheduledClass());
-//                                bundle.putString("section", readScheduleDetails.get(position).getScheduledSection());
-//                                bundle.putString("subject", readScheduleDetails.get(position).getSubjectScheduled());
-//                                bundle.putString("date", readScheduleDetails.get(position).getScheduleDate());
-//                                bundle.putString("time", readScheduleDetails.get(position).getScheduleTime());
-//                                TeacherAddScheduleFragment fragment = new TeacherAddScheduleFragment();
-//                                fragment.setArguments(bundle);
-//                                ((FragmentActivity) c).getSupportFragmentManager().beginTransaction()
-//                                        .replace(R.id.nav_host_fragment, fragment)
-//                                        .addToBackStack(null)
-//                                        .commit();
-//                                break;
-//                            case R.id.delete:
-//                                AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(c);
-//                                builder.setMessage("Are you sure you want to Delete?")
-//                                        .setCancelable(false)
-//                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//
-//                                            }
-//                                        })
-//                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//                                                dialog.cancel();
-//                                            }
-//                                        });
-//                                AlertDialog alertDialog = builder.create();
-//                                alertDialog.show();
-//                                break;
-//                        }
-//                        return false;
-//                    }
-//                });
-//                popupMenu.show();
-//            }
-//        });
     }
 
     @Override
     public int getItemCount() {
         return readScheduleDetails.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filterOne;
+    }
+
+    private Filter filterOne = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<ReadScheduleDetails> filteredList = new ArrayList<>();
+
+            if (constraint.equals("all")){
+                filteredList = filterList;
+            }
+            else if (constraint.equals("filter1")) {
+                try {
+//                Calendar calendar = Calendar.getInstance();
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//                String query = dateFormat.format(calendar.getTime());
+
+                    for (ReadScheduleDetails readScheduleDetails : filterList) {
+                        SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
+                        Date date = datequery.parse(readScheduleDetails.getScheduleDate());
+                        if (new Date().before(date)) {
+                            filteredList.add(readScheduleDetails);
+                        }
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else if (constraint.equals("filter2")) {
+                try {
+                    for (ReadScheduleDetails readScheduleDetails : filterList) {
+                        SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
+                        Date date = datequery.parse(readScheduleDetails.getScheduleDate());
+                        if (new Date().after(date)) {
+                            filteredList.add(readScheduleDetails);
+                        }
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
+                    Date now = datequery.parse(constraint.toString());
+                    for (ReadScheduleDetails readScheduleDetails : filterList) {
+                        Date date = datequery.parse(readScheduleDetails.getScheduleDate());
+                        if (now.compareTo(date)==0) {
+                            filteredList.add(readScheduleDetails);
+                        }
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            readScheduleDetails.clear();
+            readScheduleDetails.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
 

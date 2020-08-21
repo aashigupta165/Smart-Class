@@ -109,12 +109,58 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/topic_bunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/student_Class_Section"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/topic_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Topic: "
+                android:textSize="20sp" />
+
+            <RadioGroup
+                android:id="@+id/topic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/topic_heading"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/subjectbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Subject"
+                    android:textColor="@color/grey" />
+
+                <RadioButton
+                    android:id="@+id/otherbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Other"
+                    android:textColor="@color/grey" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
         <AutoCompleteTextView
             android:id="@+id/subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/student_Class_Section"
-            android:layout_marginTop="30dp"
+            android:layout_below="@+id/topic_bunch"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/edittext_background"
             android:enabled="false"
             android:hint="Subject"
@@ -139,7 +185,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/subject"
-            android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Date"
             android:inputType="text"
@@ -161,32 +206,18 @@
             android:singleLine="true"
             android:textSize="18sp" />
 
-        <RadioGroup
+        <TextView
             android:id="@+id/student_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/time"
             android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="All Students"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <RadioButton
-                android:id="@+id/selected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Select Students"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </RadioGroup>
+            android:background="@drawable/edittext_background"
+            android:hint="Select Students"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:singleLine="true"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -205,12 +236,12 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/small_wave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/small_wave_light" />
+<!--    <ImageView-->
+<!--        android:id="@+id/small_wave"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@drawable/small_wave_light" />-->
 
 
 </RelativeLayout>

@@ -1,7 +1,10 @@
 package com.education.smartclass.roles.teacher.fragments;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,31 +20,26 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.Adapter.ScheduleListAdapter;
-import com.education.smartclass.Adapter.TeacherListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadScheduleDetails;
-import com.education.smartclass.models.Teachers;
-import com.education.smartclass.roles.Organisation.fragments.ManualTeacherRegisterFragment3;
-import com.education.smartclass.roles.Organisation.model.HomeViewModel;
 import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.Calendar;
 
 public class TeacherScheduleFragment extends Fragment {
 
+    private ImageView filter;
     private RelativeLayout relativeLayout;
     private RecyclerView schedule_list;
     private ReadSchedulesViewModel readSchedulesViewModel;
@@ -60,17 +58,30 @@ public class TeacherScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teacher_schedule, container, false);
 
+        filter = view.findViewById(R.id.filter);
         schedule_list = view.findViewById(R.id.schedule_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
         progressDialog = new ProgressDialog(getContext());
 
         dataObserver();
+        buttonClickEvents();
 
         readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
                 SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
 
         return view;
+    }
+
+    private void buttonClickEvents() {
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                filterSelectionOptions(v);
+            }
+        });
     }
 
     private void dataObserver() {
@@ -171,7 +182,7 @@ public class TeacherScheduleFragment extends Fragment {
                         delete(position);
                         break;
                 }
-               return true;
+                return true;
             }
         });
         popupMenu.show();
@@ -197,7 +208,7 @@ public class TeacherScheduleFragment extends Fragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                       deleteItem(position);
+                        deleteItem(position);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -221,5 +232,55 @@ public class TeacherScheduleFragment extends Fragment {
         positionDelete = position;
 
         scheduleDeleteViewModel.delete(orgCode, teacherCode, readScheduleDetailsArrayList.get(position).getScheduleId());
+    }
+
+    private void filterSelectionOptions(View v) {
+
+        PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+        popupMenu.getMenuInflater().inflate(R.menu.filter_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.all:
+                        scheduleListAdapter.getFilter().filter("all");
+                        return true;
+                    case R.id.coming:
+                        scheduleListAdapter.getFilter().filter("filter1");
+                        return true;
+                    case R.id.previous:
+                        scheduleListAdapter.getFilter().filter("filter2");
+                        return true;
+                    case R.id.by_date:
+                        selectDate();
+                        return true;
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void selectDate() {
+
+        DatePickerDialog.OnDateSetListener setListener;
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String selectedDate = dayOfMonth + "-" + month + "-" + year;
+                scheduleListAdapter.getFilter().filter(selectedDate);
+            }
+        };
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener, year, month, day);
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
     }
 }
