@@ -41,11 +41,7 @@ public class StudentScheduleFragment extends Fragment {
     private RecyclerView schedule_list;
     private ReadSchedulesViewModel readSchedulesViewModel;
 
-    private ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetailsArrayList;
-
     private StudentScheduleListAdapter studentScheduleListAdapter;
-
-    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,8 +51,6 @@ public class StudentScheduleFragment extends Fragment {
         no_data = view.findViewById(R.id.no_class);
         schedule_list = view.findViewById(R.id.schedule_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
-
-        progressDialog = new ProgressDialog(getContext());
 
         dataObserver();
         buttonClickEvents();
