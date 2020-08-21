@@ -25,10 +25,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.education.smartclass.Adapter.ScheduleListAdapter;
+import com.education.smartclass.Adapter.TeacherScheduleListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
-import com.education.smartclass.models.ReadScheduleDetails;
+import com.education.smartclass.models.ReadTeacherScheduleDetails;
 import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -45,9 +45,9 @@ public class TeacherScheduleFragment extends Fragment {
     private RecyclerView schedule_list;
     private ReadSchedulesViewModel readSchedulesViewModel;
 
-    private ArrayList<ReadScheduleDetails> readScheduleDetailsArrayList;
+    private ArrayList<ReadTeacherScheduleDetails> readTeacherScheduleDetailsArrayList;
 
-    private ScheduleListAdapter scheduleListAdapter;
+    private TeacherScheduleListAdapter teacherScheduleListAdapter;
 
     private ScheduleDeleteViewModel scheduleDeleteViewModel;
 
@@ -119,8 +119,8 @@ public class TeacherScheduleFragment extends Fragment {
                 switch (s) {
                     case "schedule_deleted":
                         progressDialog.dismiss();
-                        readScheduleDetailsArrayList.remove(positionDelete);
-                        scheduleListAdapter.notifyItemRemoved(positionDelete);
+                        readTeacherScheduleDetailsArrayList.remove(positionDelete);
+                        teacherScheduleListAdapter.notifyItemRemoved(positionDelete);
                         break;
                     case "Internet_Issue":
                         progressDialog.dismiss();
@@ -135,29 +135,29 @@ public class TeacherScheduleFragment extends Fragment {
     }
 
     private void fetchList() {
-        LiveData<ArrayList<ReadScheduleDetails>> list = readSchedulesViewModel.getList();
+        LiveData<ArrayList<ReadTeacherScheduleDetails>> list = readSchedulesViewModel.getList();
 
-        list.observe(this, new Observer<ArrayList<ReadScheduleDetails>>() {
+        list.observe(this, new Observer<ArrayList<ReadTeacherScheduleDetails>>() {
             @Override
-            public void onChanged(ArrayList<ReadScheduleDetails> readScheduleDetails) {
+            public void onChanged(ArrayList<ReadTeacherScheduleDetails> readTeacherScheduleDetails) {
 
-                readScheduleDetailsArrayList = readScheduleDetails;
+                readTeacherScheduleDetailsArrayList = readTeacherScheduleDetails;
 
                 schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
-                scheduleListAdapter = new ScheduleListAdapter(getContext(), readScheduleDetails);
-                schedule_list.setAdapter(scheduleListAdapter);
+                teacherScheduleListAdapter = new TeacherScheduleListAdapter(getContext(), readTeacherScheduleDetails);
+                schedule_list.setAdapter(teacherScheduleListAdapter);
 
-                scheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                teacherScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
                     public void onChanged() {
                         super.onChanged();
-                        if (scheduleListAdapter.getItemCount()==0){
+                        if (teacherScheduleListAdapter.getItemCount()==0){
                             no_data.setVisibility(View.VISIBLE);
                         }
                     }
                 });
 
-                scheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
+                teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         showmenu(view, position);
@@ -203,9 +203,9 @@ public class TeacherScheduleFragment extends Fragment {
     private void edit(int position) {
 
         Bundle bundle = new Bundle();
-        bundle.putString("id", readScheduleDetailsArrayList.get(position).getScheduleId());
-        bundle.putString("date", readScheduleDetailsArrayList.get(position).getScheduleDate());
-        bundle.putString("time", readScheduleDetailsArrayList.get(position).getScheduleTime());
+        bundle.putString("id", readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        bundle.putString("date", readTeacherScheduleDetailsArrayList.get(position).getScheduleDate());
+        bundle.putString("time", readTeacherScheduleDetailsArrayList.get(position).getScheduleTime());
 
         ScheduleUpdateFragment fragment = new ScheduleUpdateFragment();
         fragment.setArguments(bundle);
@@ -243,7 +243,7 @@ public class TeacherScheduleFragment extends Fragment {
 
         positionDelete = position;
 
-        scheduleDeleteViewModel.delete(orgCode, teacherCode, readScheduleDetailsArrayList.get(position).getScheduleId());
+        scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
     }
 
     private void filterSelectionOptions(View v) {
@@ -256,13 +256,13 @@ public class TeacherScheduleFragment extends Fragment {
 
                 switch (item.getItemId()) {
                     case R.id.all:
-                        scheduleListAdapter.getFilter().filter("all");
+                        teacherScheduleListAdapter.getFilter().filter("all");
                         return true;
                     case R.id.coming:
-                        scheduleListAdapter.getFilter().filter("filter1");
+                        teacherScheduleListAdapter.getFilter().filter("filter1");
                         return true;
                     case R.id.previous:
-                        scheduleListAdapter.getFilter().filter("filter2");
+                        teacherScheduleListAdapter.getFilter().filter("filter2");
                         return true;
                     case R.id.by_date:
                         selectDate();
@@ -287,7 +287,7 @@ public class TeacherScheduleFragment extends Fragment {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 String selectedDate = dayOfMonth + "-" + month + "-" + year;
-                scheduleListAdapter.getFilter().filter(selectedDate);
+                teacherScheduleListAdapter.getFilter().filter(selectedDate);
             }
         };
 

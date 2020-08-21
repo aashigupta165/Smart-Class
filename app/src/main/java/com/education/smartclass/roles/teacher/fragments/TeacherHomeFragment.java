@@ -21,12 +21,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.education.smartclass.Adapter.ScheduleListAdapter;
+import com.education.smartclass.Adapter.TeacherScheduleListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
-import com.education.smartclass.models.ReadScheduleDetails;
+import com.education.smartclass.models.ReadTeacherScheduleDetails;
 import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -43,9 +42,9 @@ public class TeacherHomeFragment extends Fragment {
     private RecyclerView schedule_list;
     private ReadSchedulesViewModel readSchedulesViewModel;
 
-    private ArrayList<ReadScheduleDetails> readScheduleDetailsArrayList;
+    private ArrayList<ReadTeacherScheduleDetails> readTeacherScheduleDetailsArrayList;
 
-    private ScheduleListAdapter scheduleListAdapter;
+    private TeacherScheduleListAdapter teacherScheduleListAdapter;
 
     private ScheduleDeleteViewModel scheduleDeleteViewModel;
 
@@ -110,8 +109,8 @@ public class TeacherHomeFragment extends Fragment {
                 switch (s) {
                     case "schedule_deleted":
                         progressDialog.dismiss();
-                        readScheduleDetailsArrayList.remove(positionDelete);
-                        scheduleListAdapter.notifyItemRemoved(positionDelete);
+                        readTeacherScheduleDetailsArrayList.remove(positionDelete);
+                        teacherScheduleListAdapter.notifyItemRemoved(positionDelete);
                         break;
                     case "Internet_Issue":
                         progressDialog.dismiss();
@@ -126,37 +125,37 @@ public class TeacherHomeFragment extends Fragment {
     }
 
     private void fetchList() {
-        LiveData<ArrayList<ReadScheduleDetails>> list = readSchedulesViewModel.getList();
+        LiveData<ArrayList<ReadTeacherScheduleDetails>> list = readSchedulesViewModel.getList();
 
-        list.observe(this, new Observer<ArrayList<ReadScheduleDetails>>() {
+        list.observe(this, new Observer<ArrayList<ReadTeacherScheduleDetails>>() {
             @Override
-            public void onChanged(ArrayList<ReadScheduleDetails> readScheduleDetails) {
+            public void onChanged(ArrayList<ReadTeacherScheduleDetails> readTeacherScheduleDetails) {
 
-                readScheduleDetailsArrayList = readScheduleDetails;
+                readTeacherScheduleDetailsArrayList = readTeacherScheduleDetails;
 
                 schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
-                scheduleListAdapter = new ScheduleListAdapter(getContext(), readScheduleDetails);
-                scheduleListAdapter.getFilter().filter("filter1");
+                teacherScheduleListAdapter = new TeacherScheduleListAdapter(getContext(), readTeacherScheduleDetails);
+                teacherScheduleListAdapter.getFilter().filter("filter1");
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        schedule_list.setAdapter(scheduleListAdapter);
+                        schedule_list.setAdapter(teacherScheduleListAdapter);
                     }
                 },10);
 
-                scheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                teacherScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
                     public void onChanged() {
                         super.onChanged();
-                        if (scheduleListAdapter.getItemCount()==0){
+                        if (teacherScheduleListAdapter.getItemCount()==0){
                             no_data.setVisibility(View.VISIBLE);
                         }
                     }
                 });
 
-                scheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
+                teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         showmenu(view, position);
@@ -202,9 +201,9 @@ public class TeacherHomeFragment extends Fragment {
     private void edit(int position) {
 
         Bundle bundle = new Bundle();
-        bundle.putString("id", readScheduleDetailsArrayList.get(position).getScheduleId());
-        bundle.putString("date", readScheduleDetailsArrayList.get(position).getScheduleDate());
-        bundle.putString("time", readScheduleDetailsArrayList.get(position).getScheduleTime());
+        bundle.putString("id", readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        bundle.putString("date", readTeacherScheduleDetailsArrayList.get(position).getScheduleDate());
+        bundle.putString("time", readTeacherScheduleDetailsArrayList.get(position).getScheduleTime());
 
         ScheduleUpdateFragment fragment = new ScheduleUpdateFragment();
         fragment.setArguments(bundle);
@@ -242,6 +241,6 @@ public class TeacherHomeFragment extends Fragment {
 
         positionDelete = position;
 
-        scheduleDeleteViewModel.delete(orgCode, teacherCode, readScheduleDetailsArrayList.get(position).getScheduleId());
+        scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
     }
 }

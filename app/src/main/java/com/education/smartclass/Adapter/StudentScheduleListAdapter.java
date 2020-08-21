@@ -12,56 +12,51 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
-import com.education.smartclass.models.ReadScheduleDetails;
+import com.education.smartclass.models.ReadStudentScheduleDetails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder> implements Filterable {
+public class StudentScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder> implements Filterable {
 
     private Context c;
-    private ArrayList<ReadScheduleDetails> readScheduleDetails;
+    private ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetails;
 
-    private ArrayList<ReadScheduleDetails> filterList;
+    private ArrayList<ReadStudentScheduleDetails> filterList;
 
-    private ScheduleListHolder.OnItemClickListener mListener;
-
-    public void setOnItemClickListener(ScheduleListHolder.OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-    public ScheduleListAdapter(Context c, ArrayList<ReadScheduleDetails> readScheduleDetails) {
+    public StudentScheduleListAdapter(Context c, ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetails) {
         this.c = c;
-        this.readScheduleDetails = readScheduleDetails;
-        filterList = new ArrayList<>(readScheduleDetails);
+        this.readStudentScheduleDetails = readStudentScheduleDetails;
+        filterList = new ArrayList<>(readStudentScheduleDetails);
     }
 
     @NonNull
     @Override
     public ScheduleListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.teacher_schedule_list_row, null);
-        return new ScheduleListHolder(view, mListener);
+        return new ScheduleListHolder(view, null);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScheduleListHolder scheduleListHolder, int position) {
-        if (readScheduleDetails.get(position).getTopicScheduled().equals("Subject")) {
-            scheduleListHolder.subject.setText(readScheduleDetails.get(position).getSubjectScheduled());
+        if (readStudentScheduleDetails.get(position).getTopicScheduled().equals("Subject")) {
+            scheduleListHolder.subject.setText(readStudentScheduleDetails.get(position).getSubjectScheduled());
         } else {
             scheduleListHolder.subject.setText("General Meeting");
         }
-        scheduleListHolder.time.setText("Lecture: " + readScheduleDetails.get(position).getScheduleTime() + "(" + readScheduleDetails.get(position).getScheduleDate() + ")");
-        scheduleListHolder.count.setText(readScheduleDetails.get(position).getStudentCount() + " Students");
-        scheduleListHolder.standard.setText("STD: " + readScheduleDetails.get(position).getScheduledClass() + " " + readScheduleDetails.get(position).getScheduledSection());
+        scheduleListHolder.time.setText("Lecture: " + readStudentScheduleDetails.get(position).getScheduleTime() + "(" + readStudentScheduleDetails.get(position).getScheduleDate() + ")");
+        scheduleListHolder.count.setText(readStudentScheduleDetails.get(position).getStudentCount() + " Students");
+        scheduleListHolder.standard.setText(readStudentScheduleDetails.get(position).getTeacherName());
+        scheduleListHolder.standard.setTextColor(c.getResources().getColor(R.color.colorPrimaryDark));
+        scheduleListHolder.optionMenu.setVisibility(View.GONE);
     }
 
     @Override
     public int getItemCount() {
-        return readScheduleDetails.size();
+        return readStudentScheduleDetails.size();
     }
 
     @Override
@@ -73,7 +68,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            List<ReadScheduleDetails> filteredList = new ArrayList<>();
+            List<ReadStudentScheduleDetails> filteredList = new ArrayList<>();
 
             if (constraint.equals("all")) {
                 filteredList = filterList;
@@ -82,10 +77,10 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
                     SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     Date now = new Date();
                     datequery.format(now);
-                    for (ReadScheduleDetails readScheduleDetails : filterList) {
-                        Date date = datequery.parse(readScheduleDetails.getScheduleDate() + " " + readScheduleDetails.getScheduleTime());
+                    for (ReadStudentScheduleDetails readStudentScheduleDetails : filterList) {
+                        Date date = datequery.parse(readStudentScheduleDetails.getScheduleDate() + " " + readStudentScheduleDetails.getScheduleTime());
                         if (now.before(date)) {
-                            filteredList.add(readScheduleDetails);
+                            filteredList.add(readStudentScheduleDetails);
                         }
                     }
 
@@ -97,10 +92,10 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
                     SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     Date now = new Date();
                     datequery.format(now);
-                    for (ReadScheduleDetails readScheduleDetails : filterList) {
-                        Date date = datequery.parse(readScheduleDetails.getScheduleDate() + " " + readScheduleDetails.getScheduleTime());
+                    for (ReadStudentScheduleDetails readStudentScheduleDetails : filterList) {
+                        Date date = datequery.parse(readStudentScheduleDetails.getScheduleDate() + " " + readStudentScheduleDetails.getScheduleTime());
                         if (now.after(date)) {
-                            filteredList.add(readScheduleDetails);
+                            filteredList.add(readStudentScheduleDetails);
                         }
                     }
                 } catch (ParseException e) {
@@ -110,10 +105,10 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
                 try {
                     SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
                     Date now = datequery.parse(constraint.toString());
-                    for (ReadScheduleDetails readScheduleDetails : filterList) {
-                        Date date = datequery.parse(readScheduleDetails.getScheduleDate());
+                    for (ReadStudentScheduleDetails readStudentScheduleDetails : filterList) {
+                        Date date = datequery.parse(readStudentScheduleDetails.getScheduleDate());
                         if (now.compareTo(date) == 0) {
-                            filteredList.add(readScheduleDetails);
+                            filteredList.add(readStudentScheduleDetails);
                         }
                     }
                 } catch (ParseException e) {
@@ -129,10 +124,9 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            readScheduleDetails.clear();
-            readScheduleDetails.addAll((List) results.values);
+            readStudentScheduleDetails.clear();
+            readStudentScheduleDetails.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };
 }
-

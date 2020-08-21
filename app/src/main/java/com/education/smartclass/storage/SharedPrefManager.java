@@ -64,6 +64,7 @@ public class SharedPrefManager {
             editor.putString("studentMobile", user.getStudentMobile());
             editor.putString("studentDOB", user.getStudentDOB());
             editor.putString("studentGender", user.getStudentGender());
+            editor.putString("orgCode", user.getOrgCode());
         }
 
         editor.apply();

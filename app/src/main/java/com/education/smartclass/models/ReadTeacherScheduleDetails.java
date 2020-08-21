@@ -1,6 +1,6 @@
 package com.education.smartclass.models;
 
-public class ReadScheduleDetails {
+public class ReadTeacherScheduleDetails {
 
     private String scheduleId;
     private String scheduledClass;
@@ -11,10 +11,10 @@ public class ReadScheduleDetails {
     private String scheduleTime;
     private String studentCount;
 
-    public ReadScheduleDetails() {
+    public ReadTeacherScheduleDetails() {
     }
 
-    public ReadScheduleDetails(String scheduleId, String scheduledClass, String scheduledSection, String topicScheduled, String subjectScheduled, String scheduleDate, String scheduleTime, String studentCount) {
+    public ReadTeacherScheduleDetails(String scheduleId, String scheduledClass, String scheduledSection, String topicScheduled, String subjectScheduled, String scheduleDate, String scheduleTime, String studentCount) {
         this.scheduleId = scheduleId;
         this.scheduledClass = scheduledClass;
         this.scheduledSection = scheduledSection;

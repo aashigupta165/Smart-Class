@@ -1,18 +1,18 @@
 package com.education.smartclass.response;
 
-import com.education.smartclass.models.ReadScheduleDetails;
+import com.education.smartclass.models.ReadStudentScheduleDetails;
 
 import java.util.ArrayList;
 
-public class ScheduleResponse {
+public class StudentScheduleResponse {
 
-    private ArrayList<ReadScheduleDetails> list;
+    private ArrayList<ReadStudentScheduleDetails> list;
     private String message;
 
-    public ScheduleResponse() {
+    public StudentScheduleResponse() {
     }
 
-    public ScheduleResponse(ArrayList list, String message) {
+    public StudentScheduleResponse(ArrayList list, String message) {
         this.list = list;
         this.message = message;
     }
@@ -32,4 +32,5 @@ public class ScheduleResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

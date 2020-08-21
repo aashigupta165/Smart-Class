@@ -1,11 +1,11 @@
 package com.education.smartclass.api;
 
-import com.education.smartclass.models.StudentDetail;
 import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
-import com.education.smartclass.response.ScheduleResponse;
+import com.education.smartclass.response.StudentScheduleResponse;
+import com.education.smartclass.response.TeacherScheduleResponse;
 import com.education.smartclass.response.StudentList;
 import com.education.smartclass.response.TeacherList;
 
@@ -147,7 +147,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("schedule/read")
-    Call<ScheduleResponse> readSchedule(
+    Call<TeacherScheduleResponse> readTeacherSchedule(
             @Field("orgCode") String orgCode,
             @Field("role") String role,
             @Field("teacherCode") String teacherCode
@@ -169,5 +169,15 @@ public interface Api {
             @Field("orgCode") String orgCode,
             @Field("teacherCode") String teacherCode,
             @Field("scheduleId") String scheduleId
+    );
+
+    @FormUrlEncoded
+    @POST("schedule/read")
+    Call<StudentScheduleResponse> readStudentSchedule(
+            @Field("orgCode") String orgCode,
+            @Field("role") String role,
+            @Field("studentClass") String studentClass,
+            @Field("studentSection") String studentSection,
+            @Field("studentRollNo") String studentRollNo
     );
 }
