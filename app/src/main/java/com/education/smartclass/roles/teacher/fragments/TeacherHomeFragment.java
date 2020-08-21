@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -136,7 +137,14 @@ public class TeacherHomeFragment extends Fragment {
                 schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
                 scheduleListAdapter = new ScheduleListAdapter(getContext(), readScheduleDetails);
                 scheduleListAdapter.getFilter().filter("filter1");
-                schedule_list.setAdapter(scheduleListAdapter);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        schedule_list.setAdapter(scheduleListAdapter);
+                    }
+                },10);
 
                 scheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
