@@ -6,27 +6,45 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.education.smartclass.R;
+import com.education.smartclass.utils.SnackBar;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private TextView nextbtn;
-    private EditText mobile;
+    private EditText email;
+
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        mobile = findViewById(R.id.mobile);
+        email = findViewById(R.id.email);
+
+        relativeLayout = findViewById(R.id.relativeLayout);
 
         nextbtn = findViewById(R.id.nextbtn);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (email.getText().toString().equals("")){
+                    new SnackBar(relativeLayout, "Please Enter Your Email!");
+                    return;
+                }
+
+                if (!email.getText().toString().matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                    new SnackBar(relativeLayout, "Please Enter Valid Email!");
+                    return;
+                }
+
                 Intent intent = new Intent(ForgotPasswordActivity.this, OtpActivity.class);
+                intent.putExtra("email", email.getText().toString());
                 startActivity(intent);
             }
         });

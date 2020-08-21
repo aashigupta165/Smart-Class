@@ -231,4 +231,17 @@ public interface Api {
             @Field("questionId") String questionId,
             @Field("replyId") String replyId
     );
+
+    @FormUrlEncoded
+    @POST("user/sendOtp")
+    Call<MessageResponse> otpSend(
+            @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("user/verifyOtp")
+    Call<MessageResponse> verifyOtp(
+            @Field("otpReceived") String otpReceived,
+            @Field("email") String email
+    );
 }
