@@ -1,6 +1,7 @@
 package com.education.smartclass.api;
 
 import com.education.smartclass.response.DropdownDetails;
+import com.education.smartclass.response.FetchSubjectList;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
@@ -179,5 +180,13 @@ public interface Api {
             @Field("studentClass") String studentClass,
             @Field("studentSection") String studentSection,
             @Field("studentRollNo") String studentRollNo
+    );
+
+    @FormUrlEncoded
+    @POST("student/subject")
+    Call<FetchSubjectList> fetchSubjects(
+            @Field("orgCode") String orgCode,
+            @Field("studentClass") String studentClass,
+            @Field("studentSection") String studentSection
     );
 }
