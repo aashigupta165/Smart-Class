@@ -184,19 +184,23 @@
             android:id="@+id/question_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Question: "
             android:layout_below="@id/subject"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:text="Question: "
+            android:textSize="20sp" />
 
-       <EditText
-           android:id="@+id/question"
-           android:layout_width="match_parent"
-           android:layout_height="150dp"
-           android:background="@drawable/edittext_background"
-           android:layout_below="@id/question_heading"
-           android:layout_marginTop="10dp"
-           android:padding="10dp"/>
+        <EditText
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_below="@id/question_heading"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:gravity="top"
+            android:hint="Question"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="16dp" />
 
     </RelativeLayout>
 

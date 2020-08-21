@@ -40,7 +40,7 @@
         <item
             android:id="@+id/new_question"
             android:icon="@drawable/ic_add_new_question"
-            android:title="Ask Doubt"
+            android:title="Ask Question"
             android:visible="false" />
         <item
             android:id="@+id/questionaire"

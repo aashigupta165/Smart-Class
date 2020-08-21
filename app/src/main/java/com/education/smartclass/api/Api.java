@@ -189,4 +189,46 @@ public interface Api {
             @Field("studentClass") String studentClass,
             @Field("studentSection") String studentSection
     );
+
+    @FormUrlEncoded
+    @POST("question/ask")
+    Call<MessageResponse> teacherPostQuestion(
+            @Field("orgCode") String orgCode,
+            @Field("purposeOfQuestion") String purposeOfQuestion,
+            @Field("subject") String subject,
+            @Field("question") String question,
+            @Field("questionAskerName") String questionAskerName,
+            @Field("questionAskerCode") String questionAskerCode,
+            @Field("questionAskerRole") String questionAskerRole,
+            @Field("questionForClass") String questionForClass,
+            @Field("questionForSection") String questionForSection
+    );
+
+    @FormUrlEncoded
+    @POST("question/reply/create")
+    Call<MessageResponse> replyToQuestion(
+            @Field("orgCode") String orgCode,
+            @Field("questionId") String questionId,
+            @Field("reply") String reply,
+            @Field("replierName") String replierName,
+            @Field("replierRole") String replierRole,
+            @Field("replierCode") String replierCode,
+            @Field("replierClass") String replierClass,
+            @Field("replierSection") String replierSection
+    );
+
+    @FormUrlEncoded
+    @POST("question/delete")
+    Call<MessageResponse> deleteQuestion(
+            @Field("orgCode") String orgCode,
+            @Field("questionId") String questionId
+    );
+
+    @FormUrlEncoded
+    @POST("question/reply/delete")
+    Call<MessageResponse> deleteReply(
+            @Field("orgCode") String orgCode,
+            @Field("questionId") String questionId,
+            @Field("replyId") String replyId
+    );
 }
