@@ -75,19 +75,16 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
 
             List<ReadScheduleDetails> filteredList = new ArrayList<>();
 
-            if (constraint.equals("all")){
+            if (constraint.equals("all")) {
                 filteredList = filterList;
-            }
-            else if (constraint.equals("filter1")) {
+            } else if (constraint.equals("filter1")) {
                 try {
-//                Calendar calendar = Calendar.getInstance();
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//                String query = dateFormat.format(calendar.getTime());
-
+                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    Date now = new Date();
+                    datequery.format(now);
                     for (ReadScheduleDetails readScheduleDetails : filterList) {
-                        SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
-                        Date date = datequery.parse(readScheduleDetails.getScheduleDate());
-                        if (new Date().before(date)) {
+                        Date date = datequery.parse(readScheduleDetails.getScheduleDate() + " " + readScheduleDetails.getScheduleTime());
+                        if (now.before(date)) {
                             filteredList.add(readScheduleDetails);
                         }
                     }
@@ -97,10 +94,12 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
                 }
             } else if (constraint.equals("filter2")) {
                 try {
+                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    Date now = new Date();
+                    datequery.format(now);
                     for (ReadScheduleDetails readScheduleDetails : filterList) {
-                        SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
-                        Date date = datequery.parse(readScheduleDetails.getScheduleDate());
-                        if (new Date().after(date)) {
+                        Date date = datequery.parse(readScheduleDetails.getScheduleDate() + " " + readScheduleDetails.getScheduleTime());
+                        if (now.after(date)) {
                             filteredList.add(readScheduleDetails);
                         }
                     }
@@ -113,7 +112,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListHolder
                     Date now = datequery.parse(constraint.toString());
                     for (ReadScheduleDetails readScheduleDetails : filterList) {
                         Date date = datequery.parse(readScheduleDetails.getScheduleDate());
-                        if (now.compareTo(date)==0) {
+                        if (now.compareTo(date) == 0) {
                             filteredList.add(readScheduleDetails);
                         }
                     }
