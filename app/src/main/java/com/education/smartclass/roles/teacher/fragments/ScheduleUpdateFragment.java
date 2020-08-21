@@ -32,8 +32,7 @@ import java.util.Calendar;
 
 public class ScheduleUpdateFragment extends Fragment {
 
-    private EditText date, time;
-    private TextView updatebtn;
+    private TextView date, time, updatebtn;
 
     private String bundleId, bundleDate, bundleTime;
 
@@ -53,16 +52,13 @@ public class ScheduleUpdateFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_manual_teacher_register1, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule_update, container, false);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
-        date = view.findViewById(R.id.email);
-        date.setHint("Date");
-        time = view.findViewById(R.id.mobile);
-        time.setHint("Time");
-        updatebtn = view.findViewById(R.id.nextbtn);
-        updatebtn.setText("Update");
+        date = view.findViewById(R.id.date);
+        time = view.findViewById(R.id.time);
+        updatebtn = view.findViewById(R.id.updatebtn);
 
         progressDialog = new ProgressDialog(getContext());
 

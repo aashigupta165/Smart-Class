@@ -17,7 +17,7 @@ import com.education.smartclass.utils.SnackBar;
 
 public class ManualTeacherRegisterFragment1 extends Fragment {
 
-    private EditText email, mobile, dob;
+    private EditText email, mobile;
     private TextView nextbtn;
 
     private RelativeLayout relativeLayout;
@@ -30,10 +30,7 @@ public class ManualTeacherRegisterFragment1 extends Fragment {
         relativeLayout = view.findViewById(R.id.relativeLayout);
         email = view.findViewById(R.id.email);
         mobile = view.findViewById(R.id.mobile);
-        dob = view.findViewById(R.id.dob);
         nextbtn = view.findViewById(R.id.nextbtn);
-
-        dob.setVisibility(View.VISIBLE);
 
         buttonClickEvents();
 
@@ -56,7 +53,6 @@ public class ManualTeacherRegisterFragment1 extends Fragment {
 
         String Email = email.getText().toString().trim();
         String Mobile = mobile.getText().toString().trim();
-        String DOB = dob.getText().toString().trim();
 
         if (Email.isEmpty() || Mobile.isEmpty()) {
             new SnackBar(relativeLayout, "Please Enter All The Details");
@@ -71,7 +67,6 @@ public class ManualTeacherRegisterFragment1 extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString("email", Email);
         bundle.putString("mobile", Mobile);
-        bundle.putString("dob", DOB);
 
         ManualTeacherRegisterFragment2 fragment = new ManualTeacherRegisterFragment2();
         fragment.setArguments(bundle);
