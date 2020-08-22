@@ -13,5 +13,13 @@
     <item
         android:id="@+id/by_date"
         android:title="By Date" />
+    <item
+        android:id="@+id/by_teacher"
+        android:title="By Teacher"
+        android:visible="false" />
+    <item
+        android:id="@+id/by_subject"
+        android:title="By Subject"
+        android:visible="false" />
 
 </menu>

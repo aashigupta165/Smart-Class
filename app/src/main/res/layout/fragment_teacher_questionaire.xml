@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".roles.teacher.fragments.TeacherQuestionaireFragment">
+    android:background="@color/white"
+    tools:context=".roles.teacher.fragments.TeacherScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Questionaire"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        android:id="@+id/heading"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/filter_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/filter"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toLeftOf="@+id/filter"
+        android:text="Filters"
+        android:textColor="@color/grey" />
+
+    <ImageView
+        android:id="@+id/filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_filter" />
+
+    <TextView
+        android:id="@+id/no_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="No Questions Available"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/question_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filter"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>

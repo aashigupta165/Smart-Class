@@ -44,7 +44,7 @@ public class OtpActivity extends AppCompatActivity {
         DataObserver();
         ButtonClickEvents();
 
-        sendOtpViewModel.sendOtp( getIntent().getStringExtra("email"));
+        sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"));
     }
 
     private void ButtonClickEvents() {
@@ -54,7 +54,7 @@ public class OtpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (otp.getText().toString().equals("")){
+                if (otp.getText().toString().equals("")) {
                     new SnackBar(relativeLayout, "Please Enter Otp!");
                     return;
                 }
@@ -72,7 +72,7 @@ public class OtpActivity extends AppCompatActivity {
                 progressDialog.setMessage("Resending...");
                 progressDialog.show();
 
-                sendOtpViewModel.sendOtp( getIntent().getStringExtra("email"));
+                sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"));
             }
         });
     }
@@ -106,10 +106,11 @@ public class OtpActivity extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 progressDialog.dismiss();
-                switch (s){
+                switch (s) {
                     case "otp_sent":
                         new SnackBar(relativeLayout, "OTP Verified.");
                         Intent intent = new Intent(OtpActivity.this, ResetPasswordActivity.class);
+                        intent.putExtra("email", getIntent().getStringExtra("email"));
                         startActivity(intent);
                         break;
                     case "not_matched":

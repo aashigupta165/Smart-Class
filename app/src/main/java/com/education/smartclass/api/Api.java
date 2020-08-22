@@ -1,6 +1,8 @@
 package com.education.smartclass.api;
 
 import com.education.smartclass.response.DropdownDetails;
+import com.education.smartclass.response.FetchQuestionList;
+import com.education.smartclass.response.FetchRepliesOfAQuestion;
 import com.education.smartclass.response.FetchSubjectList;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
@@ -201,7 +203,8 @@ public interface Api {
             @Field("questionAskerCode") String questionAskerCode,
             @Field("questionAskerRole") String questionAskerRole,
             @Field("questionForClass") String questionForClass,
-            @Field("questionForSection") String questionForSection
+            @Field("questionForSection") String questionForSection,
+            @Field("questionDateTime") String questionDateTime
     );
 
     @FormUrlEncoded
@@ -243,5 +246,25 @@ public interface Api {
     Call<MessageResponse> verifyOtp(
             @Field("otpReceived") String otpReceived,
             @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("question/read")
+    Call<FetchQuestionList> fetchQuestionList(
+            @Field("orgCode") String orgCode
+    );
+
+    @FormUrlEncoded
+    @POST("question/reply/read")
+    Call<FetchRepliesOfAQuestion> fetchQuestionreply(
+            @Field("orgCode") String orgCode,
+            @Field("questionId") String questionId
+    );
+
+    @FormUrlEncoded
+    @POST("user/changePassword")
+    Call<MessageResponse> changePassword(
+            @Field("email") String email,
+            @Field("newPassword") String newPassword
     );
 }
