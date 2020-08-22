@@ -116,14 +116,6 @@ public class TeacherQuestionaireFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void selectTeacher() {
-
-    }
-
-    private void selectSubject() {
-
-    }
-
     private void selectDate() {
 
         DatePickerDialog.OnDateSetListener setListener;
