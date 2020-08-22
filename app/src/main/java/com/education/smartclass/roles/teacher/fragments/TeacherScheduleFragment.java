@@ -235,7 +235,7 @@ public class TeacherScheduleFragment extends Fragment {
 
     private void deleteItem(int position) {
 
-        progressDialog.setMessage("Deleting");
+        progressDialog.setMessage("Deleting...");
         progressDialog.show();
 
         String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();

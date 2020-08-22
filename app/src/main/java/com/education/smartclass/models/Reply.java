@@ -3,6 +3,7 @@ package com.education.smartclass.models;
 public class Reply {
 
     private String replyId;
+    private String reply;
     private String replyDateTime;
     private String replierName;
     private String replierRole;
@@ -13,8 +14,9 @@ public class Reply {
     public Reply() {
     }
 
-    public Reply(String replyId, String replyDateTime, String replierName, String replierRole, String replierCode, String replierClass, String replierSection) {
+    public Reply(String replyId, String reply, String replyDateTime, String replierName, String replierRole, String replierCode, String replierClass, String replierSection) {
         this.replyId = replyId;
+        this.reply = reply;
         this.replyDateTime = replyDateTime;
         this.replierName = replierName;
         this.replierRole = replierRole;
@@ -29,6 +31,14 @@ public class Reply {
 
     public void setReplyId(String replyId) {
         this.replyId = replyId;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
     }
 
     public String getReplyDateTime() {

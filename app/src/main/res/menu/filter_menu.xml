@@ -18,8 +18,16 @@
         android:title="By Teacher"
         android:visible="false" />
     <item
+        android:id="@+id/by_student"
+        android:title="By Student"
+        android:visible="false" />
+    <item
         android:id="@+id/by_subject"
         android:title="By Subject"
+        android:visible="false" />
+    <item
+        android:id="@+id/other"
+        android:title="General Topics"
         android:visible="false" />
 
 </menu>

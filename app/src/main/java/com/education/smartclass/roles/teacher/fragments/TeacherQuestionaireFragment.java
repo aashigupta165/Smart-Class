@@ -1,7 +1,6 @@
 package com.education.smartclass.roles.teacher.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.education.smartclass.Adapter.QuestionListAdapter;
-import com.education.smartclass.Adapter.TeacherScheduleListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.QuestionListHolder;
 import com.education.smartclass.models.Question;
@@ -49,8 +47,6 @@ public class TeacherQuestionaireFragment extends Fragment {
 
     private QuestionListAdapter questionListAdapter;
 
-    private ProgressDialog progressDialog;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teacher_questionaire, container, false);
@@ -59,8 +55,6 @@ public class TeacherQuestionaireFragment extends Fragment {
         no_data = view.findViewById(R.id.no_class);
         question_list = view.findViewById(R.id.question_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
-
-        progressDialog = new ProgressDialog(getContext());
 
         dataObserver();
         buttonClickEvents();
@@ -91,19 +85,27 @@ public class TeacherQuestionaireFragment extends Fragment {
                 Menu menu = popupMenu.getMenu();
                 menu.findItem(R.id.coming).setVisible(false);
                 menu.findItem(R.id.previous).setVisible(false);
-                menu.findItem(R.id.by_teacher).setVisible(false);
-                menu.findItem(R.id.by_subject).setVisible(false);
+                menu.findItem(R.id.by_teacher).setVisible(true);
+                menu.findItem(R.id.by_student).setVisible(true);
+                menu.findItem(R.id.by_subject).setVisible(true);
+                menu.findItem(R.id.other).setVisible(true);
 
                 switch (item.getItemId()) {
                     case R.id.all:
                         questionListAdapter.getFilter().filter("all");
                         return true;
                     case R.id.by_teacher:
-                        selectTeacher();
+                        questionListAdapter.getFilter().filter("filter1");
+                        return true;
+                    case R.id.by_student:
+                        questionListAdapter.getFilter().filter("filter2");
                         return true;
                     case R.id.by_subject:
-                        selectSubject();
+                        questionListAdapter.getFilter().filter("filter3");
                         return true;
+                    case R.id.other:
+                        questionListAdapter.getFilter().filter("filter4");
+                        return  true;
                     case R.id.by_date:
                         selectDate();
                         return true;
@@ -196,14 +198,26 @@ public class TeacherQuestionaireFragment extends Fragment {
                 questionListAdapter.setOnItemClickListener(new QuestionListHolder.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        openQuestionDetails();
+                        openQuestionDetails(position);
                     }
                 });
             }
         });
     }
 
-    private void openQuestionDetails() {
+    private void openQuestionDetails(int position) {
+
+        Bundle bundle = new Bundle();
+
+        bundle.putString("questionId", questionArrayList.get(position).getQuestionId());
+        bundle.putString("question", questionArrayList.get(position).getQuestion());
+        bundle.putString("questionType", questionArrayList.get(position).getPurposeOfQuestion());
+        bundle.putString("askerName", questionArrayList.get(position).getQuestionAskerName());
+        bundle.putString("askerRole", questionArrayList.get(position).getQuestionAskerRole());
+        bundle.putString("askerClass", questionArrayList.get(position).getQuestionForClass());
+        bundle.putString("askerSection", questionArrayList.get(position).getQuestionForSection());
+        bundle.putString("date", questionArrayList.get(position).getQuestionDateTime());
+
         TeacherQuestionRepliesFragment fragment = new TeacherQuestionRepliesFragment();
         fragment.setArguments(bundle);
         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
