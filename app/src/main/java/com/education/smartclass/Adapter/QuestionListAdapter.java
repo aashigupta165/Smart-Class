@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.QuestionListHolder;
 import com.education.smartclass.models.Question;
+import com.education.smartclass.models.ReadTeacherScheduleDetails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,9 +54,9 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListHolder
         } else {
             questionListHolder.subject.setText("General Question");
         }
-        if (questions.get(position).getQuestionAskerRole().equals("Student")){
+        if (questions.get(position).getQuestionAskerRole().equals("Student")) {
             questionListHolder.standard.setText("STD: " + questions.get(position).getQuestionForClass() + " " + questions.get(position).getQuestionForSection());
-        }else{
+        } else {
             questionListHolder.standard.setText("Faculty");
         }
         questionListHolder.time.setText(questions.get(position).getQuestionDateTime());
@@ -82,33 +83,28 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListHolder
             if (constraint.equals("all")) {
                 filteredList = filterList;
             } else if (constraint.equals("filter1")) {
-                try {
-                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                    Date now = new Date();
-                    datequery.format(now);
-                    for (Question question : filterList) {
-                        Date date = datequery.parse(question.getQuestionDateTime() + " " + question.getQuestionDateTime());
-                        if (now.before(date)) {
-                            filteredList.add(question);
-                        }
+                for (Question question : filterList) {
+                    if (question.getQuestionAskerRole().equals("Teacher")) {
+                        filteredList.add(question);
                     }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
                 }
             } else if (constraint.equals("filter2")) {
-                try {
-                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                    Date now = new Date();
-                    datequery.format(now);
-                    for (Question question : filterList) {
-                        Date date = datequery.parse(question.getQuestionDateTime());
-                        if (now.after(date)) {
-                            filteredList.add(question);
-                        }
+                for (Question question : filterList) {
+                    if (question.getQuestionAskerRole().equals("Student")) {
+                        filteredList.add(question);
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                }
+            } else if (constraint.equals("filter3")){
+                for (Question question : filterList) {
+                    if (question.getPurposeOfQuestion().equals("Subject")) {
+                        filteredList.add(question);
+                    }
+                }
+            } else if (constraint.equals("filter4")){
+                for (Question question : filterList) {
+                    if (question.getPurposeOfQuestion().equals("Other")) {
+                        filteredList.add(question);
+                    }
                 }
             } else {
                 try {
