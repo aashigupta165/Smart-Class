@@ -88,7 +88,7 @@ public class OtpActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 switch (s) {
                     case "otp_sent":
-                        new SnackBar(relativeLayout, "OTP Sent.");
+                        new SnackBar(relativeLayout, "OTP Sent!");
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
@@ -107,7 +107,7 @@ public class OtpActivity extends AppCompatActivity {
             public void onChanged(String s) {
                 progressDialog.dismiss();
                 switch (s) {
-                    case "otp_sent":
+                    case "matched":
                         new SnackBar(relativeLayout, "OTP Verified.");
                         Intent intent = new Intent(OtpActivity.this, ResetPasswordActivity.class);
                         intent.putExtra("email", getIntent().getStringExtra("email"));
@@ -115,6 +115,9 @@ public class OtpActivity extends AppCompatActivity {
                         break;
                     case "not_matched":
                         new SnackBar(relativeLayout, "Wrong OTP.");
+                        break;
+                    case "otp_expired":
+                        new SnackBar(relativeLayout, "OTP Expired!");
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");

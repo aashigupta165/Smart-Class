@@ -9,9 +9,19 @@
     tools:context=".roles.teacher.fragments.TeacherQuestionRepliesFragment">
 
     <TextView
+        android:id="@+id/que_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/que_heading"
+        android:layout_marginTop="20dp"
         android:text="Name"
         android:textColor="@color/colorPrimary" />
 
@@ -19,7 +29,9 @@
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/que_heading"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
         android:src="@drawable/ic_delete" />
 
     <TextView
@@ -36,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/question"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -59,10 +71,20 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/no_replies"
+        android:id="@+id/answer_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/details2"
+        android:layout_marginTop="20dp"
+        android:text="Answers"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/no_replies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answer_heading"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:text="You are the first one to Reply."
@@ -73,21 +95,21 @@
         android:id="@+id/replies_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/details2"
-        android:layout_marginTop="30dp" />
+        android:layout_below="@id/answer_heading" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/reply_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="50dp"
-            android:background="@drawable/edittext_background"
+            android:layout_weight="10"
+            android:background="@drawable/reply_background"
             android:hint="Reply"
             android:inputType="text"
             android:maxHeight="100dp"
@@ -99,11 +121,10 @@
             android:id="@+id/post_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
             android:padding="10dp"
             android:src="@drawable/ic_send" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -80,7 +80,10 @@ public class OrganisationHomeFragment extends Fragment {
         list.observe(this, new Observer<ArrayList<Teachers>>() {
             @Override
             public void onChanged(ArrayList<Teachers> teachers) {
-                teacher_list.setLayoutManager(new LinearLayoutManager(getContext()));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                teacher_list.setLayoutManager(linearLayoutManager);
                 TeacherListAdapter teacherListAdapter = new TeacherListAdapter(getContext(), teachers);
                 teacher_list.setAdapter(teacherListAdapter);
             }

@@ -143,7 +143,10 @@ public class TeacherScheduleFragment extends Fragment {
 
                 readTeacherScheduleDetailsArrayList = readTeacherScheduleDetails;
 
-                schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                schedule_list.setLayoutManager(linearLayoutManager);
                 teacherScheduleListAdapter = new TeacherScheduleListAdapter(getContext(), readTeacherScheduleDetails);
                 schedule_list.setAdapter(teacherScheduleListAdapter);
 

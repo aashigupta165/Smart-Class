@@ -58,6 +58,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 switch (s) {
                     case "password_changed":
+                        new SnackBar(relativeLayout, "Password Changed Successfully!");
                         Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
@@ -86,8 +87,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                       return;
                   }
 
-                  if (password!=confirmPassword){
-                      new SnackBar(relativeLayout, "Password should be equal to Cinfirm Password");
+                  if (!password.getText().toString().equals(confirmPassword.getText().toString())){
+                      new SnackBar(relativeLayout, "Password should be equal to Confirm Password");
                       return;
                   }
 

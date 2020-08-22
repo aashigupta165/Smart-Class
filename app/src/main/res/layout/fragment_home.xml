@@ -55,14 +55,14 @@
             android:textSize="20sp"
             android:id="@+id/status"/>
 
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_edit" />
+<!--        <TextView-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Edit"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@color/colorAccent"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:src="@drawable/ic_edit" />-->
 
     </LinearLayout>
 

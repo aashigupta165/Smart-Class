@@ -66,6 +66,18 @@ public class ManualStudentRegisterFragment2 extends Fragment {
         teacherDesignation.setHint("Class-section");
         submitbtn.setText("Submit");
 
+        studentGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButton = view.findViewById(checkedId);
+                if (radioButton.getText().toString().equals("Male")) {
+                    gender = "male";
+                } else {
+                    gender = "female";
+                }
+            }
+        });
+
         progressDialog = new ProgressDialog(getContext());
 
         buttonClickEvents();
@@ -75,18 +87,6 @@ public class ManualStudentRegisterFragment2 extends Fragment {
     }
 
     private void buttonClickEvents() {
-
-        studentGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton = radioButton.findViewById(checkedId);
-                if (radioButton.getText().toString().equals("Male")) {
-                    gender = "male";
-                } else {
-                    gender = "female";
-                }
-            }
-        });
 
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override

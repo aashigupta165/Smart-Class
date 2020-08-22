@@ -111,7 +111,10 @@ public class AdminHomeActivity extends AppCompatActivity {
         list.observe(this, new Observer<ArrayList<Organisation>>() {
             @Override
             public void onChanged(ArrayList<Organisation> organisations) {
-                organisation_list.setLayoutManager(new LinearLayoutManager(AdminHomeActivity.this));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AdminHomeActivity.this);
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                organisation_list.setLayoutManager(linearLayoutManager);
                 OrganisationListAdapter organisationListAdapter = new OrganisationListAdapter(AdminHomeActivity.this, organisations);
                 organisation_list.setAdapter(organisationListAdapter);
             }

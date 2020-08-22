@@ -42,6 +42,8 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
     private RegisterViewModel registerViewModel;
     private RelativeLayout relativeLayout, inputForm;
 
+    private String radio = "Yes";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 radioButton = findViewById(checkedId);
+                radio = radioButton.getText().toString();
                 if (radioButton.getText().toString().equals("Yes")){
                     inputForm.setVisibility(View.VISIBLE);
                 }else {
@@ -145,14 +148,16 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
 
     private void registerOrganisation() {
 
-        if (radioButton.getText().toString().equals("Yes")){
+        String isLogo = "";
+
+        if (radio.equals("Yes")){
             if (logo == null) {
                 new SnackBar(relativeLayout, "Please Upload the Logo");
                 return;
             }
-        }
-        else {
-            logo = null;
+            isLogo = "File";
+        }else {
+            isLogo = "Manual";
         }
 
         progressDialog.setMessage("Loading...");
@@ -167,6 +172,6 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
         String email = bundle.getString("email");
         String mobile = bundle.getString("mobile");
 
-        registerViewModel.RegisterNewOrg(orgName, orgCode, orgType, orgAddress, email, mobile, logo);
+        registerViewModel.RegisterNewOrg(orgName, orgCode, orgType, orgAddress, email, mobile, isLogo, logo);
     }
 }

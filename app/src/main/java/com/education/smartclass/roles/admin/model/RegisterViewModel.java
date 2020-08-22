@@ -17,7 +17,7 @@ public class RegisterViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void RegisterNewOrg(String orgName, String orgCode, String orgType, String orgAddress, String email, String mobile, MultipartBody.Part logo) {
+    public void RegisterNewOrg(String orgName, String orgCode, String orgType, String orgAddress, String email, String mobile, String isLogo, MultipartBody.Part logo) {
 
         RequestBody OrgName = RequestBody.create(orgName, MediaType.parse("text/plain"));
         RequestBody OrgCode = RequestBody.create(orgCode, MediaType.parse("text/plain"));
@@ -26,7 +26,7 @@ public class RegisterViewModel extends ViewModel {
         RequestBody Email = RequestBody.create(email, MediaType.parse("text/plain"));
         RequestBody Role = RequestBody.create("Organisation", MediaType.parse("text/plain"));
         RequestBody Mobile = RequestBody.create(mobile, MediaType.parse("text/plain"));
-        RequestBody MethodToUpload = RequestBody.create("File", MediaType.parse("text/plain"));
+        RequestBody MethodToUpload = RequestBody.create(isLogo, MediaType.parse("text/plain"));
 
         Call<MessageResponse> call = RetrofitClient.getInstance().getApi().registerOrg(OrgName, OrgCode, OrgType, OrgAddress, Email, Role, Mobile,
                 MethodToUpload, logo);

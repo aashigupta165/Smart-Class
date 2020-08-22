@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -94,13 +95,13 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListHolder
                         filteredList.add(question);
                     }
                 }
-            } else if (constraint.equals("filter3")){
+            } else if (constraint.equals("filter3")) {
                 for (Question question : filterList) {
                     if (question.getPurposeOfQuestion().equals("Subject")) {
                         filteredList.add(question);
                     }
                 }
-            } else if (constraint.equals("filter4")){
+            } else if (constraint.equals("filter4")) {
                 for (Question question : filterList) {
                     if (question.getPurposeOfQuestion().equals("Other")) {
                         filteredList.add(question);

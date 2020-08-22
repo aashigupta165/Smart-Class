@@ -52,7 +52,7 @@ public class TeacherQuestionaireFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_teacher_questionaire, container, false);
 
         filter = view.findViewById(R.id.filter);
-        no_data = view.findViewById(R.id.no_class);
+        no_data = view.findViewById(R.id.no_question);
         question_list = view.findViewById(R.id.question_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
@@ -78,17 +78,18 @@ public class TeacherQuestionaireFragment extends Fragment {
 
         PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
         popupMenu.getMenuInflater().inflate(R.menu.filter_menu, popupMenu.getMenu());
+
+        Menu menu = popupMenu.getMenu();
+        menu.findItem(R.id.coming).setVisible(false);
+        menu.findItem(R.id.previous).setVisible(false);
+        menu.findItem(R.id.by_teacher).setVisible(true);
+        menu.findItem(R.id.by_student).setVisible(true);
+        menu.findItem(R.id.by_subject).setVisible(true);
+        menu.findItem(R.id.other).setVisible(true);
+
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
-                Menu menu = popupMenu.getMenu();
-                menu.findItem(R.id.coming).setVisible(false);
-                menu.findItem(R.id.previous).setVisible(false);
-                menu.findItem(R.id.by_teacher).setVisible(true);
-                menu.findItem(R.id.by_student).setVisible(true);
-                menu.findItem(R.id.by_subject).setVisible(true);
-                menu.findItem(R.id.other).setVisible(true);
 
                 switch (item.getItemId()) {
                     case R.id.all:
@@ -173,7 +174,10 @@ public class TeacherQuestionaireFragment extends Fragment {
 
                 questionArrayList = questions;
 
-                question_list.setLayoutManager(new LinearLayoutManager(getContext()));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                question_list.setLayoutManager(linearLayoutManager);
                 questionListAdapter = new QuestionListAdapter(getContext(), questions);
                 question_list.setAdapter(questionListAdapter);
 

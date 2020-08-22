@@ -68,8 +68,13 @@ public class TeacherQuestionRepliesFragment extends Fragment {
         askerstd = view.findViewById(R.id.std);
         questiontime = view.findViewById(R.id.time);
         reply_text = view.findViewById(R.id.reply_text);
+        reply_list = view.findViewById(R.id.replies_list);
         sendbtn = view.findViewById(R.id.post_reply);
         no_data = view.findViewById(R.id.no_replies);
+
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Student")){
+            deletebtn.setVisibility(View.GONE);
+        }
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
@@ -89,9 +94,9 @@ public class TeacherQuestionRepliesFragment extends Fragment {
         question.setText(ques);
         questiontime.setText(time);
 
-        if (role.equals("Teacher")){
+        if (role.equals("Teacher")) {
             askerstd.setText("Faculty");
-        }else {
+        } else {
             askerstd.setText("STD: " + std + " " + sec);
         }
 
@@ -116,6 +121,7 @@ public class TeacherQuestionRepliesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 postReplyToQuestion();
+                sendbtn.setEnabled(false);
             }
         });
     }
@@ -151,11 +157,11 @@ public class TeacherQuestionRepliesFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                progressDialog.dismiss();
+                sendbtn.setEnabled(true);
                 switch (s) {
                     case "replied":
-                        fetchReplyOfQuestionViewModel.fetchReplies(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), id);
                         reply_text.setText("");
+                        fetchReplyOfQuestionViewModel.fetchReplies(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), id);
                         break;
                     case "invalid_orgCode":
                         new SnackBar(relativeLayout, "Invalid Details");
@@ -178,7 +184,7 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                 progressDialog.dismiss();
                 switch (s) {
                     case "list_found":
-
+                        setRepliesList();
                         break;
                     case "invalid_orgCode":
                         new SnackBar(relativeLayout, "Invalid Details");
@@ -251,7 +257,10 @@ public class TeacherQuestionRepliesFragment extends Fragment {
 
                 replyArrayList = replies;
 
-                reply_list.setLayoutManager(new LinearLayoutManager(getContext()));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                reply_list.setLayoutManager(linearLayoutManager);
                 replyListAdapter = new ReplyListAdapter(getContext(), replies);
                 reply_list.setAdapter(replyListAdapter);
 
@@ -309,18 +318,22 @@ public class TeacherQuestionRepliesFragment extends Fragment {
     }
 
 
-    private void postReplyToQuestion(){
+    private void postReplyToQuestion() {
 
-        if (reply_text.getText().toString().equals("")){
+        if (reply_text.getText().toString().equals("")) {
             new SnackBar(relativeLayout, "Please give reply!");
             return;
         }
 
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        postReplyViewModel.postReply(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), id, reply_text.getText().toString(),
-                SharedPrefManager.getInstance(getContext()).getUser().getTeacherName(), SharedPrefManager.getInstance(getContext()).getUser().getRole(),
-                SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode(), null, null);
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            postReplyViewModel.postReply(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), id, reply_text.getText().toString(),
+                    SharedPrefManager.getInstance(getContext()).getUser().getTeacherName(), SharedPrefManager.getInstance(getContext()).getUser().getRole(),
+                    SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode(), null, null);
+        } else {
+            postReplyViewModel.postReply(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), id, reply_text.getText().toString(),
+                    SharedPrefManager.getInstance(getContext()).getUser().getStudentName(), SharedPrefManager.getInstance(getContext()).getUser().getRole(),
+                    SharedPrefManager.getInstance(getContext()).getUser().getStudentRollNo(), SharedPrefManager.getInstance(getContext()).getUser().getStudentClass(),
+                    SharedPrefManager.getInstance(getContext()).getUser().getStudentSection());
+        }
     }
 }

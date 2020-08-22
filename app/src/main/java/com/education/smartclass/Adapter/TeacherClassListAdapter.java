@@ -36,8 +36,7 @@ public class TeacherClassListAdapter extends RecyclerView.Adapter<TeacherClassLi
 
     @Override
     public void onBindViewHolder(@NonNull TeacherClassListHolder teacherClassListHolder, int position) {
-        teacherClassListHolder.className.setText(studentList.get(position).getTeacherClass());
-        teacherClassListHolder.section.setText(studentList.get(position).getTeacherSection());
+        teacherClassListHolder.className.setText(studentList.get(position).getTeacherClass() + " " + studentList.get(position).getTeacherSection());
         ArrayList<String> teacherSubjects = new ArrayList<>();
         int i=0;
         for (TeacherSubjects sub : studentList.get(position).getTeachingSubjects()){

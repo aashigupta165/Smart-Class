@@ -59,9 +59,8 @@ public class TeacherFragment extends Fragment {
         manual_entry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment, new ManualTeacherRegisterFragment1());
-                fragmentTransaction.commitAllowingStateLoss();
+                ManualTeacherRegisterFragment1 fragment = new ManualTeacherRegisterFragment1();
+                getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
             }
         });
 
