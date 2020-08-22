@@ -95,6 +95,7 @@
         android:id="@+id/replies_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
         android:layout_below="@id/answer_heading" />
 
     <LinearLayout
@@ -117,13 +118,25 @@
             android:paddingVertical="10dp"
             android:textColor="@color/colorPrimaryDark" />
 
-        <ImageView
+        <TextView
             android:id="@+id/post_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="14dp"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:src="@drawable/ic_send" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/post_btn_background"
+            android:drawableLeft="@drawable/ic_send"/>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/post_reply"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:padding="10dp"-->
+<!--            android:src="@drawable/ic_send" />-->
 
     </LinearLayout>
 

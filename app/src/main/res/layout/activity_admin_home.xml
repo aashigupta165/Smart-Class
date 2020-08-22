@@ -8,23 +8,15 @@
     android:background="@color/white"
     tools:context=".roles.Organisation.activities.OrganisationActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/toolbar_card"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="8dp">
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
-
-    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_card"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Organisation List"
@@ -37,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

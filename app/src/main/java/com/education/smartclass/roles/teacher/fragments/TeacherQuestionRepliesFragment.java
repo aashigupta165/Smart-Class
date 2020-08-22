@@ -35,9 +35,9 @@ import java.util.ArrayList;
 
 public class TeacherQuestionRepliesFragment extends Fragment {
 
-    private TextView askername, question, askerstd, questiontime, no_data;
+    private TextView askername, question, askerstd, questiontime, no_data, sendbtn;
     private EditText reply_text;
-    private ImageView deletebtn, sendbtn;
+    private ImageView deletebtn;
 
     private RelativeLayout relativeLayout;
 
