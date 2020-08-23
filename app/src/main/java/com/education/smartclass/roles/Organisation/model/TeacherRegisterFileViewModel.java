@@ -32,7 +32,7 @@ public class TeacherRegisterFileViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-                message.setValue("Internet_Issue");
+                message.setValue(t.getMessage());
             }
         });
     }

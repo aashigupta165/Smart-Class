@@ -2,6 +2,8 @@ package com.education.smartclass.roles.Organisation.fragments;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -36,7 +38,7 @@ public class StudentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ManualStudentRegisterFragment1 fragment = new ManualStudentRegisterFragment1();
-                getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
             }
         });
     }
