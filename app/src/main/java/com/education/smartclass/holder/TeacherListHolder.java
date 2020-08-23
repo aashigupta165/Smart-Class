@@ -15,11 +15,27 @@ public class TeacherListHolder extends RecyclerView.ViewHolder {
     public TextView teacherCode;
     public ImageView status;
 
-    public TeacherListHolder(@NonNull View itemView) {
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public TeacherListHolder(@NonNull View itemView, final OnItemClickListener listener) {
         super(itemView);
 
         this.teacherName = itemView.findViewById(R.id.subject);
         this.teacherCode = itemView.findViewById(R.id.Time);
         this.status = itemView.findViewById(R.id.status);
+
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(v, position);
+                    }
+                }
+            }
+        });
     }
 }

@@ -1,10 +1,14 @@
 package com.education.smartclass.roles.Organisation.fragments;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,12 +21,20 @@ import androidx.fragment.app.Fragment;
 import com.education.smartclass.R;
 import com.education.smartclass.utils.SnackBar;
 
+import java.util.Calendar;
+
 public class ManualStudentRegisterFragment1 extends Fragment {
 
-    private EditText email, mobile, dob;
-    private TextView nextbtn, heading;
+    private EditText email, mobile;
+    private TextView nextbtn, heading, dob;
 
     private RelativeLayout relativeLayout;
+
+    private DatePickerDialog.OnDateSetListener setListener;
+    private Calendar calendar = Calendar.getInstance();
+    private final int year = calendar.get(Calendar.YEAR);
+    private final int month = calendar.get(Calendar.MONTH);
+    private final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,12 +73,37 @@ public class ManualStudentRegisterFragment1 extends Fragment {
 
     private void buttonClickEvents() {
 
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datepicker();
+            }
+        });
+
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkDetails();
             }
         });
+    }
+
+    private void datepicker() {
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,
+                year, month, day);
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.getDatePicker();
+        datePickerDialog.show();
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String selectedDate = dayOfMonth + "-" + month + "-" + year;
+                dob.setText(selectedDate);
+            }
+        };
     }
 
     private void checkDetails() {

@@ -298,14 +298,14 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                 replyListAdapter.setOnItemClickListener(new ReplyListHolder.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        delete(view, position);
+                        delete(position);
                     }
                 });
             }
         });
     }
 
-    private void delete(View view, int position) {
+    private void delete(int position) {
 
         AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
         builder.setMessage("Are you sure you want to Delete?")
