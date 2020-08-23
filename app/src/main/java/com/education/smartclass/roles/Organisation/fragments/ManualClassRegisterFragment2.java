@@ -25,11 +25,12 @@ import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ManualClassRegisterFragment2 extends Fragment {
 
     private LinearLayout subjectList;
-    private TextView heading, addbtn, submitbtn;
+    private TextView heading, addbtn, submitbtn, inner_heading;
 
     private RelativeLayout relativeLayout;
     private ProgressDialog progressDialog;
@@ -61,8 +62,10 @@ public class ManualClassRegisterFragment2 extends Fragment {
         addbtn = view.findViewById(R.id.addbtn);
         submitbtn = view.findViewById(R.id.submitbtn);
         heading = view.findViewById(R.id.heading);
+        inner_heading = view.findViewById(R.id.inner_heading);
 
         heading.setText("Add Subjects");
+        inner_heading.setText("Subjects");
 
         progressDialog = new ProgressDialog(getContext());
 
@@ -101,6 +104,8 @@ public class ManualClassRegisterFragment2 extends Fragment {
         String className = bundle.getString("class");
         String section = bundle.getString("section");
 
+        int isvalid = 0;
+
         String temp = className + "_" + section + "_";
 
         for (int i = 0; i < subjectList.getChildCount(); i++) {
@@ -108,7 +113,11 @@ public class ManualClassRegisterFragment2 extends Fragment {
 
             EditText subject = view.findViewById(R.id.subject);
 
-            if (!subject.getText().toString().equals("")) {
+            if (!Pattern.matches("[a-zA-Z0-9 ]+", subject.getText().toString())) {
+                isvalid++;
+                result = false;
+                break;
+            } else if (!subject.getText().toString().equals("")) {
                 temp += subject.getText().toString() + "_";
             } else {
                 result = false;
@@ -121,7 +130,11 @@ public class ManualClassRegisterFragment2 extends Fragment {
 
         if (list.size() == 0 || !result) {
             result = false;
-            new SnackBar(relativeLayout, "Please Enter the Required Fields.");
+            if (isvalid != 0) {
+                new SnackBar(relativeLayout, "Please enter one valid subject at a time");
+            } else {
+                new SnackBar(relativeLayout, "Please Enter the Required Fields.");
+            }
         }
 
         return result;

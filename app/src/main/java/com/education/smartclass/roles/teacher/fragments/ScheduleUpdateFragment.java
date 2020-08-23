@@ -100,16 +100,7 @@ public class ScheduleUpdateFragment extends Fragment {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String AM_PM;
-                        if (hourOfDay < 12) {
-                            AM_PM = "am";
-                        } else {
-                            AM_PM = "pm";
-                            if (hourOfDay != 12) {
-                                hourOfDay %= 12;
-                            }
-                        }
-                        time.setText(hourOfDay + ":" + minute + AM_PM);
+                        time.setText(hourOfDay + ":" + minute);
                     }
                 }, hour, minute, android.text.format.DateFormat.is24HourFormat(getContext()));
                 timePickerDialog.show();
@@ -131,7 +122,7 @@ public class ScheduleUpdateFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                String selectedDate = day + "-" + month + "-" + year;
+                String selectedDate = dayOfMonth + "-" + month + "-" + year;
                 date.setText(selectedDate);
             }
         };

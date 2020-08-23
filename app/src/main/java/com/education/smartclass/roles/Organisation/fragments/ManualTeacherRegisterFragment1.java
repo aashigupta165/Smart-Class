@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.utils.SnackBar;
+
+import java.util.regex.Pattern;
 
 public class ManualTeacherRegisterFragment1 extends Fragment {
 
@@ -63,8 +66,6 @@ public class ManualTeacherRegisterFragment1 extends Fragment {
 
     private void checkDetails() {
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
         String Email = email.getText().toString().trim();
         String Mobile = mobile.getText().toString().trim();
 
@@ -73,7 +74,7 @@ public class ManualTeacherRegisterFragment1 extends Fragment {
             return;
         }
 
-        if (!Email.matches(emailPattern) || Mobile.length() != 10 || Long.parseLong(Mobile) < Long.parseLong("6000000000")) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches() || Mobile.length() != 10 || Long.parseLong(Mobile) < Long.parseLong("6000000000")) {
             new SnackBar(relativeLayout, "Invalid Credentials");
             return;
         }

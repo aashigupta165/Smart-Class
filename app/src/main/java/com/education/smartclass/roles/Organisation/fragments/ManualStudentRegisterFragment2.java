@@ -150,9 +150,13 @@ public class ManualStudentRegisterFragment2 extends Fragment {
         String StudentSection = studentSection.getText().toString().trim();
         String StudentFather = studentFather.getText().toString().trim();
 
-        if (StudentName.isEmpty() || StudentRollNo.isEmpty() || StudentClass.isEmpty() || StudentSection.isEmpty() || StudentFather.isEmpty()) {
+        if (StudentName.isEmpty() || StudentRollNo.isEmpty() || StudentClass.isEmpty() || StudentFather.isEmpty()) {
             new SnackBar(relativeLayout, "Please Enter All The Details.");
             return;
+        }
+
+        if (studentSection.equals("")){
+            StudentSection = "A";
         }
 
         Bundle bundle = this.getArguments();

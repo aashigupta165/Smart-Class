@@ -1,6 +1,7 @@
 package com.education.smartclass.roles.Organisation.fragments;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +71,6 @@ public class ManualStudentRegisterFragment1 extends Fragment {
 
     private void checkDetails() {
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
         String Email = email.getText().toString().trim();
         String Mobile = mobile.getText().toString().trim();
         String Dob = dob.getText().toString().trim();
@@ -81,7 +80,7 @@ public class ManualStudentRegisterFragment1 extends Fragment {
             return;
         }
 
-        if (!Email.matches(emailPattern) || Mobile.length() != 10 || Long.parseLong(Mobile) < Long.parseLong("6000000000")) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches() || Mobile.length() != 10 || Long.parseLong(Mobile) < Long.parseLong("6000000000")) {
             new SnackBar(relativeLayout, "Invalid Credentials");
             return;
         }

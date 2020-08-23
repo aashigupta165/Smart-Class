@@ -71,9 +71,13 @@ public class ManualClassRegisterFragment1 extends Fragment {
         String Class = className.getText().toString().trim();
         String Section = section.getText().toString().trim();
 
-        if (Class.isEmpty() || Section.isEmpty()) {
+        if (Class.isEmpty()) {
             new SnackBar(relativeLayout, "Please Enter All The Details");
             return;
+        }
+
+        if (Section.equals("")){
+            Section = "A";
         }
 
         Bundle bundle = new Bundle();

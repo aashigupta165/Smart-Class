@@ -3,12 +3,14 @@ package com.education.smartclass.roles.Organisation.fragments;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ManualTeacherRegisterFragment3 extends Fragment {
 
@@ -79,6 +82,7 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
         });
 
         submitbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 if (checkIfValidAndRead()) {
@@ -88,10 +92,13 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private boolean checkIfValidAndRead() {
 
         list.clear();
         boolean result = true;
+
+        int isvalid = 0;
 
         for (int i = 0; i < classDetailsList.getChildCount(); i++) {
             View view = classDetailsList.getChildAt(i);
@@ -112,11 +119,14 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
             if (!section.getText().toString().equals("")) {
                 temp += section.getText().toString() + "_";
             } else {
-                result = false;
-                break;
+                temp += "A_";
             }
 
-            if (!subject.getText().toString().equals("")) {
+            if (!Pattern.matches("[a-zA-Z0-9 ]+", subject.getText().toString())) {
+                isvalid++;
+                result = false;
+                break;
+            } else if (!subject.getText().toString().equals("")) {
                 temp += subject.getText().toString();
             } else {
                 result = false;
@@ -128,7 +138,11 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
 
         if (list.size() == 0 || !result) {
             result = false;
-            new SnackBar(relativeLayout, "Please Enter the Required Fields.");
+            if (isvalid != 0) {
+                new SnackBar(relativeLayout, "Please enter one valid subject at a time");
+            } else {
+                new SnackBar(relativeLayout, "Please Enter the Required Fields.");
+            }
         }
 
         return result;
