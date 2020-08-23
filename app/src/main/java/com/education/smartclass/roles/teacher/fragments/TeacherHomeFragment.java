@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.Adapter.TeacherScheduleListAdapter;
 import com.education.smartclass.R;
@@ -33,11 +32,7 @@ import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class TeacherHomeFragment extends Fragment {
 
@@ -153,13 +148,13 @@ public class TeacherHomeFragment extends Fragment {
                     public void run() {
                         schedule_list.setAdapter(teacherScheduleListAdapter);
                     }
-                },10);
+                }, 10);
 
                 teacherScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
                     public void onChanged() {
                         super.onChanged();
-                        if (teacherScheduleListAdapter.getItemCount()==0){
+                        if (teacherScheduleListAdapter.getItemCount() == 0) {
                             no_data.setVisibility(View.VISIBLE);
                         }
                     }

@@ -112,7 +112,7 @@ public class TeacherQuestionaireFragment extends Fragment {
                         return true;
                     case R.id.other:
                         questionListAdapter.getFilter().filter("filter4");
-                        return  true;
+                        return true;
                     case R.id.by_date:
                         selectDate();
                         return true;

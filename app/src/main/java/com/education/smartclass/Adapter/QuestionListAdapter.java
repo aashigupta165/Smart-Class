@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.QuestionListHolder;
 import com.education.smartclass.models.Question;
-import com.education.smartclass.models.ReadTeacherScheduleDetails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

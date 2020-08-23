@@ -161,7 +161,7 @@ public class TeacherScheduleFragment extends Fragment {
                     @Override
                     public void onChanged() {
                         super.onChanged();
-                        if (teacherScheduleListAdapter.getItemCount()==0){
+                        if (teacherScheduleListAdapter.getItemCount() == 0) {
                             no_data.setVisibility(View.VISIBLE);
                         }
                     }

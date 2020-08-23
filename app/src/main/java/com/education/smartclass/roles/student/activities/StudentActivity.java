@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
-import com.education.smartclass.roles.teacher.activities.TeacherActivity;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 

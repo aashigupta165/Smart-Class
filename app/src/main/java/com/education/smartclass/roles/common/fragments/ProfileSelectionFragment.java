@@ -22,7 +22,7 @@ public class ProfileSelectionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.transaction_fragment, container, false);
 
-        switch (SharedPrefManager.getInstance(getContext()).getUser().getRole()){
+        switch (SharedPrefManager.getInstance(getContext()).getUser().getRole()) {
             case "Organisation":
                 OrganisationProfileFragment organisationProfileFragment = new OrganisationProfileFragment();
                 getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, organisationProfileFragment).commit();

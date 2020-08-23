@@ -15,7 +15,7 @@ public class StudentQuestionaireFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_student_questionaire, container, false);
+        View view = inflater.inflate(R.layout.transaction_fragment, container, false);
 
         TeacherQuestionaireFragment teacherQuestionaireFragment = new TeacherQuestionaireFragment();
         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, teacherQuestionaireFragment).commit();

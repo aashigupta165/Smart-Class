@@ -171,6 +171,7 @@
                         android:textColor="@color/colorAccent" />
 
                 </TableRow>
+
             </TableLayout>
 
             <!--            <ImageView-->
@@ -181,6 +182,30 @@
             <!--                android:layout_marginHorizontal="16dp"-->
             <!--                android:layout_marginTop="10dp"-->
             <!--                android:background="@drawable/seperator" />-->
+
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headingtable"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:progressDrawable="@drawable/edulogo"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headingtable"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:text="No Data Available"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/detailsList"

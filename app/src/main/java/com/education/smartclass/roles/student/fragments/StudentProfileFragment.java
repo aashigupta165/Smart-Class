@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.education.smartclass.Adapter.TeacherClassListAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.models.TeacherClasses;
-import com.education.smartclass.response.FetchSubjectList;
 import com.education.smartclass.roles.student.model.FetchSubjectsViewModel;
-import com.education.smartclass.roles.teacher.model.FetchDropdownDetailsViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 

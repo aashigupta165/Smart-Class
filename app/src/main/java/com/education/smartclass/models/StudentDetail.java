@@ -1,8 +1,6 @@
 package com.education.smartclass.models;
 
-import java.io.Serializable;
-
-public class StudentDetail implements Serializable {
+public class StudentDetail {
 
     private String studentName;
     private String studentRollNo;

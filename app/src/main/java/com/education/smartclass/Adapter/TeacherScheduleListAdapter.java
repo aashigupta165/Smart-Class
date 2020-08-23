@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadTeacherScheduleDetails;
-import com.education.smartclass.storage.SharedPrefManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

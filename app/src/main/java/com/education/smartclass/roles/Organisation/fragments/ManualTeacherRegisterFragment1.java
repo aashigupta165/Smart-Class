@@ -17,8 +17,6 @@ import android.widget.TextView;
 import com.education.smartclass.R;
 import com.education.smartclass.utils.SnackBar;
 
-import java.util.regex.Pattern;
-
 public class ManualTeacherRegisterFragment1 extends Fragment {
 
     private EditText email, mobile;

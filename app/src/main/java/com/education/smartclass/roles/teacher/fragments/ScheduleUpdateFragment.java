@@ -18,14 +18,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.education.smartclass.R;
-import com.education.smartclass.roles.Organisation.fragments.TeacherFragment;
-import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleUpdateViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
@@ -164,7 +161,7 @@ public class ScheduleUpdateFragment extends Fragment {
 
     private void update() {
 
-        if (date.getText().toString().equals(bundleDate) && time.getText().toString().equals(bundleTime)){
+        if (date.getText().toString().equals(bundleDate) && time.getText().toString().equals(bundleTime)) {
             new SnackBar(relativeLayout, "Change Date or Time before Updation!");
             return;
         }

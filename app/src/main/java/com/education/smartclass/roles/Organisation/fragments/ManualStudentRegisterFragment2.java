@@ -155,7 +155,7 @@ public class ManualStudentRegisterFragment2 extends Fragment {
             return;
         }
 
-        if (studentSection.equals("")){
+        if (studentSection.equals("")) {
             StudentSection = "A";
         }
 

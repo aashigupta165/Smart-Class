@@ -48,7 +48,7 @@ public class RegisterNewOrgActivity1 extends AppCompatActivity {
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches() || Mobile.length() != 10 || Long.parseLong(Mobile)<Long.parseLong("6000000000")) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches() || Mobile.length() != 10 || Long.parseLong(Mobile) < Long.parseLong("6000000000")) {
             new SnackBar(relativeLayout, "Invalid Credentials");
             return;
         }

@@ -20,7 +20,7 @@ public class PostReplyViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
 
     public void postReply(String orgCode, String questionId, String reply, String name, String role, String code,
-                             String className, String section) {
+                          String className, String section) {
 
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());

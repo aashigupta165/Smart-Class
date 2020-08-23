@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +51,6 @@ public class ClassFragment extends Fragment {
                 intent.setType("*/*");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(Intent.createChooser(intent, "Select File"), 1);
-//                setResult(Activity.RESULT_OK);
             }
         });
 
@@ -67,7 +65,7 @@ public class ClassFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode==1 && resultCode==Activity.RESULT_OK){
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             String path = data.getData().getPath();
             Toast.makeText(getContext(), path, Toast.LENGTH_LONG).show();
             File file = new File(path);

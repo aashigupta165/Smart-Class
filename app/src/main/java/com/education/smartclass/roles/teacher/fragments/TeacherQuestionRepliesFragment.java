@@ -90,7 +90,7 @@ public class TeacherQuestionRepliesFragment extends Fragment {
         sendbtn = view.findViewById(R.id.post_reply);
         no_data = view.findViewById(R.id.no_replies);
 
-        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Student")){
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Student")) {
             deletebtn.setVisibility(View.GONE);
         }
 
@@ -337,7 +337,6 @@ public class TeacherQuestionRepliesFragment extends Fragment {
 
         deleteReplyViewModel.delete(orgCode, id, replyArrayList.get(position).getReplyId());
     }
-
 
     private void postReplyToQuestion() {
 

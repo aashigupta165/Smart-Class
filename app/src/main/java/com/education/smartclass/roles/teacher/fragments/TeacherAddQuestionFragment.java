@@ -202,7 +202,7 @@ public class TeacherAddQuestionFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 progressDialog.dismiss();
-                switch (s){
+                switch (s) {
                     case "question_asked":
                         TeacherAddQuestionFragment fragment = new TeacherAddQuestionFragment();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();

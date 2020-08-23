@@ -7,21 +7,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,26 +26,14 @@ import com.education.smartclass.roles.Organisation.model.TeacherRegisterFileView
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.ServerSocket;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 public class TeacherFragment extends Fragment {
 
@@ -60,19 +43,6 @@ public class TeacherFragment extends Fragment {
     private RelativeLayout relativeLayout;
     private TeacherRegisterFileViewModel registerFileViewModel;
     private ProgressDialog progressDialog;
-
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-//            @Override
-//            public void handleOnBackPressed() {
-//                getParentFragmentManager().popBackStack();
-//            }
-//        };
-//        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,9 +62,6 @@ public class TeacherFragment extends Fragment {
 
         buttonClickEvents();
         dataObserver();
-
-//        String id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-//        Toast.makeText(getContext(), id, Toast.LENGTH_LONG).show();
 
         return view;
     }
@@ -116,7 +83,6 @@ public class TeacherFragment extends Fragment {
                 intent.setType("*/*");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(Intent.createChooser(intent, "Select File"), 1);
-//                setResult(Activity.RESULT_OK);
             }
         });
 
@@ -256,7 +222,7 @@ public class TeacherFragment extends Fragment {
                         break;
                     default:
                         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-//                        new SnackBar(relativeLayout, s);
+                        new SnackBar(relativeLayout, s);
                 }
             }
         });

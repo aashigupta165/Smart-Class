@@ -45,9 +45,9 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListHolder> {
         } else {
             replyListHolder.standard.setText("STD: " + replies.get(position).getReplierClass() + " " + replies.get(position).getReplierSection());
         }
-        if (SharedPrefManager.getInstance(c).getUser().getRole().equals("Teacher")){
+        if (SharedPrefManager.getInstance(c).getUser().getRole().equals("Teacher")) {
             replyListHolder.delete.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             replyListHolder.delete.setVisibility(View.GONE);
         }
         replyListHolder.time.setText(replies.get(position).getReplyDateTime());

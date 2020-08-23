@@ -14,10 +14,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
-import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 

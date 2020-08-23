@@ -5,8 +5,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.education.smartclass.storage.SharedPrefManager;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 

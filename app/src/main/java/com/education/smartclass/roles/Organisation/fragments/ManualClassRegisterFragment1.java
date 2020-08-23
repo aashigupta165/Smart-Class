@@ -76,7 +76,7 @@ public class ManualClassRegisterFragment1 extends Fragment {
             return;
         }
 
-        if (Section.equals("")){
+        if (Section.equals("")) {
             Section = "A";
         }
 

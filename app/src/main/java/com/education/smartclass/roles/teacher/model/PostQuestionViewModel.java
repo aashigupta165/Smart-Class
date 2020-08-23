@@ -1,7 +1,5 @@
 package com.education.smartclass.roles.teacher.model;
 
-import android.widget.Toast;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 

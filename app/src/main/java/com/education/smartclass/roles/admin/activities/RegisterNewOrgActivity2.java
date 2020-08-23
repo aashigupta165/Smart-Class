@@ -24,7 +24,7 @@ public class RegisterNewOrgActivity2 extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
 
-    private static final String[] orgTypes = new String[] {"School", "College"};
+    private static final String[] orgTypes = new String[]{"School", "College"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

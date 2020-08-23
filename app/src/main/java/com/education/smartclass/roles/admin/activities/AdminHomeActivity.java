@@ -2,7 +2,6 @@ package com.education.smartclass.roles.admin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -17,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.education.smartclass.Adapter.OrganisationListAdapter;
 import com.education.smartclass.R;
@@ -33,6 +33,8 @@ public class AdminHomeActivity extends AppCompatActivity {
     private RecyclerView organisation_list;
     private HomeViewModel homeViewModel;
 
+    private TextView no_data;
+
     private ProgressBar progressBar;
 
     @Override
@@ -46,6 +48,8 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         relativeLayout = findViewById(R.id.relativeLayout);
         organisation_list = findViewById(R.id.organisation_list);
+
+        no_data = findViewById(R.id.no_data);
 
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
@@ -126,6 +130,16 @@ public class AdminHomeActivity extends AppCompatActivity {
                 organisation_list.setLayoutManager(linearLayoutManager);
                 OrganisationListAdapter organisationListAdapter = new OrganisationListAdapter(AdminHomeActivity.this, organisations);
                 organisation_list.setAdapter(organisationListAdapter);
+
+                organisationListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (organisationListAdapter.getItemCount() == 0) {
+                            no_data.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
         });
     }

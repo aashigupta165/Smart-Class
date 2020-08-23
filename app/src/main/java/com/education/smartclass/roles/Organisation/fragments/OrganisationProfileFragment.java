@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -35,14 +34,6 @@ public class OrganisationProfileFragment extends Fragment {
         orgName = view.findViewById(R.id.org_Name);
         orgCode = view.findViewById(R.id.org_Code);
         orgAddress = view.findViewById(R.id.org_Address);
-//        editPassword = view.findViewById(R.id.edit_password);
-
-//        editPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "ho gya", Toast.LENGTH_LONG).show();
-//            }
-//        });
 
         orgName.setText(SharedPrefManager.getInstance(getContext()).getUser().getOrgName());
         orgCode.setText("Org's id - " + SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());

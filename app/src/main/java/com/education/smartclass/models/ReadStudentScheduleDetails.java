@@ -1,6 +1,7 @@
 package com.education.smartclass.models;
 
 public class ReadStudentScheduleDetails {
+    
     private String topicScheduled;
     private String subjectScheduled;
     private String scheduleDate;

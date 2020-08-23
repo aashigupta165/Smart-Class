@@ -1,6 +1,7 @@
 package com.education.smartclass.models;
 
 public class Organisation {
+
     private String orgName;
     private String orgCode;
 

@@ -34,7 +34,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (email.getText().toString().equals("")){
+                if (email.getText().toString().equals("")) {
                     new SnackBar(relativeLayout, "Please Enter Your Email!");
                     return;
                 }

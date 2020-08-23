@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,8 +29,10 @@ import java.util.ArrayList;
 
 public class TeacherProfileFragment extends Fragment {
 
-    private TextView name, designation, id, email, mobile;
+    private TextView name, designation, id, email, mobile, no_data;
     private RecyclerView detailList;
+
+    private ProgressBar progressBar;
 
     private FetchDropdownDetailsViewModel fetchDropdownDetailsViewModel;
 
@@ -45,8 +48,12 @@ public class TeacherProfileFragment extends Fragment {
         email = view.findViewById(R.id.teacher_email);
         mobile = view.findViewById(R.id.teacher_mobile);
         detailList = view.findViewById(R.id.detailsList);
+        no_data = view.findViewById(R.id.no_data);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         name.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherName());
         designation.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherDesignation());
@@ -54,7 +61,7 @@ public class TeacherProfileFragment extends Fragment {
         email.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherEmail());
         mobile.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherMobile());
 
-        return  view;
+        return view;
     }
 
     @Override
@@ -75,6 +82,7 @@ public class TeacherProfileFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "teacher_detail_found":
                         fetchList();
@@ -104,6 +112,16 @@ public class TeacherProfileFragment extends Fragment {
                 detailList.setLayoutManager(new LinearLayoutManager(getContext()));
                 TeacherClassListAdapter teacherClassListAdapter = new TeacherClassListAdapter(getContext(), teacherClasses);
                 detailList.setAdapter(teacherClassListAdapter);
+
+                teacherClassListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (teacherClassListAdapter.getItemCount() == 0) {
+                            no_data.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
         });
     }

@@ -78,32 +78,32 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private void buttonClickEvents() {
 
-         submitbtn.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                  if (password.getText().toString().equals("") || confirmPassword.getText().toString().equals("")){
-                      new SnackBar(relativeLayout, "Please Fill All Details!");
-                      return;
-                  }
+                if (password.getText().toString().equals("") || confirmPassword.getText().toString().equals("")) {
+                    new SnackBar(relativeLayout, "Please Fill All Details!");
+                    return;
+                }
 
-                  if (!password.getText().toString().equals(confirmPassword.getText().toString())){
-                      new SnackBar(relativeLayout, "Password should be equal to Confirm Password");
-                      return;
-                  }
+                if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
+                    new SnackBar(relativeLayout, "Password should be equal to Confirm Password");
+                    return;
+                }
 
-                 Pattern PASSWORD_PATTERN = Pattern.compile("^" + "(?=.*[0-9])" + "(?=.*[a-z])" + "(?=.*[A-Z])" + "(?=.*[@#$%^&+=])" + "(?=\\S+$)" + ".{8,}" + "$");
+                Pattern PASSWORD_PATTERN = Pattern.compile("^" + "(?=.*[0-9])" + "(?=.*[a-z])" + "(?=.*[A-Z])" + "(?=.*[@#$%^&+=])" + "(?=\\S+$)" + ".{8,}" + "$");
 
-                 if (!PASSWORD_PATTERN.matcher(password.getText().toString()).matches()) {
-                     new SnackBar(relativeLayout, "Password Too Weak!");
-                     return;
-                 }
+                if (!PASSWORD_PATTERN.matcher(password.getText().toString()).matches()) {
+                    new SnackBar(relativeLayout, "Password Too Weak!");
+                    return;
+                }
 
-                 progressDialog.setMessage("Loading");
-                 progressDialog.show();
+                progressDialog.setMessage("Loading");
+                progressDialog.show();
 
-                 resetPasswordViewModel.resetPassword(getIntent().getStringExtra("email"), password.getText().toString());
-             }
-         });
+                resetPasswordViewModel.resetPassword(getIntent().getStringExtra("email"), password.getText().toString());
+            }
+        });
     }
 }

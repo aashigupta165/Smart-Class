@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -23,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.Adapter.TeacherListAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.holder.ReplyListHolder;
 import com.education.smartclass.holder.TeacherListHolder;
 import com.education.smartclass.roles.Organisation.model.HomeViewModel;
 import com.education.smartclass.models.Teachers;

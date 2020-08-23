@@ -68,9 +68,9 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 radioButton = findViewById(checkedId);
                 radio = radioButton.getText().toString();
-                if (radioButton.getText().toString().equals("Yes")){
+                if (radioButton.getText().toString().equals("Yes")) {
                     inputForm.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     inputForm.setVisibility(View.GONE);
                 }
             }
@@ -150,13 +150,13 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
 
         String isLogo = "";
 
-        if (radio.equals("Yes")){
+        if (radio.equals("Yes")) {
             if (logo == null) {
                 new SnackBar(relativeLayout, "Please Upload the Logo");
                 return;
             }
             isLogo = "File";
-        }else {
+        } else {
             isLogo = "Manual";
         }
 

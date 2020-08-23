@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
@@ -38,8 +37,8 @@ public class TeacherClassListAdapter extends RecyclerView.Adapter<TeacherClassLi
     public void onBindViewHolder(@NonNull TeacherClassListHolder teacherClassListHolder, int position) {
         teacherClassListHolder.className.setText(studentList.get(position).getTeacherClass() + " " + studentList.get(position).getTeacherSection());
         ArrayList<String> teacherSubjects = new ArrayList<>();
-        int i=0;
-        for (TeacherSubjects sub : studentList.get(position).getTeachingSubjects()){
+        int i = 0;
+        for (TeacherSubjects sub : studentList.get(position).getTeachingSubjects()) {
             teacherSubjects.add(i, sub.getSubject());
             i++;
         }

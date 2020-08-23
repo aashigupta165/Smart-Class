@@ -110,7 +110,7 @@ public class StudentHomeFragment extends Fragment {
                     public void run() {
                         schedule_list.setAdapter(studentScheduleListAdapter);
                     }
-                },10);
+                }, 10);
 
                 studentScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
