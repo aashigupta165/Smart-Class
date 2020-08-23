@@ -91,6 +91,9 @@ public class TeacherAddScheduleFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
+        progressDialog.setMessage("Data Searching...");
+        progressDialog.show();
+
         date = view.findViewById(R.id.date);
         time = view.findViewById(R.id.time);
 
@@ -263,7 +266,7 @@ public class TeacherAddScheduleFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-
+                progressDialog.dismiss();
                 switch (s) {
                     case "teacher_detail_found":
                         setDropdown();
@@ -302,23 +305,20 @@ public class TeacherAddScheduleFragment extends Fragment {
         msgs.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressDialog.dismiss();
                 switch (s) {
                     case "class_scheduled":
-                        progressDialog.dismiss();
                         TeacherAddScheduleFragment fragment = new TeacherAddScheduleFragment();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         new SnackBar(relativeLayout, "Class Scheduled");
                         break;
                     case "class_not_scheduled":
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Class cannot be Scheduled.");
                         break;
                     case "Internet_Issue":
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Invalid Credentials");
                 }
             }

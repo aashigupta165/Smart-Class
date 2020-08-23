@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,8 @@ public class TeacherQuestionRepliesFragment extends Fragment {
     private ReplyListAdapter replyListAdapter;
 
     private ProgressDialog progressDialog;
+
+    private ProgressBar progressBar;
 
     private ArrayList<Reply> replyArrayList;
 
@@ -94,6 +97,9 @@ public class TeacherQuestionRepliesFragment extends Fragment {
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
         progressDialog = new ProgressDialog(getContext());
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         Bundle bundle = this.getArguments();
 
@@ -196,7 +202,7 @@ public class TeacherQuestionRepliesFragment extends Fragment {
         msg.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "list_found":
                         setRepliesList();

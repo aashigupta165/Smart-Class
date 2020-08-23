@@ -178,6 +178,16 @@
                 android:text="Subjects: "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subheading"
+                android:layout_marginTop="50dp"
+                android:progressDrawable="@drawable/edulogo"
+                android:layout_marginBottom="50dp"
+                android:visibility="gone"/>
+
             <ListView
                 android:id="@+id/subjects"
                 android:layout_width="match_parent"

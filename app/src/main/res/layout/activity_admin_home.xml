@@ -24,6 +24,15 @@
         android:textSize="25sp"
         android:textStyle="normal" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading"
+        android:layout_marginTop="50dp"
+        android:progressDrawable="@drawable/edulogo"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/organisation_list"
         android:layout_width="match_parent"

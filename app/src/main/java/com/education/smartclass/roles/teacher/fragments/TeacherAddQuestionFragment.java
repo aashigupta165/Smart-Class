@@ -68,6 +68,9 @@ public class TeacherAddQuestionFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
+        progressDialog.setMessage("Data Searching");
+        progressDialog.show();
+
         dataObserver();
         fetchData();
         TextSelector(view);
@@ -178,7 +181,7 @@ public class TeacherAddQuestionFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-
+                progressDialog.dismiss();
                 switch (s) {
                     case "teacher_detail_found":
                         setDropdown();
@@ -198,19 +201,17 @@ public class TeacherAddQuestionFragment extends Fragment {
         msg.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressDialog.dismiss();
                 switch (s){
                     case "question_asked":
-                        progressDialog.dismiss();
                         TeacherAddQuestionFragment fragment = new TeacherAddQuestionFragment();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         new SnackBar(relativeLayout, "Question Posted");
                         break;
                     case "Internet_Issue":
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please try again later!");
                 }
             }

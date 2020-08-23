@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,8 @@ public class StudentProfileFragment extends Fragment {
     private TextView name, rollno, class_section, dob, email, mobile;
     private ListView listView;
 
+    private ProgressBar progressBar;
+
     private FetchSubjectsViewModel fetchSubjectsViewModel;
 
     private RelativeLayout relativeLayout;
@@ -51,6 +54,9 @@ public class StudentProfileFragment extends Fragment {
         listView = view.findViewById(R.id.subjects);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         name.setText(SharedPrefManager.getInstance(getContext()).getUser().getStudentName());
         rollno.setText(SharedPrefManager.getInstance(getContext()).getUser().getStudentRollNo());
@@ -81,6 +87,7 @@ public class StudentProfileFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "subject_found":
                         fetchList();

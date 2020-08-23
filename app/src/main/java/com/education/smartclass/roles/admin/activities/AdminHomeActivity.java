@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.education.smartclass.Adapter.OrganisationListAdapter;
@@ -31,6 +33,8 @@ public class AdminHomeActivity extends AppCompatActivity {
     private RecyclerView organisation_list;
     private HomeViewModel homeViewModel;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,11 @@ public class AdminHomeActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.relativeLayout);
         organisation_list = findViewById(R.id.organisation_list);
 
+        progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
+
         dataObserver();
+
         homeViewModel.fetchOrganisationList();
     }
 
@@ -85,6 +93,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         message.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "list_found":
                         fetchList();

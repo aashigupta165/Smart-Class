@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,8 @@ public class TeacherHomeFragment extends Fragment {
 
     private ProgressDialog progressDialog;
 
+    private ProgressBar progressBar;
+
     private int positionDelete;
 
     @Override
@@ -70,6 +73,9 @@ public class TeacherHomeFragment extends Fragment {
 
         schedule_list = view.findViewById(R.id.schedule_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         progressDialog = new ProgressDialog(getContext());
 
@@ -89,6 +95,7 @@ public class TeacherHomeFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressDialog.dismiss();
                 switch (s) {
                     case "list_found":
                         fetchList();
@@ -111,18 +118,16 @@ public class TeacherHomeFragment extends Fragment {
         msg.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressDialog.dismiss();
                 switch (s) {
                     case "schedule_deleted":
-                        progressDialog.dismiss();
                         readTeacherScheduleDetailsArrayList.remove(positionDelete);
                         teacherScheduleListAdapter.notifyItemRemoved(positionDelete);
                         break;
                     case "Internet_Issue":
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
             }

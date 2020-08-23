@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -53,6 +54,8 @@ public class TeacherScheduleFragment extends Fragment {
 
     private ProgressDialog progressDialog;
 
+    private ProgressBar progressBar;
+
     private int positionDelete;
 
     @Override
@@ -65,6 +68,9 @@ public class TeacherScheduleFragment extends Fragment {
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
         progressDialog = new ProgressDialog(getContext());
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         dataObserver();
         buttonClickEvents();
@@ -94,6 +100,7 @@ public class TeacherScheduleFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "list_found":
                         fetchList();

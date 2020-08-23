@@ -1,9 +1,11 @@
 package com.education.smartclass.roles.Organisation.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,8 @@ public class OrganisationHomeFragment extends Fragment {
     private RecyclerView teacher_list;
     private HomeViewModel homeViewModel;
 
+    private ProgressBar progressBar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class OrganisationHomeFragment extends Fragment {
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
         teacher_list = view.findViewById(R.id.teacher_list);
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         dataObserver();
 
@@ -54,6 +61,7 @@ public class OrganisationHomeFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "list_found":
                         fetchList();

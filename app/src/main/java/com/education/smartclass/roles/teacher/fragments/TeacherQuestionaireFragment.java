@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -47,6 +48,8 @@ public class TeacherQuestionaireFragment extends Fragment {
 
     private QuestionListAdapter questionListAdapter;
 
+    private ProgressBar progressBar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teacher_questionaire, container, false);
@@ -55,6 +58,9 @@ public class TeacherQuestionaireFragment extends Fragment {
         no_data = view.findViewById(R.id.no_question);
         question_list = view.findViewById(R.id.question_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         dataObserver();
         buttonClickEvents();
@@ -147,6 +153,7 @@ public class TeacherQuestionaireFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "list_found":
                         fetchList();

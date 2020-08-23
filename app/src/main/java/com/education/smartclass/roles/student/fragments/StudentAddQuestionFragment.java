@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -73,6 +74,9 @@ public class StudentAddQuestionFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
+        progressDialog.setMessage("Data Searching...");
+        progressDialog.show();
+
         dataObserver();
         fetchData();
         TextSelector(view);
@@ -104,17 +108,6 @@ public class StudentAddQuestionFragment extends Fragment {
         subjectDropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                ArrayList<String> subjects = new ArrayList<>();
-//                int i = 0;
-//                for (TeacherClasses s : teacherClassesArrayList) {
-//                    for (TeacherSubjects t : s.getTeachingSubjects()) {
-//                        subjects.add(i, t.getSubject());
-//                        i++;
-//                    }
-//                }
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
-//                subject.setAdapter(adapter);
                 subject.showDropDown();
             }
         });
@@ -138,7 +131,7 @@ public class StudentAddQuestionFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-
+                progressDialog.dismiss();
                 switch (s) {
                     case "subject_found":
                         setDropdown();
@@ -161,19 +154,17 @@ public class StudentAddQuestionFragment extends Fragment {
         msg.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressDialog.dismiss();
                 switch (s) {
                     case "question_asked":
-                        progressDialog.dismiss();
                         StudentAddQuestionFragment fragment = new StudentAddQuestionFragment();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         new SnackBar(relativeLayout, "Question Posted");
                         break;
                     case "Internet_Issue":
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please try again later!");
                 }
             }
@@ -193,8 +184,6 @@ public class StudentAddQuestionFragment extends Fragment {
         list.observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> subjects) {
-
-//                subjectsArrayList = subjects;
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
                 subject.setAdapter(adapter);
             }
