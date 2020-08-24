@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.education.smartclass.R;
+import com.education.smartclass.models.TeacherCSVSampleData;
 import com.education.smartclass.roles.Organisation.model.TeacherRegisterFileViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
@@ -33,7 +34,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TeacherFragment extends Fragment {
 
@@ -43,6 +43,8 @@ public class TeacherFragment extends Fragment {
     private RelativeLayout relativeLayout;
     private TeacherRegisterFileViewModel registerFileViewModel;
     private ProgressDialog progressDialog;
+
+    private ArrayList<TeacherCSVSampleData> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,7 +91,7 @@ public class TeacherFragment extends Fragment {
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                registerTeachers();
+                registerTeachers();
             }
         });
     }
@@ -98,7 +100,7 @@ public class TeacherFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 //            sample samples;
-            List<sample> list = new ArrayList<>();
+            list = new ArrayList<>();
 
 //            String path = data.getData().getPath();
 //            File file = new File(path);
@@ -120,10 +122,17 @@ public class TeacherFragment extends Fragment {
 //                        CSVWriter csvWriter = new CSVWriter(new FileWriter(csv, true));
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] tokens = line.split(",");
-                    sample samplenew = new sample();
+                    TeacherCSVSampleData samplenew = new TeacherCSVSampleData();
                     samplenew.setSno(tokens[0]);
                     samplenew.setName(tokens[1]);
-                    samplenew.setNum(tokens[2]);
+                    samplenew.setAge(tokens[2]);
+                    samplenew.setDesignation(tokens[3]);
+                    samplenew.setCode(tokens[4]);
+                    samplenew.setGender(tokens[5]);
+                    samplenew.setRole(tokens[6]);
+                    samplenew.setEmail(tokens[7]);
+                    samplenew.setMobile(tokens[8]);
+                    samplenew.setClass_section_subject(tokens[9]);
 
 //                            String row[] = new String[]{tokens[0], tokens[1], tokens[2]};
 //                            csvWriter.writeNext(row);
@@ -233,8 +242,9 @@ public class TeacherFragment extends Fragment {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+//        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
 
+        registerFileViewModel.register(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),list);
 //        registerFileViewModel.register(orgCode, file);
     }
 }

@@ -4,25 +4,29 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.education.smartclass.api.RetrofitClient;
+import com.education.smartclass.models.TeacherCSVDataBody;
+import com.education.smartclass.models.TeacherCSVSampleData;
 import com.education.smartclass.response.MessageResponse;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TeacherRegisterFileViewModel extends ViewModel {
+
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void register(String orgCode, MultipartBody.Part file) {
+    public void register(String orgCode, ArrayList<TeacherCSVSampleData> list) {
 
-        RequestBody Role = RequestBody.create("Teacher", MediaType.parse("text/plain"));
-        RequestBody OrgCode = RequestBody.create(orgCode, MediaType.parse("text/plain"));
-        RequestBody methodToCreate = RequestBody.create("File", MediaType.parse("text/plain"));
+        TeacherCSVDataBody teacherCSVDataBody = new TeacherCSVDataBody();
+        teacherCSVDataBody.setRole("Teacher");
+        teacherCSVDataBody.setOrgCode(orgCode);
+        teacherCSVDataBody.setMethodToCreate("File");
+        teacherCSVDataBody.setTeacherCSVSampleData(list);
 
-        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().registerTeachers(Role, OrgCode, methodToCreate, file);
+        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().registerTeachers(teacherCSVDataBody);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

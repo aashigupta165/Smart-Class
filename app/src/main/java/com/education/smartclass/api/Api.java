@@ -1,5 +1,8 @@
 package com.education.smartclass.api;
 
+import com.education.smartclass.models.ClassCSVDataBody;
+import com.education.smartclass.models.StudnetCSVDataBody;
+import com.education.smartclass.models.TeacherCSVDataBody;
 import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.FetchQuestionList;
 import com.education.smartclass.response.FetchRepliesOfAQuestion;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
@@ -86,13 +90,19 @@ public interface Api {
             @Field("methodToCreate") String methodToCreate
     );
 
-    @Multipart
     @POST("register")
     Call<MessageResponse> registerTeachers(
-            @Part("role") RequestBody role,
-            @Part("orgCode") RequestBody orgCode,
-            @Part("methodToCreate") RequestBody methodToCreate,
-            @Part MultipartBody.Part file
+            @Body TeacherCSVDataBody teacherCSVDataBody
+    );
+
+    @POST("register")
+    Call<MessageResponse> registerClasses(
+            @Body ClassCSVDataBody classCSVDataBody
+    );
+
+    @POST("register")
+    Call<MessageResponse> registerStudents(
+            @Body StudnetCSVDataBody studnetCSVDataBody
     );
 
     @FormUrlEncoded
