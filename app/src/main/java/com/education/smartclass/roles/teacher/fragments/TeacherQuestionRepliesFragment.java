@@ -285,15 +285,9 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                 replyListAdapter = new ReplyListAdapter(getContext(), replies);
                 reply_list.setAdapter(replyListAdapter);
 
-                replyListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if (replyListAdapter.getItemCount() == 0) {
-                            no_data.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                if (replyListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
 
                 replyListAdapter.setOnItemClickListener(new ReplyListHolder.OnItemClickListener() {
                     @Override

@@ -150,15 +150,9 @@ public class TeacherHomeFragment extends Fragment {
                     }
                 }, 10);
 
-                teacherScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if (teacherScheduleListAdapter.getItemCount() == 0) {
-                            no_data.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                if (teacherScheduleListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
 
                 teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override

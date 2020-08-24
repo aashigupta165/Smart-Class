@@ -131,15 +131,9 @@ public class AdminHomeActivity extends AppCompatActivity {
                 OrganisationListAdapter organisationListAdapter = new OrganisationListAdapter(AdminHomeActivity.this, organisations);
                 organisation_list.setAdapter(organisationListAdapter);
 
-                organisationListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if (organisationListAdapter.getItemCount() == 0) {
-                            no_data.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                if (organisationListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

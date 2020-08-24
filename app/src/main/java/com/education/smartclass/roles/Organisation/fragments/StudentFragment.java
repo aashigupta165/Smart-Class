@@ -20,10 +20,7 @@ import android.widget.TextView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.StudentCSVSampleData;
-import com.education.smartclass.models.TeacherCSVSampleData;
-import com.education.smartclass.roles.Organisation.model.ClassRegisterFileViewModel;
 import com.education.smartclass.roles.Organisation.model.StudentRegisterFileViewModel;
-import com.education.smartclass.roles.Organisation.model.TeacherRegisterFileViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -161,6 +158,7 @@ public class StudentFragment extends Fragment {
     }
 
     private void registerStudents() {
+
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 

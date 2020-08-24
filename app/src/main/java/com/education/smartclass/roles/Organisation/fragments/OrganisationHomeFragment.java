@@ -141,15 +141,9 @@ public class OrganisationHomeFragment extends Fragment {
                 TeacherListAdapter teacherListAdapter = new TeacherListAdapter(getContext(), teachers);
                 teacher_list.setAdapter(teacherListAdapter);
 
-                teacherListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if (teacherListAdapter.getItemCount() == 0) {
-                            no_data.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                if (teacherListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
 
                 teacherListAdapter.setOnItemClickListener(new TeacherListHolder.OnItemClickListener() {
                     @Override

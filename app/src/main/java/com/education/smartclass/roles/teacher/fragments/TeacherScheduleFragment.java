@@ -157,15 +157,9 @@ public class TeacherScheduleFragment extends Fragment {
                 teacherScheduleListAdapter = new TeacherScheduleListAdapter(getContext(), readTeacherScheduleDetails);
                 schedule_list.setAdapter(teacherScheduleListAdapter);
 
-                teacherScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if (teacherScheduleListAdapter.getItemCount() == 0) {
-                            no_data.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                if (teacherScheduleListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
 
                 teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override

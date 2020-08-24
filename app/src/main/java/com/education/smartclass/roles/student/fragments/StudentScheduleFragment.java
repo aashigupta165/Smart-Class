@@ -118,15 +118,9 @@ public class StudentScheduleFragment extends Fragment {
                 studentScheduleListAdapter = new StudentScheduleListAdapter(getContext(), readStudentScheduleDetails);
                 schedule_list.setAdapter(studentScheduleListAdapter);
 
-                studentScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if (studentScheduleListAdapter.getItemCount() == 0) {
-                            no_data.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                if (studentScheduleListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
