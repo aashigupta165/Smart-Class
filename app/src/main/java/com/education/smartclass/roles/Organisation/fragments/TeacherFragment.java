@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.TeacherCSVSampleData;
@@ -28,7 +27,6 @@ import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -98,112 +96,39 @@ public class TeacherFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-//            sample samples;
-            list = new ArrayList<>();
-
-//            String path = data.getData().getPath();
-//            File file = new File(path);
-
-            InputStream inputStream = null;
             try {
-                inputStream = getContext().getContentResolver().openInputStream(data.getData());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            ;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-            String line = "";
-            try {
+                list = new ArrayList<>();
+
+                InputStream inputStream = getContext().getContentResolver().openInputStream(data.getData());
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+
+                String line = "";
                 bufferedReader.readLine();
-//                        File newFile = new File(path);
-//                        newFile.mkdirs();
-//                        String csv = path;
-//                        CSVWriter csvWriter = new CSVWriter(new FileWriter(csv, true));
+
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] tokens = line.split(",");
-                    TeacherCSVSampleData samplenew = new TeacherCSVSampleData();
-                    samplenew.setSno(tokens[0]);
-                    samplenew.setName(tokens[1]);
-                    samplenew.setAge(tokens[2]);
-                    samplenew.setDesignation(tokens[3]);
-                    samplenew.setCode(tokens[4]);
-                    samplenew.setGender(tokens[5]);
-                    samplenew.setRole(tokens[6]);
-                    samplenew.setEmail(tokens[7]);
-                    samplenew.setMobile(tokens[8]);
-                    samplenew.setClass_section_subject(tokens[9]);
 
-//                            String row[] = new String[]{tokens[0], tokens[1], tokens[2]};
-//                            csvWriter.writeNext(row);
-                    list.add(samplenew);
-                    Toast.makeText(getContext(), samplenew.toString(), Toast.LENGTH_LONG).show();
+                    TeacherCSVSampleData newSample = new TeacherCSVSampleData();
+                    newSample.setSno(tokens[0]);
+                    newSample.setName(tokens[1]);
+                    newSample.setAge(tokens[2]);
+                    newSample.setDesignation(tokens[3]);
+                    newSample.setCode(tokens[4]);
+                    newSample.setGender(tokens[5]);
+                    newSample.setRole(tokens[6]);
+                    newSample.setEmail(tokens[7]);
+                    newSample.setMobile(tokens[8]);
+                    newSample.setClass_section_subject(tokens[9]);
 
+                    list.add(newSample);
                 }
-//                        csvWriter.close();
+                new SnackBar(relativeLayout, "File Uploaded Successfully!");
+                status.setVisibility(View.VISIBLE);
             } catch (IOException e) {
-                e.printStackTrace();
+                new SnackBar(relativeLayout, "There is an error in uploading file!");
             }
-
-
-//            String path = data.getData().getPath();
-//            File file = new File(path);
-//            Toast.makeText(getContext(), file.getName(), Toast.LENGTH_LONG).show();
-//            FileInputStream fileInputStream = null;
-//
-//            byte[] bytesArray = null;
-//            try {
-//                bytesArray = new byte[(int) file.length()];
-//
-//                //read file into bytes[]
-//                fileInputStream = new FileInputStream(file);
-//                fileInputStream.read(bytesArray);
-//                Toast.makeText(getContext(), fileInputStream.read(), Toast.LENGTH_LONG).show();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (fileInputStream != null) {
-//                    try {
-//                        fileInputStream.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-
-//            }
-//            Path path = Paths.get("C:\temp\\test2.txt");
-
-//            Files files = Files.copy(path, bytesArray);
-//            Files.write(path, bytesArray);
-//            Toast.makeText(getContext(), "Done", Toast.LENGTH_LONG).show();
-//            System.out.println("Done");
-//            for (int i = 0; i < bytesArray.length; i++) {
-//                Toast.makeText(getContext(), bytesArray[i], Toast.LENGTH_LONG).show();
-//                System.out.print((char) bytesArray[i]);
-//            }
-            //init array with file length
-//            byte[] bytesArray = new byte[(int) file.length()];
-
-
-//            try {
-//                FileInputStream fis = new FileInputStream(file);
-////                fis.read(bytesArray); //read file into bytes[]
-//
-//                fis.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-//            ReadByteArrayFromFile(Server.MapPath(path);
-//            Toast.makeText(getContext(), path, Toast.LENGTH_LONG).show();
-//
-//            File file = new File(path);
-//            .createFile();
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), bytesArray);
-//            MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-//            RequestBody filename = RequestBody.create(file.getName(),MediaType.parse("text/plain"));
-//            registerFileViewModel.register(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),fileToUpload);
         }
     }
 
@@ -215,9 +140,7 @@ public class TeacherFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-
                 progressDialog.dismiss();
-
                 switch (s) {
                     case "teachers_added":
                         new SnackBar(relativeLayout, "Teachers Added");
@@ -230,8 +153,7 @@ public class TeacherFragment extends Fragment {
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                        new SnackBar(relativeLayout, s);
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
             }
         });
@@ -242,9 +164,6 @@ public class TeacherFragment extends Fragment {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-//        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-
-        registerFileViewModel.register(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),list);
-//        registerFileViewModel.register(orgCode, file);
+        registerFileViewModel.register(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), list);
     }
 }

@@ -1,31 +1,46 @@
 package com.education.smartclass.roles.Organisation.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
+import com.education.smartclass.models.ClassCSVSampleData;
+import com.education.smartclass.roles.Organisation.model.ClassRegisterFileViewModel;
+import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.SnackBar;
 
-import java.io.File;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 public class ClassFragment extends Fragment {
 
-    private TextView manual_entry, heading;
+    private TextView status, manual_entry, heading, submitbtn;
     private ImageButton fileUpload;
+
+    private RelativeLayout relativeLayout;
+    private ProgressDialog progressDialog;
+    private ClassRegisterFileViewModel registerFileViewModel;
+
+    private ArrayList<ClassCSVSampleData> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +49,11 @@ public class ClassFragment extends Fragment {
         manual_entry = view.findViewById(R.id.manual_entry);
         heading = view.findViewById(R.id.heading);
         fileUpload = view.findViewById(R.id.file_upload);
+        submitbtn = view.findViewById(R.id.submitbtn);
+
+        relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        progressDialog = new ProgressDialog(getContext());
 
         heading.setText("Add Subjects");
 
@@ -61,18 +81,79 @@ public class ClassFragment extends Fragment {
                 getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
             }
         });
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerClass();
+            }
+        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            String path = data.getData().getPath();
-            Toast.makeText(getContext(), path, Toast.LENGTH_LONG).show();
-            File file = new File(path);
-            RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-            MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-            RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
 
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            try {
+                list = new ArrayList<>();
+
+                InputStream inputStream = getContext().getContentResolver().openInputStream(data.getData());
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+
+                String line = "";
+                bufferedReader.readLine();
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] tokens = line.split(",");
+
+                    ClassCSVSampleData newSample = new ClassCSVSampleData();
+                    newSample.setSno(tokens[0]);
+                    newSample.setOrgClass(tokens[1]);
+                    newSample.setOrgSection(tokens[2]);
+                    newSample.setSubjects(tokens[3]);
+
+                    list.add(newSample);
+                }
+                new SnackBar(relativeLayout, "File Uploaded Successfully!");
+                status.setVisibility(View.VISIBLE);
+            } catch (IOException e) {
+                new SnackBar(relativeLayout, "There is an error in uploading file!");
+            }
         }
+    }
+
+    private void dataObserver() {
+
+        registerFileViewModel = ViewModelProviders.of(this).get(ClassRegisterFileViewModel.class);
+        LiveData<String> message = registerFileViewModel.getMessage();
+
+        message.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "class_created":
+                        new SnackBar(relativeLayout, "Classes Added");
+                        status.setVisibility(View.GONE);
+                        break;
+                    case "invalid_entry":
+                        new SnackBar(relativeLayout, "Invalid Details");
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
+                }
+            }
+        });
+    }
+
+    private void registerClass() {
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        registerFileViewModel.register(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), list);
     }
 }
