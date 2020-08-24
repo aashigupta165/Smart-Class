@@ -147,7 +147,7 @@ public class TeacherFragment extends Fragment {
                         status.setVisibility(View.GONE);
                         break;
                     case "invalid_entry":
-                        new SnackBar(relativeLayout, "Invalid Details");
+                        new SnackBar(relativeLayout, "Invalid Details or Redundant Data Found!");
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");

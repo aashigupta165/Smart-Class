@@ -50,6 +50,7 @@ public class ClassFragment extends Fragment {
         heading = view.findViewById(R.id.heading);
         fileUpload = view.findViewById(R.id.file_upload);
         submitbtn = view.findViewById(R.id.submitbtn);
+        status = view.findViewById(R.id.status);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
@@ -137,7 +138,7 @@ public class ClassFragment extends Fragment {
                         status.setVisibility(View.GONE);
                         break;
                     case "invalid_entry":
-                        new SnackBar(relativeLayout, "Invalid Details");
+                        new SnackBar(relativeLayout, "Invalid Details or Redundant Data Found!");
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");

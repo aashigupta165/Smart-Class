@@ -2,17 +2,17 @@ package com.education.smartclass.models;
 
 import java.util.ArrayList;
 
-public class StudnetCSVDataBody {
+public class StudentCSVDataBody {
 
     private String role;
     private String orgCode;
     private String methodToCreate;
     private ArrayList<StudentCSVSampleData> list;
 
-    public StudnetCSVDataBody() {
+    public StudentCSVDataBody() {
     }
 
-    public StudnetCSVDataBody(String role, String orgCode, String methodToCreate, ArrayList<StudentCSVSampleData> list) {
+    public StudentCSVDataBody(String role, String orgCode, String methodToCreate, ArrayList<StudentCSVSampleData> list) {
         this.role = role;
         this.orgCode = orgCode;
         this.methodToCreate = methodToCreate;

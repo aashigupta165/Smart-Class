@@ -1,7 +1,7 @@
 package com.education.smartclass.api;
 
 import com.education.smartclass.models.ClassCSVDataBody;
-import com.education.smartclass.models.StudnetCSVDataBody;
+import com.education.smartclass.models.StudentCSVDataBody;
 import com.education.smartclass.models.TeacherCSVDataBody;
 import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.FetchQuestionList;
@@ -102,7 +102,7 @@ public interface Api {
 
     @POST("register")
     Call<MessageResponse> registerStudents(
-            @Body StudnetCSVDataBody studnetCSVDataBody
+            @Body StudentCSVDataBody studentCSVDataBody
     );
 
     @FormUrlEncoded
