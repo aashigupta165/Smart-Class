@@ -55,46 +55,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="20sp" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/password"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/org_Code"-->
-<!--        android:layout_marginLeft="60dp"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:text="Password" />-->
-
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/password_card"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/password"-->
-<!--        android:layout_marginHorizontal="50dp">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/password_string"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/edittext_background"-->
-<!--            android:enabled="false"-->
-<!--            android:paddingHorizontal="15dp"-->
-<!--            android:paddingVertical="10dp"-->
-<!--            android:text="********"-->
-<!--            android:textColor="@color/colorPrimaryDark" />-->
-
-<!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/edit_password"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_alignParentEnd="true"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_centerVertical="true"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_marginRight="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:paddingVertical="10dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:paddingLeft="10dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:src="@drawable/ic_edit" />&ndash;&gt;-->
-
-<!--    </RelativeLayout>-->
-
     <TextView
         android:id="@+id/org_Name"
         android:layout_width="match_parent"

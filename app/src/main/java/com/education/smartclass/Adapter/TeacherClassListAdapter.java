@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,14 +35,12 @@ public class TeacherClassListAdapter extends RecyclerView.Adapter<TeacherClassLi
     @Override
     public void onBindViewHolder(@NonNull TeacherClassListHolder teacherClassListHolder, int position) {
         teacherClassListHolder.className.setText(studentList.get(position).getTeacherClass() + " " + studentList.get(position).getTeacherSection());
-        ArrayList<String> teacherSubjects = new ArrayList<>();
-        int i = 0;
+        String teacherSubjects = "";
         for (TeacherSubjects sub : studentList.get(position).getTeachingSubjects()) {
-            teacherSubjects.add(i, sub.getSubject());
-            i++;
+            teacherSubjects += sub.getSubject() + ", ";
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, teacherSubjects);
-        teacherClassListHolder.subject.setAdapter(adapter);
+        teacherSubjects = teacherSubjects.substring(0, teacherSubjects.length() - 2);
+        teacherClassListHolder.subject.setText(teacherSubjects);
     }
 
     @Override

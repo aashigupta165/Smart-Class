@@ -112,7 +112,11 @@ public class StudentFragment extends Fragment {
                     newSample.setName(tokens[1]);
                     newSample.setRollNo(tokens[2]);
                     newSample.setStudentClass(tokens[3]);
-                    newSample.setStudentSection(tokens[4]);
+                    if (tokens[4].equals("")) {
+                        newSample.setStudentSection("A");
+                    } else {
+                        newSample.setStudentSection(tokens[4]);
+                    }
                     newSample.setFatherName(tokens[5]);
                     newSample.setRole(tokens[6]);
                     newSample.setEmail(tokens[7]);

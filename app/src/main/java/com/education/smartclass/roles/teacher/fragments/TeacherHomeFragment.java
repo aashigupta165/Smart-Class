@@ -90,7 +90,7 @@ public class TeacherHomeFragment extends Fragment {
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 switch (s) {
                     case "list_found":
                         fetchList();
@@ -150,9 +150,15 @@ public class TeacherHomeFragment extends Fragment {
                     }
                 }, 10);
 
-                if (teacherScheduleListAdapter.getItemCount() == 0) {
-                    no_data.setVisibility(View.VISIBLE);
-                }
+                teacherScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (teacherScheduleListAdapter.getItemCount() == 0) {
+                            no_data.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
 
                 teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override

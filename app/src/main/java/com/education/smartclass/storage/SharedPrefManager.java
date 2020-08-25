@@ -53,6 +53,8 @@ public class SharedPrefManager {
             editor.putString("teacherEmail", user.getTeacherEmail());
             editor.putString("teacherMobile", user.getTeacherMobile());
             editor.putString("orgCode", user.getOrgCode());
+            editor.putString("orgLogo", user.getOrgLogo());
+            editor.putString("orgName", user.getOrgName());
         } else if (user.getRole().equals("Student")) {
             editor.putString("studentName", user.getStudentName());
             editor.putString("studentRollNo", user.getStudentRollNo());
@@ -65,6 +67,8 @@ public class SharedPrefManager {
             editor.putString("studentDOB", user.getStudentDOB());
             editor.putString("studentGender", user.getStudentGender());
             editor.putString("orgCode", user.getOrgCode());
+            editor.putString("orgLogo", user.getOrgLogo());
+            editor.putString("orgName", user.getOrgName());
         }
 
         editor.apply();
@@ -125,6 +129,23 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
         return token;
+    }
+
+    public void saveFcmToken(String fcmToken) {
+
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("FcmToken", fcmToken);
+
+        editor.apply();
+
+    }
+
+    public String getFcmToken() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String fcmToken = sharedPreferences.getString("FcmToken", null);
+        return fcmToken;
     }
 
     public void clear() {

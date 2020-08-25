@@ -110,7 +110,11 @@ public class ClassFragment extends Fragment {
                     ClassCSVSampleData newSample = new ClassCSVSampleData();
                     newSample.setSno(tokens[0]);
                     newSample.setOrgClass(tokens[1]);
-                    newSample.setOrgSection(tokens[2]);
+                    if (tokens[2].equals("")) {
+                        newSample.setOrgSection("A");
+                    } else {
+                        newSample.setOrgSection(tokens[2]);
+                    }
                     newSample.setSubjects(tokens[3]);
 
                     list.add(newSample);

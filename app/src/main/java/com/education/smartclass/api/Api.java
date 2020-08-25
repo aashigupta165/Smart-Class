@@ -33,7 +33,8 @@ public interface Api {
     @POST("login")
     Call<LoginResponse> login(
             @Field("mobile") String mobile,
-            @Field("password") String password
+            @Field("password") String password,
+            @Field("deviceToken") String deviceToken
     );
 
     @FormUrlEncoded

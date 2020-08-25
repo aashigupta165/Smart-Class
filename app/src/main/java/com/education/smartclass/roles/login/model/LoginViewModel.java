@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.education.smartclass.api.RetrofitClient;
 import com.education.smartclass.response.LoginResponse;
+import com.education.smartclass.roles.login.activities.LoginActivity;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +21,9 @@ public class LoginViewModel extends ViewModel {
 
     public void dataRetrieval(Context context, String mobile, String password) {
 
-        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(mobile, password);
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(mobile, password, token);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

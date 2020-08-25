@@ -79,6 +79,7 @@ public class OrganisationHomeFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
                 switch (s) {
                     case "list_found":
                         fetchList();
@@ -104,18 +105,20 @@ public class OrganisationHomeFragment extends Fragment {
         msg.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                progressDialog.dismiss();
                 switch (s) {
                     case "state_changed":
                         homeViewModel.fetchOrganisationList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
                         break;
                     case "Invalid_orgCode":
+                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Invalid Details");
                         break;
                     case "Invalid_role":
+                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Invalid Account");
                         break;
                     case "Internet_Issue":
+                        progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:

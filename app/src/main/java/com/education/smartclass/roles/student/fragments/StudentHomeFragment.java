@@ -112,9 +112,15 @@ public class StudentHomeFragment extends Fragment {
                     }
                 }, 10);
 
-                if (studentScheduleListAdapter.getItemCount() == 0) {
-                    no_data.setVisibility(View.VISIBLE);
-                }
+                studentScheduleListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (studentScheduleListAdapter.getItemCount() == 0) {
+                            no_data.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
         });
     }

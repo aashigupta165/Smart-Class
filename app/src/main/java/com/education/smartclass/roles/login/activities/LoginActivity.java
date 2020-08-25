@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        new SnackBar(relativeLayout, s);
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
             }
         });

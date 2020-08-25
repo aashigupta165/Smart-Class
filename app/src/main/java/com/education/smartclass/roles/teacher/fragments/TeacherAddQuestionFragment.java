@@ -68,7 +68,7 @@ public class TeacherAddQuestionFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
-        progressDialog.setMessage("Data Searching");
+        progressDialog.setMessage("Data Searching...");
         progressDialog.show();
 
         dataObserver();

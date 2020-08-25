@@ -1,5 +1,7 @@
 package com.education.smartclass.roles.teacher.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +13,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,11 +30,15 @@ import com.education.smartclass.roles.teacher.model.FetchDropdownDetailsViewMode
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class TeacherProfileFragment extends Fragment {
 
-    private TextView name, designation, id, email, mobile, no_data;
+    private TextView orgName, name, designation, id, email, mobile, no_data;
+    private ImageView orgLogo;
     private RecyclerView detailList;
 
     private ProgressBar progressBar;
@@ -42,6 +51,7 @@ public class TeacherProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teacher_profile, container, false);
 
+        orgName = view.findViewById(R.id.org_Name);
         name = view.findViewById(R.id.teacher_name);
         designation = view.findViewById(R.id.teacher_designation);
         id = view.findViewById(R.id.teacher_code);
@@ -49,12 +59,14 @@ public class TeacherProfileFragment extends Fragment {
         mobile = view.findViewById(R.id.teacher_mobile);
         detailList = view.findViewById(R.id.detailsList);
         no_data = view.findViewById(R.id.no_data);
+        orgLogo = view.findViewById(R.id.org_Logo);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
+        orgName.setText(SharedPrefManager.getInstance(getContext()).getUser().getOrgName());
         name.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherName());
         designation.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherDesignation());
         id.setText(SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
@@ -67,6 +79,28 @@ public class TeacherProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    try {
+                        URL url = new URL(SharedPrefManager.getInstance(getContext()).getUser().getOrgLogo());
+                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        orgLogo.setImageBitmap(bitmap);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, 1000);
 
         dataObserver();
 

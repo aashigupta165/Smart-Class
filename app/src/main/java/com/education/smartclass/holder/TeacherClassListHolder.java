@@ -12,7 +12,7 @@ import com.education.smartclass.R;
 public class TeacherClassListHolder extends RecyclerView.ViewHolder {
 
     public TextView className;
-    public ListView subject;
+    public TextView subject;
 
     public TeacherClassListHolder(@NonNull View itemView) {
         super(itemView);
