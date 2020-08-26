@@ -11,12 +11,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
 import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
+import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.BadgeDrawable;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 
@@ -79,15 +84,44 @@ public class StudentActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
         MenuItem menuItem = menu.findItem(R.id.add);
         menuItem.setVisible(false);
+
+        MenuItem notification = menu.findItem(R.id.notification);
+        LayerDrawable icon = (LayerDrawable) notification.getIcon();
+        setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public static void setBadgeCount(Context context, LayerDrawable icon, Boolean count) {
+
+        BadgeDrawable badge;
+
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BadgeDrawable) {
+            badge = (BadgeDrawable) reuse;
+        } else {
+            badge = new BadgeDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notification:
+
+                SharedPrefManager.getInstance(getApplicationContext()).setBadgeCount(false);
+
+                MenuItem notification = item;
+                LayerDrawable icon = (LayerDrawable) notification.getIcon();
+                setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+
                 NotificationFragment fragment = new NotificationFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
+                
                 break;
             case R.id.refresh:
                 finish();

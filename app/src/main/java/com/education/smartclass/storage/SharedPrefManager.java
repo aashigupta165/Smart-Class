@@ -131,21 +131,21 @@ public class SharedPrefManager {
         return token;
     }
 
-    public void saveFcmToken(String fcmToken) {
+    public void setBadgeCount(Boolean badgeCount) {
 
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("FcmToken", fcmToken);
+        editor.putBoolean("badgeCount", badgeCount);
 
         editor.apply();
 
     }
 
-    public String getFcmToken() {
+    public Boolean getBadgeCount() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        String fcmToken = sharedPreferences.getString("FcmToken", null);
-        return fcmToken;
+        Boolean badgeCount = sharedPreferences.getBoolean("badgeCount", false);
+        return badgeCount;
     }
 
     public void clear() {

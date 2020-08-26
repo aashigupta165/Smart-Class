@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.education.smartclass.api.RetrofitClient;
 import com.education.smartclass.response.LoginResponse;
-import com.education.smartclass.roles.login.activities.LoginActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.google.firebase.iid.FirebaseInstanceId;
 

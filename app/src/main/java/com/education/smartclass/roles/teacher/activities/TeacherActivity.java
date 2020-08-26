@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,12 +17,10 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
-import com.education.smartclass.roles.teacher.fragments.TeacherQuestionaireFragment;
+import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.BadgeDrawable;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
@@ -32,8 +29,6 @@ public class TeacherActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
-    private TextView notificationBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,16 +89,15 @@ public class TeacherActivity extends AppCompatActivity {
 
         MenuItem notification = menu.findItem(R.id.notification);
         LayerDrawable icon = (LayerDrawable) notification.getIcon();
-        setBadgeCount(this, icon, "9");
+        setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
 
         return super.onCreateOptionsMenu(menu);
     }
 
-    public static void setBadgeCount(Context context, LayerDrawable icon, String count) {
+    public static void setBadgeCount(Context context, LayerDrawable icon, Boolean count) {
 
         BadgeDrawable badge;
 
-        // Reuse drawable if possible
         Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
         if (reuse != null && reuse instanceof BadgeDrawable) {
             badge = (BadgeDrawable) reuse;
@@ -121,8 +115,16 @@ public class TeacherActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notification:
+
+                SharedPrefManager.getInstance(getApplicationContext()).setBadgeCount(false);
+
+                MenuItem notification = item;
+                LayerDrawable icon = (LayerDrawable) notification.getIcon();
+                setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+
                 NotificationFragment fragment = new NotificationFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
+
                 break;
             case R.id.refresh:
                 finish();
