@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.teacher.activities.TeacherActivity;
 import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.BadgeDrawable;
@@ -85,9 +86,27 @@ public class StudentActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.add);
         menuItem.setVisible(false);
 
-        MenuItem notification = menu.findItem(R.id.notification);
-        LayerDrawable icon = (LayerDrawable) notification.getIcon();
-        setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MenuItem notification = menu.findItem(R.id.notification);
+                                LayerDrawable icon = (LayerDrawable) notification.getIcon();
+                                setBadgeCount(StudentActivity.this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+
+                }
+            }
+        };
+        thread.start();
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -112,16 +131,9 @@ public class StudentActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notification:
-
                 SharedPrefManager.getInstance(getApplicationContext()).setBadgeCount(false);
-
-                MenuItem notification = item;
-                LayerDrawable icon = (LayerDrawable) notification.getIcon();
-                setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
-
                 NotificationFragment fragment = new NotificationFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
-                
                 break;
             case R.id.refresh:
                 finish();

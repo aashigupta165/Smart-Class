@@ -32,7 +32,7 @@
         </activity>
 
         <service
-            android:name=".api.MyFirebaseMessagingService"
+            android:name=".utils.MyFirebaseMessagingService"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>

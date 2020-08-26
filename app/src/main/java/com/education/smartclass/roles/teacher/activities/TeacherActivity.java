@@ -87,9 +87,27 @@ public class TeacherActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.add);
         menuItem.setVisible(false);
 
-        MenuItem notification = menu.findItem(R.id.notification);
-        LayerDrawable icon = (LayerDrawable) notification.getIcon();
-        setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MenuItem notification = menu.findItem(R.id.notification);
+                                LayerDrawable icon = (LayerDrawable) notification.getIcon();
+                                setBadgeCount(TeacherActivity.this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+
+                }
+            }
+        };
+        thread.start();
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -115,16 +133,9 @@ public class TeacherActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notification:
-
                 SharedPrefManager.getInstance(getApplicationContext()).setBadgeCount(false);
-
-                MenuItem notification = item;
-                LayerDrawable icon = (LayerDrawable) notification.getIcon();
-                setBadgeCount(this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
-
                 NotificationFragment fragment = new NotificationFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
-
                 break;
             case R.id.refresh:
                 finish();

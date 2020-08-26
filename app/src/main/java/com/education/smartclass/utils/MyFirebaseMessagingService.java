@@ -1,4 +1,4 @@
-package com.education.smartclass.api;
+package com.education.smartclass.utils;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
