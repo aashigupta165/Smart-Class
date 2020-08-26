@@ -112,8 +112,6 @@ public class StudentScheduleFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetails) {
 
-                readStudentScheduleDetails = readStudentScheduleDetails;
-
                 schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
                 studentScheduleListAdapter = new StudentScheduleListAdapter(getContext(), readStudentScheduleDetails);
                 schedule_list.setAdapter(studentScheduleListAdapter);

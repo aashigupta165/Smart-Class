@@ -39,6 +39,7 @@ import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 
 public class TeacherAddScheduleFragment extends Fragment {
 
@@ -132,6 +133,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                             i++;
                         }
                     }
+                    sections = new ArrayList<String>(new HashSet<String>(sections));
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, sections);
                     section.setAdapter(adapter);
                     section.showDropDown();
@@ -188,6 +190,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                         i++;
                     }
                 }
+                subjects = new ArrayList<String>(new HashSet<String>(subjects));
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
                 subject.setAdapter(adapter);
                 subject.showDropDown();
@@ -348,6 +351,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                     classes.add(i, s.getTeacherClass());
                     i++;
                 }
+                classes = new ArrayList<String>(new HashSet<String>(classes));
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, classes);
                 className.setAdapter(adapter);
             }

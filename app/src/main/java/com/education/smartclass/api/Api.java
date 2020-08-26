@@ -279,4 +279,22 @@ public interface Api {
             @Field("email") String email,
             @Field("newPassword") String newPassword
     );
+
+    @FormUrlEncoded
+    @POST("notification/list")
+    Call<FetchSubjectList> notificationTeacher(
+            @Field("orgCode") String orgCode,
+            @Field("role") String role,
+            @Field("teacherCode") String teacherCode
+    );
+
+    @FormUrlEncoded
+    @POST("notification/list")
+    Call<FetchSubjectList> notificationStudent(
+            @Field("orgCode") String orgCode,
+            @Field("role") String role,
+            @Field("studentClass") String studentClass,
+            @Field("studentSection") String studentSection,
+            @Field("studentRollNo") String studentRollNo
+    );
 }

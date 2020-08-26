@@ -6,9 +6,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.education.smartclass.roles.Organisation.activities.OrganisationActivi
 import com.education.smartclass.roles.student.activities.StudentActivity;
 import com.education.smartclass.roles.teacher.activities.TeacherActivity;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.HideKeypad;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.regex.Pattern;
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(loginbtn.getWindowToken(), 0);
                 login();
             }
         });

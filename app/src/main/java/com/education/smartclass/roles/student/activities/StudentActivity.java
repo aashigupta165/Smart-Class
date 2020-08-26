@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 
@@ -85,6 +86,8 @@ public class StudentActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notification:
+                NotificationFragment fragment = new NotificationFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
                 break;
             case R.id.refresh:
                 finish();

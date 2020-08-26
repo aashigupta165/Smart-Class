@@ -1,6 +1,7 @@
 package com.education.smartclass.roles.teacher.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -29,6 +31,7 @@ import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class TeacherAddQuestionFragment extends Fragment {
 
@@ -106,6 +109,7 @@ public class TeacherAddQuestionFragment extends Fragment {
                             i++;
                         }
                     }
+                    sections = new ArrayList<String>(new HashSet<String>(sections));
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, sections);
                     section.setAdapter(adapter);
                     section.showDropDown();
@@ -156,6 +160,7 @@ public class TeacherAddQuestionFragment extends Fragment {
                         i++;
                     }
                 }
+                subjects = new ArrayList<String>(new HashSet<String>(subjects));
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
                 subject.setAdapter(adapter);
                 subject.showDropDown();
@@ -168,6 +173,8 @@ public class TeacherAddQuestionFragment extends Fragment {
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(submitbtn.getWindowToken(), 0);
                 postQuestion();
             }
         });
@@ -241,6 +248,7 @@ public class TeacherAddQuestionFragment extends Fragment {
                     classes.add(i, s.getTeacherClass());
                     i++;
                 }
+                classes = new ArrayList<String>(new HashSet<String>(classes));
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, classes);
                 className.setAdapter(adapter);
             }
