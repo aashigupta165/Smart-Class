@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.Organisation.fragments.BottomNavigationSelector;
 import com.education.smartclass.roles.Organisation.fragments.OrganisationHomeFragment;
 import com.education.smartclass.roles.student.fragments.StudentHomeFragment;
 import com.education.smartclass.roles.teacher.fragments.TeacherHomeFragment;
@@ -24,8 +25,8 @@ public class HomeSelectionFragment extends Fragment {
 
         switch (SharedPrefManager.getInstance(getContext()).getUser().getRole()) {
             case "Organisation":
-                OrganisationHomeFragment organisationHomeFragment = new OrganisationHomeFragment();
-                getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, organisationHomeFragment).commit();
+                BottomNavigationSelector bottomNavigationSelector = new BottomNavigationSelector();
+                getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, bottomNavigationSelector).commit();
                 break;
             case "Teacher":
                 TeacherHomeFragment teacherHomeFragment = new TeacherHomeFragment();

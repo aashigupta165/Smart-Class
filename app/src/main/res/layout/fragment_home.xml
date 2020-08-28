@@ -5,40 +5,42 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Teacher's List"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="25sp"
-        android:textStyle="normal" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/heading"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:text="Teacher's List"-->
+    <!--        android:textColor="@color/colorPrimaryDark"-->
+    <!--        android:textSize="25sp"-->
+    <!--        android:textStyle="normal" />-->
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp">
 
         <TextView
-            android:layout_width="80dp"
+            android:id="@+id/code_heading"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_alignParentStart="true"
             android:singleLine="true"
             android:text="Code"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/name_heading"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_weight="2"
+            android:layout_toRightOf="@+id/code_heading"
             android:singleLine="true"
             android:text="Name"
             android:textColor="@color/colorAccent"
@@ -49,23 +51,25 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:gravity="right"
+            android:layout_toRightOf="@+id/name_heading"
             android:singleLine="true"
-            android:text="Status"
+            android:text="Active"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
-        <!--        <TextView-->
-        <!--            android:layout_width="35dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="Edit"-->
-        <!--            android:textSize="20sp"-->
-        <!--            android:textColor="@color/colorAccent"-->
-        <!--            android:layout_marginLeft="15dp"-->
-        <!--            android:src="@drawable/ic_edit" />-->
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/status"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="Edit"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/no_data"
@@ -94,5 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_marginTop="20dp" />
+
+    <!--    <include layout="@layout/bottom_nav" />-->
 
 </RelativeLayout>

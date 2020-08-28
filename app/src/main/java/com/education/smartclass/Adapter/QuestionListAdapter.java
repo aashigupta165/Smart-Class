@@ -1,6 +1,7 @@
 package com.education.smartclass.Adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListHolder
             questionListHolder.standard.setText("STD: " + questions.get(position).getQuestionForClass() + " " + questions.get(position).getQuestionForSection());
         } else {
             questionListHolder.standard.setText("Faculty");
+            questionListHolder.standard.setTypeface(questionListHolder.standard.getTypeface(), Typeface.BOLD);
         }
         questionListHolder.time.setText(questions.get(position).getQuestionDateTime());
         questionListHolder.name.setText("Posted by: " + questions.get(position).getQuestionAskerName());

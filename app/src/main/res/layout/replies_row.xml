@@ -4,12 +4,34 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:paddingHorizontal="20dp"
-    android:paddingTop="20dp">
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/verified_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="Verified"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/verified_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/verified_tag"
+        android:layout_alignBottom="@+id/verified_tag"
+        android:layout_marginRight="3dp"
+        android:layout_toLeftOf="@+id/verified_tag"
+        android:src="@drawable/ic_verified"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/replier_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/verified_tag"
         android:text="Name"
         android:textColor="@color/colorPrimary" />
 
@@ -17,7 +39,9 @@
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/verified_tag"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_delete" />
 
     <TextView
@@ -51,8 +75,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/seperator"
         android:layout_below="@+id/time"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/seperator" />
 
 </RelativeLayout>

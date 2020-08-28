@@ -134,7 +134,7 @@ public class StudentProfileFragment extends Fragment {
                 for (String sub : subjects) {
                     Subjects += sub + ", ";
                 }
-                Subjects = Subjects.substring(0, Subjects.length() - 2);
+                Subjects = Subjects.substring(0, Subjects.length() - 4);
                 subjectsList.setText(Subjects);
             }
         });

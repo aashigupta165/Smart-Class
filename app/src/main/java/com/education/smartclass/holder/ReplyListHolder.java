@@ -16,6 +16,8 @@ public class ReplyListHolder extends RecyclerView.ViewHolder {
     public TextView reply;
     public TextView time;
     public ImageView delete;
+    public TextView verified;
+    public ImageView verified_image;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -29,6 +31,8 @@ public class ReplyListHolder extends RecyclerView.ViewHolder {
         this.reply = itemView.findViewById(R.id.reply);
         this.time = itemView.findViewById(R.id.time);
         this.delete = itemView.findViewById(R.id.delete);
+        this.verified = itemView.findViewById(R.id.verified_tag);
+        this.verified_image = itemView.findViewById(R.id.verified_image);
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

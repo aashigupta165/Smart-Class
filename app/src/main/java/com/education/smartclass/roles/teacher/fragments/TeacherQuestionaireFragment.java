@@ -188,6 +188,10 @@ public class TeacherQuestionaireFragment extends Fragment {
                 questionListAdapter = new QuestionListAdapter(getContext(), questions);
                 question_list.setAdapter(questionListAdapter);
 
+                if (questionListAdapter.getItemCount() == 0) {
+                    no_data.setVisibility(View.VISIBLE);
+                }
+
                 questionListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
                     public void onChanged() {

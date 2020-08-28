@@ -1,6 +1,7 @@
 package com.education.smartclass.Adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,9 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListHolder> {
     public void onBindViewHolder(@NonNull ReplyListHolder replyListHolder, int position) {
         if (replies.get(position).getReplierRole().equals("Teacher")) {
             replyListHolder.standard.setText("Faculty");
+            replyListHolder.standard.setTypeface(replyListHolder.standard.getTypeface(), Typeface.BOLD);
+            replyListHolder.verified.setVisibility(View.VISIBLE);
+            replyListHolder.verified_image.setVisibility(View.VISIBLE);
         } else {
             replyListHolder.standard.setText("STD: " + replies.get(position).getReplierClass() + " " + replies.get(position).getReplierSection());
         }

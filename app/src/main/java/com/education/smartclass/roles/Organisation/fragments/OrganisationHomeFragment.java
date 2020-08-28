@@ -2,6 +2,7 @@ package com.education.smartclass.roles.Organisation.fragments;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -154,9 +155,24 @@ public class OrganisationHomeFragment extends Fragment {
                         positionOfTeacher = position;
                         statusChange();
                     }
+
+                    @Override
+                    public void onEditClick(View view, int position) {
+                        positionOfTeacher = position;
+                        editTeacher();
+                    }
                 });
             }
         });
+    }
+
+    private void editTeacher() {
+
+        Bundle bundle = new Bundle();
+
+        ManualTeacherRegisterFragment1 fragment = new ManualTeacherRegisterFragment1();
+        fragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
     }
 
     private void statusChange() {
