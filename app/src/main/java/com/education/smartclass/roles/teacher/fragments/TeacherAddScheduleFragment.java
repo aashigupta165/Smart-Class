@@ -185,9 +185,10 @@ public class TeacherAddScheduleFragment extends Fragment {
                 int i = 0;
                 for (TeacherClasses s : teacherClassesArrayList) {
                     if (s.getTeacherClass().equals(className.getText().toString()) && s.getTeacherSection().equals(section.getText().toString())) {
-                        for (TeacherSubjects t : s.getTeachingSubjects())
+                        for (TeacherSubjects t : s.getTeachingSubjects()) {
                             subjects.add(i, t.getSubject());
-                        i++;
+                            i++;
+                        }
                     }
                 }
                 subjects = new ArrayList<String>(new HashSet<String>(subjects));

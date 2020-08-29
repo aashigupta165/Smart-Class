@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,11 +26,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.education.smartclass.R;
+import com.education.smartclass.models.OrgClassList;
+import com.education.smartclass.models.OrgSubjects;
+import com.education.smartclass.roles.Organisation.model.ClassListViewModel;
 import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 public class ManualTeacherRegisterFragment3 extends Fragment {
@@ -40,8 +46,10 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
     private ProgressDialog progressDialog;
 
     ArrayList<String> list = new ArrayList<>();
+    private ArrayList<OrgClassList> orgClassLists;
 
     private TeacherRegisterManualViewModel teacherRegisterManualViewModel;
+    private ClassListViewModel classListViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,10 +76,18 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
+        progressDialog.setMessage("Data Searching...");
+        progressDialog.show();
+
         buttonClickEvents();
         dataObserver();
+        fetchData();
 
         return view;
+    }
+
+    private void fetchData() {
+        classListViewModel.fetchStudentList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Class");
     }
 
     private void buttonClickEvents() {
@@ -166,6 +182,85 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
         });
 
         classDetailsList.addView(view);
+
+        AutoCompleteTextView className = view.findViewById(R.id.className);
+        AutoCompleteTextView section = view.findViewById(R.id.section);
+        AutoCompleteTextView subject = view.findViewById(R.id.subject);
+
+        ImageView classDropdown = view.findViewById(R.id.class_drop_down);
+        ImageView sectionDropdown = view.findViewById(R.id.section_drop_down);
+        ImageView subjectDropdown = view.findViewById(R.id.subject_drop_down);
+
+        ArrayList<String> classes = new ArrayList<>();
+        int i = 0;
+        for (OrgClassList s : orgClassLists) {
+            classes.add(i, s.getOrgClass());
+            i++;
+        }
+        classes = new ArrayList<String>(new HashSet<String>(classes));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, classes);
+        className.setAdapter(adapter);
+
+        classDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                className.showDropDown();
+                section.setText("");
+                subject.setText("");
+            }
+        });
+
+        sectionDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (className.getText().toString().equals("")) {
+                    new SnackBar(relativeLayout, "Please Select Class!");
+                    return;
+                } else {
+                    ArrayList<String> sections = new ArrayList<>();
+                    int i = 0;
+                    for (OrgClassList s : orgClassLists) {
+                        if (s.getOrgClass().equals(className.getText().toString())) {
+                            sections.add(i, s.getOrgSection());
+                            i++;
+                        }
+                    }
+                    sections = new ArrayList<String>(new HashSet<String>(sections));
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, sections);
+                    section.setAdapter(adapter);
+                    section.showDropDown();
+                    subject.setText("");
+                }
+            }
+        });
+
+        subjectDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
+                    new SnackBar(relativeLayout, "Please Select Above Fields!");
+                    return;
+                }
+
+                ArrayList<String> subjects = new ArrayList<>();
+                int i = 0;
+                for (OrgClassList s : orgClassLists) {
+                    if (s.getOrgClass().equals(className.getText().toString()) && s.getOrgSection().equals(section.getText().toString())) {
+                        for (OrgSubjects t : s.getOrgSubjects()) {
+                            if (!t.getSubject().equals("")) {
+                                subjects.add(i, t.getSubject());
+                                i++;
+                            }
+                        }
+                    }
+                }
+                subjects = new ArrayList<String>(new HashSet<String>(subjects));
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, subjects);
+                subject.setAdapter(adapter);
+                subject.showDropDown();
+            }
+        });
     }
 
     private void removeView(View view) {
@@ -197,6 +292,38 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");
                 }
+            }
+        });
+
+        classListViewModel = ViewModelProviders.of(this).get(ClassListViewModel.class);
+        LiveData<String> messages = classListViewModel.getMessage();
+
+        messages.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "list_found":
+                        fetchList();
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
+                }
+            }
+        });
+    }
+
+    private void fetchList() {
+
+        LiveData<ArrayList<OrgClassList>> list = classListViewModel.getList();
+
+        list.observe(this, new Observer<ArrayList<OrgClassList>>() {
+            @Override
+            public void onChanged(ArrayList<OrgClassList> classLists) {
+                orgClassLists = classLists;
             }
         });
     }
