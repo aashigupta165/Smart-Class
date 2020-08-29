@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="2dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="5dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -85,5 +87,50 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="-10dp"
+        android:background="@drawable/description_background"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="5dp">
+
+<!--        <TextView-->
+<!--            android:id="@+id/short_desc"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="This is a description" />-->
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandable_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_duration="100"
+            app:ael_expanded="false"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <TextView
+                android:id="@+id/long_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:text="njvcgvgvbg hjbhvgv hbvgfcgfhbjbh bhvbgcvgfcgbhjgcgvghbbbhvvghvgcghvbhbhbbhbbhbhvvhvhhvgggvvvhvv vgnbgv vhhbhvb hhvhh hhvv" />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <ImageView
+            android:id="@+id/dragbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/expandable_desc"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:src="@drawable/ic_drag_handle" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

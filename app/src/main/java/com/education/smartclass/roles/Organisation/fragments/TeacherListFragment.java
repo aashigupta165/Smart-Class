@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +33,7 @@ import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 
-public class OrganisationHomeFragment extends Fragment {
+public class TeacherListFragment extends Fragment {
 
     private TextView no_data;
     private RelativeLayout relativeLayout;
@@ -168,11 +169,19 @@ public class OrganisationHomeFragment extends Fragment {
 
     private void editTeacher() {
 
-        Bundle bundle = new Bundle();
+        Toast.makeText(getContext(), teachersArrayList.get(positionOfTeacher).getTeacherClass().get(0).getTeacherClass()
+//                + teachersArrayList.get(positionOfTeacher).getTeacherClass().get(0).getTeacherClass() +
+//                teachersArrayList.get(positionOfTeacher).getTeacherClass().get(0).getTeachingSubjects().get(0).getSubject()
+                , Toast.LENGTH_LONG).show();
 
-        ManualTeacherRegisterFragment1 fragment = new ManualTeacherRegisterFragment1();
-        fragment.setArguments(bundle);
-        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
+//        Bundle bundle = new Bundle();
+//
+//        String tc = teachersArrayList.toString();
+//        bundle.putString("teacherClasses", tc);
+
+//        ManualTeacherRegisterFragment3 fragment = new ManualTeacherRegisterFragment3();
+//        fragment.setArguments(bundle);
+//        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
     }
 
     private void statusChange() {

@@ -176,6 +176,10 @@ public class TeacherScheduleFragment extends Fragment {
                     public void onItemClick(View view, int position) {
                         showmenu(view, position);
                     }
+
+                    @Override
+                    public void onDrag(View view, int position) {
+                    }
                 });
             }
         });

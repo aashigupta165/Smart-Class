@@ -40,4 +40,13 @@ public class TeacherClasses {
     public void setTeacherSection(String teacherSection) {
         this.teacherSection = teacherSection;
     }
+
+    @Override
+    public String toString() {
+        return "TeacherClasses{" +
+                "teachingSubjects=" + teachingSubjects +
+                ", teacherClass='" + teacherClass + '\'' +
+                ", teacherSection='" + teacherSection + '\'' +
+                '}';
+    }
 }

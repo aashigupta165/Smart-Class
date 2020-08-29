@@ -29,8 +29,8 @@ public class BottomNavigationSelector extends Fragment {
         if (savedInstanceState == null) {
             bottomNav.setItemSelected(R.id.teacher_list, true);
             fragmentManager = getParentFragmentManager();
-            OrganisationHomeFragment organisationHomeFragment = new OrganisationHomeFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, organisationHomeFragment).commit();
+            TeacherListFragment teacherListFragment = new TeacherListFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, teacherListFragment).commit();
         }
 
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
@@ -39,7 +39,7 @@ public class BottomNavigationSelector extends Fragment {
                 Fragment fragment = null;
                 switch (id) {
                     case R.id.teacher_list:
-                        fragment = new OrganisationHomeFragment();
+                        fragment = new TeacherListFragment();
                         break;
                     case R.id.student_list:
                         fragment = new ClassFragment();

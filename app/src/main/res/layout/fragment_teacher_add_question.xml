@@ -193,14 +193,14 @@
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_below="@id/question_heading"
             android:layout_marginTop="10dp"
             android:background="@drawable/edittext_background"
             android:gravity="top"
             android:hint="Question"
+            android:paddingHorizontal="16dp"
             android:paddingVertical="10dp"
-            android:paddingHorizontal="16dp" />
+            android:textColor="@color/colorPrimaryDark" />
 
     </RelativeLayout>
 

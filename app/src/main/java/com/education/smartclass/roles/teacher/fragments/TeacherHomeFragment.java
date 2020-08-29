@@ -31,6 +31,7 @@ import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.util.ArrayList;
 
@@ -164,6 +165,10 @@ public class TeacherHomeFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         showmenu(view, position);
+                    }
+
+                    @Override
+                    public void onDrag(View view, int position) {
                     }
                 });
             }

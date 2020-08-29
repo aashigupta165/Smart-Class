@@ -42,4 +42,13 @@ public class TeacherList {
     public void setActive(String active) {
         this.active = active;
     }
+
+    @Override
+    public String toString() {
+        return "TeacherList{" +
+                "list=" + list +
+                ", message='" + message + '\'' +
+                ", active='" + active + '\'' +
+                '}';
+    }
 }

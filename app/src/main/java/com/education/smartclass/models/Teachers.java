@@ -1,17 +1,21 @@
 package com.education.smartclass.models;
 
+import java.util.ArrayList;
+
 public class Teachers {
 
     private String teacherName;
     private String teacherCode;
+    private ArrayList<TeacherClasses> teacherClass;
     private String active;
 
     public Teachers() {
     }
 
-    public Teachers(String teacherName, String teacherCode, String active) {
+    public Teachers(String teacherName, String teacherCode, ArrayList<TeacherClasses> teacherClass, String active) {
         this.teacherName = teacherName;
         this.teacherCode = teacherCode;
+        this.teacherClass = teacherClass;
         this.active = active;
     }
 
@@ -37,5 +41,23 @@ public class Teachers {
 
     public void setActive(String active) {
         this.active = active;
+    }
+
+    public ArrayList<TeacherClasses> getTeacherClass() {
+        return teacherClass;
+    }
+
+    public void setTeacherClass(ArrayList<TeacherClasses> teacherClass) {
+        this.teacherClass = teacherClass;
+    }
+
+    @Override
+    public String toString() {
+        return "Teachers{" +
+                "teacherName='" + teacherName + '\'' +
+                ", teacherCode='" + teacherCode + '\'' +
+                ", teacherClass=" + teacherClass +
+                ", active='" + active + '\'' +
+                '}';
     }
 }
