@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/heading"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:text="Teacher's List"-->
+    <!--        android:textColor="@color/colorPrimaryDark"-->
+    <!--        android:textSize="25sp"-->
+    <!--        android:textStyle="normal" />-->
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/class_section"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:singleLine="true"
+            android:text="Class"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/subject_heading"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/class_section"
+            android:singleLine="true"
+            android:text="Subject"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/class_section"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_toRightOf="@+id/name_heading"-->
+<!--            android:singleLine="true"-->
+<!--            android:text="Class"-->
+<!--            android:textColor="@color/colorAccent"-->
+<!--            android:textSize="20sp" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_toRightOf="@+id/status"-->
+        <!--            android:gravity="right"-->
+        <!--            android:singleLine="true"-->
+        <!--            android:text="Edit"-->
+        <!--            android:textColor="@color/colorAccent"-->
+        <!--            android:textSize="20sp" />-->
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="No Data Available"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="50dp"
+        android:progressDrawable="@drawable/edulogo"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/class_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="20dp" />
+
+    <!--    <include layout="@layout/bottom_nav" />-->
+
+</RelativeLayout>

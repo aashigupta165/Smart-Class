@@ -45,7 +45,7 @@ public class BottomNavigationSelector extends Fragment {
                         fragment = new StudentListFragment();
                         break;
                     case R.id.class_list:
-                        fragment = new StudentFragment();
+                        fragment = new ClassListFragment();
                         break;
                 }
 

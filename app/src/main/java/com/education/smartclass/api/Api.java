@@ -1,8 +1,10 @@
 package com.education.smartclass.api;
 
 import com.education.smartclass.models.ClassCSVDataBody;
+import com.education.smartclass.models.OrgClassList;
 import com.education.smartclass.models.StudentCSVDataBody;
 import com.education.smartclass.models.TeacherCSVDataBody;
+import com.education.smartclass.response.ClassList;
 import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.FetchQuestionList;
 import com.education.smartclass.response.FetchRepliesOfAQuestion;
@@ -309,6 +311,13 @@ public interface Api {
     @FormUrlEncoded
     @POST("org/need")
     Call<StudentList> showStudentsList(
+            @Field("orgCode") String orgCode,
+            @Field("need") String need
+    );
+
+    @FormUrlEncoded
+    @POST("org/need")
+    Call<ClassList> showClassList(
             @Field("orgCode") String orgCode,
             @Field("need") String need
     );
