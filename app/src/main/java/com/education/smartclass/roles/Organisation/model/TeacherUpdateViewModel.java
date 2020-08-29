@@ -12,15 +12,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TeacherRegisterManualViewModel extends ViewModel {
+public class TeacherUpdateViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void register(String teacherName, String teacherAge, String teacherDesignation, String teacherCode, String teacherGender,
-                         String teacherEmail, String mobile, ArrayList<String> class_section_subject, String orgCode) {
+    public void update(String orgCode, String teacherCode, ArrayList<String> class_section_subject) {
 
-        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().registerTeacher(teacherName, teacherAge, teacherDesignation, teacherCode,
-                teacherGender, "Teacher", teacherEmail, mobile, class_section_subject, orgCode, "Manual");
+        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().updateTeacher(orgCode, teacherCode, class_section_subject);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

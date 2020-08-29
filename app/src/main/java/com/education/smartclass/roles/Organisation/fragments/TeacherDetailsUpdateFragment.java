@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -25,15 +24,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.education.smartclass.R;
-import com.education.smartclass.models.Teachers;
-import com.education.smartclass.roles.Organisation.model.TeacherRegisterManualViewModel;
+import com.education.smartclass.models.TeacherClasses;
+import com.education.smartclass.models.TeacherSubjects;
+import com.education.smartclass.roles.Organisation.model.TeacherUpdateViewModel;
+import com.education.smartclass.roles.teacher.model.FetchDropdownDetailsViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class TeacherDetailsUpdate extends Fragment {
+public class TeacherDetailsUpdateFragment extends Fragment {
 
     private LinearLayout classDetailsList;
     private TextView addbtn, submitbtn;
@@ -41,9 +42,10 @@ public class TeacherDetailsUpdate extends Fragment {
     private RelativeLayout relativeLayout;
     private ProgressDialog progressDialog;
 
-    ArrayList<String> list = new ArrayList<>();
+    private FetchDropdownDetailsViewModel fetchDropdownDetailsViewModel;
+    private TeacherUpdateViewModel teacherUpdateViewModel;
 
-    private TeacherRegisterManualViewModel teacherRegisterManualViewModel;
+    ArrayList<String> list = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,23 +72,24 @@ public class TeacherDetailsUpdate extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
-//        String tc = this.getArguments().getString("teacherClasses");
-//        Teachers teachers = new Teachers(tc);
-
-//        String teacherName = bundle.getString("teacherName");
-//        String teacherAge = bundle.getString("teacherAge");
-//        String teacherDesignation = bundle.getString("teacherDesignation");
-//        String teacherCode = bundle.getString("teacherCode");
-//        String teacherGender = bundle.getString("teacherGender");
-//        String email = bundle.getString("email");
-//        String mobile = bundle.getString("mobile");
-//
-//        Toast.makeText(getContext(), bundle.getString("teacherClasses") , Toast.LENGTH_LONG).show();
+        progressDialog.setMessage("Data Searching...");
+        progressDialog.show();
 
         buttonClickEvents();
         dataObserver();
+        fetchData();
 
         return view;
+    }
+
+    private void fetchData() {
+
+        Bundle bundle = this.getArguments();
+        String teacherCode = bundle.getString("teacherCode");
+
+        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+
+        fetchDropdownDetailsViewModel.fetchDropdownDetails(orgCode, teacherCode);
     }
 
     private void buttonClickEvents() {
@@ -105,7 +108,7 @@ public class TeacherDetailsUpdate extends Fragment {
                 if (checkIfValidAndRead()) {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(submitbtn.getWindowToken(), 0);
-                    registerTeacher();
+                    updateTeacher();
                 }
             }
         });
@@ -188,8 +191,8 @@ public class TeacherDetailsUpdate extends Fragment {
     }
 
     private void dataObserver() {
-        teacherRegisterManualViewModel = ViewModelProviders.of(this).get(TeacherRegisterManualViewModel.class);
-        LiveData<String> message = teacherRegisterManualViewModel.getMessage();
+        teacherUpdateViewModel = ViewModelProviders.of(this).get(TeacherUpdateViewModel.class);
+        LiveData<String> message = teacherUpdateViewModel.getMessage();
 
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -198,12 +201,12 @@ public class TeacherDetailsUpdate extends Fragment {
                 progressDialog.dismiss();
 
                 switch (s) {
-                    case "teacher_created":
+                    case "teacher_updated":
                         new SnackBar(relativeLayout, "Teacher Registered");
-                        TeacherFragment fragment = new TeacherFragment();
+                        TeacherListFragment fragment = new TeacherListFragment();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         break;
-                    case "invalid_entry":
+                    case "invalid_data":
                         new SnackBar(relativeLayout, "Invalid Details");
                         break;
                     case "Internet_Issue":
@@ -214,25 +217,62 @@ public class TeacherDetailsUpdate extends Fragment {
                 }
             }
         });
+
+        fetchDropdownDetailsViewModel = ViewModelProviders.of(this).get(FetchDropdownDetailsViewModel.class);
+        LiveData<String> messages = fetchDropdownDetailsViewModel.getMessage();
+
+        messages.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "teacher_detail_found":
+                        setDropdown();
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Please try again later!");
+                }
+            }
+        });
     }
 
-    private void registerTeacher() {
+    private void setDropdown() {
+
+        LiveData<ArrayList<TeacherClasses>> list = fetchDropdownDetailsViewModel.getList();
+
+        list.observe(getViewLifecycleOwner(), new Observer<ArrayList<TeacherClasses>>() {
+            @Override
+            public void onChanged(ArrayList<TeacherClasses> teacherClass) {
+                int i = 0;
+                for (TeacherClasses s : teacherClass) {
+                    for (TeacherSubjects sub : s.getTeachingSubjects()) {
+                        addView();
+                        View view = classDetailsList.getChildAt(i);
+
+                        EditText className = view.findViewById(R.id.className);
+                        EditText section = view.findViewById(R.id.section);
+                        EditText subject = view.findViewById(R.id.subject);
+
+                        className.setText(s.getTeacherClass());
+                        section.setText(s.getTeacherSection());
+                        subject.setText(sub.getSubject());
+                        i++;
+                    }
+                }
+            }
+        });
+    }
+
+    private void updateTeacher() {
 
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         Bundle bundle = this.getArguments();
 
-        String teacherName = bundle.getString("teacherName");
-        String teacherAge = bundle.getString("teacherAge");
-        String teacherDesignation = bundle.getString("teacherDesignation");
-        String teacherCode = bundle.getString("teacherCode");
-        String teacherGender = bundle.getString("teacherGender");
-        String email = bundle.getString("email");
-        String mobile = bundle.getString("mobile");
-        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-
-        teacherRegisterManualViewModel.register(teacherName, teacherAge, teacherDesignation, teacherCode, teacherGender, email, mobile,
-                list, orgCode);
+        teacherUpdateViewModel.update(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), bundle.getString("teacherCode"), list);
     }
 }

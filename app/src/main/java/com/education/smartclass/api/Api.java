@@ -297,4 +297,19 @@ public interface Api {
             @Field("studentSection") String studentSection,
             @Field("studentRollNo") String studentRollNo
     );
+
+    @FormUrlEncoded
+    @POST("teacher/edit")
+    Call<MessageResponse> updateTeacher(
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode,
+            @Field("class_section_subject") ArrayList<String> class_section_subject
+    );
+
+    @FormUrlEncoded
+    @POST("org/need")
+    Call<StudentList> showStudentsList(
+            @Field("orgCode") String orgCode,
+            @Field("need") String need
+    );
 }

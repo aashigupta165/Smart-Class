@@ -2,7 +2,6 @@ package com.education.smartclass.roles.Organisation.fragments;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.education.smartclass.Adapter.TeacherListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.TeacherListHolder;
-import com.education.smartclass.roles.Organisation.model.HomeViewModel;
+import com.education.smartclass.roles.Organisation.model.TeacherListViewModel;
 import com.education.smartclass.models.Teachers;
 import com.education.smartclass.roles.Organisation.model.StateChangeViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -38,7 +36,7 @@ public class TeacherListFragment extends Fragment {
     private TextView no_data;
     private RelativeLayout relativeLayout;
     private RecyclerView teacher_list;
-    private HomeViewModel homeViewModel;
+    private TeacherListViewModel teacherListViewModel;
 
     private ArrayList<Teachers> teachersArrayList;
 
@@ -67,15 +65,15 @@ public class TeacherListFragment extends Fragment {
 
         dataObserver();
 
-        homeViewModel.fetchOrganisationList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
+        teacherListViewModel.fetchTeacherList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
 
         return view;
     }
 
     private void dataObserver() {
 
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        LiveData<String> message = homeViewModel.getMessage();
+        teacherListViewModel = ViewModelProviders.of(this).get(TeacherListViewModel.class);
+        LiveData<String> message = teacherListViewModel.getMessage();
 
         message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -96,7 +94,7 @@ public class TeacherListFragment extends Fragment {
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
                     default:
-                        new SnackBar(relativeLayout, "Please Try Again Later!1cb");
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
             }
         });
@@ -109,7 +107,7 @@ public class TeacherListFragment extends Fragment {
             public void onChanged(String s) {
                 switch (s) {
                     case "state_changed":
-                        homeViewModel.fetchOrganisationList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
+                        teacherListViewModel.fetchTeacherList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
                         break;
                     case "Invalid_orgCode":
                         progressDialog.dismiss();
@@ -131,7 +129,7 @@ public class TeacherListFragment extends Fragment {
     }
 
     private void fetchList() {
-        LiveData<ArrayList<Teachers>> list = homeViewModel.getList();
+        LiveData<ArrayList<Teachers>> list = teacherListViewModel.getList();
 
         list.observe(this, new Observer<ArrayList<Teachers>>() {
             @Override
@@ -169,19 +167,13 @@ public class TeacherListFragment extends Fragment {
 
     private void editTeacher() {
 
-        Toast.makeText(getContext(), teachersArrayList.get(positionOfTeacher).getTeacherClass().get(0).getTeacherClass()
-//                + teachersArrayList.get(positionOfTeacher).getTeacherClass().get(0).getTeacherClass() +
-//                teachersArrayList.get(positionOfTeacher).getTeacherClass().get(0).getTeachingSubjects().get(0).getSubject()
-                , Toast.LENGTH_LONG).show();
+        Bundle bundle = new Bundle();
 
-//        Bundle bundle = new Bundle();
-//
-//        String tc = teachersArrayList.toString();
-//        bundle.putString("teacherClasses", tc);
+        bundle.putString("teacherCode", teachersArrayList.get(positionOfTeacher).getTeacherCode());
 
-//        ManualTeacherRegisterFragment3 fragment = new ManualTeacherRegisterFragment3();
-//        fragment.setArguments(bundle);
-//        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
+        TeacherDetailsUpdateFragment fragment = new TeacherDetailsUpdateFragment();
+        fragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
     }
 
     private void statusChange() {

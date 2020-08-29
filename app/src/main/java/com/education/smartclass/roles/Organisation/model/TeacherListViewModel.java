@@ -13,12 +13,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeViewModel extends ViewModel {
+public class TeacherListViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Teachers>> list = new MutableLiveData<>();
 
-    public void fetchOrganisationList(String orgCode) {
+    public void fetchTeacherList(String orgCode) {
 
         Call<TeacherList> call = RetrofitClient.getInstance().getApi().showTeacherList("Organisation", orgCode);
         call.enqueue(new Callback<TeacherList>() {
