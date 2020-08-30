@@ -268,6 +268,7 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
     }
 
     private void dataObserver() {
+
         teacherRegisterManualViewModel = ViewModelProviders.of(this).get(TeacherRegisterManualViewModel.class);
         LiveData<String> message = teacherRegisterManualViewModel.getMessage();
 

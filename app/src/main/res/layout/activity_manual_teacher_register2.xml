@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
-        android:layout_marginHorizontal="50dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/inside_edittext_background"
@@ -81,36 +81,72 @@
             android:id="@+id/student_Class_Section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/className"
+            android:layout_below="@+id/className"
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <EditText
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <AutoCompleteTextView
                 android:id="@+id/student_Class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1"
                 android:background="@drawable/edittext_background"
+                android:enabled="false"
                 android:hint="Class"
-                android:inputType="text"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="8dp"
                 android:singleLine="true" />
 
-            <EditText
+            <ImageView
+                android:id="@+id/class_drop_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/student_Class"
+                android:layout_alignRight="@+id/student_Class"
+                android:layout_alignBottom="@+id/student_Class"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_drop_down" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <AutoCompleteTextView
                 android:id="@+id/student_Section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1"
                 android:background="@drawable/edittext_background"
+                android:enabled="false"
                 android:hint="Section"
                 android:inputType="text"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="8dp"
                 android:singleLine="true" />
+
+            <ImageView
+                android:id="@+id/section_drop_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/student_Section"
+                android:layout_alignRight="@+id/student_Section"
+                android:layout_alignBottom="@+id/student_Section"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_drop_down" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <EditText
