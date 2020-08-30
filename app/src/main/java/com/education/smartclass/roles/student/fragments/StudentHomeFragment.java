@@ -17,9 +17,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.education.smartclass.Adapter.StudentScheduleListAdapter;
 import com.education.smartclass.R;
+import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadStudentScheduleDetails;
 import com.education.smartclass.roles.student.model.ReadSchedulesViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -119,6 +121,20 @@ public class StudentHomeFragment extends Fragment {
                         if (studentScheduleListAdapter.getItemCount() == 0) {
                             no_data.setVisibility(View.VISIBLE);
                         }
+                    }
+                });
+
+                studentScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
+                    @Override
+                    public void onCardClick(View view, int position) {
+                    }
+
+                    @Override
+                    public void onItemClick(View view, int position) {
+                    }
+
+                    @Override
+                    public void onDrag(View view, int position) {
                     }
                 });
             }

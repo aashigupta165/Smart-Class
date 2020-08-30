@@ -23,6 +23,8 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
     public ImageView dragbtn;
 
     public interface OnItemClickListener {
+        void onCardClick(View view, int position);
+
         void onItemClick(View view, int position);
 
         void onDrag(View view, int position);
@@ -39,6 +41,18 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
         this.desc = itemView.findViewById(R.id.expandable_desc);
         desc.collapse();
         this.dragbtn = itemView.findViewById(R.id.dragbtn);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onCardClick(v, position);
+                    }
+                }
+            }
+        });
 
         optionMenu.setOnClickListener(new View.OnClickListener() {
             @Override

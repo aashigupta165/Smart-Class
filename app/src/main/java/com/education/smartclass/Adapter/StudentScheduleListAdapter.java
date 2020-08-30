@@ -27,6 +27,12 @@ public class StudentScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
 
     private ArrayList<ReadStudentScheduleDetails> filterList;
 
+    private ScheduleListHolder.OnItemClickListener mListener;
+
+    public void setOnItemClickListener(ScheduleListHolder.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     public StudentScheduleListAdapter(Context c, ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetails) {
         this.c = c;
         this.readStudentScheduleDetails = readStudentScheduleDetails;
@@ -37,7 +43,7 @@ public class StudentScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
     @Override
     public ScheduleListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.teacher_schedule_list_row, null);
-        return new ScheduleListHolder(view, null);
+        return new ScheduleListHolder(view, mListener);
     }
 
     @Override

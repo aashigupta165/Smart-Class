@@ -415,20 +415,29 @@ public class TeacherAddScheduleFragment extends Fragment {
             }
         });
 
-        builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Clear", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 for (int i = 0; i < checkedItems.length; i++) {
                     checkedItems[i] = false;
+                    studentDetailArrayList.clear();
                     studentItems.clear();
+                    select_students.setText("");
+                    select_students.setHint("Select Students");
                 }
+            }
+        });
+
+        builder.setNeutralButton("Select All", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                studentDetailArrayList.clear();
+                for (int i = 0; i < students.length; i++) {
+                    studentItems.add(i);
+                    studentDetailArrayList.add(i, name[i] + "_" + rollno[i] + "_" + email[i]);
+                    checkedItems[i] = true;
+                }
+                select_students.setText(studentItems.size() + " Students");
             }
         });
 

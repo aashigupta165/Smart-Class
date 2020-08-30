@@ -163,6 +163,11 @@ public class TeacherHomeFragment extends Fragment {
 
                 teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override
+                    public void onCardClick(View view, int position) {
+
+                    }
+
+                    @Override
                     public void onItemClick(View view, int position) {
                         showmenu(view, position);
                     }
