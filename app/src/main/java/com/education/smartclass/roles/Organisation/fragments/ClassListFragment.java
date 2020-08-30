@@ -2,6 +2,7 @@ package com.education.smartclass.roles.Organisation.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,10 +29,14 @@ import java.util.ArrayList;
 
 public class ClassListFragment extends Fragment {
 
+    private SearchView searchView;
     private TextView no_data;
     private RelativeLayout relativeLayout;
     private RecyclerView class_list;
+
     private ClassListViewModel classListViewModel;
+
+    private ClassListAdapter classListAdapter;
 
     private ProgressBar progressBar;
 
@@ -41,15 +47,35 @@ public class ClassListFragment extends Fragment {
         relativeLayout = view.findViewById(R.id.relativeLayout);
         class_list = view.findViewById(R.id.class_list);
         no_data = view.findViewById(R.id.no_data);
+        searchView = view.findViewById(R.id.search_bar);
 
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
         dataObserver();
+        serachAction();
 
         classListViewModel.fetchStudentList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Class");
 
         return view;
+    }
+
+    private void serachAction() {
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                classListAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void dataObserver() {
@@ -87,7 +113,7 @@ public class ClassListFragment extends Fragment {
                 linearLayoutManager.setReverseLayout(true);
                 linearLayoutManager.setStackFromEnd(true);
                 class_list.setLayoutManager(linearLayoutManager);
-                ClassListAdapter classListAdapter = new ClassListAdapter(getContext(), classLists);
+                classListAdapter = new ClassListAdapter(getContext(), classLists);
                 class_list.setAdapter(classListAdapter);
 
                 if (classListAdapter.getItemCount() == 0) {
