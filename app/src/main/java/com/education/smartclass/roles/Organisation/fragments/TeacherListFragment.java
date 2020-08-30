@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -33,12 +35,15 @@ import java.util.ArrayList;
 
 public class TeacherListFragment extends Fragment {
 
+    private SearchView searchView;
     private TextView no_data;
     private RelativeLayout relativeLayout;
     private RecyclerView teacher_list;
     private TeacherListViewModel teacherListViewModel;
 
     private ArrayList<Teachers> teachersArrayList;
+
+    private TeacherListAdapter teacherListAdapter;
 
     private ProgressBar progressBar;
 
@@ -57,6 +62,7 @@ public class TeacherListFragment extends Fragment {
         relativeLayout = view.findViewById(R.id.relativeLayout);
         teacher_list = view.findViewById(R.id.teacher_list);
         no_data = view.findViewById(R.id.no_data);
+        searchView = view.findViewById(R.id.search_bar);
 
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
@@ -64,10 +70,29 @@ public class TeacherListFragment extends Fragment {
         progressDialog = new ProgressDialog(getContext());
 
         dataObserver();
+        serachAction();
 
         teacherListViewModel.fetchTeacherList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode());
 
         return view;
+    }
+
+    private void serachAction() {
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                teacherListAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void dataObserver() {
@@ -141,7 +166,7 @@ public class TeacherListFragment extends Fragment {
                 linearLayoutManager.setReverseLayout(true);
                 linearLayoutManager.setStackFromEnd(true);
                 teacher_list.setLayoutManager(linearLayoutManager);
-                TeacherListAdapter teacherListAdapter = new TeacherListAdapter(getContext(), teachers);
+                teacherListAdapter = new TeacherListAdapter(getContext(), teachers);
                 teacher_list.setAdapter(teacherListAdapter);
 
                 if (teacherListAdapter.getItemCount() == 0) {

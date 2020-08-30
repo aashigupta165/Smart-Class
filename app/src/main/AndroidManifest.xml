@@ -15,7 +15,9 @@
         <activity android:name=".roles.student.activities.StudentActivity"></activity>
         <activity android:name=".roles.teacher.activities.TeacherActivity" />
         <activity android:name=".roles.admin.activities.AdminHomeActivity" />
-        <activity android:name=".roles.Organisation.activities.OrganisationActivity" />
+        <activity
+            android:name=".roles.Organisation.activities.OrganisationActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".roles.login.activities.ResetPasswordActivity" />
         <activity android:name=".roles.login.activities.OtpActivity" />
         <activity android:name=".roles.login.activities.ForgotPasswordActivity" />
