@@ -158,6 +158,7 @@ public interface Api {
             @Field("subjectScheduled") String subjectScheduled,
             @Field("scheduleDate") String scheduleDate,
             @Field("scheduleTime") String scheduleTime,
+            @Field("description") String description,
             @Field("selectedStudents") ArrayList<String> selectedStudents
     );
 

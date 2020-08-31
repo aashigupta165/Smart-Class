@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -46,6 +47,7 @@ public class TeacherAddScheduleFragment extends Fragment {
     private AutoCompleteTextView subject, className, section;
     private ImageView subjectDropdown, classDropdown, sectionDropdown;
     private TextView date, time, select_students, submitbtn;
+    private EditText description;
     private RadioGroup topic;
     private RadioButton radioButton, subjectradiobtn;
 
@@ -87,6 +89,7 @@ public class TeacherAddScheduleFragment extends Fragment {
         topic = view.findViewById(R.id.topic);
         subjectradiobtn = view.findViewById(R.id.subjectbtn);
         select_students = view.findViewById(R.id.student_selection);
+        description = view.findViewById(R.id.description);
         submitbtn = view.findViewById(R.id.submitbtn);
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
@@ -467,6 +470,6 @@ public class TeacherAddScheduleFragment extends Fragment {
         String teacherCode = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode();
 
         scheduleAddViewModel.scheduleCreate(orgCode, teacherCode, className.getText().toString(), section.getText().toString(), topicOptionSelected,
-                subject.getText().toString(), date.getText().toString(), time.getText().toString(), studentDetailArrayList);
+                subject.getText().toString(), date.getText().toString(), time.getText().toString(), description.getText().toString(), studentDetailArrayList);
     }
 }

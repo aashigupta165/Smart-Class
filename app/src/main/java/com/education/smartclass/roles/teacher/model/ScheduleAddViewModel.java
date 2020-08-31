@@ -17,10 +17,10 @@ public class ScheduleAddViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
 
     public void scheduleCreate(String orgCode, String teacherCode, String className, String section, String topic, String subject, String date, String time,
-                               ArrayList<String> students) {
+                               String description, ArrayList<String> students) {
 
         Call<MessageResponse> call = RetrofitClient.getInstance().getApi().createSchedule(orgCode, teacherCode, className, section, topic,
-                subject, date, time, students);
+                subject, date, time, description, students);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

@@ -58,6 +58,11 @@ public class StudentScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
         scheduleListHolder.standard.setText(readStudentScheduleDetails.get(position).getTeacherName());
         scheduleListHolder.standard.setTextColor(c.getResources().getColor(R.color.colorPrimaryDark));
         scheduleListHolder.optionMenu.setVisibility(View.GONE);
+        if (readStudentScheduleDetails.get(position).getScheduleDescription().equals("")) {
+            scheduleListHolder.desc_card.setVisibility(View.GONE);
+        } else {
+            scheduleListHolder.description.setText(readStudentScheduleDetails.get(position).getScheduleDescription());
+        }
     }
 
     @Override

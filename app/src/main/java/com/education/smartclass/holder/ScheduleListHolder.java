@@ -1,9 +1,9 @@
 package com.education.smartclass.holder;
 
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +19,9 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
     public TextView count;
     public TextView standard;
     public TextView optionMenu;
-    public ExpandableRelativeLayout desc;
+    public RelativeLayout desc_card;
+    public ExpandableRelativeLayout desc_layout;
+    public TextView description;
     public ImageView dragbtn;
 
     public interface OnItemClickListener {
@@ -38,8 +40,10 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
         this.count = itemView.findViewById(R.id.count);
         this.standard = itemView.findViewById(R.id.standard);
         this.optionMenu = itemView.findViewById(R.id.optionMenu);
-        this.desc = itemView.findViewById(R.id.expandable_desc);
-        desc.collapse();
+        this.desc_card = itemView.findViewById(R.id.desc_card);
+        this.desc_layout = itemView.findViewById(R.id.expandable_desc);
+        desc_layout.collapse();
+        this.description = itemView.findViewById(R.id.desc);
         this.dragbtn = itemView.findViewById(R.id.dragbtn);
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +77,7 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         listener.onDrag(v, position);
-                        desc.toggle();
+                        desc_layout.toggle();
                     }
                 }
                 return true;

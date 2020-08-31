@@ -55,7 +55,7 @@
                 android:text="Lecture:Time(Date)"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,6 +90,7 @@
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
+        android:id="@+id/desc_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/card"
@@ -98,12 +99,6 @@
         android:background="@drawable/description_background"
         android:paddingHorizontal="10dp"
         android:paddingTop="10dp">
-
-<!--        <TextView-->
-<!--            android:id="@+id/short_desc"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="This is a description" />-->
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
             android:id="@+id/expandable_desc"
@@ -115,9 +110,10 @@
             app:ael_orientation="vertical">
 
             <TextView
-                android:id="@+id/long_desc"
+                android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoLink="web"
                 android:lineSpacingExtra="2dp"
                 android:text="njvcgvgvbg hjbhvgv hbvgfcgfhbjbh bhvbgcvgfcgbhjgcgvghbbbhvvghvgcghvbhbhbbhbbhbhvvhvhhvgggvvvhvv vgnbgv vhhbhvb hhvhh hhvv" />
 

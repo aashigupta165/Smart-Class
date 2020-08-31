@@ -56,6 +56,11 @@ public class TeacherScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
         scheduleListHolder.time.setText("Lecture: " + readTeacherScheduleDetails.get(position).getScheduleTime() + "(" + readTeacherScheduleDetails.get(position).getScheduleDate() + ")");
         scheduleListHolder.count.setText(readTeacherScheduleDetails.get(position).getStudentCount() + " Students");
         scheduleListHolder.standard.setText("STD: " + readTeacherScheduleDetails.get(position).getScheduledClass() + " " + readTeacherScheduleDetails.get(position).getScheduledSection());
+        if (readTeacherScheduleDetails.get(position).getScheduleDescription().equals("")){
+            scheduleListHolder.desc_card.setVisibility(View.GONE);
+        }else{
+            scheduleListHolder.description.setText(readTeacherScheduleDetails.get(position).getScheduleDescription());
+        }
     }
 
     @Override

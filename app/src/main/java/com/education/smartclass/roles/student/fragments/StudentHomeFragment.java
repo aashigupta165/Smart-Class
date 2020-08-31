@@ -100,9 +100,10 @@ public class StudentHomeFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetails) {
 
-                readStudentScheduleDetails = readStudentScheduleDetails;
-
-                schedule_list.setLayoutManager(new LinearLayoutManager(getContext()));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                schedule_list.setLayoutManager(linearLayoutManager);
                 studentScheduleListAdapter = new StudentScheduleListAdapter(getContext(), readStudentScheduleDetails);
                 studentScheduleListAdapter.getFilter().filter("filter1");
 
