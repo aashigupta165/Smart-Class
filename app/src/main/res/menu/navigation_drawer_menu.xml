@@ -13,6 +13,11 @@
             android:icon="@drawable/ic_profile"
             android:title="@string/profile" />
         <item
+            android:id="@+id/existing_users"
+            android:icon="@drawable/ic_registered"
+            android:title="Registered Users"
+            android:visible="false" />
+        <item
             android:id="@+id/teacher"
             android:icon="@drawable/ic_teacher"
             android:title="@string/teacher"
@@ -30,13 +35,12 @@
         <item
             android:id="@+id/new_schedule"
             android:icon="@drawable/ic_add_new_schedule"
-            android:title="Add Class"
+            android:title="Arrange Meeting"
             android:visible="false" />
         <item
             android:id="@+id/schedule"
             android:icon="@drawable/ic_schedule"
-            android:title="Schedule"
-            android:visible="false" />
+            android:title="Schedule" />
         <item
             android:id="@+id/new_question"
             android:icon="@drawable/ic_add_new_question"

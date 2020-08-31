@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.Organisation.fragments.OrganisationScheduleFragment;
 import com.education.smartclass.roles.student.fragments.StudentScheduleFragment;
 import com.education.smartclass.roles.teacher.fragments.TeacherScheduleFragment;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -22,6 +23,10 @@ public class ScheduleSelectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.transaction_fragment, container, false);
 
         switch (SharedPrefManager.getInstance(getContext()).getUser().getRole()) {
+            case "Organisation":
+                OrganisationScheduleFragment organisationScheduleFragment = new OrganisationScheduleFragment();
+                getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, organisationScheduleFragment).commit();
+                break;
             case "Teacher":
                 TeacherScheduleFragment teacherScheduleFragment = new TeacherScheduleFragment();
                 getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, teacherScheduleFragment).commit();

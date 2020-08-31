@@ -14,6 +14,10 @@
         android:name="com.education.smartclass.roles.common.fragments.ProfileSelectionFragment" />
 
     <fragment
+        android:id="@+id/existing_users"
+        android:name="com.education.smartclass.roles.Organisation.fragments.BottomNavigationSelector" />
+
+    <fragment
         android:id="@+id/teacher"
         android:name="com.education.smartclass.roles.Organisation.fragments.TeacherFragment" />
 
@@ -35,7 +39,7 @@
 
     <fragment
         android:id="@+id/new_schedule"
-        android:name="com.education.smartclass.roles.teacher.fragments.TeacherAddScheduleFragment" />
+        android:name="com.education.smartclass.roles.common.fragments.AddScheduleSelectionFragment" />
 
     <fragment
         android:id="@+id/new_question"

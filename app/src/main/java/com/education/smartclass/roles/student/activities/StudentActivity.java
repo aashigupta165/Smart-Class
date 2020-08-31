@@ -45,11 +45,9 @@ public class StudentActivity extends AppCompatActivity {
 
         Menu menu = navigationView.getMenu();
 
-        MenuItem schedule = menu.findItem(R.id.schedule);
         MenuItem questionare = menu.findItem(R.id.questionaire);
         MenuItem addquestion = menu.findItem(R.id.new_question);
 
-        schedule.setVisible(true);
         questionare.setVisible(true);
         addquestion.setVisible(true);
 

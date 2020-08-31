@@ -39,13 +39,17 @@ public class OrganisationActivity extends AppCompatActivity {
 
         Menu menu = navigationView.getMenu();
 
+        MenuItem existing_users = menu.findItem(R.id.existing_users);
         MenuItem teacher = menu.findItem(R.id.teacher);
         MenuItem student = menu.findItem(R.id.student);
         MenuItem classes = menu.findItem(R.id.classes);
+        MenuItem addSchedule = menu.findItem(R.id.new_schedule);
 
+        existing_users.setVisible(true);
         teacher.setVisible(true);
         student.setVisible(true);
         classes.setVisible(true);
+        addSchedule.setVisible(true);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
