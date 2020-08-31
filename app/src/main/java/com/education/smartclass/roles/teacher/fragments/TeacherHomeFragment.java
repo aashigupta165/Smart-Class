@@ -31,7 +31,6 @@ import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.util.ArrayList;
 
@@ -77,8 +76,12 @@ public class TeacherHomeFragment extends Fragment {
 
         dataObserver();
 
-        readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
-                SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Teacher",
+                    SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
+        }else {
+            readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Organisation", "");
+        }
 
         return view;
     }
@@ -259,6 +262,10 @@ public class TeacherHomeFragment extends Fragment {
 
         positionDelete = position;
 
-        scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        }else {
+            scheduleDeleteViewModel.delete(orgCode, "Organisation", readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        }
     }
 }

@@ -1,14 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".roles.Organisation.fragments.OrganisationAddScheduleFragment">
+    android:background="@color/white"
+    tools:context=".roles.admin.activities.RegisterNewOrgActivity1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Create Schedule"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/heading"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/dots" />
+
+            <RelativeLayout
+                android:id="@+id/input_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/heading"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/inside_edittext_background"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="30dp">
+
+                <LinearLayout
+                    android:id="@+id/selection_bunch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/selection_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Students: "
+                        android:textSize="20sp" />
+
+                    <RadioGroup
+                        android:id="@+id/selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/selection_heading"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/allbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All"
+                            android:textColor="@color/grey" />
+
+                        <RadioButton
+                            android:id="@+id/somebtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:checked="true"
+                            android:text="Selected"
+                            android:textColor="@color/grey" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/student_Class_Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selection_bunch"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/student_Class"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittext_background"
+                            android:enabled="false"
+                            android:hint="Class"
+                            android:inputType="text"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="8dp"
+                            android:singleLine="true" />
+
+                        <ImageView
+                            android:id="@+id/class_drop_down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/student_Class"
+                            android:layout_alignRight="@+id/student_Class"
+                            android:layout_alignBottom="@+id/student_Class"
+                            android:layout_marginRight="10dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_drop_down" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/student_Section"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_background"
+                            android:enabled="false"
+                            android:hint="Section"
+                            android:inputType="text"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="8dp"
+                            android:singleLine="true" />
+
+                        <ImageView
+                            android:id="@+id/section_drop_down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/student_Section"
+                            android:layout_alignRight="@+id/student_Section"
+                            android:layout_alignBottom="@+id/student_Section"
+                            android:layout_marginRight="10dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_drop_down" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/student_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/student_Class_Section"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:hint="Select Students"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/student_selection"
+                    android:background="@drawable/edittext_background"
+                    android:hint="Date"
+                    android:inputType="text"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/date"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:hint="Time"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/time"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:hint="Description(Optional)"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/submitbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_form"
+                android:layout_alignRight="@+id/input_form"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_background"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="5dp"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

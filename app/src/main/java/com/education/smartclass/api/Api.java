@@ -163,6 +163,21 @@ public interface Api {
     );
 
     @FormUrlEncoded
+    @POST("schedule/create")
+    Call<MessageResponse> createScheduleOrganisation(
+            @Field("orgCode") String ordCode,
+            @Field("teacherCode") String teacherCode,
+            @Field("classScheduled") String classScheduled,
+            @Field("sectionScheduled") String sectionScheduled,
+            @Field("topicScheduled") String topicScheduled,
+            @Field("studentCount") String studentCount,
+            @Field("scheduleDate") String scheduleDate,
+            @Field("scheduleTime") String scheduleTime,
+            @Field("description") String description,
+            @Field("selectedStudents") ArrayList<String> selectedStudents
+    );
+
+    @FormUrlEncoded
     @POST("schedule/read")
     Call<TeacherScheduleResponse> readTeacherSchedule(
             @Field("orgCode") String orgCode,

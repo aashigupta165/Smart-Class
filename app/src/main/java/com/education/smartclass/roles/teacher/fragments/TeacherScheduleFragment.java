@@ -75,8 +75,12 @@ public class TeacherScheduleFragment extends Fragment {
         dataObserver();
         buttonClickEvents();
 
-        readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
-                SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Teacher",
+                    SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
+        }else {
+            readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Organisation", "");
+        }
 
         return view;
     }
@@ -266,7 +270,11 @@ public class TeacherScheduleFragment extends Fragment {
 
         positionDelete = position;
 
-        scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        }else{
+            scheduleDeleteViewModel.delete(orgCode, "Organisation", readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
+        }
     }
 
     private void filterSelectionOptions(View v) {

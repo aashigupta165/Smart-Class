@@ -172,6 +172,10 @@ public class ScheduleUpdateFragment extends Fragment {
         String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
         String teacherCode = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode();
 
-        scheduleUpdateViewModel.update(orgCode, teacherCode, bundleId, date.getText().toString(), time.getText().toString());
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            scheduleUpdateViewModel.update(orgCode, teacherCode, bundleId, date.getText().toString(), time.getText().toString());
+        } else {
+            scheduleUpdateViewModel.update(orgCode, "Organisation", bundleId, date.getText().toString(), time.getText().toString());
+        }
     }
 }

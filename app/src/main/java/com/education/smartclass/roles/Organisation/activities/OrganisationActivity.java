@@ -60,7 +60,7 @@ public class OrganisationActivity extends AppCompatActivity {
         toggle.syncState();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.home, R.id.profile, R.id.teacher, R.id.classes, R.id.student, R.id.logout)
+                R.id.home, R.id.profile, R.id.existing_users, R.id.teacher, R.id.classes, R.id.student, R.id.new_schedule, R.id.schedule)
                 .setDrawerLayout(drawerLayout)
                 .build();
 

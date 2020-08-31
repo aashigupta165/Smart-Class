@@ -18,9 +18,9 @@ public class ReadSchedulesViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<ArrayList<ReadTeacherScheduleDetails>> list = new MutableLiveData<>();
 
-    public void fetchScheduleList(String orgCode, String teacherCode) {
+    public void fetchScheduleList(String orgCode, String role, String teacherCode) {
 
-        Call<TeacherScheduleResponse> call = RetrofitClient.getInstance().getApi().readTeacherSchedule(orgCode, "Teacher", teacherCode);
+        Call<TeacherScheduleResponse> call = RetrofitClient.getInstance().getApi().readTeacherSchedule(orgCode, role, teacherCode);
         call.enqueue(new Callback<TeacherScheduleResponse>() {
             @Override
             public void onResponse(Call<TeacherScheduleResponse> call, Response<TeacherScheduleResponse> response) {
