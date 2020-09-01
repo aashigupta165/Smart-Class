@@ -75,7 +75,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
     private final int hour = calendar.get(Calendar.HOUR_OF_DAY);
     private final int minute = calendar.get(Calendar.MINUTE);
 
-    private String radioSelected = "0";
+    private String radioSelected = "Selected";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 radioButton = view.findViewById(checkedId);
 
                 if (radioButton.getText().toString().equals("All")) {
-                    radioSelected = "1";
+                    radioSelected = "All";
                     className.setVisibility(View.GONE);
                     section.setVisibility(View.GONE);
                     classDropdown.setVisibility(View.GONE);
@@ -122,7 +122,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     className.setText("");
                     section.setText("");
                 } else {
-                    radioSelected = "0";
+                    radioSelected = "Selected";
                     fetchData();
                     className.setVisibility(View.VISIBLE);
                     section.setVisibility(View.VISIBLE);
@@ -185,13 +185,16 @@ public class OrganisationAddScheduleFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (className.getText().toString().equals("") || section.getText().toString().equals("")){
-                    new SnackBar(relativeLayout, "Please Fill Above details");
-                    return;
-                }
-                String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+                if (radioSelected.equals("Selected")){
+                    if (className.getText().toString().equals("") || section.getText().toString().equals("")){
+                        new SnackBar(relativeLayout, "Please Fill Above details");
+                        return;
+                    }
+                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
 
-                fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
+                    fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
+                }
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,
                         year, month, day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -439,7 +442,13 @@ public class OrganisationAddScheduleFragment extends Fragment {
 
         String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
 
+        String ans = "0";
+
+        if(radioSelected.equals("All")){
+            ans = "1";
+        }
+
         scheduleCreateViewModel.scheduleCreate(orgCode, "Organisation", className.getText().toString(), section.getText().toString(), "Other",
-                radioSelected, date.getText().toString(), time.getText().toString(), description.getText().toString(), studentDetailArrayList);
+                ans, date.getText().toString(), time.getText().toString(), description.getText().toString(), studentDetailArrayList);
     }
 }
