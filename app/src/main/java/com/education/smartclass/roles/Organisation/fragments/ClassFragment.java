@@ -107,7 +107,7 @@ public class ClassFragment extends Fragment {
                 new SnackBar(relativeLayout, "Please upload csv file!");
                 return;
             }
-            
+
             try {
                 list = new ArrayList<>();
 

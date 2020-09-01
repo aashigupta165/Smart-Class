@@ -17,6 +17,7 @@
         <activity android:name=".roles.admin.activities.AdminHomeActivity" />
         <activity
             android:name=".roles.Organisation.activities.OrganisationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".roles.login.activities.ResetPasswordActivity" />
         <activity android:name=".roles.login.activities.OtpActivity" />

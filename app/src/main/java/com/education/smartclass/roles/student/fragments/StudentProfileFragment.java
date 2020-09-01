@@ -132,9 +132,11 @@ public class StudentProfileFragment extends Fragment {
             public void onChanged(ArrayList<String> subjects) {
                 String Subjects = "";
                 for (String sub : subjects) {
-                    Subjects += sub + ", ";
+                    if (!sub.equals("")) {
+                        Subjects += sub + ", ";
+                    }
                 }
-                Subjects = Subjects.substring(0, Subjects.length() - 4);
+                Subjects = Subjects.substring(0, Subjects.length() - 2);
                 subjectsList.setText(Subjects);
             }
         });

@@ -37,7 +37,9 @@ public class TeacherClassListAdapter extends RecyclerView.Adapter<TeacherClassLi
         teacherClassListHolder.className.setText(studentList.get(position).getTeacherClass() + " " + studentList.get(position).getTeacherSection());
         String teacherSubjects = "";
         for (TeacherSubjects sub : studentList.get(position).getTeachingSubjects()) {
-            teacherSubjects += sub.getSubject() + ", ";
+            if (!sub.getSubject().equals("")) {
+                teacherSubjects += sub.getSubject() + ", ";
+            }
         }
         teacherSubjects = teacherSubjects.substring(0, teacherSubjects.length() - 2);
         teacherClassListHolder.subject.setText(teacherSubjects);

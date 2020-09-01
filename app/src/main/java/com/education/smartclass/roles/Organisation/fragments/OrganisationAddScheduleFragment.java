@@ -409,6 +409,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
         builder.setNeutralButton("Select All", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                studentItems.clear();
                 studentDetailArrayList.clear();
                 for (int i = 0; i < students.length; i++) {
                     studentItems.add(i);

@@ -43,9 +43,11 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListHolder> impl
         holder.class_section.setText(classLists.get(position).getOrgClass() + "-" + classLists.get(position).getOrgSection());
         String orgSubjects = "";
         for (OrgSubjects sub : classLists.get(position).getOrgSubjects()) {
-            orgSubjects += sub.getSubject() + ", ";
+            if (!sub.getSubject().equals("")) {
+                orgSubjects += sub.getSubject() + ", ";
+            }
         }
-        orgSubjects = orgSubjects.substring(0, orgSubjects.length() - 4);
+        orgSubjects = orgSubjects.substring(0, orgSubjects.length() - 2);
         holder.subject.setText(orgSubjects);
     }
 
