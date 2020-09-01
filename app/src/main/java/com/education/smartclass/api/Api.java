@@ -337,4 +337,11 @@ public interface Api {
             @Field("orgCode") String orgCode,
             @Field("need") String need
     );
+
+    @FormUrlEncoded
+    @POST("schedule/student/list")
+    Call<StudentList> showStudentListOfSchedule(
+            @Field("orgCode") String orgCode,
+            @Field("scheduleId") String scheduleId
+    );
 }

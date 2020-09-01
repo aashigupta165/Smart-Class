@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
@@ -14,6 +15,7 @@ import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 public class ScheduleListHolder extends RecyclerView.ViewHolder {
 
+    public CardView cardView;
     public TextView subject;
     public TextView time;
     public TextView count;
@@ -35,6 +37,7 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
     public ScheduleListHolder(@NonNull View itemView, final OnItemClickListener listener) {
         super(itemView);
 
+        this.cardView = itemView.findViewById(R.id.card);
         this.subject = itemView.findViewById(R.id.subject);
         this.time = itemView.findViewById(R.id.time);
         this.count = itemView.findViewById(R.id.count);
@@ -46,7 +49,7 @@ public class ScheduleListHolder extends RecyclerView.ViewHolder {
         this.description = itemView.findViewById(R.id.desc);
         this.dragbtn = itemView.findViewById(R.id.dragbtn);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {

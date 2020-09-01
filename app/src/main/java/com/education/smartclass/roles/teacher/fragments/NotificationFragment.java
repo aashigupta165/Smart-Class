@@ -69,9 +69,12 @@ public class NotificationFragment extends Fragment {
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
-        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+        if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Organisation")) {
             teacherDataObserver();
-            teacherNotificationViewModel.fetchNotifications(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
+            teacherNotificationViewModel.fetchNotifications(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Organisation", "");
+        } else if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
+            teacherDataObserver();
+            teacherNotificationViewModel.fetchNotifications(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Teacher",
                     SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
         } else {
             studentDataObserver();
@@ -109,7 +112,7 @@ public class NotificationFragment extends Fragment {
         });
     }
 
-    private void studentDataObserver(){
+    private void studentDataObserver() {
 
         studentNotificationViewModel = ViewModelProviders.of(this).get(StudentNotificationViewModel.class);
         LiveData<String> message = studentNotificationViewModel.getMessage();
@@ -153,7 +156,7 @@ public class NotificationFragment extends Fragment {
         });
     }
 
-    private void setStudentList(){
+    private void setStudentList() {
 
         LiveData<ArrayList<String>> list = studentNotificationViewModel.getList();
 

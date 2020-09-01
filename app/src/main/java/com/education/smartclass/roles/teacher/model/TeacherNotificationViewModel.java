@@ -18,9 +18,9 @@ public class TeacherNotificationViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<ArrayList<String>> list = new MutableLiveData<>();
 
-    public void fetchNotifications(String orgCode, String teacherCode) {
+    public void fetchNotifications(String orgCode, String role, String teacherCode) {
 
-        Call<FetchSubjectList> call = RetrofitClient.getInstance().getApi().notificationTeacher(orgCode, "Teacher", teacherCode);
+        Call<FetchSubjectList> call = RetrofitClient.getInstance().getApi().notificationTeacher(orgCode, role, teacherCode);
         call.enqueue(new Callback<FetchSubjectList>() {
             @Override
             public void onResponse(Call<FetchSubjectList> call, Response<FetchSubjectList> response) {

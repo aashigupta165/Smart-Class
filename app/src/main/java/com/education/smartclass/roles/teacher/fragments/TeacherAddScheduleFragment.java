@@ -118,6 +118,8 @@ public class TeacherAddScheduleFragment extends Fragment {
                 section.setText("");
                 subject.setText("");
                 subjectradiobtn.setChecked(true);
+                select_students.setText("");
+                select_students.setHint("Select Students");
             }
         });
 
@@ -142,6 +144,8 @@ public class TeacherAddScheduleFragment extends Fragment {
                     section.showDropDown();
                     subject.setText("");
                     subjectradiobtn.setChecked(true);
+                    select_students.setText("");
+                    select_students.setHint("Select Students");
                 }
             }
         });

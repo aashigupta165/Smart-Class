@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
+import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.Logout;
 import com.google.android.material.navigation.NavigationView;
 
@@ -81,16 +83,17 @@ public class OrganisationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.add);
-        menuItem.setVisible(false);
-        menuItem = menu.findItem(R.id.notification);
-        menuItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.notification:
+                SharedPrefManager.getInstance(getApplicationContext()).setBadgeCount(false);
+                NotificationFragment fragment = new NotificationFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
+                break;
             case R.id.refresh:
                 finish();
                 startActivity(getIntent());

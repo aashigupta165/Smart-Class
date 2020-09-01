@@ -9,13 +9,14 @@ public class ReadTeacherScheduleDetails {
     private String subjectScheduled;
     private String scheduleDate;
     private String scheduleTime;
+    private String studentALL;
     private String studentCount;
     private String scheduleDescription;
 
     public ReadTeacherScheduleDetails() {
     }
 
-    public ReadTeacherScheduleDetails(String scheduleId, String scheduledClass, String scheduledSection, String topicScheduled, String subjectScheduled, String scheduleDate, String scheduleTime, String studentCount, String scheduleDescription) {
+    public ReadTeacherScheduleDetails(String scheduleId, String scheduledClass, String scheduledSection, String topicScheduled, String subjectScheduled, String scheduleDate, String scheduleTime, String studentALL, String studentCount, String scheduleDescription) {
         this.scheduleId = scheduleId;
         this.scheduledClass = scheduledClass;
         this.scheduledSection = scheduledSection;
@@ -23,6 +24,7 @@ public class ReadTeacherScheduleDetails {
         this.subjectScheduled = subjectScheduled;
         this.scheduleDate = scheduleDate;
         this.scheduleTime = scheduleTime;
+        this.studentALL = studentALL;
         this.studentCount = studentCount;
         this.scheduleDescription = scheduleDescription;
     }
@@ -97,5 +99,13 @@ public class ReadTeacherScheduleDetails {
 
     public void setScheduleDescription(String scheduleDescription) {
         this.scheduleDescription = scheduleDescription;
+    }
+
+    public String getStudentALL() {
+        return studentALL;
+    }
+
+    public void setStudentALL(String studentALL) {
+        this.studentALL = studentALL;
     }
 }

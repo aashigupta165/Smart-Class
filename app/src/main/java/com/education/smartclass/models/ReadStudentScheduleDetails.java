@@ -1,9 +1,11 @@
 package com.education.smartclass.models;
 
 public class ReadStudentScheduleDetails {
-    
+
+    private String scheduleId;
     private String topicScheduled;
     private String subjectScheduled;
+    private String studentALL;
     private String scheduleDate;
     private String scheduleTime;
     private String studentCount;
@@ -13,9 +15,11 @@ public class ReadStudentScheduleDetails {
     public ReadStudentScheduleDetails() {
     }
 
-    public ReadStudentScheduleDetails(String topicScheduled, String subjectScheduled, String scheduleDate, String scheduleTime, String studentCount, String teacherName, String scheduleDescription) {
+    public ReadStudentScheduleDetails(String scheduleId, String topicScheduled, String subjectScheduled, String studentALL, String scheduleDate, String scheduleTime, String studentCount, String teacherName, String scheduleDescription) {
+        this.scheduleId = scheduleId;
         this.topicScheduled = topicScheduled;
         this.subjectScheduled = subjectScheduled;
+        this.studentALL = studentALL;
         this.scheduleDate = scheduleDate;
         this.scheduleTime = scheduleTime;
         this.studentCount = studentCount;
@@ -77,5 +81,21 @@ public class ReadStudentScheduleDetails {
 
     public void setScheduleDescription(String scheduleDescription) {
         this.scheduleDescription = scheduleDescription;
+    }
+
+    public String getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(String scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
+    public String getStudentALL() {
+        return studentALL;
+    }
+
+    public void setStudentALL(String studentALL) {
+        this.studentALL = studentALL;
     }
 }

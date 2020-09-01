@@ -82,8 +82,6 @@ public class TeacherActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.add);
-        menuItem.setVisible(false);
 
         Thread thread = new Thread() {
             @Override

@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -30,8 +31,10 @@ import com.education.smartclass.Adapter.TeacherScheduleListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadTeacherScheduleDetails;
+import com.education.smartclass.models.StudentDetail;
 import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
+import com.education.smartclass.roles.teacher.model.ScheduleStudentsViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -47,10 +50,12 @@ public class TeacherScheduleFragment extends Fragment {
     private ReadSchedulesViewModel readSchedulesViewModel;
 
     private ArrayList<ReadTeacherScheduleDetails> readTeacherScheduleDetailsArrayList;
+    private ArrayList<StudentDetail> studentDetailArrayList;
 
     private TeacherScheduleListAdapter teacherScheduleListAdapter;
 
     private ScheduleDeleteViewModel scheduleDeleteViewModel;
+    private ScheduleStudentsViewModel scheduleStudentsViewModel;
 
     private ProgressDialog progressDialog;
 
@@ -74,11 +79,12 @@ public class TeacherScheduleFragment extends Fragment {
 
         dataObserver();
         buttonClickEvents();
+        fetchStudentsList();
 
         if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
             readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Teacher",
                     SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
-        }else {
+        } else {
             readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Organisation", "");
         }
 
@@ -143,6 +149,28 @@ public class TeacherScheduleFragment extends Fragment {
                 }
             }
         });
+
+        scheduleStudentsViewModel = ViewModelProviders.of(this).get(ScheduleStudentsViewModel.class);
+        LiveData<String> msgs = scheduleStudentsViewModel.getMessage();
+
+        msgs.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "all_students_selected":
+                    case "list_found":
+                        break;
+                    case "Internet_Issue":
+                        progressDialog.dismiss();
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        progressDialog.dismiss();
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
+                }
+            }
+        });
     }
 
     private void fetchList() {
@@ -178,7 +206,7 @@ public class TeacherScheduleFragment extends Fragment {
                 teacherScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override
                     public void onCardClick(View view, int position) {
-
+                        showSelectedStudents(position);
                     }
 
                     @Override
@@ -192,6 +220,14 @@ public class TeacherScheduleFragment extends Fragment {
                 });
             }
         });
+    }
+
+    private void showSelectedStudents(int position) {
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        scheduleStudentsViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
     }
 
     private void showmenu(View view, int position) {
@@ -272,7 +308,7 @@ public class TeacherScheduleFragment extends Fragment {
 
         if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Teacher")) {
             scheduleDeleteViewModel.delete(orgCode, teacherCode, readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
-        }else{
+        } else {
             scheduleDeleteViewModel.delete(orgCode, "Organisation", readTeacherScheduleDetailsArrayList.get(position).getScheduleId());
         }
     }
@@ -325,5 +361,44 @@ public class TeacherScheduleFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener, year, month, day);
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
+    }
+
+    private void fetchStudentsList() {
+
+        LiveData<ArrayList<StudentDetail>> list = scheduleStudentsViewModel.getList();
+
+        list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
+            @Override
+            public void onChanged(ArrayList<StudentDetail> studentDetails) {
+
+                studentDetailArrayList = studentDetails;
+                showStudentsDialog();
+            }
+        });
+    }
+
+    private void showStudentsDialog() {
+
+        if (studentDetailArrayList == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage("All students have to attend the meeting.");
+            builder.setCancelable(true);
+            builder.show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Selected Students");
+
+            ArrayList<String> name = new ArrayList<>();
+            int i = 0;
+            for (StudentDetail s : studentDetailArrayList) {
+                name.add(i, s.getStudentName() + " (" + s.getStudentRollNo() + ")");
+                i++;
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, name);
+
+            builder.setAdapter(adapter, null);
+            builder.setCancelable(true);
+            builder.show();
+        }
     }
 }

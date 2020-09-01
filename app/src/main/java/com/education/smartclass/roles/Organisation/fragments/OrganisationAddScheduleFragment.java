@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
@@ -137,6 +138,8 @@ public class OrganisationAddScheduleFragment extends Fragment {
             public void onClick(View v) {
                 className.showDropDown();
                 section.setText("");
+                select_students.setText("");
+                select_students.setHint("Select Students");
             }
         });
 
@@ -147,10 +150,6 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     new SnackBar(relativeLayout, "Please Select Class!");
                     return;
                 } else {
-
-                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-                    fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
-
                     ArrayList<String> sections = new ArrayList<>();
                     int i = 0;
                     for (OrgClassList s : orgClassLists) {
@@ -163,6 +162,8 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, sections);
                     section.setAdapter(adapter);
                     section.showDropDown();
+                    select_students.setText("");
+                    select_students.setHint("Select Students");
                 }
             }
         });
@@ -183,6 +184,14 @@ public class OrganisationAddScheduleFragment extends Fragment {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (className.getText().toString().equals("") || section.getText().toString().equals("")){
+                    new SnackBar(relativeLayout, "Please Fill Above details");
+                    return;
+                }
+                String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+
+                fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,
                         year, month, day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -340,7 +349,6 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 rollno = new String[studentList.size()];
                 email = new String[studentList.size()];
 
-                Toast.makeText(getContext(), String.valueOf(studentList.size()),Toast.LENGTH_LONG).show();
                 int i = 0;
                 for (StudentDetail s : studentList) {
                     students[i] = s.getStudentName() + " (" + s.getStudentRollNo() + ")";

@@ -1,10 +1,12 @@
 package com.education.smartclass.roles.student.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -17,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,7 +30,9 @@ import com.education.smartclass.Adapter.StudentScheduleListAdapter;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadStudentScheduleDetails;
+import com.education.smartclass.models.StudentDetail;
 import com.education.smartclass.roles.student.model.ReadSchedulesViewModel;
+import com.education.smartclass.roles.teacher.model.ScheduleStudentsViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SnackBar;
 
@@ -42,9 +47,15 @@ public class StudentScheduleFragment extends Fragment {
     private RecyclerView schedule_list;
     private ReadSchedulesViewModel readSchedulesViewModel;
 
+    private ArrayList<StudentDetail> studentDetailArrayList;
+    private ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetailsArrayList;
+
     private StudentScheduleListAdapter studentScheduleListAdapter;
+    private ScheduleStudentsViewModel scheduleStudentsViewModel;
 
     private ProgressBar progressBar;
+
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,8 +69,11 @@ public class StudentScheduleFragment extends Fragment {
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
+        progressDialog = new ProgressDialog(getContext());
+
         dataObserver();
         buttonClickEvents();
+        fetchStudentsList();
 
         readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
                 SharedPrefManager.getInstance(getContext()).getUser().getStudentClass(), SharedPrefManager.getInstance(getContext()).getUser().getStudentSection(),
@@ -103,6 +117,28 @@ public class StudentScheduleFragment extends Fragment {
                 }
             }
         });
+
+        scheduleStudentsViewModel = ViewModelProviders.of(this).get(ScheduleStudentsViewModel.class);
+        LiveData<String> msgs = scheduleStudentsViewModel.getMessage();
+
+        msgs.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "all_students_selected":
+                    case "list_found":
+                        break;
+                    case "Internet_Issue":
+                        progressDialog.dismiss();
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    default:
+                        progressDialog.dismiss();
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
+                }
+            }
+        });
     }
 
     private void fetchList() {
@@ -112,6 +148,8 @@ public class StudentScheduleFragment extends Fragment {
         list.observe(this, new Observer<ArrayList<ReadStudentScheduleDetails>>() {
             @Override
             public void onChanged(ArrayList<ReadStudentScheduleDetails> readStudentScheduleDetails) {
+
+                readStudentScheduleDetailsArrayList = readStudentScheduleDetails;
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setReverseLayout(true);
@@ -137,7 +175,7 @@ public class StudentScheduleFragment extends Fragment {
                 studentScheduleListAdapter.setOnItemClickListener(new ScheduleListHolder.OnItemClickListener() {
                     @Override
                     public void onCardClick(View view, int position) {
-
+                        showSelectedStudents(position);
                     }
 
                     @Override
@@ -200,5 +238,52 @@ public class StudentScheduleFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener, year, month, day);
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
+    }
+
+    private void showSelectedStudents(int position) {
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        scheduleStudentsViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), readStudentScheduleDetailsArrayList.get(position).getScheduleId());
+    }
+
+    private void fetchStudentsList() {
+
+        LiveData<ArrayList<StudentDetail>> list = scheduleStudentsViewModel.getList();
+
+        list.observe(getViewLifecycleOwner(), new Observer<ArrayList<StudentDetail>>() {
+            @Override
+            public void onChanged(ArrayList<StudentDetail> studentDetails) {
+
+                studentDetailArrayList = studentDetails;
+                showStudentsDialog();
+            }
+        });
+    }
+
+    private void showStudentsDialog() {
+
+        if (studentDetailArrayList == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage("All students have to attend the meeting.");
+            builder.setCancelable(true);
+            builder.show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Selected Students");
+
+            ArrayList<String> name = new ArrayList<>();
+            int i = 0;
+            for (StudentDetail s : studentDetailArrayList) {
+                name.add(i, s.getStudentName() + " (" + s.getStudentRollNo() + ")");
+                i++;
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, name);
+
+            builder.setAdapter(adapter, null);
+            builder.setCancelable(true);
+            builder.show();
+        }
     }
 }
