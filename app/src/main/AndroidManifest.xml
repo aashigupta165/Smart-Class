@@ -12,8 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".roles.student.activities.StudentActivity"></activity>
-        <activity android:name=".roles.teacher.activities.TeacherActivity" />
+        <activity
+            android:name=".roles.student.activities.StudentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity
+            android:name=".roles.teacher.activities.TeacherActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".roles.admin.activities.AdminHomeActivity" />
         <activity
             android:name=".roles.Organisation.activities.OrganisationActivity"
