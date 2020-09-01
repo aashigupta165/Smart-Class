@@ -185,8 +185,8 @@ public class OrganisationAddScheduleFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (radioSelected.equals("Selected")){
-                    if (className.getText().toString().equals("") || section.getText().toString().equals("")){
+                if (radioSelected.equals("Selected")) {
+                    if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
                         new SnackBar(relativeLayout, "Please Fill Above details");
                         return;
                     }
@@ -307,7 +307,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
         progressDialog.setMessage("Data Searching...");
         progressDialog.show();
 
-        if (radioSelected.equals("0")) {
+        if (radioSelected.equals("Selected")) {
             classListViewModel.fetchStudentList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), "Class");
         }
     }
@@ -425,7 +425,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
 
     private void createSchedule() {
 
-        if (radioSelected.equals("0")) {
+        if (radioSelected.equals("Selected")) {
             if (className.getText().toString().equals("") || section.getText().toString().equals("") || studentDetailArrayList.size() == 0) {
                 new SnackBar(relativeLayout, "Please Enter All Details!");
                 return;
@@ -444,7 +444,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
 
         String ans = "0";
 
-        if(radioSelected.equals("All")){
+        if (radioSelected.equals("All")) {
             ans = "1";
         }
 

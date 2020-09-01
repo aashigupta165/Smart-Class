@@ -52,7 +52,6 @@
                     android:id="@+id/selection_bunch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -96,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selection_bunch"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -167,6 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/student_Class_Section"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/edittext_background"
                     android:hint="Date"
                     android:inputType="text"
@@ -189,17 +189,17 @@
                     android:textSize="18sp" />
 
                 <TextView
-                android:id="@+id/student_selection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/time"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background"
-                android:hint="Select Students"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="8dp"
-                android:singleLine="true"
-                android:textSize="18sp" />
+                    android:id="@+id/student_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/time"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:hint="Select Students"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/description"

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.ScheduleListHolder;
 import com.education.smartclass.models.ReadTeacherScheduleDetails;
+import com.education.smartclass.storage.SharedPrefManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,11 +56,13 @@ public class TeacherScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
         }
         scheduleListHolder.time.setText("Lecture: " + readTeacherScheduleDetails.get(position).getScheduleTime() + "(" + readTeacherScheduleDetails.get(position).getScheduleDate() + ")");
         scheduleListHolder.count.setText(readTeacherScheduleDetails.get(position).getStudentCount() + " Students");
-        if (readTeacherScheduleDetails.get(position).getStudentALL().equals("true")) {
-            scheduleListHolder.standard.setVisibility(View.GONE);
-        } else {
-            scheduleListHolder.standard.setText("STD: " + readTeacherScheduleDetails.get(position).getScheduledClass() + " " +
-                    readTeacherScheduleDetails.get(position).getScheduledSection());
+        if (SharedPrefManager.getInstance(c).getUser().getRole().equals("Organisation")) {
+            if (readTeacherScheduleDetails.get(position).getStudentALL().equals("true")) {
+                scheduleListHolder.standard.setVisibility(View.GONE);
+            } else {
+                scheduleListHolder.standard.setText("STD: " + readTeacherScheduleDetails.get(position).getScheduledClass() + " " +
+                        readTeacherScheduleDetails.get(position).getScheduledSection());
+            }
         }
         if (readTeacherScheduleDetails.get(position).getScheduleDescription().equals("")) {
             scheduleListHolder.desc_card.setVisibility(View.GONE);

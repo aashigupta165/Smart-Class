@@ -3,7 +3,9 @@ package com.education.smartclass.roles.Organisation.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,9 +18,11 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.TeacherCSVSampleData;
@@ -98,6 +102,15 @@ public class TeacherFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+
+            Uri uri = data.getData();
+            ContentResolver contentResolver = getContext().getContentResolver();
+            MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+            if (!mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)).equals("csv")) {
+                new SnackBar(relativeLayout, "Please upload csv file!");
+                return;
+            }
+
             try {
                 list = new ArrayList<>();
 
@@ -160,6 +173,11 @@ public class TeacherFragment extends Fragment {
     }
 
     private void registerTeachers() {
+
+        if (list == null) {
+            new SnackBar(relativeLayout, "Please upload file");
+            return;
+        }
 
         progressDialog.setMessage("Loading...");
         progressDialog.show();
