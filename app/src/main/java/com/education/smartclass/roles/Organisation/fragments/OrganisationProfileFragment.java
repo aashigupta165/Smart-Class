@@ -28,7 +28,7 @@ public class OrganisationProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_profile, container, false);
 
         orgLogo = view.findViewById(R.id.org_Logo);
         orgName = view.findViewById(R.id.org_Name);

@@ -41,7 +41,7 @@
         android:paddingVertical="30dp">
 
         <EditText
-            android:id="@+id/subject"
+            android:id="@+id/teacher_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
@@ -52,22 +52,23 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/className"
+            android:id="@+id/teacher_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/subject"
+            android:layout_below="@+id/teacher_name"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Age"
+            android:inputType="number"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/date"
+            android:id="@+id/teacher_designation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/className"
+            android:layout_below="@+id/teacher_age"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Designation"
@@ -80,7 +81,7 @@
             android:id="@+id/student_Class_Section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/className"
+            android:layout_below="@+id/teacher_designation"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -149,10 +150,10 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/Time"
+            android:id="@+id/teacher_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/date"
+            android:layout_below="@+id/teacher_designation"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Code"
@@ -164,7 +165,7 @@
             android:id="@+id/teacher_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Time"
+            android:layout_below="@+id/teacher_code"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
@@ -212,6 +213,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/small_wave_light" />
-
 
 </RelativeLayout>

@@ -27,7 +27,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.OrgClassList;
-import com.education.smartclass.models.TeacherClasses;
 import com.education.smartclass.roles.Organisation.model.ClassListViewModel;
 import com.education.smartclass.roles.Organisation.model.StudentRegisterManualViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -73,17 +72,17 @@ public class ManualStudentRegisterFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_manual_teacher_register2, container, false);
+        View view = inflater.inflate(R.layout.fragment_manual_teacher_register2, container, false);
 
         class_section = view.findViewById(R.id.student_Class_Section);
         class_section.setVisibility(View.VISIBLE);
-        studentName = view.findViewById(R.id.subject);
-        studentRollNo = view.findViewById(R.id.className);
-        teacherDesignation = view.findViewById(R.id.date);
+        studentName = view.findViewById(R.id.teacher_name);
+        studentRollNo = view.findViewById(R.id.teacher_age);
+        teacherDesignation = view.findViewById(R.id.teacher_designation);
         teacherDesignation.setVisibility(View.INVISIBLE);
         studentClass = view.findViewById(R.id.student_Class);
         studentSection = view.findViewById(R.id.student_Section);
-        studentFather = view.findViewById(R.id.Time);
+        studentFather = view.findViewById(R.id.teacher_code);
         studentGender = view.findViewById(R.id.teacher_gender);
         submitbtn = view.findViewById(R.id.nextbtn);
         heading = view.findViewById(R.id.heading);

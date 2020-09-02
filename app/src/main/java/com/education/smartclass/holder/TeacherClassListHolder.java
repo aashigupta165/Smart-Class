@@ -1,7 +1,6 @@
 package com.education.smartclass.holder;
 
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.education.smartclass.R;
 import com.education.smartclass.holder.StudentListHolder;
 import com.education.smartclass.models.StudentDetail;
-import com.education.smartclass.models.Teachers;
 
 import java.util.ArrayList;
 import java.util.List;

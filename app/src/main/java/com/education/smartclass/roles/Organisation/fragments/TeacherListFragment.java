@@ -57,7 +57,7 @@ public class TeacherListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_teacher_list, container, false);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
         teacher_list = view.findViewById(R.id.teacher_list);

@@ -48,7 +48,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/time"
@@ -61,7 +61,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -86,6 +86,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/small_wave_light" />
-
 
 </RelativeLayout>

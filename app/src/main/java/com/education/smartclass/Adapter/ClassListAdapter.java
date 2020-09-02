@@ -14,7 +14,6 @@ import com.education.smartclass.R;
 import com.education.smartclass.holder.ClassListHolder;
 import com.education.smartclass.models.OrgClassList;
 import com.education.smartclass.models.OrgSubjects;
-import com.education.smartclass.models.StudentDetail;
 
 import java.util.ArrayList;
 import java.util.List;

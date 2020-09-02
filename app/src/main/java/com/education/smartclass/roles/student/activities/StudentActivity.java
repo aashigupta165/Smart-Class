@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
-import com.education.smartclass.roles.teacher.activities.TeacherActivity;
 import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.BadgeDrawable;
@@ -34,7 +33,7 @@ public class StudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_home);
+        setContentView(R.layout.activity_teacher_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -22,7 +22,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.TeacherCSVSampleData;
@@ -50,7 +49,7 @@ public class TeacherFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_teacher, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_teacher_register, container, false);
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);

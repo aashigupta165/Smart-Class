@@ -1,7 +1,6 @@
 package com.education.smartclass.api;
 
 import com.education.smartclass.models.ClassCSVDataBody;
-import com.education.smartclass.models.OrgClassList;
 import com.education.smartclass.models.StudentCSVDataBody;
 import com.education.smartclass.models.TeacherCSVDataBody;
 import com.education.smartclass.response.ClassList;

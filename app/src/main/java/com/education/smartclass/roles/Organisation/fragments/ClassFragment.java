@@ -47,7 +47,7 @@ public class ClassFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_teacher, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_teacher_register, container, false);
 
         manual_entry = view.findViewById(R.id.manual_entry);
         heading = view.findViewById(R.id.heading);

@@ -133,5 +133,4 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/small_wave_light" />
 
-
 </RelativeLayout>

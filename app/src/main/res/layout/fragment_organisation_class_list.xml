@@ -25,45 +25,23 @@
         android:paddingHorizontal="16dp">
 
         <TextView
-            android:id="@+id/code_heading"
-            android:layout_width="60dp"
+            android:id="@+id/class_section"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:singleLine="true"
-            android:text="Code"
+            android:text="Class"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/name_heading"
-            android:layout_width="100dp"
+            android:id="@+id/subject_heading"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/code_heading"
+            android:layout_toRightOf="@+id/class_section"
             android:singleLine="true"
-            android:text="Name"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/name_heading"
-            android:singleLine="true"
-            android:text="Active"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/status"
-            android:singleLine="true"
-            android:text="Edit"
+            android:text="Subject"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
@@ -91,12 +69,10 @@
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/teacher_list"
+        android:id="@+id/class_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_marginTop="20dp" />
-
-    <!--    <include layout="@layout/bottom_nav" />-->
 
 </RelativeLayout>

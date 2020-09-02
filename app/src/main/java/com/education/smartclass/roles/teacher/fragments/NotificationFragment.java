@@ -14,17 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.education.smartclass.Adapter.NotificationsListAdapter;
-import com.education.smartclass.Adapter.TeacherScheduleListAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.holder.NotificationListHolder;
 import com.education.smartclass.roles.student.model.StudentNotificationViewModel;
 import com.education.smartclass.roles.teacher.model.TeacherNotificationViewModel;
 import com.education.smartclass.storage.SharedPrefManager;

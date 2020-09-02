@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.education.smartclass.api.RetrofitClient;
-import com.education.smartclass.models.TeacherClasses;
 import com.education.smartclass.response.FetchSubjectList;
 
 import java.util.ArrayList;

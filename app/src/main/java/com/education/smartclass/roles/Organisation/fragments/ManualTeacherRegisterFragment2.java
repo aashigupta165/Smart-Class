@@ -46,12 +46,12 @@ public class ManualTeacherRegisterFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_manual_teacher_register2, container, false);
+        View view = inflater.inflate(R.layout.fragment_manual_teacher_register2, container, false);
 
-        teacherName = view.findViewById(R.id.subject);
-        teacherAge = view.findViewById(R.id.className);
-        teacherDesignation = view.findViewById(R.id.date);
-        teacherCode = view.findViewById(R.id.Time);
+        teacherName = view.findViewById(R.id.teacher_name);
+        teacherAge = view.findViewById(R.id.teacher_age);
+        teacherDesignation = view.findViewById(R.id.teacher_designation);
+        teacherCode = view.findViewById(R.id.teacher_code);
         teacherGender = view.findViewById(R.id.teacher_gender);
         nextbtn = view.findViewById(R.id.nextbtn);
 

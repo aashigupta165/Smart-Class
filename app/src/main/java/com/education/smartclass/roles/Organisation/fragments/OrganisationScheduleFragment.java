@@ -15,7 +15,7 @@ public class OrganisationScheduleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_organisation_schedule, container, false);
+        View view = inflater.inflate(R.layout.transaction_fragment, container, false);
 
         TeacherScheduleFragment teacherScheduleFragment = new TeacherScheduleFragment();
         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, teacherScheduleFragment).commit();

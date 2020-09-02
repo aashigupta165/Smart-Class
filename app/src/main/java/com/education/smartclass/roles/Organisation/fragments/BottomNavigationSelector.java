@@ -22,7 +22,7 @@ public class BottomNavigationSelector extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.bottom_nav, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_bottom_nav, container, false);
 
         bottomNav = view.findViewById(R.id.bottom_nav);
 

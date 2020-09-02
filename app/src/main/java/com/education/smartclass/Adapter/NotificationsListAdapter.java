@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.holder.NotificationListHolder;
+
 import java.util.ArrayList;
 
 public class NotificationsListAdapter extends RecyclerView.Adapter<NotificationListHolder> {

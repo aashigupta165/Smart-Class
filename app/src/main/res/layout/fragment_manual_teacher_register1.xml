@@ -5,6 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".roles.admin.activities.RegisterNewOrgActivity1">
 
     <TextView
@@ -12,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Create Organisation"
+        android:layout_marginTop="10dp"
+        android:text="Create Teacher"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -40,64 +41,43 @@
         android:paddingVertical="30dp">
 
         <EditText
-            android:id="@+id/org_Name"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
-            android:hint="Org's Name"
-            android:inputType="text"
+            android:hint="Teacher Email"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/org_Code"
+            android:id="@+id/mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/org_Name"
+            android:layout_below="@+id/email"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
-            android:hint="Org's Code"
-            android:inputType="text"
+            android:hint="Teacher Mobile"
+            android:maxLength="10"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true" />
 
-        <AutoCompleteTextView
-            android:id="@+id/org_Type"
+        <TextView
+            android:id="@+id/dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/org_Code"
+            android:layout_below="@+id/mobile"
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
-            android:hint="Org's Type"
+            android:hint="DOB"
+            android:inputType="date"
+            android:maxLength="10"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
-            android:singleLine="true" />
-
-        <ImageView
-            android:id="@+id/dropdown_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/org_Type"
-            android:layout_alignRight="@+id/org_Type"
-            android:layout_alignBottom="@+id/org_Type"
-            android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_drop_down" />
-
-        <EditText
-            android:id="@+id/org_Address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/org_Type"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint="Org's Address"
-            android:inputType="text"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

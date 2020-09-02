@@ -22,7 +22,6 @@ import com.education.smartclass.roles.Organisation.activities.OrganisationActivi
 import com.education.smartclass.roles.student.activities.StudentActivity;
 import com.education.smartclass.roles.teacher.activities.TeacherActivity;
 import com.education.smartclass.storage.SharedPrefManager;
-import com.education.smartclass.utils.HideKeypad;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.regex.Pattern;

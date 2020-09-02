@@ -24,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.OrgClassList;
@@ -68,7 +67,7 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_manual_teacher_register3, container, false);
+        View view = inflater.inflate(R.layout.fragment_manual_teacher_register3, container, false);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
         classDetailsList = view.findViewById(R.id.class_details_list);
@@ -171,7 +170,7 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
 
     private void addView() {
 
-        View view = getLayoutInflater().inflate(R.layout.row_add_teach_details, null, false);
+        View view = getLayoutInflater().inflate(R.layout.add_teaching_details, null, false);
 
         ImageView imageClose = view.findViewById(R.id.remove_row);
 

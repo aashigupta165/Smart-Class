@@ -42,7 +42,7 @@ public class ClassListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_class_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_class_list, container, false);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
         class_list = view.findViewById(R.id.class_list);

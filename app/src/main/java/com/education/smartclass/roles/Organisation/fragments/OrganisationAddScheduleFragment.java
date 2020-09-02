@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
@@ -28,7 +27,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.OrgClassList;
@@ -127,6 +125,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     section.setVisibility(View.VISIBLE);
                     classDropdown.setVisibility(View.VISIBLE);
                     sectionDropdown.setVisibility(View.VISIBLE);
+                    select_students.setVisibility(View.VISIBLE);
                 }
             }
         });

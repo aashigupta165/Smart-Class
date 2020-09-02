@@ -57,7 +57,7 @@ public class ManualClassRegisterFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_manual_teacher_register3, container, false);
+        View view = inflater.inflate(R.layout.fragment_manual_teacher_register3, container, false);
 
         relativeLayout = view.findViewById(R.id.relativeLayout);
         subjectList = view.findViewById(R.id.class_details_list);
@@ -146,7 +146,7 @@ public class ManualClassRegisterFragment2 extends Fragment {
 
     private void addView() {
 
-        View view = getLayoutInflater().inflate(R.layout.subject_list_row, null, false);
+        View view = getLayoutInflater().inflate(R.layout.add_subjects, null, false);
 
         ImageView imageClose = view.findViewById(R.id.remove_row);
         TextView subject = view.findViewById(R.id.subject);
