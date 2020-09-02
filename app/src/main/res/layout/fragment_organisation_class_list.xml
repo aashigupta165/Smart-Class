@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/subject_heading"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/class_section"
