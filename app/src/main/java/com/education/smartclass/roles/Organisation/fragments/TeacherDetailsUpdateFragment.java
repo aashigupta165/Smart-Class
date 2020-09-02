@@ -293,7 +293,7 @@ public class TeacherDetailsUpdateFragment extends Fragment {
                 switch (s) {
                     case "teacher_updated":
                         new SnackBar(relativeLayout, "Teacher Updated");
-                        TeacherListFragment fragment = new TeacherListFragment();
+                        BottomNavigationSelector fragment = new BottomNavigationSelector();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         break;
                     case "invalid_data":
@@ -337,6 +337,9 @@ public class TeacherDetailsUpdateFragment extends Fragment {
                 switch (s) {
                     case "list_found":
                         fetchList();
+                        break;
+                    case "no_data":
+                        new SnackBar(relativeLayout, "Please register class!");
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");

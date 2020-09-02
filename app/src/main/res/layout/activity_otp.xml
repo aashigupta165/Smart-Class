@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativeLayout"
     tools:context=".roles.login.activities.LoginActivity">
 
     <TextView
@@ -18,13 +18,25 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/otp"
+    <TextView
+        android:id="@+id/message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Enter the OTP sent to"
+        android:textAlignment="center"
+        android:textColor="#828283"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/edittext_background"
         android:hint="Enter OTP"
         android:inputType="number"
@@ -42,8 +54,8 @@
         android:layout_marginRight="20dp"
         android:text="resend"
         android:textColor="@color/colorPrimaryDark"
-        android:textStyle="italic"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/verifybtn"

@@ -22,7 +22,7 @@ import com.education.smartclass.utils.SnackBar;
 
 public class OtpActivity extends AppCompatActivity {
 
-    private TextView verifybtn, resendbtn;
+    private TextView message, verifybtn, resendbtn;
     private EditText otp;
     private ProgressDialog progressDialog;
 
@@ -36,8 +36,11 @@ public class OtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
 
+        message = findViewById(R.id.message);
         otp = findViewById(R.id.otp);
         resendbtn = findViewById(R.id.resendbtn);
+
+        message.setText("Enter the OTP sent to " + getIntent().getStringExtra("email"));
 
         relativeLayout = findViewById(R.id.relativeLayout);
 
@@ -45,8 +48,6 @@ public class OtpActivity extends AppCompatActivity {
 
         DataObserver();
         ButtonClickEvents();
-
-        sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"));
     }
 
     private void ButtonClickEvents() {
@@ -81,7 +82,7 @@ public class OtpActivity extends AppCompatActivity {
                 progressDialog.setMessage("Resending...");
                 progressDialog.show();
 
-                sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"));
+                sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"), getIntent().getStringExtra("mobile"));
             }
         });
     }

@@ -308,6 +308,9 @@ public class ManualTeacherRegisterFragment3 extends Fragment {
                     case "list_found":
                         fetchList();
                         break;
+                    case "no_data":
+                        new SnackBar(relativeLayout, "Please register class!");
+                        break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;

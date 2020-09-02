@@ -149,6 +149,8 @@ public class ManualClassRegisterFragment2 extends Fragment {
         View view = getLayoutInflater().inflate(R.layout.subject_list_row, null, false);
 
         ImageView imageClose = view.findViewById(R.id.remove_row);
+        TextView subject = view.findViewById(R.id.subject);
+        subject.requestFocus();
 
         imageClose.setOnClickListener(new View.OnClickListener() {
             @Override

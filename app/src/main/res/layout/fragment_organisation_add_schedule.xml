@@ -162,10 +162,23 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/student_selection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/student_Class_Section"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:hint="Select Students"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/student_selection"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/edittext_background"
                     android:hint="Date"
@@ -188,27 +201,14 @@
                     android:singleLine="true"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/student_selection"
+                <EditText
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/time"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/edittext_background"
-                    android:hint="Select Students"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp"
-                    android:singleLine="true"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/student_selection"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/edittext_background"
-                    android:hint="Description(Optional)"
+                    android:hint="Description "
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="8dp"
                     android:textSize="18sp" />

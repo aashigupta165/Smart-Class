@@ -14,9 +14,9 @@ public class SendOtpViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void sendOtp(String email) {
+    public void sendOtp(String email, String mobile) {
 
-        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().otpSend(email);
+        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().otpSend(email, mobile);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

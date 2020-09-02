@@ -59,7 +59,6 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Teacher Age"
-            android:inputType="number"
             android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
             android:singleLine="true" />
@@ -90,28 +89,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-            <AutoCompleteTextView
-                android:id="@+id/student_Class"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background"
-                android:enabled="false"
-                android:hint="Class"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="8dp"
-                android:singleLine="true" />
+                <AutoCompleteTextView
+                    android:id="@+id/student_Class"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:enabled="false"
+                    android:hint="Class"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true" />
 
-            <ImageView
-                android:id="@+id/class_drop_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/student_Class"
-                android:layout_alignRight="@+id/student_Class"
-                android:layout_alignBottom="@+id/student_Class"
-                android:layout_marginRight="10dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_drop_down" />
+                <ImageView
+                    android:id="@+id/class_drop_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/student_Class"
+                    android:layout_alignRight="@+id/student_Class"
+                    android:layout_alignBottom="@+id/student_Class"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_drop_down" />
 
             </RelativeLayout>
 
@@ -120,30 +119,30 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-            <AutoCompleteTextView
-                android:id="@+id/student_Section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background"
-                android:enabled="false"
-                android:hint="Section"
-                android:inputType="text"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="8dp"
-                android:singleLine="true" />
+                <AutoCompleteTextView
+                    android:id="@+id/student_Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/edittext_background"
+                    android:enabled="false"
+                    android:hint="Section"
+                    android:inputType="text"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true" />
 
-            <ImageView
-                android:id="@+id/section_drop_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/student_Section"
-                android:layout_alignRight="@+id/student_Section"
-                android:layout_alignBottom="@+id/student_Section"
-                android:layout_marginRight="10dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_drop_down" />
+                <ImageView
+                    android:id="@+id/section_drop_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/student_Section"
+                    android:layout_alignRight="@+id/student_Section"
+                    android:layout_alignBottom="@+id/student_Section"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_drop_down" />
 
             </RelativeLayout>
 

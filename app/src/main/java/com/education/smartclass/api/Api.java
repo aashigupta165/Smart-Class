@@ -268,7 +268,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("user/sendOtp")
     Call<MessageResponse> otpSend(
-            @Field("email") String email
+            @Field("email") String email,
+            @Field("mobile") String mobile
     );
 
     @FormUrlEncoded

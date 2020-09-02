@@ -225,6 +225,7 @@ public class TeacherAddScheduleFragment extends Fragment {
                         year, month, day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.setCancelable(false);
                 datePickerDialog.show();
             }
         });
@@ -438,6 +439,7 @@ public class TeacherAddScheduleFragment extends Fragment {
         builder.setNeutralButton("Select All", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                studentItems.clear();
                 studentDetailArrayList.clear();
                 for (int i = 0; i < students.length; i++) {
                     studentItems.add(i);

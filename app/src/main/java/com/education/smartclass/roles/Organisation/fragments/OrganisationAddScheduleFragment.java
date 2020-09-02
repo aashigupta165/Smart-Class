@@ -87,7 +87,6 @@ public class OrganisationAddScheduleFragment extends Fragment {
         classDropdown = view.findViewById(R.id.class_drop_down);
         sectionDropdown = view.findViewById(R.id.section_drop_down);
         select_students = view.findViewById(R.id.student_selection);
-        select_students.setVisibility(View.GONE);
         description = view.findViewById(R.id.description);
         submitbtn = view.findViewById(R.id.submitbtn);
         relativeLayout = view.findViewById(R.id.relativeLayout);
@@ -184,21 +183,11 @@ public class OrganisationAddScheduleFragment extends Fragment {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (radioSelected.equals("Selected")) {
-                    if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
-                        new SnackBar(relativeLayout, "Please Fill Above details");
-                        return;
-                    }
-                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-
-                    fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
-                }
-
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,
                         year, month, day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.setCancelable(false);
                 datePickerDialog.show();
             }
         });
@@ -217,10 +206,16 @@ public class OrganisationAddScheduleFragment extends Fragment {
             public void onClick(View v) {
 
                 if (className.getText().toString().equals("") || section.getText().toString().equals("")) {
-                    new SnackBar(relativeLayout, "Please Fill Above Details!");
+                    new SnackBar(relativeLayout, "Please Fill Above details");
                     return;
                 }
-                showStudentList();
+
+                progressDialog.setMessage("Loading");
+                progressDialog.show();
+
+                String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+
+                fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
             }
         });
     }
@@ -263,6 +258,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
         msg.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                progressDialog.dismiss();
                 switch (s) {
                     case "list_found":
                         setStudentList();
@@ -343,8 +339,6 @@ public class OrganisationAddScheduleFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<StudentDetail> studentList) {
 
-                select_students.setVisibility(View.VISIBLE);
-
                 checkedItems = new boolean[studentList.size()];
 
                 students = new String[studentList.size()];
@@ -360,6 +354,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     email[i] = s.getStudentEmail();
                     i++;
                 }
+                showStudentList();
             }
         });
     }
@@ -433,7 +428,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
             }
         }
 
-        if (date.getText().toString().equals("") || time.getText().toString().equals("")) {
+        if (date.getText().toString().equals("") || time.getText().toString().equals("") || description.getText().toString().equals("")) {
             new SnackBar(relativeLayout, "Please Enter All Details!");
             return;
         }
