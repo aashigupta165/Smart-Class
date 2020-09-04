@@ -23,6 +23,7 @@ import com.education.smartclass.utils.Logout;
 import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 import java.util.Date;
@@ -103,6 +104,12 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
                         .openFileDescriptor(data.getData(), "r").getFileDescriptor());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                int options = 90;
+                while (stream.toByteArray().length / 1024 > 500) {
+                    stream.reset();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, options, stream);
+                    options -= 10;
+                }
                 byte[] byteArray = stream.toByteArray();
                 RequestBody requestLogo = RequestBody.create(MediaType.parse("image/*"), byteArray);
                 Date date = Calendar.getInstance().getTime();
@@ -125,9 +132,7 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
         message.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-
                 progressDialog.dismiss();
-
                 switch (s) {
                     case "org_created":
                         new SnackBar(relativeLayout, "Organisation Registered");

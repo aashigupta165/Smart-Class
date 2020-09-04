@@ -20,7 +20,7 @@ public class RetrofitClient {
     private static final String AUTH = "Basic " + Base64.encodeToString(("aashi:123456").getBytes(), Base64.NO_WRAP);
     private Context context;
 
-    private static final String BASE_URL = "https://smart-class-app.herokuapp.com/api/app/";
+    private static final String BASE_URL = "https://class-smart.herokuapp.com/api/app/";
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
 
