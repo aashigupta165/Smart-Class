@@ -35,6 +35,8 @@ import com.education.smartclass.roles.Organisation.model.ClassListViewModel;
 import com.education.smartclass.roles.Organisation.model.ScheduleCreateViewModel;
 import com.education.smartclass.roles.teacher.model.FetchStudentListViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
@@ -245,6 +247,10 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
@@ -265,6 +271,10 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "There is an error in fetching Details... Please Try Again Later!");
                 }
@@ -280,7 +290,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 progressDialog.dismiss();
                 switch (s) {
                     case "class_scheduled":
-                        OrganisationScheduleFragment fragment = new OrganisationScheduleFragment();
+                        OrganisationAddScheduleFragment fragment = new OrganisationAddScheduleFragment();
                         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         new SnackBar(relativeLayout, "Class Scheduled");
                         break;
@@ -289,6 +299,10 @@ public class OrganisationAddScheduleFragment extends Fragment {
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
                         break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");

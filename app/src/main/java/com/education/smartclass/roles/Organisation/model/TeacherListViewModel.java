@@ -24,9 +24,13 @@ public class TeacherListViewModel extends ViewModel {
         call.enqueue(new Callback<TeacherList>() {
             @Override
             public void onResponse(Call<TeacherList> call, Response<TeacherList> response) {
-                TeacherList teacherList = response.body();
-                message.setValue(teacherList.getMessage());
-                list.setValue(teacherList.getList());
+                if (response.isSuccessful()) {
+                    TeacherList teacherList = response.body();
+                    message.setValue(teacherList.getMessage());
+                    list.setValue(teacherList.getList());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

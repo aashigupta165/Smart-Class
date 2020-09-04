@@ -23,9 +23,13 @@ public class TeacherNotificationViewModel extends ViewModel {
         call.enqueue(new Callback<FetchSubjectList>() {
             @Override
             public void onResponse(Call<FetchSubjectList> call, Response<FetchSubjectList> response) {
-                FetchSubjectList fetchSubjectList = response.body();
-                message.setValue(fetchSubjectList.getMessage());
-                list.setValue(fetchSubjectList.getList());
+                if (response.isSuccessful()) {
+                    FetchSubjectList fetchSubjectList = response.body();
+                    message.setValue(fetchSubjectList.getMessage());
+                    list.setValue(fetchSubjectList.getList());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

@@ -19,6 +19,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.education.smartclass.R;
 import com.education.smartclass.roles.admin.model.RegisterViewModel;
+import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.io.ByteArrayOutputStream;
@@ -138,6 +140,10 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(RegisterNewOrgActivity3.this);
                         break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");

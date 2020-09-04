@@ -1,11 +1,15 @@
 package com.education.smartclass.roles.admin.model;
 
+import android.content.Intent;
+import android.widget.Toast;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.education.smartclass.api.RetrofitClient;
 import com.education.smartclass.models.Organisation;
 import com.education.smartclass.response.OrganisationList;
+import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
 
@@ -24,9 +28,13 @@ public class HomeViewModel extends ViewModel {
         call.enqueue(new Callback<OrganisationList>() {
             @Override
             public void onResponse(Call<OrganisationList> call, Response<OrganisationList> response) {
-                OrganisationList organisationList = response.body();
-                message.setValue(organisationList.getMessage());
-                list.setValue(organisationList.getList());
+                if (response.isSuccessful()) {
+                    OrganisationList organisationList = response.body();
+                    message.setValue(organisationList.getMessage());
+                    list.setValue(organisationList.getList());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

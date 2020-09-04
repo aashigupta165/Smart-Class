@@ -23,6 +23,8 @@ import com.education.smartclass.R;
 import com.education.smartclass.roles.student.model.StudentNotificationViewModel;
 import com.education.smartclass.roles.teacher.model.TeacherNotificationViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
@@ -100,6 +102,10 @@ public class NotificationFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "Please try again later!");
                 }
@@ -125,6 +131,10 @@ public class NotificationFragment extends Fragment {
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
                         break;
                     default:
                         new SnackBar(relativeLayout, "Please try again later!");

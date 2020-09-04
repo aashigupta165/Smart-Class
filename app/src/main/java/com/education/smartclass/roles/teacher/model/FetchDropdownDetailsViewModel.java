@@ -24,9 +24,13 @@ public class FetchDropdownDetailsViewModel extends ViewModel {
         call.enqueue(new Callback<DropdownDetails>() {
             @Override
             public void onResponse(Call<DropdownDetails> call, Response<DropdownDetails> response) {
-                DropdownDetails dropdownDetails = response.body();
-                message.setValue(dropdownDetails.getMessage());
-                list.setValue(dropdownDetails.getTeacherClass());
+                if (response.isSuccessful()) {
+                    DropdownDetails dropdownDetails = response.body();
+                    message.setValue(dropdownDetails.getMessage());
+                    list.setValue(dropdownDetails.getTeacherClass());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

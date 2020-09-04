@@ -33,6 +33,8 @@ import com.education.smartclass.roles.teacher.model.ReadSchedulesViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleDeleteViewModel;
 import com.education.smartclass.roles.teacher.model.ScheduleStudentsViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
@@ -111,6 +113,10 @@ public class TeacherHomeFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");
                 }
@@ -132,6 +138,10 @@ public class TeacherHomeFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
@@ -152,6 +162,10 @@ public class TeacherHomeFragment extends Fragment {
                     case "Internet_Issue":
                         progressDialog.dismiss();
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
                         break;
                     default:
                         progressDialog.dismiss();
@@ -175,7 +189,7 @@ public class TeacherHomeFragment extends Fragment {
                 linearLayoutManager.setStackFromEnd(true);
                 schedule_list.setLayoutManager(linearLayoutManager);
                 teacherScheduleListAdapter = new TeacherScheduleListAdapter(getContext(), readTeacherScheduleDetails);
-                teacherScheduleListAdapter.getFilter().filter("filter1");
+                teacherScheduleListAdapter.getFilter().filter("home_filter");
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {

@@ -23,6 +23,7 @@ import com.education.smartclass.R;
 import com.education.smartclass.roles.admin.model.HomeViewModel;
 import com.education.smartclass.models.Organisation;
 import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
@@ -110,6 +111,10 @@ public class AdminHomeActivity extends AppCompatActivity {
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(AdminHomeActivity.this);
                         break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");

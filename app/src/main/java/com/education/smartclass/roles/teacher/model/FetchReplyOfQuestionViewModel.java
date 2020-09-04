@@ -24,9 +24,13 @@ public class FetchReplyOfQuestionViewModel extends ViewModel {
         call.enqueue(new Callback<FetchRepliesOfAQuestion>() {
             @Override
             public void onResponse(Call<FetchRepliesOfAQuestion> call, Response<FetchRepliesOfAQuestion> response) {
-                FetchRepliesOfAQuestion fetchRepliesOfAQuestion = response.body();
-                message.setValue(fetchRepliesOfAQuestion.getMessage());
-                list.setValue(fetchRepliesOfAQuestion.getList());
+                if (response.isSuccessful()) {
+                    FetchRepliesOfAQuestion fetchRepliesOfAQuestion = response.body();
+                    message.setValue(fetchRepliesOfAQuestion.getMessage());
+                    list.setValue(fetchRepliesOfAQuestion.getList());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

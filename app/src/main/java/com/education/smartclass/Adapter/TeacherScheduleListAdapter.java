@@ -103,7 +103,6 @@ public class TeacherScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
                             filteredList.add(readTeacherScheduleDetails);
                         }
                     }
-
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -115,6 +114,20 @@ public class TeacherScheduleListAdapter extends RecyclerView.Adapter<ScheduleLis
                     for (ReadTeacherScheduleDetails readTeacherScheduleDetails : filterList) {
                         Date date = datequery.parse(readTeacherScheduleDetails.getScheduleDate() + " " + readTeacherScheduleDetails.getScheduleTime());
                         if (now.after(date)) {
+                            filteredList.add(readTeacherScheduleDetails);
+                        }
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else if (constraint.equals("home_filter")) {
+                try {
+                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    Date now = new Date(System.currentTimeMillis() - 3600000);
+                    datequery.format(now);
+                    for (ReadTeacherScheduleDetails readTeacherScheduleDetails : filterList) {
+                        Date date = datequery.parse(readTeacherScheduleDetails.getScheduleDate() + " " + readTeacherScheduleDetails.getScheduleTime());
+                        if (now.before(date)) {
                             filteredList.add(readTeacherScheduleDetails);
                         }
                     }

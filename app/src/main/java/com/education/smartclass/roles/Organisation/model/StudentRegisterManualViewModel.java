@@ -22,8 +22,12 @@ public class StudentRegisterManualViewModel extends ViewModel {
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                MessageResponse messageResponse = response.body();
-                message.setValue(messageResponse.getMessage());
+                if (response.isSuccessful()) {
+                    MessageResponse messageResponse = response.body();
+                    message.setValue(messageResponse.getMessage());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

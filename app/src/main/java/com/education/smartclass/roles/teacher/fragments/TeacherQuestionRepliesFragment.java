@@ -34,6 +34,8 @@ import com.education.smartclass.roles.teacher.model.DeleteReplyViewModel;
 import com.education.smartclass.roles.teacher.model.FetchReplyOfQuestionViewModel;
 import com.education.smartclass.roles.teacher.model.PostReplyViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.ArrayList;
@@ -194,6 +196,10 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
@@ -216,6 +222,10 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
                         break;
                     default:
                         new SnackBar(relativeLayout, "Please Try Again Later!");
@@ -241,6 +251,10 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
                         break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
                     default:
                         new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
@@ -264,6 +278,10 @@ public class TeacherQuestionRepliesFragment extends Fragment {
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
                         break;
                     default:
                         new SnackBar(relativeLayout, "Please Try Again Later!");

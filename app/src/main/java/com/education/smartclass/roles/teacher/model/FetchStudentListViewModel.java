@@ -24,9 +24,13 @@ public class FetchStudentListViewModel extends ViewModel {
         call.enqueue(new Callback<StudentList>() {
             @Override
             public void onResponse(Call<StudentList> call, Response<StudentList> response) {
-                StudentList studentList = response.body();
-                message.setValue(studentList.getMessage());
-                list.setValue(studentList.getList());
+                if (response.isSuccessful()) {
+                    StudentList studentList = response.body();
+                    message.setValue(studentList.getMessage());
+                    list.setValue(studentList.getList());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override

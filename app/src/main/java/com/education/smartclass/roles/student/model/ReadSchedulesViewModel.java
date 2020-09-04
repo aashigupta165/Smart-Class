@@ -25,9 +25,13 @@ public class ReadSchedulesViewModel extends ViewModel {
         call.enqueue(new Callback<StudentScheduleResponse>() {
             @Override
             public void onResponse(Call<StudentScheduleResponse> call, Response<StudentScheduleResponse> response) {
-                StudentScheduleResponse studentScheduleResponse = response.body();
-                message.setValue(studentScheduleResponse.getMessage());
-                list.setValue(studentScheduleResponse.getList());
+                if (response.isSuccessful()) {
+                    StudentScheduleResponse studentScheduleResponse = response.body();
+                    message.setValue(studentScheduleResponse.getMessage());
+                    list.setValue(studentScheduleResponse.getList());
+                } else if (response.code() == 401) {
+                    message.setValue("Session Expire");
+                }
             }
 
             @Override
