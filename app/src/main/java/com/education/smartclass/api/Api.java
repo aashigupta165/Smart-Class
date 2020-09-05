@@ -344,4 +344,10 @@ public interface Api {
             @Field("orgCode") String orgCode,
             @Field("scheduleId") String scheduleId
     );
+
+    @FormUrlEncoded
+    @POST("version")
+    Call<MessageResponse> versionChecking(
+            @Field("version") String version
+    );
 }

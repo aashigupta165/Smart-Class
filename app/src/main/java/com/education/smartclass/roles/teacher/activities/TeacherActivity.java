@@ -6,29 +6,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.education.smartclass.R;
+import com.education.smartclass.roles.Organisation.activities.OrganisationActivity;
+import com.education.smartclass.roles.Organisation.model.VersionCheckingViewModel;
 import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.BadgeDrawable;
 import com.education.smartclass.utils.Logout;
+import com.education.smartclass.utils.SessionExpire;
 import com.google.android.material.navigation.NavigationView;
 
 public class TeacherActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+
+    private VersionCheckingViewModel versionCheckingViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +80,31 @@ public class TeacherActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    private void BuildVersion() {
+        try {
+            PackageInfo info = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = info.versionName;
+            versionCheckingViewModel.version(version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateChecking() {
+        final String appPackageName = "com.education.smartclass";
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BuildVersion();
     }
 
     @Override
@@ -143,5 +180,25 @@ public class TeacherActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void DataObserver() {
+
+        versionCheckingViewModel = ViewModelProviders.of(this).get(VersionCheckingViewModel.class);
+        LiveData<String> message = versionCheckingViewModel.getMessage();
+
+        message.observe(TeacherActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch (s) {
+                    case "not_matched":
+                        updateChecking();
+                        break;
+                    case "Session Expire":
+                        new SessionExpire(getApplicationContext());
+                        break;
+                }
+            }
+        });
     }
 }

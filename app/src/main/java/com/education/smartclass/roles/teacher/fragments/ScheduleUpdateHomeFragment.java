@@ -6,14 +6,6 @@ import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,17 +14,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.education.smartclass.R;
+import com.education.smartclass.roles.Organisation.fragments.OrganisationHomeFragment;
 import com.education.smartclass.roles.Organisation.fragments.OrganisationScheduleFragment;
 import com.education.smartclass.roles.teacher.model.ScheduleUpdateViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
-import com.education.smartclass.utils.Logout;
 import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.util.Calendar;
 
-public class ScheduleUpdateFragment extends Fragment {
+public class ScheduleUpdateHomeFragment extends Fragment {
 
     private TextView date, time, updatebtn;
 
@@ -150,10 +149,10 @@ public class ScheduleUpdateFragment extends Fragment {
                     case "schedule_updated":
                         new SnackBar(relativeLayout, "Schedule Updated");
                         if (SharedPrefManager.getInstance(getContext()).getUser().getRole().equals("Organisation")) {
-                            OrganisationScheduleFragment fragment = new OrganisationScheduleFragment();
+                            OrganisationHomeFragment fragment = new OrganisationHomeFragment();
                             getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         } else {
-                            TeacherScheduleFragment fragment = new TeacherScheduleFragment();
+                            TeacherHomeFragment fragment = new TeacherHomeFragment();
                             getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
                         }
                         break;

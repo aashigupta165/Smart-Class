@@ -1,10 +1,12 @@
 package com.education.smartclass.roles.Organisation.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -51,6 +53,10 @@ public class ClassFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organisation_teacher_register, container, false);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
 
         manual_entry = view.findViewById(R.id.manual_entry);
         heading = view.findViewById(R.id.heading);

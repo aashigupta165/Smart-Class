@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "803329176876",
-    "firebase_url": "https://smart-class-b2920.firebaseio.com",
-    "project_id": "smart-class-b2920",
-    "storage_bucket": "smart-class-b2920.appspot.com"
+    "project_number": "989925890820",
+    "firebase_url": "https://smart-class-94f51.firebaseio.com",
+    "project_id": "smart-class-94f51",
+    "storage_bucket": "smart-class-94f51.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:803329176876:android:86da4135997963b6f16889",
+        "mobilesdk_app_id": "1:989925890820:android:733b2e110de947c2568e51",
         "android_client_info": {
           "package_name": "com.education.smartclass"
         }
       },
       "oauth_client": [
         {
-          "client_id": "803329176876-mms8jmd0akonccj73au4evg7r1605bcg.apps.googleusercontent.com",
+          "client_id": "989925890820-vbgcf5vvvspsp3365kfhtjic57avm9o2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.education.smartclass",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "803329176876-q1aorf2b7gdfaati7jsn4ih5pephicod.apps.googleusercontent.com",
+          "client_id": "989925890820-l1opvrj3dqa1bhmv96hv44gvjlg76c6i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAUCjxoLuxrS7h2v0sL08ClPAlWJj2nZ28"
+          "current_key": "AIzaSyBcHKvZg88IEl-0Lw6NYQ2SGVOWfnHjT74"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "803329176876-q1aorf2b7gdfaati7jsn4ih5pephicod.apps.googleusercontent.com",
+              "client_id": "989925890820-l1opvrj3dqa1bhmv96hv44gvjlg76c6i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

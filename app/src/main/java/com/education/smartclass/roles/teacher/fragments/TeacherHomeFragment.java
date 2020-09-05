@@ -276,7 +276,7 @@ public class TeacherHomeFragment extends Fragment {
         bundle.putString("date", readTeacherScheduleDetailsArrayList.get(position).getScheduleDate());
         bundle.putString("time", readTeacherScheduleDetailsArrayList.get(position).getScheduleTime());
 
-        ScheduleUpdateFragment fragment = new ScheduleUpdateFragment();
+        ScheduleUpdateHomeFragment fragment = new ScheduleUpdateHomeFragment();
         fragment.setArguments(bundle);
         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
     }

@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +23,8 @@ import android.widget.TextView;
 
 import com.education.smartclass.Adapter.OrganisationListAdapter;
 import com.education.smartclass.R;
+import com.education.smartclass.roles.Organisation.activities.OrganisationActivity;
+import com.education.smartclass.roles.Organisation.model.VersionCheckingViewModel;
 import com.education.smartclass.roles.admin.model.HomeViewModel;
 import com.education.smartclass.models.Organisation;
 import com.education.smartclass.utils.Logout;
@@ -32,9 +37,11 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
     private RecyclerView organisation_list;
-    private HomeViewModel homeViewModel;
 
     private TextView no_data;
+
+    private HomeViewModel homeViewModel;
+    private VersionCheckingViewModel versionCheckingViewModel;
 
     private ProgressBar progressBar;
 
@@ -58,6 +65,31 @@ public class AdminHomeActivity extends AppCompatActivity {
         dataObserver();
 
         homeViewModel.fetchOrganisationList();
+    }
+
+    private void BuildVersion() {
+        try {
+            PackageInfo info = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = info.versionName;
+            versionCheckingViewModel.version(version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateChecking() {
+        final String appPackageName = "com.education.smartclass";
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BuildVersion();
     }
 
     @Override
@@ -118,6 +150,23 @@ public class AdminHomeActivity extends AppCompatActivity {
                         break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
+
+        versionCheckingViewModel = ViewModelProviders.of(this).get(VersionCheckingViewModel.class);
+        LiveData<String> msg = versionCheckingViewModel.getMessage();
+
+        msg.observe(AdminHomeActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch (s) {
+                    case "not_matched":
+                        updateChecking();
+                        break;
+                    case "Session Expire":
+                        new SessionExpire(getApplicationContext());
+                        break;
                 }
             }
         });

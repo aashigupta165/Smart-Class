@@ -81,7 +81,7 @@
             android:id="@+id/student_Class_Section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/teacher_designation"
+            android:layout_below="@+id/teacher_age"
             android:orientation="horizontal"
             android:visibility="gone">
 
