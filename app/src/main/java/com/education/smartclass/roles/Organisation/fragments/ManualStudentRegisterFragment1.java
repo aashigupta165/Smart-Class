@@ -94,12 +94,6 @@ public class ManualStudentRegisterFragment1 extends Fragment {
 
     private void datepicker() {
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,
-                year, month, day);
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog.getDatePicker();
-        datePickerDialog.show();
-
         setListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -108,6 +102,12 @@ public class ManualStudentRegisterFragment1 extends Fragment {
                 dob.setText(selectedDate);
             }
         };
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener,
+                year, month, day);
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.getDatePicker();
+        datePickerDialog.show();
     }
 
     private void checkDetails() {
@@ -116,7 +116,7 @@ public class ManualStudentRegisterFragment1 extends Fragment {
         String Mobile = mobile.getText().toString().trim();
         String Dob = dob.getText().toString().trim();
 
-        if (Email.isEmpty() || Mobile.isEmpty()) {
+        if (Email.isEmpty() || Mobile.isEmpty() || Dob.isEmpty()) {
             new SnackBar(relativeLayout, "Please Enter All The Details");
             return;
         }
