@@ -54,6 +54,9 @@ public class TeacherActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
+        DataObserver();
+        BuildVersion();
+
         Menu menu = navigationView.getMenu();
 
         MenuItem questionare = menu.findItem(R.id.questionaire);

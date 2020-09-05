@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -104,11 +105,9 @@ public class RegisterNewOrgActivity3 extends AppCompatActivity {
                         .openFileDescriptor(data.getData(), "r").getFileDescriptor());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                int options = 90;
-                while (stream.toByteArray().length / 1024 > 500) {
-                    stream.reset();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, options, stream);
-                    options -= 10;
+                if (stream.toByteArray().length > 5220226) {
+                    new SnackBar(relativeLayout, "Please upload image upto 5MB!");
+                    return;
                 }
                 byte[] byteArray = stream.toByteArray();
                 RequestBody requestLogo = RequestBody.create(MediaType.parse("image/*"), byteArray);

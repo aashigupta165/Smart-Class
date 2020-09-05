@@ -98,11 +98,19 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/logo_subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo_heading"
+            android:layout_centerHorizontal="true"
+            android:text="Size upto 5MB" />
+
         <ImageButton
             android:id="@+id/logo_upload"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_below="@+id/logo_heading"
+            android:layout_below="@+id/logo_subheading"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@null"
