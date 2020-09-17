@@ -33,16 +33,12 @@
                     android:text="Uploaded at: Time(Date)"
                     android:textColor="@color/grey" />
 
-                <TextView
-                    android:id="@+id/optionMenu"
+                <ImageView
+                    android:id="@+id/delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     android:paddingHorizontal="10dp"
-                    android:text="&#8942;"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
+                    android:src="@drawable/ic_delete" />
 
             </LinearLayout>
 
