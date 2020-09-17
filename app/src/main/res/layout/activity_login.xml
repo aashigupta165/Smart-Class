@@ -11,13 +11,27 @@
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/mobile"
+        android:layout_above="@+id/firstName"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:text="LOGIN"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/firstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mobile"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/edittext_background"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/mobile"

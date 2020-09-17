@@ -51,5 +51,15 @@
             android:icon="@drawable/ic_question_answer"
             android:title="Discussion"
             android:visible="false" />
+        <item
+            android:id="@+id/new_assignment"
+            android:icon="@drawable/ic_add_assignment"
+            android:title="Post Assignment"
+            android:visible="false" />
+        <item
+            android:id="@+id/assignment"
+            android:icon="@drawable/ic_assignment"
+            android:title="Assignment"
+            android:visible="false" />
     </group>
 </menu>

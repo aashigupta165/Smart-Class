@@ -18,11 +18,11 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void dataRetrieval(Context context, String mobile, String password) {
+    public void dataRetrieval(Context context, String mobile, String name, String password) {
 
         String token = FirebaseInstanceId.getInstance().getToken();
 
-        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(mobile, password, token);
+        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(mobile, password, name, token);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

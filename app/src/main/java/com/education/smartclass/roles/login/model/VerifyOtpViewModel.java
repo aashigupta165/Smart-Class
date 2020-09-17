@@ -14,9 +14,9 @@ public class VerifyOtpViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void verifyOtp(String otp, String email) {
+    public void verifyOtp(String otp, String email, String mobile, String firstName) {
 
-        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().verifyOtp(otp, email);
+        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().verifyOtp(otp, email, mobile, firstName);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

@@ -23,7 +23,7 @@ import com.education.smartclass.utils.SnackBar;
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private TextView nextbtn;
-    private EditText mobile, email;
+    private EditText mobile, email, firstName;
 
     private RelativeLayout relativeLayout;
 
@@ -38,6 +38,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         mobile = findViewById(R.id.mobile);
+        firstName = findViewById(R.id.firstName);
         nextbtn = findViewById(R.id.nextbtn);
 
         progressDialog = new ProgressDialog(this);
@@ -57,7 +58,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(nextbtn.getWindowToken(), 0);
 
-                if (email.getText().toString().equals("") || mobile.getText().toString().equals("")) {
+                if (email.getText().toString().equals("") || mobile.getText().toString().equals("") || firstName.getText().toString().equals("")) {
                     new SnackBar(relativeLayout, "Please Enter The Details!");
                     return;
                 }
@@ -70,7 +71,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 progressDialog.setMessage("Loading...");
                 progressDialog.show();
 
-                sendOtpViewModel.sendOtp(email.getText().toString(), mobile.getText().toString());
+                sendOtpViewModel.sendOtp(email.getText().toString(), mobile.getText().toString(), firstName.getText().toString());
             }
         });
     }
@@ -90,6 +91,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         Intent intent = new Intent(ForgotPasswordActivity.this, OtpActivity.class);
                         intent.putExtra("email", email.getText().toString());
                         intent.putExtra("mobile", mobile.getText().toString());
+                        intent.putExtra("firstName", firstName.getText().toString());
                         startActivity(intent);
                         break;
                     case "user_not_found":

@@ -35,6 +35,7 @@ public interface Api {
     Call<LoginResponse> login(
             @Field("mobile") String mobile,
             @Field("password") String password,
+            @Field("firstName") String firstName,
             @Field("deviceToken") String deviceToken
     );
 
@@ -268,14 +269,17 @@ public interface Api {
     @POST("user/sendOtp")
     Call<MessageResponse> otpSend(
             @Field("email") String email,
-            @Field("mobile") String mobile
+            @Field("mobile") String mobile,
+            @Field("firstName") String firstName
     );
 
     @FormUrlEncoded
     @POST("user/verifyOtp")
     Call<MessageResponse> verifyOtp(
             @Field("otpReceived") String otpReceived,
-            @Field("email") String email
+            @Field("email") String email,
+            @Field("mobile") String mobile,
+            @Field("firstName") String firstName
     );
 
     @FormUrlEncoded
@@ -294,8 +298,10 @@ public interface Api {
     @FormUrlEncoded
     @POST("user/changePassword")
     Call<MessageResponse> changePassword(
+            @Field("newPassword") String newPassword,
             @Field("email") String email,
-            @Field("newPassword") String newPassword
+            @Field("mobile") String mobile,
+            @Field("firstName") String firstName
     );
 
     @FormUrlEncoded

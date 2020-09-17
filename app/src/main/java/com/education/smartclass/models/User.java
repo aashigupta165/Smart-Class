@@ -4,6 +4,7 @@ public class User {
 
     private String name;
     private String mobile;
+    private String loginId;
     private String email;
     private String role;
 
@@ -36,9 +37,10 @@ public class User {
     public User() {
     }
 
-    public User(String name, String mobile, String email, String role, String orgName, String orgCode, String orgType, String orgAddress, String orgLogo, String orgEmail, String orgMobile, String teacherName, String teacherAge, String teacherDesignation, String teacherCode, String teacherGender, String teacherEmail, String teacherMobile, String studentName, String studentRollNo, String studentClass, String studentSection, String studentFatherName, String studentEmail, String studentMobile, String studentDOB, String studentGender) {
+    public User(String name, String mobile, String loginId, String email, String role, String orgName, String orgCode, String orgType, String orgAddress, String orgLogo, String orgEmail, String orgMobile, String teacherName, String teacherAge, String teacherDesignation, String teacherCode, String teacherGender, String teacherEmail, String teacherMobile, String studentName, String studentRollNo, String studentClass, String studentSection, String studentFatherName, String studentEmail, String studentMobile, String studentDOB, String studentGender) {
         this.name = name;
         this.mobile = mobile;
+        this.loginId = loginId;
         this.email = email;
         this.role = role;
         this.orgName = orgName;
@@ -280,5 +282,13 @@ public class User {
 
     public void setStudentGender(String studentGender) {
         this.studentGender = studentGender;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 }

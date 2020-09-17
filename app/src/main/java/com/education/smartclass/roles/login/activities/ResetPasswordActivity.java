@@ -107,7 +107,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 progressDialog.setMessage("Loading");
                 progressDialog.show();
 
-                resetPasswordViewModel.resetPassword(getIntent().getStringExtra("email"), password.getText().toString());
+                resetPasswordViewModel.resetPassword(getIntent().getStringExtra("email"), password.getText().toString(), getIntent().getStringExtra("mobile"),
+                        getIntent().getStringExtra("firstName"));
             }
         });
     }

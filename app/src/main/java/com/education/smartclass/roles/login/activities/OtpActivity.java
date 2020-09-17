@@ -68,7 +68,8 @@ public class OtpActivity extends AppCompatActivity {
                 progressDialog.setMessage("Verifying...");
                 progressDialog.show();
 
-                verifyOtpViewModel.verifyOtp(otp.getText().toString(), getIntent().getStringExtra("email"));
+                verifyOtpViewModel.verifyOtp(otp.getText().toString(), getIntent().getStringExtra("email"), getIntent().getStringExtra("mobile"),
+                        getIntent().getStringExtra("firstName"));
             }
         });
 
@@ -82,7 +83,7 @@ public class OtpActivity extends AppCompatActivity {
                 progressDialog.setMessage("Resending...");
                 progressDialog.show();
 
-                sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"), getIntent().getStringExtra("mobile"));
+                sendOtpViewModel.sendOtp(getIntent().getStringExtra("email"), getIntent().getStringExtra("mobile"), getIntent().getStringExtra("firstName"));
             }
         });
     }
@@ -120,8 +121,7 @@ public class OtpActivity extends AppCompatActivity {
                     case "matched":
                         new SnackBar(relativeLayout, "OTP Verified.");
                         Intent intent = new Intent(OtpActivity.this, ResetPasswordActivity.class);
-                        intent.putExtra("email", getIntent().getStringExtra("email"));
-                        startActivity(intent);
+                        startActivity(getIntent());
                         break;
                     case "not_matched":
                         new SnackBar(relativeLayout, "Wrong OTP.");

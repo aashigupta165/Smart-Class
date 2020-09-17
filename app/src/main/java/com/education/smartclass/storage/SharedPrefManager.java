@@ -29,11 +29,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor.putString("loginId", user.getLoginId());
+        editor.putString("role", user.getRole());
         if (user.getRole().equals("Admin")) {
             editor.putString("name", user.getName());
             editor.putString("mobile", user.getMobile());
             editor.putString("email", user.getEmail());
-            editor.putString("role", user.getRole());
         } else if (user.getRole().equals("Organisation")) {
             editor.putString("orgName", user.getOrgName());
             editor.putString("orgCode", user.getOrgCode());
@@ -41,7 +42,6 @@ public class SharedPrefManager {
             editor.putString("orgAddress", user.getOrgAddress());
             editor.putString("orgLogo", user.getOrgLogo());
             editor.putString("orgEmail", user.getOrgEmail());
-            editor.putString("role", user.getRole());
             editor.putString("orgMobile", user.getOrgMobile());
         } else if (user.getRole().equals("Teacher")) {
             editor.putString("teacherName", user.getTeacherName());
@@ -49,7 +49,6 @@ public class SharedPrefManager {
             editor.putString("teacherDesignation", user.getTeacherDesignation());
             editor.putString("teacherCode", user.getTeacherCode());
             editor.putString("teacherGender", user.getTeacherGender());
-            editor.putString("role", user.getRole());
             editor.putString("teacherEmail", user.getTeacherEmail());
             editor.putString("teacherMobile", user.getTeacherMobile());
             editor.putString("orgCode", user.getOrgCode());
@@ -61,7 +60,6 @@ public class SharedPrefManager {
             editor.putString("studentClass", user.getStudentClass());
             editor.putString("studentSection", user.getStudentSection());
             editor.putString("studentFatherName", user.getStudentFatherName());
-            editor.putString("role", user.getRole());
             editor.putString("studentEmail", user.getStudentEmail());
             editor.putString("studentMobile", user.getStudentMobile());
             editor.putString("studentDOB", user.getStudentDOB());
@@ -86,6 +84,7 @@ public class SharedPrefManager {
         return new User(
                 sharedPreferences.getString("name", null),
                 sharedPreferences.getString("mobile", null),
+                sharedPreferences.getString("loginId", null),
                 sharedPreferences.getString("email", null),
                 sharedPreferences.getString("role", null),
                 sharedPreferences.getString("orgName", null),

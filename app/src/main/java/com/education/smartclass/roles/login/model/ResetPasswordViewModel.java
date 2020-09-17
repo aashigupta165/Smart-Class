@@ -14,9 +14,9 @@ public class ResetPasswordViewModel extends ViewModel {
 
     private MutableLiveData<String> message = new MutableLiveData<>();
 
-    public void resetPassword(String email, String newPassword) {
+    public void resetPassword(String email, String newPassword, String mobile, String firstName) {
 
-        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().changePassword(email, newPassword);
+        Call<MessageResponse> call = RetrofitClient.getInstance().getApi().changePassword(newPassword, email, mobile, firstName);
         call.enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {

@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class LoginActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
-    private EditText mobile, password;
+    private EditText mobile, password, firstName;
     private TextView loginbtn, forgotPassword;
 
     private ProgressDialog progressBar;
@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.relativeLayout);
         mobile = findViewById(R.id.mobile);
         password = findViewById(R.id.password);
+        firstName = findViewById(R.id.firstName);
         loginbtn = findViewById(R.id.loginbtn);
         forgotPassword = findViewById(R.id.forgotPassword);
         progressBar = new ProgressDialog(this);
@@ -93,11 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                 switch (s) {
                     case "loggedIn":
                         roleSelection();
-                    case "Invalid_PhoneNo":
-                        new SnackBar(relativeLayout, "Invalid Mobile Number");
-                        break;
-                    case "Invalid_Password":
-                        new SnackBar(relativeLayout, "Invalid Password");
+                    case "Invalid_details":
+                        new SnackBar(relativeLayout, "Invalid Details");
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
@@ -115,8 +113,9 @@ public class LoginActivity extends AppCompatActivity {
 
         String Mobile = mobile.getText().toString().trim();
         String Password = password.getText().toString().trim();
+        String Name = firstName.getText().toString().trim();
 
-        if (Mobile.isEmpty() || Password.isEmpty()) {
+        if (Mobile.isEmpty() || Password.isEmpty() || Name.isEmpty()) {
             new SnackBar(relativeLayout, "Please Enter All The Details");
             return;
         }
@@ -128,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
 
         progressBar.setMessage("Loading...");
         progressBar.show();
-        loginViewModel.dataRetrieval(getApplicationContext(), mobile.getText().toString(), password.getText().toString());
+        loginViewModel.dataRetrieval(getApplicationContext(), Mobile, Name, Password);
     }
 
     private void roleSelection() {
