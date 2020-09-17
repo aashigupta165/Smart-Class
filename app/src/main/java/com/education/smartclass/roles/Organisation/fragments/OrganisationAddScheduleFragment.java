@@ -65,7 +65,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
 
     private ArrayList<Integer> studentItems = new ArrayList<>();
     private boolean[] checkedItems;
-    private String[] students, name, rollno, email;
+    private String[] students, name, rollno, ids;
 
     private DatePickerDialog.OnDateSetListener setListener;
     private Calendar calendar = Calendar.getInstance();
@@ -357,14 +357,14 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 students = new String[studentList.size()];
                 name = new String[studentList.size()];
                 rollno = new String[studentList.size()];
-                email = new String[studentList.size()];
+                ids = new String[studentList.size()];
 
                 int i = 0;
                 for (StudentDetail s : studentList) {
                     students[i] = s.getStudentName() + " (" + s.getStudentRollNo() + ")";
                     name[i] = s.getStudentName();
                     rollno[i] = s.getStudentRollNo();
-                    email[i] = s.getStudentEmail();
+                    ids[i] = s.getStudentId();
                     i++;
                 }
                 showStudentList();
@@ -395,7 +395,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 studentDetailArrayList.clear();
                 for (int i = 0; i < studentItems.size(); i++) {
-                    studentDetailArrayList.add(i, name[studentItems.get(i)] + "_" + rollno[studentItems.get(i)] + "_" + email[studentItems.get(i)]);
+                    studentDetailArrayList.add(i, ids[studentItems.get(i)]);
                 }
                 select_students.setText(studentItems.size() + " Students");
             }
@@ -421,7 +421,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 studentDetailArrayList.clear();
                 for (int i = 0; i < students.length; i++) {
                     studentItems.add(i);
-                    studentDetailArrayList.add(i, name[i] + "_" + rollno[i] + "_" + email[i]);
+                    studentDetailArrayList.add(i, ids[i]);
                     checkedItems[i] = true;
                 }
                 select_students.setText(studentItems.size() + " Students");

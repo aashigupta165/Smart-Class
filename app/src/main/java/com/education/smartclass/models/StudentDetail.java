@@ -6,17 +6,17 @@ public class StudentDetail {
     private String studentRollNo;
     private String studentClass;
     private String studentSection;
-    private String studentEmail;
+    private String studentId;
 
     public StudentDetail() {
     }
 
-    public StudentDetail(String studentName, String studentRollNo, String studentClass, String studentSection, String studentEmail) {
+    public StudentDetail(String studentName, String studentRollNo, String studentClass, String studentSection, String studentId) {
         this.studentName = studentName;
         this.studentRollNo = studentRollNo;
         this.studentClass = studentClass;
         this.studentSection = studentSection;
-        this.studentEmail = studentEmail;
+        this.studentId = studentId;
     }
 
     public String getStudentName() {
@@ -35,12 +35,12 @@ public class StudentDetail {
         this.studentRollNo = studentRollNo;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public String getStudentClass() {
