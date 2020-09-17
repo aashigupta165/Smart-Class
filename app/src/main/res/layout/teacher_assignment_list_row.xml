@@ -1,100 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:elevation="2dp"
-    app:cardUseCompatPadding="true">
+    android:background="@color/white">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:elevation="2dp"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true">
 
-        <LinearLayout
-            android:id="@+id/details1"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/details1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Uploaded at: Time(Date)"
+                    android:textColor="@color/grey" />
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:src="@drawable/ic_delete" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/name_rollno"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/details1"
+                android:layout_marginTop="10dp"
+                android:text="what is your Name? How you Do this? Meet me at 11 today!"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/download_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_assignment"
+                    android:gravity="center_vertical"
+                    android:text="Download"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/class_section_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Class(Subject)"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/desc_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="-10dp"
+        android:background="@drawable/description_background"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandable_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_duration="100"
+            app:ael_expanded="false"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <TextView
+                android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Name(Roll No)"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
+                android:autoLink="web"
+                android:lineSpacingExtra="2dp"
+                android:text="njvcgvgvbg hjbhvgv hbvgfcgfhbjbh bhvbgcvgfcgbhjgcgvghbbbhvvghvgcghvbhbhbbhbbhbhvvhvhhvgggvvvhvv vgnbgv vhhbhvb hhvhh hhvv" />
 
-            <ImageView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_submit" />
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/time"
+        <ImageView
+            android:id="@+id/dragbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/details1"
-            android:text="Uploaded at: time(date)"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/time"
-            android:layout_marginTop="10dp"
-            android:text="Description: jingle bells jingle bells jingle all the ways." />
-
-        <TextView
-            android:id="@+id/remark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/description"
-            android:layout_marginTop="10dp"
-            android:text="Remark: Very Good, Keep it up."
-            android:textColor="@color/grey"
-            android:textSize="12sp"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/details2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/remark"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_download"
-                android:gravity="center_vertical"
-                android:text="Download"
-                android:textAlignment="gravity"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/add_remark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_add"
-                android:gravity="right|center_vertical"
-                android:text="Add Remark"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </LinearLayout>
+            android:layout_below="@+id/expandable_desc"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:src="@drawable/ic_drag_handle" />
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</RelativeLayout>
