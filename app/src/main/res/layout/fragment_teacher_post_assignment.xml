@@ -117,58 +117,12 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/topic_bunch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/student_Class_Section"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/topic_heading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Topic: "
-                        android:textSize="20sp" />
-
-                    <RadioGroup
-                        android:id="@+id/topic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/topic_heading"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/subjectbtn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:text="Subject"
-                            android:textColor="@color/grey" />
-
-                        <RadioButton
-                            android:id="@+id/otherbtn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Other"
-                            android:textColor="@color/grey" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-
                 <AutoCompleteTextView
                     android:id="@+id/subject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/topic_bunch"
-                    android:layout_marginBottom="30dp"
+                    android:layout_below="@+id/student_Class_Section"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/edittext_background"
                     android:enabled="false"
                     android:hint="Subject"
@@ -228,35 +182,13 @@
 
                 <ImageView
                     android:id="@+id/assignment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignTop="@+id/assignment_heading"
                     android:layout_alignRight="@+id/assignment_heading"
                     android:layout_alignBottom="@+id/assignment_heading"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="20dp"
                     android:src="@drawable/ic_upload" />
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/description_heading"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_below="@id/subject"-->
-                <!--                    android:layout_marginLeft="10dp"-->
-                <!--                    android:text="Description: "-->
-                <!--                    android:textSize="20sp" />-->
-
-                <!--                <EditText-->
-                <!--                    android:id="@+id/description"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="150dp"-->
-                <!--                    android:layout_below="@id/question_heading"-->
-                <!--                    android:layout_marginTop="10dp"-->
-                <!--                    android:background="@drawable/edittext_background"-->
-                <!--                    android:gravity="top"-->
-                <!--                    android:hint="Description"-->
-                <!--                    android:paddingHorizontal="16dp"-->
-                <!--                    android:paddingVertical="10dp"-->
-                <!--                    android:textColor="@color/colorPrimaryDark" />-->
 
             </RelativeLayout>
 

@@ -259,7 +259,7 @@ public class TeacherScheduleFragment extends Fragment {
     private void openOptionMenu(View v, int position) {
 
         PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
-        popupMenu.getMenuInflater().inflate(R.menu.option_menu, popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.schedule_option_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

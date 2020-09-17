@@ -61,7 +61,8 @@
             android:layout_marginTop="10dp"
             android:text="Remark: Very Good, Keep it up."
             android:textColor="@color/grey"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/details2"
