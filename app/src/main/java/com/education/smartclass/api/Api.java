@@ -1,5 +1,7 @@
 package com.education.smartclass.api;
 
+import android.widget.RelativeLayout;
+
 import com.education.smartclass.models.ClassCSVDataBody;
 import com.education.smartclass.models.StudentCSVDataBody;
 import com.education.smartclass.models.TeacherCSVDataBody;
@@ -356,4 +358,24 @@ public interface Api {
     Call<MessageResponse> versionChecking(
             @Field("version") String version
     );
+
+    @Multipart
+    @POST("assignment/create")
+    Call<MessageResponse> postAssignment(
+            @Part("orgCode") RequestBody orgCode,
+            @Part("teacherCode") RequestBody teacherCode,
+            @Part("assignmentTitle") RequestBody assignmentTitle,
+            @Part("description") RequestBody description,
+            @Part("classAssignment") RequestBody classAssignment,
+            @Part("sectionAssignment") RequestBody sectionAssignment,
+            @Part("subjectAssignment") RequestBody subjectAssignment,
+            @Part("assignmentDate") RequestBody assignmentDate,
+            @Part("assignmentTime") RequestBody assignmentTime,
+            @Part("role") RequestBody role,
+            @Part("assignmentType") RequestBody assignmentType,
+            @Part MultipartBody.Part file
+    );
+
+//    @POST
+//    Call<>
 }
