@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -24,24 +26,21 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.TeacherClasses;
 import com.education.smartclass.models.TeacherSubjects;
 import com.education.smartclass.roles.teacher.model.FetchDropdownDetailsViewModel;
 import com.education.smartclass.roles.teacher.model.PostAssignmentViewModel;
-import com.education.smartclass.roles.teacher.model.PostQuestionViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -171,6 +170,7 @@ public class TeacherPostAssignmentFragment extends Fragment {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -180,42 +180,29 @@ public class TeacherPostAssignmentFragment extends Fragment {
                 ContentResolver contentResolver = getContext().getContentResolver();
                 MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
                 String extension = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+                Date date = Calendar.getInstance().getTime();
+                String name = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode() + "_" + className.getText().toString() + "_" + section.getText().toString()
+                        + "_" + date + "Assignment.";
+                byte[] byteArray = null;
                 if (extension.toLowerCase().equals("pdf")) {
                     type = "pdf";
-                    String PDFPATH = uri.getPath();
-                    File path = new File(PDFPATH);
-                    String namepdf = "newpdf";
-                    fileName.setText(path.getName());
-                    RequestBody Title = RequestBody.create(MediaType.parse("text/plain"),namepdf);
-                    RequestBody PDFreq = RequestBody.create(MediaType.parse("application/pdf"),path.getName());
-                    file = MultipartBody.Part.createFormData("file", Title + extension, PDFreq);
+                    InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+                    byteArray = new byte[inputStream.available()];
+                    inputStream.read(byteArray);
                 } else if (extension.toLowerCase().equals("jpg") || extension.toLowerCase().equals("jpeg") || extension.toLowerCase().equals("png")) {
                     type = "image";
-                    //                    Bitmap bitmap = BitmapFactory.decodeFileDescriptor(getActivity().getContentResolver()
-//                            .openFileDescriptor(data.getData(), "r").getFileDescriptor());
+                    Bitmap bitmap = BitmapFactory.decodeFileDescriptor(getActivity().getContentResolver().openFileDescriptor(data.getData(), "r").getFileDescriptor());
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] byteArray = stream.toByteArray();
-                    RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), byteArray);
-                    Date date = Calendar.getInstance().getTime();
-                    file = MultipartBody.Part.createFormData("file", date + "Assignment." + extension, requestBody);
-                    File path = new File(uri.getPath());
-                    fileName.setText(path.getName());
-//                }
-
-//                if (!mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)).equals("csv")) {
-//                    new SnackBar(relativeLayout, "Please upload csv file!");
-//                    return;
-//                }
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//                if (stream.toByteArray().length > 5220226) {
-//                    new SnackBar(relativeLayout, "Please upload image upto 5MB!");
-//                    return;
-//                }
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byteArray = stream.toByteArray();
                 } else {
                     new SnackBar(relativeLayout, "Please Select Image or PDF File!");
                     return;
                 }
+                RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), byteArray);
+                file = MultipartBody.Part.createFormData("file", name + extension, requestBody);
+                File path = new File(uri.getPath());
+                fileName.setText(path.getName());
                 new SnackBar(relativeLayout, "File Uploaded Successfully");
             } else {
                 new SnackBar(relativeLayout, "You haven't picked File.");

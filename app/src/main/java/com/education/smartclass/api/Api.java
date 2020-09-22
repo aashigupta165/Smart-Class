@@ -14,6 +14,7 @@ import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
 import com.education.smartclass.response.StudentScheduleResponse;
+import com.education.smartclass.response.TeacherAssignmentResponse;
 import com.education.smartclass.response.TeacherScheduleResponse;
 import com.education.smartclass.response.StudentList;
 import com.education.smartclass.response.TeacherList;
@@ -376,6 +377,21 @@ public interface Api {
             @Part MultipartBody.Part file
     );
 
-//    @POST
-//    Call<>
+    @FormUrlEncoded
+    @POST
+    Call<TeacherAssignmentResponse> teacherFetchAssignmentList(
+            @Field("orgCode") String orgCode,
+            @Field("role") String role,
+            @Field("teacherCode") String teacherCode
+    );
+
+    @FormUrlEncoded
+    @POST
+    Call<TeacherAssignmentResponse> studentFetchAssignmentList(
+            @Field("orgCode") String orgCode,
+            @Field("role") String role,
+            @Field("studentClass") String studentClass,
+            @Field("studentSection") String studentSection,
+            @Field("studentId") String studentId
+    );
 }
