@@ -18,7 +18,7 @@ public class TeacherFetchAssignmentListViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TeacherAssignmentDetailsList>> list = new MutableLiveData<>();
 
-    public void fetchDropdownDetails(String orgCode, String teacherCode) {
+    public void fetchAssignmentLists(String orgCode, String teacherCode) {
 
         Call<TeacherAssignmentResponse> call = RetrofitClient.getInstance().getApi().teacherFetchAssignmentList(orgCode, "Teacher", teacherCode);
         call.enqueue(new Callback<TeacherAssignmentResponse>() {

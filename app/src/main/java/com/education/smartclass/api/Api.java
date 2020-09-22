@@ -378,7 +378,7 @@ public interface Api {
     );
 
     @FormUrlEncoded
-    @POST
+    @POST("assignment/readAssignment")
     Call<TeacherAssignmentResponse> teacherFetchAssignmentList(
             @Field("orgCode") String orgCode,
             @Field("role") String role,
@@ -386,7 +386,7 @@ public interface Api {
     );
 
     @FormUrlEncoded
-    @POST
+    @POST("assignment/readAssignment")
     Call<TeacherAssignmentResponse> studentFetchAssignmentList(
             @Field("orgCode") String orgCode,
             @Field("role") String role,
