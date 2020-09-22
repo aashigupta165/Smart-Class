@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.education.smartclass.R;
 import com.education.smartclass.holder.TeacherAssignmentListHolder;
-import com.education.smartclass.models.TeacherAssignmentDetailsList;
+import com.education.smartclass.models.AssignmentDetailsList;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,9 +23,9 @@ import java.util.List;
 public class TeacherAssignmentListAdapter extends RecyclerView.Adapter<TeacherAssignmentListHolder> implements Filterable {
 
     private Context c;
-    private ArrayList<TeacherAssignmentDetailsList> teacherAssignmentDetailsLists;
+    private ArrayList<AssignmentDetailsList> teacherAssignmentDetailsLists;
 
-    private ArrayList<TeacherAssignmentDetailsList> filterList;
+    private ArrayList<AssignmentDetailsList> filterList;
 
     private TeacherAssignmentListHolder.OnItemClickListener mListener;
 
@@ -33,7 +33,7 @@ public class TeacherAssignmentListAdapter extends RecyclerView.Adapter<TeacherAs
         mListener = listener;
     }
 
-    public TeacherAssignmentListAdapter(Context c, ArrayList<TeacherAssignmentDetailsList> teacherAssignmentDetailsLists) {
+    public TeacherAssignmentListAdapter(Context c, ArrayList<AssignmentDetailsList> teacherAssignmentDetailsLists) {
         this.c = c;
         this.teacherAssignmentDetailsLists = teacherAssignmentDetailsLists;
         filterList = new ArrayList<>(teacherAssignmentDetailsLists);
@@ -74,7 +74,7 @@ public class TeacherAssignmentListAdapter extends RecyclerView.Adapter<TeacherAs
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            List<TeacherAssignmentDetailsList> filteredList = new ArrayList<>();
+            List<AssignmentDetailsList> filteredList = new ArrayList<>();
 
             if (constraint.equals("all")) {
                 filteredList = filterList;
@@ -82,7 +82,7 @@ public class TeacherAssignmentListAdapter extends RecyclerView.Adapter<TeacherAs
                 try {
                     SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");
                     Date now = datequery.parse(constraint.toString());
-                    for (TeacherAssignmentDetailsList teacherAssignmentDetailsList : filterList) {
+                    for (AssignmentDetailsList teacherAssignmentDetailsList : filterList) {
                         Date date = datequery.parse(teacherAssignmentDetailsList.getAssignmentDate());
                         if (now.compareTo(date) == 0) {
                             filteredList.add(teacherAssignmentDetailsList);

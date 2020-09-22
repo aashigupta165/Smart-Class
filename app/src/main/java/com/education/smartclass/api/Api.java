@@ -1,10 +1,9 @@
 package com.education.smartclass.api;
 
-import android.widget.RelativeLayout;
-
 import com.education.smartclass.models.ClassCSVDataBody;
 import com.education.smartclass.models.StudentCSVDataBody;
 import com.education.smartclass.models.TeacherCSVDataBody;
+import com.education.smartclass.response.AssignmentResponse;
 import com.education.smartclass.response.ClassList;
 import com.education.smartclass.response.DropdownDetails;
 import com.education.smartclass.response.FetchQuestionList;
@@ -14,7 +13,6 @@ import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
 import com.education.smartclass.response.StudentScheduleResponse;
-import com.education.smartclass.response.TeacherAssignmentResponse;
 import com.education.smartclass.response.TeacherScheduleResponse;
 import com.education.smartclass.response.StudentList;
 import com.education.smartclass.response.TeacherList;
@@ -379,7 +377,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("assignment/readAssignment")
-    Call<TeacherAssignmentResponse> teacherFetchAssignmentList(
+    Call<AssignmentResponse> teacherFetchAssignmentList(
             @Field("orgCode") String orgCode,
             @Field("role") String role,
             @Field("teacherCode") String teacherCode
@@ -387,7 +385,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("assignment/readAssignment")
-    Call<TeacherAssignmentResponse> studentFetchAssignmentList(
+    Call<AssignmentResponse> studentFetchAssignmentList(
             @Field("orgCode") String orgCode,
             @Field("role") String role,
             @Field("studentClass") String studentClass,

@@ -1,6 +1,6 @@
 package com.education.smartclass.models;
 
-public class TeacherAssignmentDetailsList {
+public class AssignmentDetailsList {
     private String assignmentId;
     private String assignmentTitle;
     private String classAssignment;
@@ -13,10 +13,10 @@ public class TeacherAssignmentDetailsList {
     private String submitCount;
     private String active;
 
-    public TeacherAssignmentDetailsList() {
+    public AssignmentDetailsList() {
     }
 
-    public TeacherAssignmentDetailsList(String assignmentId, String assignmentTitle, String classAssignment, String sectionAssignment, String subjectAssignment, String assignmentDate, String assignmentTime, String description, String file, String submitCount, String active) {
+    public AssignmentDetailsList(String assignmentId, String assignmentTitle, String classAssignment, String sectionAssignment, String subjectAssignment, String assignmentDate, String assignmentTime, String description, String file, String submitCount, String active) {
         this.assignmentId = assignmentId;
         this.assignmentTitle = assignmentTitle;
         this.classAssignment = classAssignment;
