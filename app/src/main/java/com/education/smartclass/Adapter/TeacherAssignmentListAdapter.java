@@ -78,48 +78,6 @@ public class TeacherAssignmentListAdapter extends RecyclerView.Adapter<TeacherAs
 
             if (constraint.equals("all")) {
                 filteredList = filterList;
-            } else if (constraint.equals("filter1")) {
-                try {
-                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                    Date now = new Date();
-                    datequery.format(now);
-                    for (TeacherAssignmentDetailsList teacherAssignmentDetailsList : filterList) {
-                        Date date = datequery.parse(teacherAssignmentDetailsList.getAssignmentDate() + " " + teacherAssignmentDetailsList.getAssignmentTime());
-                        if (now.before(date)) {
-                            filteredList.add(teacherAssignmentDetailsList);
-                        }
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            } else if (constraint.equals("filter2")) {
-                try {
-                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                    Date now = new Date();
-                    datequery.format(now);
-                    for (TeacherAssignmentDetailsList teacherAssignmentDetailsList : filterList) {
-                        Date date = datequery.parse(teacherAssignmentDetailsList.getAssignmentDate() + " " + teacherAssignmentDetailsList.getAssignmentTime());
-                        if (now.after(date)) {
-                            filteredList.add(teacherAssignmentDetailsList);
-                        }
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            } else if (constraint.equals("home_filter")) {
-                try {
-                    SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                    Date now = new Date(System.currentTimeMillis() - 3600000);
-                    datequery.format(now);
-                    for (TeacherAssignmentDetailsList teacherAssignmentDetailsList : filterList) {
-                        Date date = datequery.parse(teacherAssignmentDetailsList.getAssignmentDate() + " " + teacherAssignmentDetailsList.getAssignmentTime());
-                        if (now.before(date)) {
-                            filteredList.add(teacherAssignmentDetailsList);
-                        }
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
             } else {
                 try {
                     SimpleDateFormat datequery = new SimpleDateFormat("dd-MM-yyyy");

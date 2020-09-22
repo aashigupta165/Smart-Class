@@ -394,4 +394,12 @@ public interface Api {
             @Field("studentSection") String studentSection,
             @Field("studentId") String studentId
     );
+
+    @FormUrlEncoded
+    @POST("assignment/delete")
+    Call<MessageResponse> deleteAssignment(
+            @Field("assignmentId") String assignmentId,
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode
+    );
 }

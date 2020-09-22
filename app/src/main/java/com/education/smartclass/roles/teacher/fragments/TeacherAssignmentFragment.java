@@ -1,6 +1,7 @@
 package com.education.smartclass.roles.teacher.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,14 +26,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.education.smartclass.Adapter.QuestionListAdapter;
 import com.education.smartclass.Adapter.TeacherAssignmentListAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.holder.QuestionListHolder;
 import com.education.smartclass.holder.TeacherAssignmentListHolder;
-import com.education.smartclass.models.Question;
 import com.education.smartclass.models.TeacherAssignmentDetailsList;
-import com.education.smartclass.roles.teacher.model.FetchQuestionViewModel;
+import com.education.smartclass.roles.teacher.model.DeleteAssignmentViewModel;
+import com.education.smartclass.roles.teacher.model.DeleteReplyViewModel;
 import com.education.smartclass.roles.teacher.model.TeacherFetchAssignmentListViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SessionExpire;
@@ -49,10 +48,15 @@ public class TeacherAssignmentFragment extends Fragment {
     private RecyclerView assignment_list;
 
     private TeacherFetchAssignmentListViewModel fetchAssignmentListViewModel;
+    private DeleteAssignmentViewModel deleteAssignmentViewModel;
 
     private ArrayList<TeacherAssignmentDetailsList> teacherAssignmentDetailsListArrayList;
 
     private TeacherAssignmentListAdapter assignmentListAdapter;
+
+    private ProgressDialog progressDialog;
+
+    private int positionDelete;
 
     private RelativeLayout relativeLayout;
 
@@ -66,6 +70,8 @@ public class TeacherAssignmentFragment extends Fragment {
         no_data.setText("No Assignment Available");
         assignment_list = view.findViewById(R.id.question_list);
         relativeLayout = view.findViewById(R.id.relativeLayout);
+
+        progressDialog = new ProgressDialog(getContext());
 
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
@@ -96,10 +102,6 @@ public class TeacherAssignmentFragment extends Fragment {
         Menu menu = popupMenu.getMenu();
         menu.findItem(R.id.coming).setVisible(false);
         menu.findItem(R.id.previous).setVisible(false);
-        menu.findItem(R.id.by_teacher).setVisible(true);
-        menu.findItem(R.id.by_student).setVisible(true);
-        menu.findItem(R.id.by_subject).setVisible(true);
-        menu.findItem(R.id.other).setVisible(true);
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -108,18 +110,6 @@ public class TeacherAssignmentFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.all:
                         assignmentListAdapter.getFilter().filter("all");
-                        return true;
-                    case R.id.by_teacher:
-                        assignmentListAdapter.getFilter().filter("filter1");
-                        return true;
-                    case R.id.by_student:
-                        assignmentListAdapter.getFilter().filter("filter2");
-                        return true;
-                    case R.id.by_subject:
-                        assignmentListAdapter.getFilter().filter("filter3");
-                        return true;
-                    case R.id.other:
-                        assignmentListAdapter.getFilter().filter("filter4");
                         return true;
                     case R.id.by_date:
                         selectDate();
@@ -150,6 +140,7 @@ public class TeacherAssignmentFragment extends Fragment {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener, year, month, day);
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
 
@@ -178,6 +169,31 @@ public class TeacherAssignmentFragment extends Fragment {
                         break;
                     default:
                         new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
+
+        deleteAssignmentViewModel = ViewModelProviders.of(this).get(DeleteAssignmentViewModel.class);
+        LiveData<String> msgs = deleteAssignmentViewModel.getMessage();
+
+        msgs.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "assignment_deleted":
+                        teacherAssignmentDetailsListArrayList.remove(positionDelete);
+                        assignmentListAdapter.notifyItemRemoved(positionDelete);
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
                 }
             }
         });
@@ -280,13 +296,12 @@ public class TeacherAssignmentFragment extends Fragment {
 
     private void deleteItem(int position) {
 
-//        progressDialog.setMessage("Deleting...");
-//        progressDialog.show();
-//
-//        String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
-//
-//        positionDelete = position;
-//
-//        deleteReplyViewModel.delete(orgCode, id, replyArrayList.get(position).getReplyId());
+        progressDialog.setMessage("Deleting...");
+        progressDialog.show();
+
+        positionDelete = position;
+
+        deleteAssignmentViewModel.delete(teacherAssignmentDetailsListArrayList.get(position).getAssignmentId(), SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
+                SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
     }
 }
