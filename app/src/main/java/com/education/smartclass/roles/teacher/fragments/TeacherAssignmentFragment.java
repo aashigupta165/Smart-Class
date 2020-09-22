@@ -1,11 +1,15 @@
 package com.education.smartclass.roles.teacher.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,12 +35,12 @@ import com.education.smartclass.R;
 import com.education.smartclass.holder.TeacherAssignmentListHolder;
 import com.education.smartclass.models.TeacherAssignmentDetailsList;
 import com.education.smartclass.roles.teacher.model.DeleteAssignmentViewModel;
-import com.education.smartclass.roles.teacher.model.DeleteReplyViewModel;
 import com.education.smartclass.roles.teacher.model.TeacherFetchAssignmentListViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -238,7 +242,7 @@ public class TeacherAssignmentFragment extends Fragment {
 
                     @Override
                     public void onDownload(View view, int position) {
-
+                        download(position);
                     }
 
                     @Override
@@ -303,5 +307,18 @@ public class TeacherAssignmentFragment extends Fragment {
 
         deleteAssignmentViewModel.delete(teacherAssignmentDetailsListArrayList.get(position).getAssignmentId(), SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
                 SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode());
+    }
+
+    private void download(int position) {
+        DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(teacherAssignmentDetailsListArrayList.get(position).getFile());
+        File file = new File(uri.getPath());
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setTitle(file.getName());
+        request.setDescription("Downloading");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setVisibleInDownloadsUi(false);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, file.getName());
+        downloadManager.enqueue(request);
     }
 }
