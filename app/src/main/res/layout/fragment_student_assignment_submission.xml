@@ -64,7 +64,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/document_download"
+        android:id="@+id/download_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/attachments_heading"
@@ -79,7 +79,7 @@
         android:id="@+id/submission_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/document_download"
+        android:layout_below="@+id/download_link"
         android:layout_marginTop="50dp"
         android:text="Submission"
         android:textColor="@color/colorPrimary"

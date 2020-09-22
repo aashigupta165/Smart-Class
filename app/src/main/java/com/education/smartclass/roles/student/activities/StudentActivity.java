@@ -61,9 +61,11 @@ public class StudentActivity extends AppCompatActivity {
 
         MenuItem questionare = menu.findItem(R.id.questionaire);
         MenuItem addquestion = menu.findItem(R.id.new_question);
+        MenuItem assignment = menu.findItem(R.id.assignment);
 
         questionare.setVisible(true);
         addquestion.setVisible(true);
+        assignment.setVisible(true);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
@@ -74,7 +76,7 @@ public class StudentActivity extends AppCompatActivity {
         toggle.syncState();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.home, R.id.profile, R.id.schedule, R.id.new_question, R.id.questionaire)
+                R.id.home, R.id.profile, R.id.schedule, R.id.new_question, R.id.questionaire, R.id.assignment)
                 .setDrawerLayout(drawerLayout)
                 .build();
 

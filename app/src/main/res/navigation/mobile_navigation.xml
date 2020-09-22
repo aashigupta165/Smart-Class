@@ -51,5 +51,5 @@
 
     <fragment
         android:id="@+id/assignment"
-        android:name="com.education.smartclass.roles.teacher.fragments.TeacherAssignmentFragment" />
+        android:name="com.education.smartclass.roles.common.fragments.AssignmentSelectionFragment" />
 </navigation>
