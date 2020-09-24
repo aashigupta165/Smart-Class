@@ -8,159 +8,194 @@
     android:padding="20dp"
     tools:context=".roles.teacher.fragments.TeacherQuestionRepliesFragment">
 
-    <TextView
-        android:id="@+id/subject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Subject"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/subject"
-        android:layout_marginTop="5dp"
-        android:text="Uploaded at: time(date)"
-        android:textColor="@color/grey" />
-
-    <ImageView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_missing" />
-
-    <TextView
-        android:id="@+id/title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/time"
-        android:layout_marginTop="20dp"
-        android:text="what is your Name? How you Do this? Meet me at 11 today!"
-        android:textSize="20sp" />
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="16dp"
-        android:autoLink="web"
-        android:text="Description: bfbtfbtgb cjndkucvjbgv cjbfcgyegfbce dbjcubhwyecf"
-        android:textColor="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/attachments_heading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/description"
-        android:layout_marginTop="20dp"
-        android:text="Attachments"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/download_link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/attachments_heading"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_assignment"
-        android:gravity="center_vertical"
-        android:text="Download"
-        android:textAlignment="gravity" />
-
-    <TextView
-        android:id="@+id/submission_heading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/download_link"
-        android:layout_marginTop="50dp"
-        android:text="Submission"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/document_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/submission_heading"
-        android:layout_marginTop="10dp"
-        android:autoLink="web"
-        android:text="Description: ye chcuye chrnhug hugyxd gheubdrugvgytvhhcgcvhvhg"
-        android:textColor="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/document"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/document_description"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/ic_assignment"
-        android:gravity="center_vertical"
-        android:text="Document"
-        android:textAlignment="gravity" />
-
-    <ImageView
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/document_description"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_delete" />
-
-    <TextView
-        android:id="@+id/document_upload_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/document"
-        android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/ic_add"
-        android:gravity="center_vertical"
-        android:text="Upload Document"
-        android:textAlignment="gravity" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/document_upload_btn"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/description_text"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="@drawable/edittext_background"
-            android:hint="Description"
-            android:inputType="text"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp"
-            android:singleLine="true"
-            android:textColor="@color/colorPrimaryDark" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/post_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/post_btn_background"
-            android:drawableLeft="@drawable/ic_send"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="12dp" />
+            <TextView
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subject"
+                android:layout_marginTop="5dp"
+                android:text="Uploaded at: time(date)"
+                android:textColor="@color/grey" />
+
+            <ImageView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_missing" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/time"
+                android:layout_marginTop="20dp"
+                android:text="what is your Name? How you Do this? Meet me at 11 today!"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_marginTop="16dp"
+                android:autoLink="web"
+                android:text="Description: bfbtfbtgb cjndkucvjbgv cjbfcgyegfbce dbjcubhwyecf"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/attachments_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:layout_marginTop="20dp"
+                android:text="Attachments"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/download_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/attachments_heading"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_assignment"
+                android:gravity="center_vertical"
+                android:text="Download"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/submission_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/download_link"
+                android:layout_marginTop="50dp"
+                android:text="Submission"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/submission_heading"
+                android:layout_marginTop="50dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/student_document_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/submission_heading"
+                android:layout_marginTop="10dp"
+                android:autoLink="web"
+                android:text="Description: ye chcuye chrnhug hugyxd gheubdrugvgytvhhcgcvhvhg"
+                android:textColor="@android:color/darker_gray"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/student_document"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/student_document_description"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_assignment"
+                android:gravity="center_vertical"
+                android:text="Document"
+                android:textAlignment="gravity"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/student_document"
+                android:layout_marginTop="10dp"
+                android:text="Remark"
+                android:textColor="@color/colorAccent"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_document_description"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_delete"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/document_upload_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/student_document"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Upload Document"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:singleLine="true"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/student_assignment_description_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/document_upload_btn"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Description(Optional)"
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/submitbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/student_assignment_description_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_background"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="5dp"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

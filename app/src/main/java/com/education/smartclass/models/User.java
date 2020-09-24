@@ -24,6 +24,7 @@ public class User {
     private String teacherEmail;
     private String teacherMobile;
 
+    private String studentId;
     private String studentName;
     private String studentRollNo;
     private String studentClass;
@@ -37,7 +38,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, String mobile, String loginId, String email, String role, String orgName, String orgCode, String orgType, String orgAddress, String orgLogo, String orgEmail, String orgMobile, String teacherName, String teacherAge, String teacherDesignation, String teacherCode, String teacherGender, String teacherEmail, String teacherMobile, String studentName, String studentRollNo, String studentClass, String studentSection, String studentFatherName, String studentEmail, String studentMobile, String studentDOB, String studentGender) {
+    public User(String name, String mobile, String loginId, String email, String role, String orgName, String orgCode, String orgType, String orgAddress, String orgLogo, String orgEmail, String orgMobile, String teacherName, String teacherAge, String teacherDesignation, String teacherCode, String teacherGender, String teacherEmail, String teacherMobile, String studentId, String studentName, String studentRollNo, String studentClass, String studentSection, String studentFatherName, String studentEmail, String studentMobile, String studentDOB, String studentGender) {
         this.name = name;
         this.mobile = mobile;
         this.loginId = loginId;
@@ -57,6 +58,7 @@ public class User {
         this.teacherGender = teacherGender;
         this.teacherEmail = teacherEmail;
         this.teacherMobile = teacherMobile;
+        this.studentId = studentId;
         this.studentName = studentName;
         this.studentRollNo = studentRollNo;
         this.studentClass = studentClass;
@@ -290,5 +292,13 @@ public class User {
 
     public void setLoginId(String loginId) {
         this.loginId = loginId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }

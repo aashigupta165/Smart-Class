@@ -55,6 +55,7 @@ public class SharedPrefManager {
             editor.putString("orgLogo", user.getOrgLogo());
             editor.putString("orgName", user.getOrgName());
         } else if (user.getRole().equals("Student")) {
+            editor.putString("studentId", user.getStudentId());
             editor.putString("studentName", user.getStudentName());
             editor.putString("studentRollNo", user.getStudentRollNo());
             editor.putString("studentClass", user.getStudentClass());
@@ -101,6 +102,7 @@ public class SharedPrefManager {
                 sharedPreferences.getString("teacherGender", null),
                 sharedPreferences.getString("teacherEmail", null),
                 sharedPreferences.getString("teacherMobile", null),
+                sharedPreferences.getString("studentId", null),
                 sharedPreferences.getString("studentName", null),
                 sharedPreferences.getString("studentRollNo", null),
                 sharedPreferences.getString("studentClass", null),

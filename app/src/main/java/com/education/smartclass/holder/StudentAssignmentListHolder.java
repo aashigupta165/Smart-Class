@@ -20,9 +20,9 @@ public class StudentAssignmentListHolder extends RecyclerView.ViewHolder {
     public TextView time;
     public ImageView status;
     public TextView title;
-    public RelativeLayout desc_card;
-    public ExpandableRelativeLayout desc_layout;
-    public TextView description;
+    public RelativeLayout remark_card;
+    public ExpandableRelativeLayout expandable_remark;
+    public TextView remark;
     public ImageView dragbtn;
 
     public interface OnItemClickListener {
@@ -39,10 +39,10 @@ public class StudentAssignmentListHolder extends RecyclerView.ViewHolder {
         this.time = itemView.findViewById(R.id.time);
         this.status = itemView.findViewById(R.id.status);
         this.title = itemView.findViewById(R.id.title);
-        this.desc_card = itemView.findViewById(R.id.desc_card);
-        this.desc_layout = itemView.findViewById(R.id.expandable_desc);
-        desc_layout.collapse();
-        this.description = itemView.findViewById(R.id.desc);
+        this.remark_card = itemView.findViewById(R.id.remark_card);
+        this.expandable_remark = itemView.findViewById(R.id.expandable_remark);
+        expandable_remark.collapse();
+        this.remark = itemView.findViewById(R.id.remark);
         this.dragbtn = itemView.findViewById(R.id.dragbtn);
 
         cardView.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class StudentAssignmentListHolder extends RecyclerView.ViewHolder {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         listener.onDrag(v, position);
-                        desc_layout.toggle();
+                        expandable_remark.toggle();
                     }
                 }
                 return true;
