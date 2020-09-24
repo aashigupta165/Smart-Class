@@ -1,14 +1,17 @@
 package com.education.smartclass.roles.student.fragments;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,6 +168,33 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
                 deleteAssignment();
             }
         });
+
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadAssignment(getfile);
+            }
+        });
+
+        student_document.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadAssignment(studentAssignmentSubmissionDetail.getStudentFile());
+            }
+        });
+    }
+
+    private void downloadAssignment(String fileName) {
+        DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(fileName);
+        File file = new File(uri.getPath());
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setTitle(file.getName());
+        request.setDescription("Downloading");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setVisibleInDownloadsUi(false);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, file.getName());
+        downloadManager.enqueue(request);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
