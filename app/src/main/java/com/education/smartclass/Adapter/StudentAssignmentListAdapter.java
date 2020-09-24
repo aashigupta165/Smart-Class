@@ -61,7 +61,7 @@ public class StudentAssignmentListAdapter extends RecyclerView.Adapter<StudentAs
         if (studentAssignmentDetailsLists.get(position).getDescription().equals("")) {
             studentAssignmentListHolder.remark_card.setVisibility(View.GONE);
         } else {
-            studentAssignmentListHolder.remark.setText(studentAssignmentDetailsLists.get(position).getDescription());
+            studentAssignmentListHolder.remark.setText(studentAssignmentDetailsLists.get(position).getTeacherRemark());
         }
     }
 

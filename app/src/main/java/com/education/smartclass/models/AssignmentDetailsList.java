@@ -6,6 +6,7 @@ public class AssignmentDetailsList {
     private String classAssignment;
     private String sectionAssignment;
     private String subjectAssignment;
+    private String teacherRemark;
     private String assignmentDate;
     private String assignmentTime;
     private String description;
@@ -16,12 +17,13 @@ public class AssignmentDetailsList {
     public AssignmentDetailsList() {
     }
 
-    public AssignmentDetailsList(String assignmentId, String assignmentTitle, String classAssignment, String sectionAssignment, String subjectAssignment, String assignmentDate, String assignmentTime, String description, String file, String submitCount, String active) {
+    public AssignmentDetailsList(String assignmentId, String assignmentTitle, String classAssignment, String sectionAssignment, String subjectAssignment, String teacherRemark, String assignmentDate, String assignmentTime, String description, String file, String submitCount, String active) {
         this.assignmentId = assignmentId;
         this.assignmentTitle = assignmentTitle;
         this.classAssignment = classAssignment;
         this.sectionAssignment = sectionAssignment;
         this.subjectAssignment = subjectAssignment;
+        this.teacherRemark = teacherRemark;
         this.assignmentDate = assignmentDate;
         this.assignmentTime = assignmentTime;
         this.description = description;
@@ -116,5 +118,13 @@ public class AssignmentDetailsList {
 
     public void setActive(String active) {
         this.active = active;
+    }
+
+    public String getTeacherRemark() {
+        return teacherRemark;
+    }
+
+    public void setTeacherRemark(String teacherRemark) {
+        this.teacherRemark = teacherRemark;
     }
 }
