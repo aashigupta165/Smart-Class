@@ -12,6 +12,7 @@ import com.education.smartclass.response.FetchSubjectList;
 import com.education.smartclass.response.LoginResponse;
 import com.education.smartclass.response.MessageResponse;
 import com.education.smartclass.response.OrganisationList;
+import com.education.smartclass.response.TeacherFetchStudentAssignmentListResponse;
 import com.education.smartclass.response.StudentScheduleResponse;
 import com.education.smartclass.response.TeacherScheduleResponse;
 import com.education.smartclass.response.StudentList;
@@ -399,5 +400,13 @@ public interface Api {
             @Field("assignmentId") String assignmentId,
             @Field("orgCode") String orgCode,
             @Field("teacherCode") String teacherCode
+    );
+
+    @FormUrlEncoded
+    @POST("assignment/readStudent")
+    Call<TeacherFetchStudentAssignmentListResponse> studentAssignmentList(
+            @Field("orgCode") String orgCode,
+            @Field("assignmentId") String assignmentId,
+            @Field("role") String role
     );
 }

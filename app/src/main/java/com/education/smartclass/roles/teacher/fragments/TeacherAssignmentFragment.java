@@ -263,18 +263,14 @@ public class TeacherAssignmentFragment extends Fragment {
 
         Bundle bundle = new Bundle();
 
-//        bundle.putString("questionId", questionArrayList.get(position).getQuestionId());
-//        bundle.putString("question", questionArrayList.get(position).getQuestion());
-//        bundle.putString("questionType", questionArrayList.get(position).getPurposeOfQuestion());
-//        bundle.putString("askerName", questionArrayList.get(position).getQuestionAskerName());
-//        bundle.putString("askerRole", questionArrayList.get(position).getQuestionAskerRole());
-//        bundle.putString("askerClass", questionArrayList.get(position).getQuestionForClass());
-//        bundle.putString("askerSection", questionArrayList.get(position).getQuestionForSection());
-//        bundle.putString("date", questionArrayList.get(position).getQuestionDateTime());
+        bundle.putString("assignmentId", assignmentDetailsListArrayList.get(position).getAssignmentId());
+        bundle.putString("assignmentTitle", assignmentDetailsListArrayList.get(position).getAssignmentTitle());
+        bundle.putString("assignmentDate", assignmentDetailsListArrayList.get(position).getAssignmentDate());
+        bundle.putString("assignmentTime", assignmentDetailsListArrayList.get(position).getAssignmentTime());
 
-//        TeacherQuestionRepliesFragment fragment = new TeacherQuestionRepliesFragment();
-//        fragment.setArguments(bundle);
-//        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
+        StudentAssignmentListFragment fragment = new StudentAssignmentListFragment();
+        fragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit();
     }
 
     private void delete(int position) {
