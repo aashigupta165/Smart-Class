@@ -25,6 +25,7 @@ import com.education.smartclass.Adapter.TeacherFetchStudentAssignmentListAdapter
 import com.education.smartclass.R;
 import com.education.smartclass.holder.TeacherFetchStudentAssignmentListHolder;
 import com.education.smartclass.models.TeacherFetchStudentAssignmentListDetails;
+import com.education.smartclass.roles.teacher.model.PostAssignmentRemarkViewModel;
 import com.education.smartclass.roles.teacher.model.StudentAssignmentListViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SessionExpire;
@@ -44,6 +45,7 @@ public class StudentAssignmentListFragment extends Fragment {
     private ArrayList<TeacherFetchStudentAssignmentListDetails> teacherFetchStudentAssignmentListDetailsArrayList;
 
     private TeacherFetchStudentAssignmentListAdapter teacherFetchStudentAssignmentListAdapter;
+    private PostAssignmentRemarkViewModel postAssignmentRemarkViewModel;
 
     private StudentAssignmentListViewModel studentAssignmentListViewModel;
 
@@ -152,6 +154,30 @@ public class StudentAssignmentListFragment extends Fragment {
                 }
             }
         });
+
+        postAssignmentRemarkViewModel = ViewModelProviders.of(this).get(PostAssignmentRemarkViewModel.class);
+        LiveData<String> msg = postAssignmentRemarkViewModel.getMessage();
+
+        msg.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch (s) {
+                    case "remark_saved":
+                        new SnackBar(relativeLayout, "Remark Saved.");
+                        studentAssignmentListViewModel.fetchAssignments(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), getid);
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Please Try Again Later!");
+                }
+            }
+        });
     }
 
     private void assignmentListSetUp() {
@@ -179,15 +205,28 @@ public class StudentAssignmentListFragment extends Fragment {
 
                     @Override
                     public void addRemark(View view, int position) {
-                        postRemark(position);
+
+                    }
+
+                    @Override
+                    public void onPostRemark(View view, int position, String message) {
+                        postRemark(position, message);
                     }
                 });
             }
         });
     }
 
-    private void postRemark(int position) {
+    private void postRemark(int position, String message) {
 
+        if (message.equals("")) {
+            new SnackBar(relativeLayout, "Remark id Empty!");
+            return;
+        }
+
+        postAssignmentRemarkViewModel.postRemark(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
+                SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode(), getid,
+                teacherFetchStudentAssignmentListDetailsArrayList.get(position).getStudentId(), message);
     }
 
     private void download(int position) {

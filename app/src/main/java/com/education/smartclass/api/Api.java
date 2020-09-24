@@ -409,4 +409,14 @@ public interface Api {
             @Field("assignmentId") String assignmentId,
             @Field("role") String role
     );
+
+    @FormUrlEncoded
+    @POST("assignment/giveRemark")
+    Call<MessageResponse> postRemark(
+            @Field("orgCode") String orgCode,
+            @Field("teacherCode") String teacherCode,
+            @Field("assignmentId") String assignmentId,
+            @Field("studentId") String studentId,
+            @Field("teacherRemark") String teacherRemark
+    );
 }

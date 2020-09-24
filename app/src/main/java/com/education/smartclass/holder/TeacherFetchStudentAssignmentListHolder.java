@@ -1,7 +1,9 @@
 package com.education.smartclass.holder;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,11 +23,16 @@ public class TeacherFetchStudentAssignmentListHolder extends RecyclerView.ViewHo
     public TextView remark;
     public TextView download;
     public TextView add_remark;
+    public LinearLayout post_remark;
+    public EditText remark_edittext;
+    public ImageView send;
 
     public interface OnItemClickListener {
         void onDownload(View view, int position);
 
         void addRemark(View view, int position);
+
+        void onPostRemark(View view, int position, String message);
     }
 
     public TeacherFetchStudentAssignmentListHolder(@NonNull View itemView, final TeacherFetchStudentAssignmentListHolder.OnItemClickListener listener) {
@@ -39,6 +46,9 @@ public class TeacherFetchStudentAssignmentListHolder extends RecyclerView.ViewHo
         this.remark = itemView.findViewById(R.id.remark);
         this.download = itemView.findViewById(R.id.download_link);
         this.add_remark = itemView.findViewById(R.id.add_remark);
+        this.post_remark = itemView.findViewById(R.id.post_remark);
+        this.remark_edittext = itemView.findViewById(R.id.remark_edittext);
+        this.send = itemView.findViewById(R.id.send);
 
         download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,12 +68,24 @@ public class TeacherFetchStudentAssignmentListHolder extends RecyclerView.ViewHo
                 if (listener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        post_remark.setVisibility(View.VISIBLE);
+                        add_remark.setVisibility(View.GONE);
                         listener.addRemark(v, position);
                     }
                 }
             }
         });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onPostRemark(v, position, remark_edittext.getText().toString().trim());
+                    }
+                }
+            }
+        });
     }
-
-
 }

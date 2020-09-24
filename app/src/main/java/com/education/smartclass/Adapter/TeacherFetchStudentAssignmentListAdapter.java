@@ -43,10 +43,9 @@ public class TeacherFetchStudentAssignmentListAdapter extends RecyclerView.Adapt
         teacherFetchStudentAssignmentListHolder.name_roll.setText(teacherFetchStudentAssignmentListDetails.get(position).getStudentName() + "(" +
                 teacherFetchStudentAssignmentListDetails.get(position).getStudentRollNo() + ")");
         if (teacherFetchStudentAssignmentListDetails.get(position).getResponseActive().equals("true")) {
-            teacherFetchStudentAssignmentListHolder.card.setEnabled(true);
             teacherFetchStudentAssignmentListHolder.card.setCardBackgroundColor(ContextCompat.getColor(c, R.color.primaryLight));
-            teacherFetchStudentAssignmentListHolder.download.setEnabled(true);
-            teacherFetchStudentAssignmentListHolder.add_remark.setEnabled(true);
+            teacherFetchStudentAssignmentListHolder.download.setVisibility(View.VISIBLE);
+            teacherFetchStudentAssignmentListHolder.add_remark.setVisibility(View.VISIBLE);
             teacherFetchStudentAssignmentListHolder.time.setText("Uploaded at: " + teacherFetchStudentAssignmentListDetails.get(position).getStudentTime() + "(" +
                     teacherFetchStudentAssignmentListDetails.get(position).getStudentDate());
             teacherFetchStudentAssignmentListHolder.status.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.ic_submit));
@@ -64,9 +63,8 @@ public class TeacherFetchStudentAssignmentListAdapter extends RecyclerView.Adapt
             }
         } else {
             teacherFetchStudentAssignmentListHolder.status.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.ic_missing));
-            teacherFetchStudentAssignmentListHolder.card.setEnabled(false);
-            teacherFetchStudentAssignmentListHolder.download.setEnabled(false);
-            teacherFetchStudentAssignmentListHolder.add_remark.setEnabled(false);
+            teacherFetchStudentAssignmentListHolder.download.setVisibility(View.GONE);
+            teacherFetchStudentAssignmentListHolder.add_remark.setVisibility(View.GONE);
         }
     }
 
