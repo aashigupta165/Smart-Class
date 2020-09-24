@@ -30,6 +30,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.education.smartclass.R;
 import com.education.smartclass.models.StudentAssignmentSubmissionDetails;
+import com.education.smartclass.roles.student.model.DeleteAssignmentViewModel;
 import com.education.smartclass.roles.student.model.StudentAssignmentDetailViewModel;
 import com.education.smartclass.roles.student.model.SubmitAssignmentViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
@@ -61,6 +62,7 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
 
     private StudentAssignmentDetailViewModel studentAssignmentDetailViewModel;
     private SubmitAssignmentViewModel submitAssignmentViewModel;
+    private DeleteAssignmentViewModel deleteAssignmentViewModel;
 
     private MultipartBody.Part file;
     private String type;
@@ -154,6 +156,13 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 submitAssignment();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteAssignment();
             }
         });
     }
@@ -257,6 +266,37 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
                 }
             }
         });
+
+        deleteAssignmentViewModel = ViewModelProviders.of(this).get(DeleteAssignmentViewModel.class);
+        LiveData<String> msgs = deleteAssignmentViewModel.getMessage();
+
+        msgs.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                progressDialog.dismiss();
+                switch (s) {
+                    case "assignment_response_deleted":
+                        document_upload_btn.setVisibility(View.VISIBLE);
+                        student_assignment_description_btn.setVisibility(View.VISIBLE);
+                        submitbtn.setVisibility(View.VISIBLE);
+                        status.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_missing));
+                        student_document.setVisibility(View.GONE);
+                        student_document_description.setVisibility(View.GONE);
+                        delete.setVisibility(View.GONE);
+                        remark.setVisibility(View.GONE);
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
     }
 
     private void dataSetup() {
@@ -300,5 +340,14 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
         submitAssignmentViewModel.submitAssignment(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
                 getid, SharedPrefManager.getInstance(getContext()).getUser().getStudentId(), student_document_description.getText().toString(),
                 type, file);
+    }
+
+    private void deleteAssignment() {
+
+        progressDialog.setMessage("Deleting...");
+        progressDialog.show();
+
+        deleteAssignmentViewModel.deleteAssignment(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(), getid,
+                SharedPrefManager.getInstance(getContext()).getUser().getStudentId());
     }
 }
