@@ -429,4 +429,26 @@ public interface Api {
             @Field("role") String role,
             @Field("studentId") String studentId
     );
+
+    @Multipart
+    @POST("assignment/submitAnswer")
+    Call<MessageResponse> submitAssignment(
+            @Part("orgCode") RequestBody orgCode,
+            @Part("assignmentId") RequestBody assignmentId,
+            @Part("studentId") RequestBody studentId,
+            @Part("studentDescription") RequestBody studentDescription,
+            @Part("submitDate") RequestBody submitDate,
+            @Part("submitTime") RequestBody submitTime,
+            @Part("role") RequestBody role,
+            @Part("assignmentType") RequestBody assignmentType,
+            @Part MultipartBody.Part file
+    );
+
+    @FormUrlEncoded
+    @POST("assignment/deleteAnswer")
+    Call<MessageResponse> studentDeleteAssignment(
+            @Field("orgCode") String orgCode,
+            @Field("assignmentId") String assignmentId,
+            @Field("studentId") String studentId
+    );
 }

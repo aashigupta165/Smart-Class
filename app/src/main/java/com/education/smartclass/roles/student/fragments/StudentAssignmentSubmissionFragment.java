@@ -1,34 +1,50 @@
 package com.education.smartclass.roles.student.fragments;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.education.smartclass.Adapter.StudentAssignmentListAdapter;
 import com.education.smartclass.R;
-import com.education.smartclass.holder.StudentAssignmentListHolder;
-import com.education.smartclass.models.AssignmentDetailsList;
 import com.education.smartclass.models.StudentAssignmentSubmissionDetails;
 import com.education.smartclass.roles.student.model.StudentAssignmentDetailViewModel;
-import com.education.smartclass.roles.student.model.StudentFetchAssignmentListViewModel;
+import com.education.smartclass.roles.student.model.SubmitAssignmentViewModel;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.education.smartclass.utils.SessionExpire;
 import com.education.smartclass.utils.SnackBar;
 
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Date;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class StudentAssignmentSubmissionFragment extends Fragment {
 
@@ -39,11 +55,30 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
 
     private RelativeLayout relativeLayout;
 
+    private ProgressDialog progressDialog;
+
     private StudentAssignmentSubmissionDetails studentAssignmentSubmissionDetail;
 
     private StudentAssignmentDetailViewModel studentAssignmentDetailViewModel;
+    private SubmitAssignmentViewModel submitAssignmentViewModel;
+
+    private MultipartBody.Part file;
+    private String type;
 
     String getid, gettitle, getsubject, getdate, gettime, getdescription, getfile, getactive;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getParentFragmentManager().popBackStack();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_assignment_submission, container, false);
@@ -64,7 +99,10 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
         submitbtn = view.findViewById(R.id.submitbtn);
         relativeLayout = view.findViewById(R.id.relativeLayout);
 
+        progressDialog = new ProgressDialog(getContext());
+
         dataObserver();
+        buttonClickEvents();
 
         Bundle bundle = this.getArguments();
 
@@ -100,6 +138,68 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
         return view;
     }
 
+    private void buttonClickEvents() {
+
+        document_upload_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(Intent.createChooser(intent, "Select File"), 1);
+            }
+        });
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitAssignment();
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
+                Uri uri = data.getData();
+                ContentResolver contentResolver = getContext().getContentResolver();
+                MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+                String extension = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+                Date date = Calendar.getInstance().getTime();
+                String name = SharedPrefManager.getInstance(getContext()).getUser().getStudentName() + "_" +
+                        SharedPrefManager.getInstance(getContext()).getUser().getStudentRollNo() + "_" + date + " Assignment.";
+                byte[] byteArray = null;
+                if (extension.toLowerCase().equals("pdf")) {
+                    type = "pdf";
+                    InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+                    byteArray = new byte[inputStream.available()];
+                    inputStream.read(byteArray);
+                } else if (extension.toLowerCase().equals("jpg") || extension.toLowerCase().equals("jpeg") || extension.toLowerCase().equals("png")) {
+                    type = "image";
+                    Bitmap bitmap = BitmapFactory.decodeFileDescriptor(getActivity().getContentResolver().openFileDescriptor(data.getData(), "r").getFileDescriptor());
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byteArray = stream.toByteArray();
+                } else {
+                    new SnackBar(relativeLayout, "Please Select Image or PDF File!");
+                    return;
+                }
+                RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), byteArray);
+                file = MultipartBody.Part.createFormData("file", name + extension, requestBody);
+                File path = new File(uri.getPath());
+                document_upload_btn.setText(path.getName());
+                new SnackBar(relativeLayout, "File Uploaded Successfully");
+            } else {
+                new SnackBar(relativeLayout, "You haven't picked File.");
+            }
+        } catch (Exception e) {
+            new SnackBar(relativeLayout, "Something went wrong");
+        }
+    }
+
     private void dataObserver() {
 
         studentAssignmentDetailViewModel = ViewModelProviders.of(this).get(StudentAssignmentDetailViewModel.class);
@@ -109,12 +209,41 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
                 switch (s) {
                     case "list_found":
                         dataSetup();
                         break;
                     case "invalid_orgCode":
                         new SnackBar(relativeLayout, "Invalid Details");
+                        break;
+                    case "Internet_Issue":
+                        new SnackBar(relativeLayout, "Please connect to the Internet!");
+                        break;
+                    case "Session Expire":
+                        new SnackBar(relativeLayout, "Session Expire, Please Login Again!");
+                        new SessionExpire(getContext());
+                        break;
+                    default:
+                        new SnackBar(relativeLayout, "Invalid Credentials");
+                }
+            }
+        });
+
+        submitAssignmentViewModel = ViewModelProviders.of(this).get(SubmitAssignmentViewModel.class);
+        LiveData<String> msg = submitAssignmentViewModel.getMessage();
+
+        msg.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch (s) {
+                    case "assignment_response_saved":
+                        document_upload_btn.setVisibility(View.GONE);
+                        student_assignment_description_btn.setVisibility(View.GONE);
+                        submitbtn.setVisibility(View.GONE);
+                        status.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_submit));
+                        studentAssignmentDetailViewModel.assignmentDetails(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
+                                getid, SharedPrefManager.getInstance(getContext()).getUser().getStudentId());
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
@@ -140,15 +269,36 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
 
                 studentAssignmentSubmissionDetail = studentAssignmentSubmissionDetails;
 
-                student_document_description.setVisibility(View.VISIBLE);
                 student_document.setVisibility(View.VISIBLE);
-                student_document_description.setText(studentAssignmentSubmissionDetails.getStudentDescription());
                 delete.setVisibility(View.VISIBLE);
-                if (!studentAssignmentSubmissionDetails.equals("")) {
+                if (!studentAssignmentSubmissionDetails.getStudentDescription().equals("")) {
+                    student_document_description.setVisibility(View.VISIBLE);
+                    student_document_description.setText(studentAssignmentSubmissionDetails.getStudentDescription());
+                } else {
+                    student_document_description.setVisibility(View.GONE);
+                }
+                if (!studentAssignmentSubmissionDetails.getTeacherRemark().equals("")) {
                     remark.setVisibility(View.VISIBLE);
                     remark.setText("Remark: " + studentAssignmentSubmissionDetails.getTeacherRemark());
+                } else {
+                    remark.setVisibility(View.GONE);
                 }
             }
         });
+    }
+
+    private void submitAssignment() {
+
+        if (document_upload_btn.getText().toString().equals("")) {
+            new SnackBar(relativeLayout, "Please upload the document!");
+            return;
+        }
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        submitAssignmentViewModel.submitAssignment(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
+                getid, SharedPrefManager.getInstance(getContext()).getUser().getStudentId(), student_document_description.getText().toString(),
+                type, file);
     }
 }

@@ -182,7 +182,7 @@ public class TeacherPostAssignmentFragment extends Fragment {
                 String extension = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
                 Date date = Calendar.getInstance().getTime();
                 String name = SharedPrefManager.getInstance(getContext()).getUser().getTeacherCode() + "_" + className.getText().toString() + "_" + section.getText().toString()
-                        + "_" + date + "Assignment.";
+                        + "_" + date + " Assignment.";
                 byte[] byteArray = null;
                 if (extension.toLowerCase().equals("pdf")) {
                     type = "pdf";
