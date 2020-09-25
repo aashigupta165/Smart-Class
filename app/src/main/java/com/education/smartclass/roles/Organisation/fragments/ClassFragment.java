@@ -145,6 +145,8 @@ public class ClassFragment extends Fragment {
                 status.setVisibility(View.VISIBLE);
             } catch (IOException e) {
                 new SnackBar(relativeLayout, "There is an error in uploading file!");
+            } catch (Exception e) {
+                new SnackBar(relativeLayout, "Please Upload Correct File!");
             }
         }
     }

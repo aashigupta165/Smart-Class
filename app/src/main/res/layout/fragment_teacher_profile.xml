@@ -222,7 +222,6 @@
         android:layout_below="@+id/headingtable"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
-        android:progressDrawable="@drawable/edulogo"
         android:visibility="gone" />
 
     <TextView

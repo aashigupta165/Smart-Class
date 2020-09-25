@@ -8,13 +8,13 @@ public class TeacherFetchStudentAssignmentListDetails {
     private String responseActive;
     private String studentDescription;
     private String studentFile;
-    private String studentDate;
-    private String studentTime;
+    private String submitDate;
+    private String submitTime;
 
     public TeacherFetchStudentAssignmentListDetails() {
     }
 
-    public TeacherFetchStudentAssignmentListDetails(String studentName, String studentRollNo, String studentId, String teacherRemark, String responseActive, String studentDescription, String studentFile, String studentDate, String studentTime) {
+    public TeacherFetchStudentAssignmentListDetails(String studentName, String studentRollNo, String studentId, String teacherRemark, String responseActive, String studentDescription, String studentFile, String submitDate, String submitTime) {
         this.studentName = studentName;
         this.studentRollNo = studentRollNo;
         this.studentId = studentId;
@@ -22,8 +22,8 @@ public class TeacherFetchStudentAssignmentListDetails {
         this.responseActive = responseActive;
         this.studentDescription = studentDescription;
         this.studentFile = studentFile;
-        this.studentDate = studentDate;
-        this.studentTime = studentTime;
+        this.submitDate = submitDate;
+        this.submitTime = submitTime;
     }
 
     public String getStudentName() {
@@ -83,18 +83,18 @@ public class TeacherFetchStudentAssignmentListDetails {
     }
 
     public String getStudentDate() {
-        return studentDate;
+        return submitDate;
     }
 
     public void setStudentDate(String studentDate) {
-        this.studentDate = studentDate;
+        this.submitDate = studentDate;
     }
 
     public String getStudentTime() {
-        return studentTime;
+        return submitTime;
     }
 
     public void setStudentTime(String studentTime) {
-        this.studentTime = studentTime;
+        this.submitTime = studentTime;
     }
 }

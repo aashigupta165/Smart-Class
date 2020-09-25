@@ -52,7 +52,8 @@ import okhttp3.RequestBody;
 
 public class StudentAssignmentSubmissionFragment extends Fragment {
 
-    private TextView subject, time, title, description, download, remark, student_document, student_document_description, document_upload_btn, submitbtn;
+    private TextView subject, time, title, description, download, remark, student_document_time, student_document, student_document_description,
+            document_upload_btn, submitbtn;
     private ImageView status, delete;
     private EditText student_assignment_description_btn;
     private ProgressBar progressBar;
@@ -96,6 +97,7 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
         status = view.findViewById(R.id.status);
         remark = view.findViewById(R.id.remark);
         progressBar = view.findViewById(R.id.progress_bar);
+        student_document_time = view.findViewById(R.id.student_document_time);
         student_document = view.findViewById(R.id.student_document);
         student_document_description = view.findViewById(R.id.student_document_description);
         delete = view.findViewById(R.id.delete);
@@ -314,6 +316,7 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
                         student_document_description.setVisibility(View.GONE);
                         delete.setVisibility(View.GONE);
                         remark.setVisibility(View.GONE);
+                        time.setVisibility(View.GONE);
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");
@@ -339,6 +342,9 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
 
                 studentAssignmentSubmissionDetail = studentAssignmentSubmissionDetails;
 
+                student_document_time.setVisibility(View.VISIBLE);
+                student_document_time.setText("Uploaded at: " + studentAssignmentSubmissionDetails.getSubmitTime() + "(" + studentAssignmentSubmissionDetails.getSubmitDate()
+                        + ")");
                 student_document.setVisibility(View.VISIBLE);
                 delete.setVisibility(View.VISIBLE);
                 if (!studentAssignmentSubmissionDetails.getStudentDescription().equals("")) {
@@ -368,7 +374,7 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
         progressDialog.show();
 
         submitAssignmentViewModel.submitAssignment(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
-                getid, SharedPrefManager.getInstance(getContext()).getUser().getStudentId(), student_document_description.getText().toString(),
+                getid, SharedPrefManager.getInstance(getContext()).getUser().getStudentId(), student_assignment_description_btn.getText().toString(),
                 type, file);
     }
 

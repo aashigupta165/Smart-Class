@@ -45,9 +45,9 @@ public class TeacherFetchStudentAssignmentListAdapter extends RecyclerView.Adapt
         if (teacherFetchStudentAssignmentListDetails.get(position).getResponseActive().equals("true")) {
             teacherFetchStudentAssignmentListHolder.card.setCardBackgroundColor(ContextCompat.getColor(c, R.color.primaryLight));
             teacherFetchStudentAssignmentListHolder.download.setVisibility(View.VISIBLE);
-            teacherFetchStudentAssignmentListHolder.add_remark.setVisibility(View.VISIBLE);
+            teacherFetchStudentAssignmentListHolder.time.setVisibility(View.VISIBLE);
             teacherFetchStudentAssignmentListHolder.time.setText("Uploaded at: " + teacherFetchStudentAssignmentListDetails.get(position).getStudentTime() + "(" +
-                    teacherFetchStudentAssignmentListDetails.get(position).getStudentDate());
+                    teacherFetchStudentAssignmentListDetails.get(position).getStudentDate() + ")");
             teacherFetchStudentAssignmentListHolder.status.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.ic_submit));
             if (teacherFetchStudentAssignmentListDetails.get(position).getStudentDescription().equals("")) {
                 teacherFetchStudentAssignmentListHolder.description.setVisibility(View.GONE);
@@ -59,6 +59,7 @@ public class TeacherFetchStudentAssignmentListAdapter extends RecyclerView.Adapt
                 teacherFetchStudentAssignmentListHolder.add_remark.setVisibility(View.VISIBLE);
             } else {
                 teacherFetchStudentAssignmentListHolder.add_remark.setVisibility(View.GONE);
+                teacherFetchStudentAssignmentListHolder.remark.setVisibility(View.VISIBLE);
                 teacherFetchStudentAssignmentListHolder.remark.setText(teacherFetchStudentAssignmentListDetails.get(position).getTeacherRemark());
             }
         } else {

@@ -211,9 +211,7 @@ public interface Api {
     Call<StudentScheduleResponse> readStudentSchedule(
             @Field("orgCode") String orgCode,
             @Field("role") String role,
-            @Field("studentClass") String studentClass,
-            @Field("studentSection") String studentSection,
-            @Field("studentRollNo") String studentRollNo
+            @Field("studentId") String studentId
     );
 
     @FormUrlEncoded

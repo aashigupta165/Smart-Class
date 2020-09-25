@@ -97,7 +97,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/answer_heading"
         android:layout_marginTop="50dp"
-        android:progressDrawable="@drawable/edulogo"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

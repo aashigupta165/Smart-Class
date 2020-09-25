@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
         android:layout_marginTop="50dp"
-        android:progressDrawable="@drawable/edulogo"
         android:visibility="gone" />
 
     <TextView

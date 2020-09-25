@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subject"
                 android:layout_marginTop="5dp"
-                android:text="Uploaded at: time(date)"
                 android:textColor="@color/grey" />
 
             <ImageView
@@ -48,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/time"
                 android:layout_marginTop="20dp"
-                android:text="what is your Name? How you Do this? Meet me at 11 today!"
                 android:textSize="20sp" />
 
             <TextView
@@ -58,7 +56,6 @@
                 android:layout_below="@+id/title"
                 android:layout_marginTop="16dp"
                 android:autoLink="web"
-                android:text="Description: bfbtfbtgb cjndkucvjbgv cjbfcgyegfbce dbjcubhwyecf"
                 android:textColor="@android:color/darker_gray" />
 
             <TextView
@@ -104,13 +101,23 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/student_document_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/submission_heading"
+                android:layout_marginTop="20dp"
+                android:text="Uploaded at: time(date)"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/student_document_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/submission_heading"
+                android:layout_below="@+id/student_document_time"
                 android:layout_marginTop="10dp"
                 android:autoLink="web"
-                android:text="Description: ye chcuye chrnhug hugyxd gheubdrugvgytvhhcgcvhvhg"
                 android:textColor="@android:color/darker_gray"
                 android:visibility="gone" />
 
@@ -133,7 +140,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/student_document"
                 android:layout_marginTop="10dp"
-                android:text="Remark"
                 android:textColor="@color/colorAccent"
                 android:visibility="gone" />
 

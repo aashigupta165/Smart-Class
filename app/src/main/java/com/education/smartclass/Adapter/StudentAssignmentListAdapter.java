@@ -58,7 +58,7 @@ public class StudentAssignmentListAdapter extends RecyclerView.Adapter<StudentAs
             studentAssignmentListHolder.status.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.ic_missing));
         }
         studentAssignmentListHolder.title.setText(studentAssignmentDetailsLists.get(position).getAssignmentTitle());
-        if (studentAssignmentDetailsLists.get(position).getDescription().equals("")) {
+        if (studentAssignmentDetailsLists.get(position).getTeacherRemark().equals("")) {
             studentAssignmentListHolder.remark_card.setVisibility(View.GONE);
         } else {
             studentAssignmentListHolder.remark.setText(studentAssignmentDetailsLists.get(position).getTeacherRemark());

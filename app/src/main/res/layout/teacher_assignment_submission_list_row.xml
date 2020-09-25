@@ -41,7 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/details1"
-            android:text="Uploaded at: time(date)"
             android:textColor="@color/grey"
             android:textSize="12sp"
             android:visibility="gone" />
@@ -52,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/time"
             android:layout_marginTop="10dp"
-            android:text="Description: jingle bells jingle bells jingle all the ways."
             android:visibility="gone" />
 
         <TextView
@@ -61,7 +59,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/description"
             android:layout_marginTop="10dp"
-            android:text="Remark: Very Good, Keep it up."
             android:textColor="@color/grey"
             android:textSize="12sp"
             android:visibility="gone" />

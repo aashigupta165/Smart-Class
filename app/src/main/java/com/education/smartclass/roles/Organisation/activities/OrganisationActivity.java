@@ -14,9 +14,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,8 +27,10 @@ import android.view.MenuItem;
 
 import com.education.smartclass.R;
 import com.education.smartclass.roles.Organisation.model.VersionCheckingViewModel;
+import com.education.smartclass.roles.student.activities.StudentActivity;
 import com.education.smartclass.roles.teacher.fragments.NotificationFragment;
 import com.education.smartclass.storage.SharedPrefManager;
+import com.education.smartclass.utils.BadgeDrawable;
 import com.education.smartclass.utils.Logout;
 import com.education.smartclass.utils.SessionExpire;
 import com.google.android.material.navigation.NavigationView;
@@ -121,7 +126,46 @@ public class OrganisationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_toolbar_menu, menu);
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MenuItem notification = menu.findItem(R.id.notification);
+                                LayerDrawable icon = (LayerDrawable) notification.getIcon();
+                                setBadgeCount(OrganisationActivity.this, icon, SharedPrefManager.getInstance(getApplicationContext()).getBadgeCount());
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+
+                }
+            }
+        };
+        thread.start();
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public static void setBadgeCount(Context context, LayerDrawable icon, Boolean count) {
+
+        BadgeDrawable badge;
+
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BadgeDrawable) {
+            badge = (BadgeDrawable) reuse;
+        } else {
+            badge = new BadgeDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
     @Override

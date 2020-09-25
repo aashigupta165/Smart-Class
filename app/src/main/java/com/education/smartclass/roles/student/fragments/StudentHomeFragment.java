@@ -75,8 +75,7 @@ public class StudentHomeFragment extends Fragment {
         fetchStudentsList();
 
         readSchedulesViewModel.fetchScheduleList(SharedPrefManager.getInstance(getContext()).getUser().getOrgCode(),
-                SharedPrefManager.getInstance(getContext()).getUser().getStudentClass(), SharedPrefManager.getInstance(getContext()).getUser().getStudentSection(),
-                SharedPrefManager.getInstance(getContext()).getUser().getStudentRollNo());
+                SharedPrefManager.getInstance(getContext()).getUser().getStudentId());
 
         return view;
     }
