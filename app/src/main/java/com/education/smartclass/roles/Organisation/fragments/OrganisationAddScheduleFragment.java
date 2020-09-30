@@ -77,6 +77,8 @@ public class OrganisationAddScheduleFragment extends Fragment {
 
     private String radioSelected = "Selected";
 
+    private Boolean isVisited = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organisation_add_schedule, container, false);
@@ -100,6 +102,7 @@ public class OrganisationAddScheduleFragment extends Fragment {
         fetchData();
         TextSelector(view);
         buttonClickEvents();
+        setStudentList();
 
         return view;
     }
@@ -140,6 +143,8 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 section.setText("");
                 select_students.setText("");
                 select_students.setHint("Select Students");
+                isVisited = false;
+                studentItems.clear();
             }
         });
 
@@ -164,6 +169,8 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     section.showDropDown();
                     select_students.setText("");
                     select_students.setHint("Select Students");
+                    isVisited = false;
+                    studentItems.clear();
                 }
             }
         });
@@ -211,12 +218,18 @@ public class OrganisationAddScheduleFragment extends Fragment {
                     return;
                 }
 
-                progressDialog.setMessage("Loading");
-                progressDialog.show();
+                if (isVisited == false) {
+                    progressDialog.setMessage("Loading");
+                    progressDialog.show();
 
-                String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+                    isVisited = true;
 
-                fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
+                    String orgCode = SharedPrefManager.getInstance(getContext()).getUser().getOrgCode();
+
+                    fetchStudentListViewModel.fetchStudents(orgCode, className.getText().toString(), section.getText().toString());
+                } else {
+                    showStudentList();
+                }
             }
         });
     }
@@ -266,7 +279,6 @@ public class OrganisationAddScheduleFragment extends Fragment {
                 progressDialog.dismiss();
                 switch (s) {
                     case "list_found":
-                        setStudentList();
                         break;
                     case "Internet_Issue":
                         new SnackBar(relativeLayout, "Please connect to the Internet!");

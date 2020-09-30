@@ -43,8 +43,10 @@ import com.education.smartclass.utils.SnackBar;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -209,9 +211,12 @@ public class StudentAssignmentSubmissionFragment extends Fragment {
                 ContentResolver contentResolver = getContext().getContentResolver();
                 MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
                 String extension = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-                Date date = Calendar.getInstance().getTime();
+                String assignmentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                String assignmentTime = new SimpleDateFormat("HH:mm:SS", Locale.getDefault()).format(new Date());
                 String name = SharedPrefManager.getInstance(getContext()).getUser().getStudentName() + "_" +
-                        SharedPrefManager.getInstance(getContext()).getUser().getStudentRollNo() + "_" + date + " Assignment.";
+                        SharedPrefManager.getInstance(getContext()).getUser().getStudentRollNo() + "_" +
+                        SharedPrefManager.getInstance(getContext()).getUser().getStudentClass() + "_"
+                        + SharedPrefManager.getInstance(getContext()).getUser().getStudentSection() + "_" + assignmentDate + "_" + assignmentTime + ".";
                 byte[] byteArray = null;
                 if (extension.toLowerCase().equals("pdf")) {
                     type = "pdf";
