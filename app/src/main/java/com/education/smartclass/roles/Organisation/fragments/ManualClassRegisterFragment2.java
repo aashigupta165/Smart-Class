@@ -129,9 +129,9 @@ public class ManualClassRegisterFragment2 extends Fragment {
                 result = false;
                 break;
             }
-
         }
 
+        temp = temp.substring(0, temp.length() - 1);
         list.add(temp);
 
         if (list.size() == 0 || !result) {

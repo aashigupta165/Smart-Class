@@ -121,7 +121,10 @@ public class OtpActivity extends AppCompatActivity {
                     case "matched":
                         new SnackBar(relativeLayout, "OTP Verified.");
                         Intent intent = new Intent(OtpActivity.this, ResetPasswordActivity.class);
-                        startActivity(getIntent());
+                        intent.putExtra("email", getIntent().getStringExtra("email"));
+                        intent.putExtra("mobile", getIntent().getStringExtra("mobile"));
+                        intent.putExtra("firstName", getIntent().getStringExtra("firstName"));
+                        startActivity(intent);
                         break;
                     case "not_matched":
                         new SnackBar(relativeLayout, "Wrong OTP.");
