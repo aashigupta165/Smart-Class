@@ -7,49 +7,49 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.education.smartclass.roles.common.fragments.HomeSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.HomeSelectionFragment" />
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.education.smartclass.roles.common.fragments.ProfileSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.ProfileSelectionFragment" />
 
     <fragment
         android:id="@+id/existing_users"
-        android:name="com.education.smartclass.roles.Organisation.fragments.BottomNavigationSelector" />
+        android:name="com.education.smartclass.modules.Organisation.fragments.BottomNavigationSelector" />
 
     <fragment
         android:id="@+id/teacher"
-        android:name="com.education.smartclass.roles.Organisation.fragments.TeacherFragment" />
+        android:name="com.education.smartclass.modules.Organisation.fragments.TeacherFragment" />
 
     <fragment
         android:id="@+id/classes"
-        android:name="com.education.smartclass.roles.Organisation.fragments.ClassFragment" />
+        android:name="com.education.smartclass.modules.Organisation.fragments.ClassFragment" />
 
     <fragment
         android:id="@+id/student"
-        android:name="com.education.smartclass.roles.Organisation.fragments.StudentFragment" />
+        android:name="com.education.smartclass.modules.Organisation.fragments.StudentFragment" />
 
     <fragment
         android:id="@+id/schedule"
-        android:name="com.education.smartclass.roles.common.fragments.ScheduleSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.ScheduleSelectionFragment" />
 
     <fragment
         android:id="@+id/questionaire"
-        android:name="com.education.smartclass.roles.common.fragments.QuestionaireSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.QuestionaireSelectionFragment" />
 
     <fragment
         android:id="@+id/new_schedule"
-        android:name="com.education.smartclass.roles.common.fragments.AddScheduleSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.AddScheduleSelectionFragment" />
 
     <fragment
         android:id="@+id/new_question"
-        android:name="com.education.smartclass.roles.common.fragments.AddQuestionSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.AddQuestionSelectionFragment" />
 
     <fragment
         android:id="@+id/new_assignment"
-        android:name="com.education.smartclass.roles.teacher.fragments.TeacherPostAssignmentFragment" />
+        android:name="com.education.smartclass.modules.teacher.fragments.TeacherPostAssignmentFragment" />
 
     <fragment
         android:id="@+id/assignment"
-        android:name="com.education.smartclass.roles.common.fragments.AssignmentSelectionFragment" />
+        android:name="com.education.smartclass.modules.common.fragments.AssignmentSelectionFragment" />
 </navigation>

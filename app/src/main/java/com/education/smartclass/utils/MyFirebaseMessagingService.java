@@ -14,7 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.education.smartclass.R;
-import com.education.smartclass.roles.common.activities.SplashScreenActivity;
+import com.education.smartclass.modules.common.activities.SplashScreenActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

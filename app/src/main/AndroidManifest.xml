@@ -14,28 +14,28 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".roles.student.activities.StudentActivity"
+            android:name=".modules.student.activities.StudentActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name=".roles.teacher.activities.TeacherActivity"
+            android:name=".modules.teacher.activities.TeacherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
-        <activity android:name=".roles.admin.activities.AdminHomeActivity" />
+        <activity android:name=".modules.admin.activities.AdminHomeActivity" />
 
         <activity
-            android:name=".roles.Organisation.activities.OrganisationActivity"
+            android:name=".modules.Organisation.activities.OrganisationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".roles.login.activities.ResetPasswordActivity" />
-        <activity android:name=".roles.login.activities.OtpActivity" />
-        <activity android:name=".roles.login.activities.ForgotPasswordActivity" />
-        <activity android:name=".roles.admin.activities.RegisterNewOrgActivity1" />
-        <activity android:name=".roles.admin.activities.RegisterNewOrgActivity2" />
-        <activity android:name=".roles.admin.activities.RegisterNewOrgActivity3" />
-        <activity android:name=".roles.login.activities.LoginActivity" />
-        <activity android:name=".roles.common.activities.SplashScreenActivity">
+        <activity android:name=".modules.login.activities.ResetPasswordActivity" />
+        <activity android:name=".modules.login.activities.OtpActivity" />
+        <activity android:name=".modules.login.activities.ForgotPasswordActivity" />
+        <activity android:name=".modules.admin.activities.RegisterNewOrgActivity1" />
+        <activity android:name=".modules.admin.activities.RegisterNewOrgActivity2" />
+        <activity android:name=".modules.admin.activities.RegisterNewOrgActivity3" />
+        <activity android:name=".modules.login.activities.LoginActivity" />
+        <activity android:name=".modules.common.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

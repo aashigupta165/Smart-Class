@@ -3,7 +3,7 @@ package com.education.smartclass.utils;
 import android.content.Context;
 import android.content.Intent;
 
-import com.education.smartclass.roles.login.activities.LoginActivity;
+import com.education.smartclass.modules.login.activities.LoginActivity;
 import com.education.smartclass.storage.SharedPrefManager;
 
 public class SessionExpire {
